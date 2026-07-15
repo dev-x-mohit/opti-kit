@@ -103,3 +103,19 @@ export function unescapeHtml(str: string): string {
   if (!str) return "";
   return str.replace(/&(?:amp|lt|gt|quot|#39);/g, (match) => htmlUnescapes[match]);
 }
+
+/**
+ * Removes all HTML tags from a string.
+ */
+export function stripHtml(str: string): string {
+  if (!str) return "";
+  return str.replace(/<[^>]*>/g, "");
+}
+
+/**
+ * Counts the number of words in a string.
+ */
+export function wordCount(str: string): number {
+  if (!str) return 0;
+  return words(str).length;
+}

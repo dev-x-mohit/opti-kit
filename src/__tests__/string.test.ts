@@ -8,6 +8,8 @@ import {
   snakeCase,
   escapeHtml,
   unescapeHtml,
+  stripHtml,
+  wordCount,
 } from "../string";
 
 describe("string utilities", () => {
@@ -62,5 +64,15 @@ describe("string utilities", () => {
       unescapeHtml("&lt;script&gt;alert(&#39;hello&#39;)&amp;&lt;/script&gt;")
     ).toBe("<script>alert('hello')&</script>");
     expect(unescapeHtml("")).toBe("");
+  });
+
+  it("stripHtml", () => {
+    expect(stripHtml("<p>Hello <b>world</b>!</p>")).toBe("Hello world!");
+    expect(stripHtml("")).toBe("");
+  });
+
+  it("wordCount", () => {
+    expect(wordCount("Hello world, this is Optikit!")).toBe(5);
+    expect(wordCount("")).toBe(0);
   });
 });
