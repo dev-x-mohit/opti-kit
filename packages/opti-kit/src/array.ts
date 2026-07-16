@@ -79,3 +79,21 @@ export function sample<T>(arr: T[]): T | undefined {
   const index = Math.floor(Math.random() * arr.length);
   return arr[index];
 }
+
+/**
+ * Returns a duplicate-free version of an array, based on a custom key or mapping function.
+ */
+export function uniqueBy<T>(
+  arr: T[],
+  iteratee: keyof T | ((item: T) => any)
+): T[] {
+  const seen = new Set<any>();
+  return arr.filter((item) => {
+    const key = typeof iteratee === "function" ? iteratee(item) : item[iteratee];
+    if (seen.has(key)) {
+      return false;
+    }
+    seen.add(key);
+    return true;
+  });
+}

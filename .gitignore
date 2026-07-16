@@ -1,18 +1,20 @@
-# Dependency directory
+# Dependencies
 node_modules/
-
-# Build output
 dist/
+.vercel
+.next/
 
-# Logs
+# Log files
+*.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # OS files
 .DS_Store
 Thumbs.db
-
-# Private npm tokens
-.npmrc
-
