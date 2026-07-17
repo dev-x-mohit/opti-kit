@@ -78,4 +78,38 @@ describe("async utilities", () => {
 
     await expect(retry(fn, 2, 5)).rejects.toThrow("permanent fail");
   });
+
+  it("debounce options", () => {
+    vi.useFakeTimers();
+    let counter = 0;
+    const fn = debounce(() => {
+      counter++;
+    }, 100, { leading: true, trailing: false });
+
+    fn(); // leading execution
+    fn();
+    fn();
+
+    expect(counter).toBe(1);
+    vi.advanceTimersByTime(100);
+    expect(counter).toBe(1); // no trailing execution
+    vi.useRealTimers();
+  });
+
+  it("throttle options", () => {
+    vi.useFakeTimers();
+    let counter = 0;
+    const fn = throttle(() => {
+      counter++;
+    }, 100, { leading: false, trailing: true });
+
+    fn(); // leading is false, does not execute immediately
+    fn();
+    fn();
+
+    expect(counter).toBe(0);
+    vi.advanceTimersByTime(100); // trailing execution triggers
+    expect(counter).toBe(1);
+    vi.useRealTimers();
+  });
 });
