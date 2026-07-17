@@ -1,0 +1,50 @@
+{
+  "name": "@dev_x_mohit/opti-kit",
+  "version": "1.0.2",
+  "description": "An ultra-lightweight, high-performance, and tree-shakeable JavaScript/TypeScript utility kit containing casing converters, array operations, safe objects path resolvers, relative dates, color space calculators, validators, isomorphic storage wrappers, and event emitters.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "utilities",
+    "utils",
+    "typescript",
+    "tree-shakeable",
+    "lightweight",
+    "zero-dependencies",
+    "esm",
+    "cjs",
+    "isomorphic",
+    "event-emitter",
+    "safe-storage",
+    "uuid",
+    "color-converter",
+    "relative-time",
+    "string-utils",
+    "array-utils",
+    "math-utils"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "tsup": "^8.0.2",
+    "vitest": "^1.6.0"
+  }
+}
