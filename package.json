@@ -1,11 +1,6 @@
 {
   "name": "opti-kit-monorepo",
   "private": true,
-  "description": "Monorepo containing the @dev_x_mohit/opti-kit utility library and its showcase website.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dev-x-mohit/opti-kit.git"
-  },
   "workspaces": [
     "packages/*",
     "apps/*"
@@ -13,7 +8,6 @@
   "scripts": {
     "build:package": "npm run build -w packages/opti-kit",
     "build:showcase": "npm run build -w apps/showcase",
-    "test:package": "npm run test -w packages/opti-kit",
-    "release": "node -e \"const p=require('./packages/opti-kit/package.json');const v=p.version;const {execSync}=require('child_process');execSync('git tag v'+v+' && git push origin v'+v,{stdio:'inherit'})\""
+    "test:package": "npm run test -w packages/opti-kit"
   }
 }
