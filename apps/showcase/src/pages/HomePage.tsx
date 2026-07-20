@@ -119,11 +119,12 @@ export function HomePage() {
             <Sparkles size={13} /> Complete Ecosystem
           </div>
           <h2 className="text-3xl md:text-5xl font-extrabold text-text-main tracking-tight">
-            25 Isomorphic Modules • 328+ Utilities
+            Modular Domain Architecture
           </h2>
           <p className="text-muted text-base md:text-lg">
-            Organized into domain categories. Pure, lightweight, and side-effect free for maximum tree-shaking performance.
+            25 domain-focused modules containing 328+ pure, zero-dependency utilities built for maximum tree-shaking performance.
           </p>
+
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

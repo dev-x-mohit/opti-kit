@@ -136,9 +136,11 @@ export function Hero() {
                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
-                <span className="text-xs font-mono text-muted flex items-center gap-1.5">
-                  <Terminal size={14} className="text-primary" /> opti-kit-preview.ts
-                </span>
+                <div className="flex items-center gap-2 px-2.5 py-1 bg-surface border border-border rounded-md">
+                  <Terminal size={13} className="text-primary" />
+                  <span className="text-xs font-mono font-medium text-text-main">index.ts</span>
+                </div>
+
               </div>
 
               {/* Code Snippet Tabs */}

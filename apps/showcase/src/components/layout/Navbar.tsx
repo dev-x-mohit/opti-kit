@@ -72,6 +72,15 @@ export function Navbar() {
           <Link to="/docs" className="text-sm font-medium text-muted hover:text-text-main transition-colors">Docs</Link>
           <Link to="/modules" className="text-sm font-medium text-muted hover:text-text-main transition-colors">Modules</Link>
           <Link to="/playground" className="text-sm font-medium text-muted hover:text-text-main transition-colors">Playground</Link>
+          <a 
+            href="https://mohitlakhara.vercel.app" 
+            target="_blank" 
+            rel="noreferrer" 
+            className="text-sm font-medium text-muted hover:text-primary transition-colors flex items-center gap-1"
+          >
+            About
+          </a>
+
           
           <div className="w-px h-4 bg-border mx-2"></div>
           
