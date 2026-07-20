@@ -183,3 +183,11 @@ emitter.emit('login', 'Mohit'); // Logs "Welcome back Mohit"
    # For scoped package:
    npm publish --access public
    ```
+
+---
+
+## Interactive Showcase & Author Portfolio
+
+- **Live Sandbox & Documentation**: [opti-kit-showcase.vercel.app](https://opti-kit-showcase.vercel.app)
+- **Author Portfolio**: [mohitlakhara.vercel.app](https://mohitlakhara.vercel.app)
+
