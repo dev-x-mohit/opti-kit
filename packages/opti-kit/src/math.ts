@@ -43,3 +43,53 @@ export function mean(nums: number[]): number {
   if (nums.length === 0) return 0;
   return sum(nums) / nums.length;
 }
+
+/**
+ * Returns the median value of an array of numbers.
+ */
+export function median(nums: number[]): number {
+  if (nums.length === 0) return 0;
+  const sorted = [...nums].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 !== 0
+    ? sorted[mid]
+    : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+/**
+ * Returns the standard deviation of an array of numbers.
+ * @param population - If true, uses population std dev (N); otherwise sample (N-1).
+ */
+export function standardDeviation(nums: number[], population = false): number {
+  if (nums.length === 0) return 0;
+  const avg = mean(nums);
+  const squareDiffs = nums.map((n) => Math.pow(n - avg, 2));
+  const divisor = population ? nums.length : nums.length - 1;
+  return Math.sqrt(sum(squareDiffs) / divisor);
+}
+
+/**
+ * Calculates the percentage of a value relative to a total.
+ * @param options.decimals - Number of decimal places (default: 2)
+ */
+export function percentage(
+  value: number,
+  total: number,
+  options?: { decimals?: number }
+): number {
+  if (total === 0) return 0;
+  return round((value / total) * 100, options?.decimals ?? 2);
+}
+
+/**
+ * Checks whether a number falls within a range [min, max].
+ * @param exclusive - If true, the range is exclusive on both ends.
+ */
+export function inRange(
+  val: number,
+  min: number,
+  max: number,
+  exclusive = false
+): boolean {
+  return exclusive ? val > min && val < max : val >= min && val <= max;
+}

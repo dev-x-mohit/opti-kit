@@ -1,6 +1,6 @@
 {
   "name": "@dev_x_mohit/opti-kit",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "An ultra-lightweight, high-performance, and tree-shakeable JavaScript/TypeScript utility kit containing casing converters, array operations, safe objects path resolvers, relative dates, color space calculators, validators, isomorphic storage wrappers, and event emitters.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
