@@ -1,0 +1,1194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary SEO Metadata -->
+    <title>OptiKit - High-Performance & Tree-Shakeable JavaScript/TypeScript Utilities</title>
+    <meta name="title" content="OptiKit - High-Performance & Tree-Shakeable JavaScript/TypeScript Utilities" />
+    <meta name="description" content="Explore OptiKit: a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility library. Features 17 optimized modules compiled for ESM and CommonJS." />
+    <meta name="keywords" content="optikit, utility library, javascript utils, typescript, tree-shakeable, lightweight, safeStorage, event emitter, uuid generator, fnv1a, code helpers" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="OptiKit - High-Performance & Tree-Shakeable JavaScript/TypeScript Utilities" />
+    <meta property="og:description" content="Explore OptiKit: a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility library. Test 17 optimized modules interactively." />
+    <meta property="og:image" content="https://opti-kit-showcase.vercel.app/og-image.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="OptiKit - High-Performance & Tree-Shakeable JavaScript/TypeScript Utilities" />
+    <meta property="twitter:description" content="Explore OptiKit: a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility library." />
+    <meta property="twitter:image" content="https://opti-kit-showcase.vercel.app/og-image.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Ambient Background Lights (Subtle Shadcn Gradients) -->
+      <div class="glow-bg glow-purple"></div>
+      <div class="glow-bg glow-blue"></div>
+
+      <!-- Navigation Bar -->
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <i class="fa-solid fa-cubes"></i>
+            <span>OptiKit</span>
+            <span class="badge">v1.0.2</span>
+          </div>
+          <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#benchmarks">Benchmarks</a>
+            <a href="#modules">Modules</a>
+            <a href="#playground">Sandbox</a>
+            <a href="#quickstart">Docs</a>
+            <a href="https://mohitlakhara.vercel.app" target="_blank" class="nav-portfolio-link">
+              <img src="/logo.png" alt="Mohit Lakhara Logo" class="nav-portfolio-logo" /> Developer
+            </a>
+            <a href="https://github.com/dev-x-mohit/opti-kit" target="_blank" class="btn-git">
+              <i class="fa-brands fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Product Hero Section -->
+      <section class="hero-section">
+        <div class="hero-container">
+          <div class="hero-content">
+            <div class="badge-creator">
+              <i class="fa-solid fa-circle-check text-success"></i> Production Ready & Published
+            </div>
+            <h1>OptiKit</h1>
+            <p class="hero-title">High-performance utilities for modern web applications.</p>
+            <p class="hero-bio">
+              A zero-dependency, isomorphic toolkit optimized for size and execution speed. Compiles to clean ESM and CommonJS, supporting 100% tree-shaking with zero configuration.
+            </p>
+            
+            <div class="hero-actions">
+              <a href="#playground" class="btn btn-primary">
+                Explore Playground
+              </a>
+              <a href="https://github.com/dev-x-mohit/opti-kit" target="_blank" class="btn btn-secondary">
+                View Source
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-stat-card">
+            <div class="stat-glass">
+              <h3>Package Specs</h3>
+              <div class="pkg-stat-row">
+                <span class="stat-label">Bundle size:</span>
+                <span class="stat-value text-primary">38.2 kB (15 kB gzipped)</span>
+              </div>
+              <div class="pkg-stat-row">
+                <span class="stat-label">Tree-Shaking:</span>
+                <span class="stat-value text-success">Full (sideEffects: false)</span>
+              </div>
+              <div class="pkg-stat-row">
+                <span class="stat-label">Dependencies:</span>
+                <span class="stat-value">0 (None)</span>
+              </div>
+              <div class="install-cmd-box" id="btn-copy-install">
+                <code>npm i @dev_x_mohit/opti-kit</code>
+                <i class="fa-regular fa-copy"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Features Section -->
+      <section id="features" class="section-container">
+        <h2 class="section-title">Design Philosophy</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fa-solid fa-tree"></i>
+            <h4>Tree-Shakeable</h4>
+            <p>Declared side-effects free. Bundlers automatically purge unused helper functions, keeping client bundles microscopic.</p>
+          </div>
+          <div class="feature-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h4>Zero Dependencies</h4>
+            <p>Hand-written implementations optimized for security and speed. Zero risk of dependency vulnerability chains.</p>
+          </div>
+          <div class="feature-card">
+            <i class="fa-solid fa-box-open"></i>
+            <h4>Dual Modules</h4>
+            <p>Native ES Module (ESM) and CommonJS (CJS) targets generated simultaneously to fit any backend or frontend setups.</p>
+          </div>
+          <div class="feature-card">
+            <i class="fa-solid fa-circle-nodes"></i>
+            <h4>Type Safe</h4>
+            <p>Written entirely in TypeScript with auto-generated declaration typings (`.d.ts`) for autocomplete and inline validations.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Benchmarks Comparison Section -->
+      <section id="benchmarks" class="section-container">
+        <h2 class="section-title">Performance Comparison</h2>
+        <p class="section-desc">Visual comparison showing how OptiKit outperforms heavy legacy utilities in client bundle weight.</p>
+        
+        <div class="benchmark-wrapper">
+          <!-- Metric 1 -->
+          <div class="benchmark-row">
+            <div class="bench-metric-info">
+              <h4>Total Package Weight (Gzipped)</h4>
+              <p>Total raw transit payload transferred over network streams.</p>
+            </div>
+            <div class="bench-bars">
+              <div class="bench-bar-item">
+                <span class="bench-lib-name opti">OptiKit</span>
+                <div class="bench-track">
+                  <div class="bench-fill opti" style="width: 21%;"></div>
+                </div>
+                <span class="bench-value opti">15 KB</span>
+              </div>
+              <div class="bench-bar-item">
+                <span class="bench-lib-name">Lodash</span>
+                <div class="bench-track">
+                  <div class="bench-fill lodash" style="width: 100%;"></div>
+                </div>
+                <span class="bench-value">70 KB</span>
+              </div>
+              <div class="bench-bar-item">
+                <span class="bench-lib-name">Ramda</span>
+                <div class="bench-track">
+                  <div class="bench-fill ramda" style="width: 71%;"></div>
+                </div>
+                <span class="bench-value">50 KB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Metric 2 -->
+          <div class="benchmark-row">
+            <div class="bench-metric-info">
+              <h4>Single Helper Import Weight</h4>
+              <p>Network transit cost of importing a single module (e.g. camelCase).</p>
+            </div>
+            <div class="bench-bars">
+              <div class="bench-bar-item">
+                <span class="bench-lib-name opti">OptiKit</span>
+                <div class="bench-track">
+                  <div class="bench-fill opti" style="width: 5%;"></div>
+                </div>
+                <span class="bench-value opti">&lt; 1 KB</span>
+              </div>
+              <div class="bench-bar-item">
+                <span class="bench-lib-name">Lodash</span>
+                <div class="bench-track">
+                  <div class="bench-fill lodash" style="width: 25%;"></div>
+                </div>
+                <span class="bench-value">5 KB</span>
+              </div>
+              <div class="bench-bar-item">
+                <span class="bench-lib-name">Ramda</span>
+                <div class="bench-track">
+                  <div class="bench-fill ramda" style="width: 100%;"></div>
+                </div>
+                <span class="bench-value">20 KB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Metric 3 -->
+          <div class="benchmark-row">
+            <div class="bench-metric-info">
+              <h4>Dependencies Count</h4>
+              <p>Security vulnerability surface area and third-party bloat.</p>
+            </div>
+            <div class="bench-bars">
+              <div class="bench-bar-item">
+                <span class="bench-lib-name opti">OptiKit</span>
+                <div class="bench-track">
+                  <div class="bench-fill opti" style="width: 0%;"></div>
+                </div>
+                <span class="bench-value opti">0</span>
+              </div>
+              <div class="bench-bar-item">
+                <span class="bench-lib-name">Lodash</span>
+                <div class="bench-track">
+                  <div class="bench-fill lodash" style="width: 0%;"></div>
+                </div>
+                <span class="bench-value">0</span>
+              </div>
+              <div class="bench-bar-item">
+                <span class="bench-lib-name">Ramda</span>
+                <div class="bench-track">
+                  <div class="bench-fill ramda" style="width: 0%;"></div>
+                </div>
+                <span class="bench-value">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Detailed Module Index Section -->
+      <section id="modules" class="section-container">
+        <h2 class="section-title">Module Index</h2>
+        <p class="section-desc">Explore the purpose and contents of the 17 hand-optimized core utility modules.</p>
+        
+        <div class="modules-grid">
+          
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-user-shield"></i>
+              <h5>Type Guards</h5>
+            </div>
+            <p>Isomorphic checks including <code>isNil</code>, <code>isObject</code>, <code>isFunction</code>, <code>isDate</code>, and <code>isRegExp</code>.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-font"></i>
+              <h5>String Cases</h5>
+            </div>
+            <p>Convert string casing formats such as <code>camelCase</code>, <code>kebabCase</code>, <code>snakeCase</code>, and <code>capitalize</code>.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-code"></i>
+              <h5>HTML Sanitizers</h5>
+            </div>
+            <p>Secure utility helpers to sanitize and format HTML code with <code>escapeHtml</code> and <code>unescapeHtml</code>.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-cubes"></i>
+              <h5>Array Chunks</h5>
+            </div>
+            <p>Manipulate list arrays with <code>chunk</code>, <code>unique</code>, <code>difference</code>, <code>intersection</code>, and <code>groupBy</code>.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-folder-tree"></i>
+              <h5>Object Paths</h5>
+            </div>
+            <p>Resolve property chains with <code>get</code>, safely <code>pick</code>/<code>omit</code> keys, and run <code>deepClone</code>/<code>deepMerge</code>.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-calculator"></i>
+              <h5>Math Precision</h5>
+            </div>
+            <p>Apply limit thresholds using <code>clamp</code>, interpolate coordinates with <code>lerp</code>, and calculate averages.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-hourglass-half"></i>
+              <h5>Async Controls</h5>
+            </div>
+            <p>Wrap operations inside isomorphic <code>delay</code>, <code>debounce</code>, <code>throttle</code>, and <code>retry</code> loops.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-clock"></i>
+              <h5>Date & Time</h5>
+            </div>
+            <p>Evaluate years with <code>isLeapYear</code>, calculate month days, and display relative text indicators.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-palette"></i>
+              <h5>Color Spaces</h5>
+            </div>
+            <p>Convert CSS color strings between RGB, HSL, and Hex values instantly.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-clipboard"></i>
+              <h5>DOM Helpers</h5>
+            </div>
+            <p>Access client features safely using <code>copyToClipboard</code> and parse search query strings.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-key"></i>
+              <h5>Crypto & Hash</h5>
+            </div>
+            <p>Generate RFC4122 v4 UUID codes and compute FNV-1a 32-bit unsigned integer hash values.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-database"></i>
+              <h5>Expiring Storage</h5>
+            </div>
+            <p>Isomorphic safeStorage local wrapper supporting millisecond payload expiration triggers.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-tower-broadcast"></i>
+              <h5>Event Bus</h5>
+            </div>
+            <p>Lightweight subscription event emitter supporting topic registrations and delta notifications.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-diagram-project"></i>
+              <h5>Tree Serializers</h5>
+            </div>
+            <p>Convert database flat lists to nested hierarchical structures with <code>arrayToTree</code> and <code>treeToArray</code>.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-coins"></i>
+              <h5>Formatters</h5>
+            </div>
+            <p>Render currency fields using `Intl.NumberFormat` and format bytes into human-readable strings.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-link"></i>
+              <h5>URL Parser</h5>
+            </div>
+            <p>Combine URL path paths without duplicate slashes, and parse host and protocol tokens.</p>
+          </div>
+
+          <div class="module-item-card">
+            <div class="mod-header">
+              <i class="fa-solid fa-asterisk"></i>
+              <h5>Common Regex</h5>
+            </div>
+            <p>Predefined constant expressions validating Credit Cards, Emails, URLs, UUIDs, and IPv4 addresses.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Interactive Playground Dashboard Section -->
+      <section id="playground" class="section-container">
+        <div class="section-header-wrap">
+          <h2 class="section-title">Interactive Sandbox</h2>
+          <p class="section-desc">Test all 17 utility modules inside this live dashboard environment.</p>
+        </div>
+
+        <div class="dashboard">
+          <!-- Sidebar Navigation -->
+          <aside class="sidebar">
+            <nav class="nav-tabs">
+              <a href="#strings" class="nav-item active" data-tab="strings">
+                <i class="fa-solid fa-font text-purple"></i> Strings & Casing
+              </a>
+              <a href="#arrays" class="nav-item" data-tab="arrays">
+                <i class="fa-solid fa-list-ol text-blue"></i> Arrays & Sets
+              </a>
+              <a href="#objects" class="nav-item" data-tab="objects">
+                <i class="fa-solid fa-code-branch text-cyan"></i> Objects & Paths
+              </a>
+              <a href="#math" class="nav-item" data-tab="math">
+                <i class="fa-solid fa-calculator text-green"></i> Math & Precision
+              </a>
+              <a href="#dates" class="nav-item" data-tab="dates">
+                <i class="fa-solid fa-calendar-days text-yellow"></i> Date & Time
+              </a>
+              <a href="#colors" class="nav-item" data-tab="colors">
+                <i class="fa-solid fa-palette text-orange"></i> Color Codes
+              </a>
+              <a href="#validation" class="nav-item" data-tab="validation">
+                <i class="fa-solid fa-shield-halved text-red"></i> Validators
+              </a>
+              <a href="#async" class="nav-item" data-tab="async">
+                <i class="fa-solid fa-hourglass-half text-teal"></i> Async Flow
+              </a>
+              <a href="#crypto" class="nav-item" data-tab="crypto">
+                <i class="fa-solid fa-key text-pink"></i> Crypto & Hashing
+              </a>
+              <a href="#storage" class="nav-item" data-tab="storage">
+                <i class="fa-solid fa-database text-indigo"></i> Safe Storage
+              </a>
+              <a href="#events" class="nav-item" data-tab="events">
+                <i class="fa-solid fa-tower-broadcast text-purple"></i> Event Bus
+              </a>
+            </nav>
+          </aside>
+
+          <!-- Main Display Content -->
+          <div class="playground-main">
+            <!-- IDE Header Bar -->
+            <div class="card-header-bar">
+              <div class="win-dots">
+                <span class="win-dot red"></span>
+                <span class="win-dot yellow"></span>
+                <span class="win-dot green"></span>
+              </div>
+              <div class="win-filename">optikit-sandbox.ts</div>
+              <div class="win-actions">
+                <span class="win-action-dot"></span>
+                <span class="win-action-dot"></span>
+                <span class="win-action-dot"></span>
+              </div>
+            </div>
+            
+            <!-- Tab Content Sections -->
+            <div class="tab-contents">
+              
+              <!-- 1. Strings Tab -->
+              <section id="tab-strings" class="tab-pane active">
+                <div class="card">
+                  <div class="card-header-row">
+                    <div class="title-wrap">
+                      <i class="fa-solid fa-font section-icon text-purple"></i>
+                      <div>
+                        <h3>String Casing & HTML Formatting</h3>
+                        <p>Modify casing formats, slugify URLs, and sanitize HTML tags safely.</p>
+                      </div>
+                    </div>
+                    <div class="subtab-header">
+                      <button class="subtab-btn active" data-subtab="preview">Preview</button>
+                      <button class="subtab-btn" data-subtab="code">Code</button>
+                    </div>
+                  </div>
+                  
+                  <!-- Subtab 1: Preview -->
+                  <div class="subtab-pane active" data-subtab-pane="preview">
+                    <div class="card-body grid-2">
+                      <div class="control-panel">
+                        <div class="input-group">
+                          <label for="string-input">Input String</label>
+                          <input type="text" id="string-input" value="Hello World! Learn JavaScript 101." />
+                        </div>
+                        <div class="input-group">
+                          <label for="string-truncate-len">Truncate Length</label>
+                          <input type="number" id="string-truncate-len" value="15" min="1" max="100" />
+                        </div>
+                      </div>
+                      <div class="output-panel">
+                        <div class="output-item">
+                          <span>camelCase</span>
+                          <pre class="output-box" id="out-camel">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>kebabCase</span>
+                          <pre class="output-box" id="out-kebab">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>snakeCase</span>
+                          <pre class="output-box" id="out-snake">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>capitalize</span>
+                          <pre class="output-box" id="out-capitalize">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>slugify</span>
+                          <pre class="output-box" id="out-slug">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>truncate</span>
+                          <pre class="output-box" id="out-truncate">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>escapeHtml</span>
+                          <pre class="output-box" id="out-escape">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>stripHtml</span>
+                          <pre class="output-box" id="out-strip-html">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>wordCount</span>
+                          <pre class="output-box" id="out-word-count">loading...</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 2: Code -->
+                  <div class="subtab-pane" data-subtab-pane="code">
+                    <pre class="code-block"><code>import { camelCase, kebabCase, slugify, truncate, stripHtml, wordCount } from '@dev_x_mohit/opti-kit';
+
+camelCase('Hello World! Learn JavaScript 101.'); // 'helloWorldLearnJavaScript101'
+kebabCase('Hello World!');                       // 'hello-world'
+slugify('Hello World! 101');                     // 'hello-world-101'
+truncate('Hello World!', 5);                     // 'He...'</code></pre>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 2. Arrays Tab -->
+              <section id="tab-arrays" class="tab-pane">
+                <div class="card">
+                  <div class="card-header-row">
+                    <div class="title-wrap">
+                      <i class="fa-solid fa-list-ol section-icon text-blue"></i>
+                      <div>
+                        <h3>Array & Set Operations</h3>
+                        <p>Chunk, deduplicate, intersect, and shuffle items dynamically.</p>
+                      </div>
+                    </div>
+                    <div class="subtab-header">
+                      <button class="subtab-btn active" data-subtab="preview">Preview</button>
+                      <button class="subtab-btn" data-subtab="code">Code</button>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 1: Preview -->
+                  <div class="subtab-pane active" data-subtab-pane="preview">
+                    <div class="card-body grid-2">
+                      <div class="control-panel">
+                        <div class="input-group">
+                          <label for="array-input-1">Array 1 (comma-separated)</label>
+                          <input type="text" id="array-input-1" value="1, 2, 2, 3, 4" />
+                        </div>
+                        <div class="input-group">
+                          <label for="array-input-2">Array 2 (for difference/intersect)</label>
+                          <input type="text" id="array-input-2" value="3, 4, 5, 6" />
+                        </div>
+                        <div class="input-group">
+                          <label for="array-chunk-size">Chunk Size</label>
+                          <input type="number" id="array-chunk-size" value="2" min="1" max="10" />
+                        </div>
+                        <button class="btn btn-primary" id="btn-shuffle-array">
+                          <i class="fa-solid fa-shuffle"></i> Shuffle Array 1
+                        </button>
+                      </div>
+                      <div class="output-panel">
+                        <div class="output-item">
+                          <span>unique(Array 1)</span>
+                          <pre class="output-box" id="out-unique">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>chunk(Array 1, size)</span>
+                          <pre class="output-box" id="out-chunk">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>difference(Array 1, Array 2)</span>
+                          <pre class="output-box" id="out-difference">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>intersection(Array 1, Array 2)</span>
+                          <pre class="output-box" id="out-intersection">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>shuffled result</span>
+                          <pre class="output-box" id="out-shuffled">Click shuffle button</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 2: Code -->
+                  <div class="subtab-pane" data-subtab-pane="code">
+                    <pre class="code-block"><code>import { unique, chunk, difference, intersection } from '@dev_x_mohit/opti-kit';
+
+unique([1, 2, 2, 3]);             // [1, 2, 3]
+chunk([1, 2, 3, 4], 2);           // [[1, 2], [3, 4]]
+difference([1, 2], [2, 3]);       // [1]
+intersection([1, 2], [2, 3]);     // [2]</code></pre>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 3. Objects Tab -->
+              <section id="tab-objects" class="tab-pane">
+                <div class="card">
+                  <div class="card-header-row">
+                    <div class="title-wrap">
+                      <i class="fa-solid fa-code-branch section-icon text-cyan"></i>
+                      <div>
+                        <h3>Object Path Resolvers & Cloning</h3>
+                        <p>Perform deep copies, path resolution, and properties merges safely.</p>
+                      </div>
+                    </div>
+                    <div class="subtab-header">
+                      <button class="subtab-btn active" data-subtab="preview">Preview</button>
+                      <button class="subtab-btn" data-subtab="code">Code</button>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 1: Preview -->
+                  <div class="subtab-pane active" data-subtab-pane="preview">
+                    <div class="card-body grid-2">
+                      <div class="control-panel">
+                        <div class="input-group">
+                          <label for="object-input">Target Object (JSON)</label>
+                          <textarea id="object-input" rows="6">{"user": {"profile": {"name": "Mohit", "skills": ["JS", "TS"]}}, "active": true}</textarea>
+                        </div>
+                        <div class="input-group">
+                          <label for="object-path">Path to Resolve</label>
+                          <input type="text" id="object-path" value="user.profile.name" />
+                        </div>
+                      </div>
+                      <div class="output-panel">
+                        <div class="output-item">
+                          <span>get(Object, Path)</span>
+                          <pre class="output-box" id="out-object-get">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>deepClone(Object)</span>
+                          <pre class="output-box" id="out-object-clone">loading...</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 2: Code -->
+                  <div class="subtab-pane" data-subtab-pane="code">
+                    <pre class="code-block"><code>import { get, deepClone } from '@dev_x_mohit/opti-kit';
+
+const obj = { user: { profile: { name: 'Mohit' } } };
+get(obj, 'user.profile.name'); // 'Mohit'
+
+const clone = deepClone(obj); // Fully deep cloned object</code></pre>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 4. Math Tab -->
+              <section id="tab-math" class="tab-pane">
+                <div class="card">
+                  <div class="card-header-row">
+                    <div class="title-wrap">
+                      <i class="fa-solid fa-calculator section-icon text-green"></i>
+                      <div>
+                        <h3>Mathematical Calculations</h3>
+                        <p>Clamp numeric value limits, execute lerp interpolation, and round to decimals.</p>
+                      </div>
+                    </div>
+                    <div class="subtab-header">
+                      <button class="subtab-btn active" data-subtab="preview">Preview</button>
+                      <button class="subtab-btn" data-subtab="code">Code</button>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 1: Preview -->
+                  <div class="subtab-pane active" data-subtab-pane="preview">
+                    <div class="card-body grid-2">
+                      <div class="control-panel">
+                        <div class="input-group">
+                          <label for="math-clamp-val">Clamp: Value</label>
+                          <input type="number" id="math-clamp-val" value="25" />
+                        </div>
+                        <div class="input-row">
+                          <div class="input-group">
+                            <label for="math-clamp-min">Min Limit</label>
+                            <input type="number" id="math-clamp-min" value="5" />
+                          </div>
+                          <div class="input-group">
+                            <label for="math-clamp-max">Max Limit</label>
+                            <input type="number" id="math-clamp-max" value="15" />
+                          </div>
+                        </div>
+                        <hr class="divider" />
+                        <div class="input-group">
+                          <label for="math-round-val">Round: Float Value</label>
+                          <input type="number" id="math-round-val" value="1.87654" step="0.00001" />
+                        </div>
+                        <div class="input-group">
+                          <label for="math-round-dec">Decimals Precision</label>
+                          <input type="number" id="math-round-dec" value="2" min="0" max="10" />
+                        </div>
+                      </div>
+                      <div class="output-panel">
+                        <div class="output-item">
+                          <span>clamp(val, min, max)</span>
+                          <pre class="output-box" id="out-math-clamp">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>round(val, decimals)</span>
+                          <pre class="output-box" id="out-math-round">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>random(1, 100) (Integer)</span>
+                          <pre class="output-box" id="out-math-random">loading...</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 2: Code -->
+                  <div class="subtab-pane" data-subtab-pane="code">
+                    <pre class="code-block"><code>import { clamp, round, random } from '@dev_x_mohit/opti-kit';
+
+clamp(25, 5, 15);     // 15
+round(1.87654, 2);    // 1.88
+random(1, 100);       // Random integer between 1 and 100</code></pre>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 5. Date Tab -->
+              <section id="tab-dates" class="tab-pane">
+                <div class="card">
+                  <div class="card-header-row">
+                    <div class="title-wrap">
+                      <i class="fa-solid fa-calendar-days section-icon text-yellow"></i>
+                      <div>
+                        <h3>Date Formatting & Differences</h3>
+                        <p>Determine relative timers, month lengths, and leap years easily.</p>
+                      </div>
+                    </div>
+                    <div class="subtab-header">
+                      <button class="subtab-btn active" data-subtab="preview">Preview</button>
+                      <button class="subtab-btn" data-subtab="code">Code</button>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 1: Preview -->
+                  <div class="subtab-pane active" data-subtab-pane="preview">
+                    <div class="card-body grid-2">
+                      <div class="control-panel">
+                        <div class="input-group">
+                          <label for="date-relative-select">Simulate Time Diff</label>
+                          <select id="date-relative-select">
+                            <option value="-30">30 seconds ago</option>
+                            <option value="-600" selected>10 minutes ago</option>
+                            <option value="-14400">4 hours ago</option>
+                            <option value="-86400">Yesterday</option>
+                            <option value="-432000">5 days ago</option>
+                            <option value="600">In 10 minutes</option>
+                            <option value="86400">Tomorrow</option>
+                          </select>
+                        </div>
+                        <div class="input-group">
+                          <label for="date-leap-year">Check Year (Leap Year)</label>
+                          <input type="number" id="date-leap-year" value="2024" />
+                        </div>
+                      </div>
+                      <div class="output-panel">
+                        <div class="output-item">
+                          <span>relativeTime(Simulated Date)</span>
+                          <pre class="output-box" id="out-date-relative">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>isLeapYear(Year)</span>
+                          <pre class="output-box" id="out-date-leap">loading...</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 2: Code -->
+                  <div class="subtab-pane" data-subtab-pane="code">
+                    <pre class="code-block"><code>import { relativeTime, isLeapYear } from '@dev_x_mohit/opti-kit';
+
+relativeTime(new Date(Date.now() - 600000)); // '10 minutes ago'
+isLeapYear(2024);                            // true</code></pre>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 6. Colors Tab -->
+              <section id="tab-colors" class="tab-pane">
+                <div class="card">
+                  <div class="card-header-row">
+                    <div class="title-wrap">
+                      <i class="fa-solid fa-palette section-icon text-orange"></i>
+                      <div>
+                        <h3>Color Space Converter</h3>
+                        <p>Parse color coordinates instantly and see visual box previews.</p>
+                      </div>
+                    </div>
+                    <div class="subtab-header">
+                      <button class="subtab-btn active" data-subtab="preview">Preview</button>
+                      <button class="subtab-btn" data-subtab="code">Code</button>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 1: Preview -->
+                  <div class="subtab-pane active" data-subtab-pane="preview">
+                    <div class="card-body grid-2">
+                      <div class="control-panel">
+                        <div class="input-group">
+                          <label for="color-hex-input">Hex Input Code</label>
+                          <input type="text" id="color-hex-input" value="#a855f7" />
+                        </div>
+                        <div class="color-preview-block" id="color-block"></div>
+                      </div>
+                      <div class="output-panel">
+                        <div class="output-item">
+                          <span>hexToRgb(Hex)</span>
+                          <pre class="output-box" id="out-color-rgb">loading...</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 2: Code -->
+                  <div class="subtab-pane" data-subtab-pane="code">
+                    <pre class="code-block"><code>import { hexToRgb } from '@dev_x_mohit/opti-kit';
+
+hexToRgb('#a855f7'); // { r: 168, g: 85, b: 247 }</code></pre>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 7. Validation Tab -->
+              <section id="tab-validation" class="tab-pane">
+                <div class="card">
+                  <div class="card-header-row">
+                    <div class="title-wrap">
+                      <i class="fa-solid fa-shield-halved section-icon text-red"></i>
+                      <div>
+                        <h3>Input Validation Utility</h3>
+                        <p>Verify string formatting patterns for Emails, URLs, and UUID configurations.</p>
+                      </div>
+                    </div>
+                    <div class="subtab-header">
+                      <button class="subtab-btn active" data-subtab="preview">Preview</button>
+                      <button class="subtab-btn" data-subtab="code">Code</button>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 1: Preview -->
+                  <div class="subtab-pane active" data-subtab-pane="preview">
+                    <div class="card-body grid-2">
+                      <div class="control-panel">
+                        <div class="input-group">
+                          <label for="val-email-input">Email Validation</label>
+                          <input type="text" id="val-email-input" value="mohit@google.com" />
+                        </div>
+                        <div class="input-group">
+                          <label for="val-url-input">URL Validation</label>
+                          <input type="text" id="val-url-input" value="https://vercel.com" />
+                        </div>
+                        <div class="input-group">
+                          <label for="val-phone-input">Phone Number Validation</label>
+                          <input type="text" id="val-phone-input" value="+1 (555) 019-2834" />
+                        </div>
+                        <div class="input-group">
+                          <label for="val-password-input">Password Strength Validation</label>
+                          <input type="text" id="val-password-input" value="P@ssw0rd123" />
+                        </div>
+                      </div>
+                      <div class="output-panel">
+                        <div class="output-item">
+                          <span>isEmail Result</span>
+                          <div class="output-status" id="out-val-email">loading...</div>
+                        </div>
+                        <div class="output-item">
+                          <span>isUrl Result</span>
+                          <div class="output-status" id="out-val-url">loading...</div>
+                        </div>
+                        <div class="output-item">
+                          <span>isPhone Result</span>
+                          <div class="output-status" id="out-val-phone">loading...</div>
+                        </div>
+                        <div class="output-item">
+                          <span>isStrongPassword Result</span>
+                          <div class="output-status" id="out-val-password">loading...</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 2: Code -->
+                  <div class="subtab-pane" data-subtab-pane="code">
+                    <pre class="code-block"><code>import { isEmail, isUrl, isPhone, isStrongPassword } from '@dev_x_mohit/opti-kit';
+
+isEmail('mohit@google.com'); // true
+isUrl('https://vercel.com'); // true
+isPhone('+1 (555) 019-2834'); // true
+isStrongPassword('P@ssw0rd123'); // true</code></pre>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 8. Async Tab -->
+              <section id="tab-async" class="tab-pane">
+                <div class="card">
+                  <div class="card-header-row">
+                    <div class="title-wrap">
+                      <i class="fa-solid fa-hourglass-half section-icon text-teal"></i>
+                      <div>
+                        <h3>Async Control Flow & Debounce</h3>
+                        <p>Test debounce input limits, throttled clicks, and once executors.</p>
+                      </div>
+                    </div>
+                    <div class="subtab-header">
+                      <button class="subtab-btn active" data-subtab="preview">Preview</button>
+                      <button class="subtab-btn" data-subtab="code">Code</button>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 1: Preview -->
+                  <div class="subtab-pane active" data-subtab-pane="preview">
+                    <div class="card-body grid-2">
+                      <div class="control-panel">
+                        <div class="input-group">
+                          <label for="async-debounce-input">Type quickly (Debounced Keypress - 400ms)</label>
+                          <input type="text" id="async-debounce-input" placeholder="Type here..." />
+                        </div>
+                        <div class="button-row">
+                          <button class="btn btn-secondary" id="btn-throttle-click">
+                            Throttle Clicks (1000ms)
+                          </button>
+                          <button class="btn btn-primary" id="btn-once-click">
+                            Execute Once
+                          </button>
+                        </div>
+                      </div>
+                      <div class="output-panel">
+                        <div class="output-item">
+                          <span>Debounce Status</span>
+                          <pre class="output-box" id="out-async-debounce">Idle</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>Throttle Clicks Trigger Count</span>
+                          <pre class="output-box" id="out-async-throttle">0</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>Once Click Executed</span>
+                          <pre class="output-box" id="out-async-once">Not executed yet</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 2: Code -->
+                  <div class="subtab-pane" data-subtab-pane="code">
+                    <pre class="code-block"><code>import { debounce, throttle, once } from '@dev_x_mohit/opti-kit';
+
+const runDebounced = debounce((val) => console.log(val), 400);
+const runThrottled = throttle(() => console.log('Click!'), 1000);
+const runOnce = once(() => console.log('Run only once!'));</code></pre>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 9. Crypto Tab -->
+              <section id="tab-crypto" class="tab-pane">
+                <div class="card">
+                  <div class="card-header-row">
+                    <div class="title-wrap">
+                      <i class="fa-solid fa-key section-icon text-pink"></i>
+                      <div>
+                        <h3>Unique Identifiers & Hashing</h3>
+                        <p>Generate RFC4122 v4 UUID codes and calculate FNV-1a integer hashes.</p>
+                      </div>
+                    </div>
+                    <div class="subtab-header">
+                      <button class="subtab-btn active" data-subtab="preview">Preview</button>
+                      <button class="subtab-btn" data-subtab="code">Code</button>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 1: Preview -->
+                  <div class="subtab-pane active" data-subtab-pane="preview">
+                    <div class="card-body grid-2">
+                      <div class="control-panel">
+                        <div class="input-group">
+                          <label for="crypto-hash-input">String to Hash (FNV-1a)</label>
+                          <input type="text" id="crypto-hash-input" value="antigravity-toolkit" />
+                        </div>
+                        <button class="btn btn-primary" id="btn-gen-uuid">
+                          <i class="fa-solid fa-rotate"></i> Regenerate UUID v4
+                        </button>
+                      </div>
+                      <div class="output-panel">
+                        <div class="output-item">
+                          <span>Generated UUID v4</span>
+                          <pre class="output-box" id="out-crypto-uuid">loading...</pre>
+                        </div>
+                        <div class="output-item">
+                          <span>fnv1a(string)</span>
+                          <pre class="output-box" id="out-crypto-hash">loading...</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 2: Code -->
+                  <div class="subtab-pane" data-subtab-pane="code">
+                    <pre class="code-block"><code>import { uuid, fnv1a } from '@dev_x_mohit/opti-kit';
+
+uuid();                  // '4e12ff48-356b-4e16-bb4d-6bc0bf3a8f56'
+fnv1a('hello world');   // 358245367 (unsigned 32-bit FNV hash)</code></pre>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 10. Storage Tab -->
+              <section id="tab-storage" class="tab-pane">
+                <div class="card">
+                  <div class="card-header-row">
+                    <div class="title-wrap">
+                      <i class="fa-solid fa-database section-icon text-indigo"></i>
+                      <div>
+                        <h3>Safe Isomorphic Storage wrapper</h3>
+                        <p>Write JSON payloads and simulate keys that expire in real-time.</p>
+                      </div>
+                    </div>
+                    <div class="subtab-header">
+                      <button class="subtab-btn active" data-subtab="preview">Preview</button>
+                      <button class="subtab-btn" data-subtab="code">Code</button>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 1: Preview -->
+                  <div class="subtab-pane active" data-subtab-pane="preview">
+                    <div class="card-body grid-2">
+                      <div class="control-panel">
+                        <div class="input-group">
+                          <label for="storage-key-input">Storage Key</label>
+                          <input type="text" id="storage-key-input" value="optikit_demo" />
+                        </div>
+                        <div class="input-group">
+                          <label for="storage-val-input">JSON Value</label>
+                          <input type="text" id="storage-val-input" value="Mohit Lakhara's Demo" />
+                        </div>
+                        <div class="input-group">
+                          <label for="storage-expiry-input">Expiration Time (in milliseconds)</label>
+                          <input type="number" id="storage-expiry-input" value="5000" min="500" step="500" />
+                        </div>
+                        <div class="button-row">
+                          <button class="btn btn-primary" id="btn-storage-write">Write Item</button>
+                          <button class="btn btn-secondary" id="btn-storage-read">Read Item</button>
+                        </div>
+                      </div>
+                      <div class="output-panel">
+                        <div class="output-item">
+                          <span>safeStorage Status Log</span>
+                          <pre class="output-box log-box" id="out-storage-log">No action yet.</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 2: Code -->
+                  <div class="subtab-pane" data-subtab-pane="code">
+                    <pre class="code-block"><code>import { safeStorage } from '@dev_x_mohit/opti-kit';
+
+// Expires after 5 seconds
+safeStorage.setItem('optikit_demo', 'Mohit Lakhara\'s Demo', 5000);
+
+safeStorage.getItem('optikit_demo'); // Returns 'Mohit Lakhara\'s Demo'</code></pre>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 11. Events Tab -->
+              <section id="tab-events" class="tab-pane">
+                <div class="card">
+                  <div class="card-header-row">
+                    <div class="title-wrap">
+                      <i class="fa-solid fa-tower-broadcast section-icon text-purple"></i>
+                      <div>
+                        <h3>Pub-Sub Event Bus</h3>
+                        <p>Subscribe to channel triggers, dispatch arguments, and view real-time log outputs.</p>
+                      </div>
+                    </div>
+                    <div class="subtab-header">
+                      <button class="subtab-btn active" data-subtab="preview">Preview</button>
+                      <button class="subtab-btn" data-subtab="code">Code</button>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 1: Preview -->
+                  <div class="subtab-pane active" data-subtab-pane="preview">
+                    <div class="card-body grid-2">
+                      <div class="control-panel">
+                        <div class="input-group">
+                          <label for="events-payload-input">Event Argument Payload</label>
+                          <input type="text" id="events-payload-input" value="Triggered at: " />
+                        </div>
+                        <div class="button-row">
+                          <button class="btn btn-primary" id="btn-events-subscribe">Subscribe Listener</button>
+                          <button class="btn btn-secondary" id="btn-events-emit">Emit 'notify' Event</button>
+                          <button class="btn btn-danger" id="btn-events-clear">Clear Listeners</button>
+                        </div>
+                      </div>
+                      <div class="output-panel">
+                        <div class="output-item">
+                          <span>Event Log Terminal</span>
+                          <pre class="output-box log-box" id="out-events-log">No events emitted yet.</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Subtab 2: Code -->
+                  <div class="subtab-pane" data-subtab-pane="code">
+                    <pre class="code-block"><code>import { EventEmitter } from '@dev_x_mohit/opti-kit';
+
+const eventBus = new EventEmitter();
+
+eventBus.on('notify', (data) => console.log('Received:', data));
+eventBus.emit('notify', 'My event payload');</code></pre>
+                  </div>
+                </div>
+              </section>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Start Section -->
+      <section id="quickstart" class="section-container">
+        <h2 class="section-title">Quick Start</h2>
+        <div class="quickstart-box">
+          <p class="quickstart-desc">Integrate OptiKit into your modern web project using your preferred module system or CDN import paths:</p>
+          
+          <div class="code-tab-wrap">
+            <span class="code-tab-label">ES Modules (ESM)</span>
+            <pre class="output-box code-block"><code>import { camelCase, unique, get } from '@dev_x_mohit/opti-kit';
+
+console.log(camelCase('hello-world')); // 'helloWorld'</code></pre>
+          </div>
+
+          <div class="code-tab-wrap">
+            <span class="code-tab-label">CommonJS (CJS)</span>
+            <pre class="output-box code-block"><code>const { camelCase, unique } = require('@dev_x_mohit/opti-kit');</code></pre>
+          </div>
+
+          <div class="code-tab-wrap">
+            <span class="code-tab-label">CDN Browser Import</span>
+            <pre class="output-box code-block"><code>&lt;script type="module"&gt;
+  import { camelCase } from 'https://cdn.jsdelivr.net/npm/@dev_x_mohit/opti-kit@1.0.2/dist/index.mjs';
+  console.log(camelCase('hello-world'));
+&lt;/script&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Section -->
+      <footer class="main-footer">
+        <div class="footer-container">
+          <div class="footer-brand">
+            <h4>OptiKit</h4>
+            <p>An open-source utility toolkit for high-performance web development.</p>
+          </div>
+          <div class="footer-meta">
+            <div class="footer-links">
+              <a href="https://mohitlakhara.vercel.app" target="_blank" class="footer-portfolio-link">
+                <img src="/logo.png" alt="Mohit Lakhara Logo" class="footer-portfolio-logo" /> Developer
+              </a>
+              <a href="https://github.com/dev-x-mohit/opti-kit" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+              <a href="https://www.npmjs.com/package/@dev_x_mohit/opti-kit" target="_blank"><i class="fa-solid fa-box-open"></i> NPM Registry</a>
+            </div>
+            <p class="copyright">Released under the MIT License. Created by Mohit Lakhara.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

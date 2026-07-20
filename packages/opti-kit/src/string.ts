@@ -16,27 +16,73 @@ export function capitalize(str: string): string {
 }
 
 /**
- * Converts a string into a URL-friendly slug.
+ * Converts a string into a URL-friendly slug with customization options.
  */
-export function slugify(str: string): string {
+export function slugify(
+  str: string,
+  options?: { lower?: boolean; replacement?: string }
+): string {
   if (!str) return "";
-  return str
-    .toLowerCase()
-    .trim()
+  const lower = options?.lower !== false;
+  const replacement = options?.replacement ?? "-";
+
+  let result = str.trim();
+  if (lower) {
+    result = result.toLowerCase();
+  }
+
+  const escapedReplacement = replacement.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+
+  return result
     .replace(/[^\w\s-]/g, "")
-    .replace(/[\s_-]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(/[\s_-]+/g, replacement)
+    .replace(new RegExp(`^${escapedReplacement}+|${escapedReplacement}+$`, "g"), "");
 }
 
 /**
- * Truncates a string to a specified length and appends a suffix (defaulting to "...").
+ * Truncates a string to a specified length with customizable separator and suffix.
  */
-export function truncate(str: string, length: number, suffix = "..."): string {
+export function truncate(
+  str: string,
+  length: number,
+  options?: string | { suffix?: string; separator?: RegExp | string }
+): string {
   if (!str) return "";
   if (str.length <= length) return str;
+
+  let suffix = "...";
+  let separator: RegExp | string | undefined;
+
+  if (typeof options === "string") {
+    suffix = options;
+  } else if (options && typeof options === "object") {
+    if (options.suffix !== undefined) suffix = options.suffix;
+    if (options.separator !== undefined) separator = options.separator;
+  }
+
   const actualLength = length - suffix.length;
   if (actualLength <= 0) return suffix.slice(0, length);
-  return str.slice(0, actualLength) + suffix;
+
+  let result = str.slice(0, actualLength);
+
+  if (separator) {
+    if (separator instanceof RegExp) {
+      const matches = [...result.matchAll(new RegExp(separator.source, "g"))];
+      if (matches.length > 0) {
+        const lastMatch = matches[matches.length - 1];
+        if (lastMatch.index !== undefined) {
+          result = result.slice(0, lastMatch.index);
+        }
+      }
+    } else {
+      const lastIdx = result.lastIndexOf(separator);
+      if (lastIdx !== -1) {
+        result = result.slice(0, lastIdx);
+      }
+    }
+  }
+
+  return result + suffix;
 }
 
 /**
