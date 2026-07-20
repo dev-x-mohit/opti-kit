@@ -27,22 +27,24 @@ jobs:
         run: |
           if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
             echo "::notice title=Vercel Deployment Notice::Vercel secrets (VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID) are not configured in GitHub Secrets."
-            echo "Skipping GitHub Action deployment. Note: Native Vercel GitHub App integration will deploy automatically if connected."
+            echo "Skipping GitHub Action deployment."
             exit 0
           fi
 
           echo "Installing dependencies..."
           npm ci
 
-          echo "Building package and showcase..."
+          echo "Building opti-kit package..."
           npm run build:package
-          npm run build:showcase
 
-          echo "Pulling Vercel environment information..."
-          npx vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+          echo "Cleaning any existing .vercel configuration directories..."
+          rm -rf .vercel apps/showcase/.vercel
 
-          echo "Building Vercel production deployment..."
-          npx vercel build --prod --token="$VERCEL_TOKEN"
+          echo "Pulling Vercel environment settings for apps/showcase..."
+          npx vercel pull --yes --environment=production --token="$VERCEL_TOKEN" --cwd apps/showcase
 
-          echo "Deploying prebuilt artifacts to Vercel..."
-          npx vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN"
+          echo "Building Vercel production deployment for apps/showcase..."
+          npx vercel build --prod --token="$VERCEL_TOKEN" --cwd apps/showcase
+
+          echo "Deploying prebuilt showcase application to Vercel..."
+          npx vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" --cwd apps/showcase
