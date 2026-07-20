@@ -16,24 +16,25 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build package
-        run: npm run build:package
-
-      - name: Build showcase
-        run: npm run build:showcase
-
-      - name: Deploy to Vercel (Production)
-        if: ${{ secrets.VERCEL_TOKEN != '' && secrets.VERCEL_ORG_ID != '' && secrets.VERCEL_PROJECT_ID != '' }}
-        run: npx vercel deploy apps/showcase/dist --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy to Vercel (or fallback to native Vercel Integration)
         env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "Notice: Vercel secrets (VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID) are not set in GitHub Repository Settings."
+            echo "Vercel automatically builds and deploys via native Vercel GitHub App Integration."
+            exit 0
+          fi
+          npm ci
+          npm run build:package
+          npm run build:showcase
+          npx vercel deploy apps/showcase/dist --prod --yes --token="$VERCEL_TOKEN"
+
 
 
 
