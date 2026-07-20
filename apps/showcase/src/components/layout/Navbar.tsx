@@ -50,8 +50,8 @@ export function Navbar() {
         <Link to="/" className="flex items-center gap-2">
           <span className="font-bold text-xl tracking-tight text-text-main">OptiKit</span>
           <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-semibold ml-2 border border-primary/20">v1.0.6</span>
-
         </Link>
+
         
         <div className="flex-1 max-w-md mx-8 hidden md:block">
           <div className="relative group">
@@ -72,15 +72,6 @@ export function Navbar() {
           <Link to="/docs" className="text-sm font-medium text-muted hover:text-text-main transition-colors">Docs</Link>
           <Link to="/modules" className="text-sm font-medium text-muted hover:text-text-main transition-colors">Modules</Link>
           <Link to="/playground" className="text-sm font-medium text-muted hover:text-text-main transition-colors">Playground</Link>
-          <a 
-            href="https://mohitlakhara.vercel.app" 
-            target="_blank" 
-            rel="noreferrer" 
-            className="text-sm font-medium text-muted hover:text-primary transition-colors flex items-center gap-1"
-          >
-            About
-          </a>
-
           
           <div className="w-px h-4 bg-border mx-2"></div>
           

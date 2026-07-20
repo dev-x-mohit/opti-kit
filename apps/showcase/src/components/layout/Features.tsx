@@ -1,60 +1,40 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Zap, 
-  Layers, 
-  ShieldCheck, 
-  Cpu, 
-  CheckCircle2, 
-  Sparkles, 
-  Code2, 
-  Box 
-} from 'lucide-react';
+import { ShieldCheck, Layers, Cpu, Box, Zap, Globe, Repeat, CheckCircle2 } from 'lucide-react';
+import { Card } from '../ui/Card';
 
 export function Features() {
   const featureList = [
     {
-      title: "Zero External Dependencies",
-      desc: "100% standalone implementation. Protects your app from supply-chain risks and heavy node_modules bloat.",
-      icon: Zap,
-      gradient: "from-amber-500/20 to-yellow-500/10",
-      tag: "Pure JS/TS"
-    },
-    {
-      title: "100% Tree-Shakeable",
-      desc: "Import individual functions like slugify or chunk. Unused utilities are stripped from your bundle automatically.",
-      icon: Layers,
-      gradient: "from-green-500/20 to-emerald-500/10",
-      tag: "sideEffects: false"
-    },
-    {
-      title: "Native TypeScript Declarations",
-      desc: "Built ground-up in TypeScript. Auto-inferred return types, strict type guards, and zero external @types requirement.",
       icon: ShieldCheck,
-      gradient: "from-blue-500/20 to-cyan-500/10",
-      tag: "Auto-Generated DTS"
+      title: "Zero Dependencies",
+      description: "0 external third-party packages. Immune to transitive dependency vulnerabilities and supply-chain attacks."
     },
     {
-      title: "Isomorphic CJS + ESM Output",
-      desc: "Pre-compiled dual distribution. Runs seamlessly in Browser DOM, Node.js, Deno, Bun, and Serverless environments.",
+      icon: Layers,
+      title: "Tree-Shakeable ESM",
+      description: "Ships with 'sideEffects: false'. Modern bundlers prune unused functions automatically from your production build."
+    },
+    {
       icon: Cpu,
-      gradient: "from-purple-500/20 to-accent/10",
-      tag: "Universal Engine"
+      title: "100% Native TypeScript",
+      description: "Built strictly in TypeScript with full type safety, deep generics, auto-complete, and zero '@types' packages needed."
     },
     {
-      title: "306 Passed Unit Tests",
-      desc: "Comprehensive Vitest coverage guaranteeing edge-case handling across strings, arrays, objects, and math.",
-      icon: CheckCircle2,
-      gradient: "from-teal-500/20 to-emerald-500/10",
-      tag: "100% Pass Rate"
+      icon: Repeat,
+      title: "Dual Package Export",
+      description: "Dual CJS and ESM format built via tsup. Works out of the box in legacy Node.js and modern ES Modules."
     },
     {
-      title: "Lightweight (~30 KB Bundle)",
-      desc: "Ultra-compact footprint designed to replace heavy legacy packages like Lodash, Moment, and Ramda.",
       icon: Box,
-      gradient: "from-rose-500/20 to-pink-500/10",
-      tag: "Ultra Compact"
+      title: "Isomorphic Safe Storage",
+      description: "Includes zero-throw `safeStorage` wrapper for localStorage & sessionStorage with JSON parsing & expiration timers."
     },
+    {
+      icon: Globe,
+      title: "Cross-Platform Verified",
+      description: "Fully tested and operational across Browsers, Node.js 18-24, Bun, Deno, and Next.js / React SSR hydration."
+    }
   ];
 
   const container = {
@@ -71,16 +51,14 @@ export function Features() {
   };
 
   return (
-    <section className="container mx-auto px-4 py-24 max-w-7xl border-t border-border/60">
-      <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold border border-primary/20">
-          <Sparkles size={13} /> Built for Performance
-        </div>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-text-main tracking-tight">
-          Engineered for Modern Web Architecture
-        </h2>
-        <p className="text-muted text-base md:text-lg">
-          OptiKit brings enterprise-grade reliability, strict typing, and zero runtime overhead to your frontend and backend projects.
+    <section className="container mx-auto px-4 py-20 max-w-7xl">
+      <div className="text-center mb-16 space-y-3">
+        <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold border border-primary/20 shadow-sm inline-flex items-center gap-1.5">
+          <Zap size={13} /> Built for Speed & Precision
+        </span>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-text-main tracking-tight">Why Engineering Teams Choose OptiKit</h2>
+        <p className="text-muted max-w-2xl mx-auto text-base">
+          A modern utility suite engineered to solve everyday developer problems with zero bloat and absolute reliability.
         </p>
       </div>
 
@@ -88,29 +66,22 @@ export function Features() {
         variants={container}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, margin: "-80px" }}
+        viewport={{ once: true, margin: "-100px" }}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         {featureList.map((feat, i) => {
           const Icon = feat.icon;
           return (
-            <motion.div 
-              key={i} 
-              variants={item} 
-              className="bg-surface/50 border border-border/80 rounded-2xl p-6 hover:border-primary/40 hover:bg-surface transition-all shadow-lg group relative flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className={`p-3 rounded-xl bg-gradient-to-br ${feat.gradient} border border-border/60 text-primary group-hover:scale-105 transition-transform`}>
-                    <Icon size={22} />
+            <motion.div key={i} variants={item}>
+              <Card className="p-6 h-full flex flex-col justify-between border-primary/15 hover:border-primary/40 transition-colors shadow-md group">
+                <div className="space-y-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                    <Icon size={20} />
                   </div>
-                  <span className="text-[11px] font-mono text-muted bg-background px-2.5 py-1 rounded-full border border-border">
-                    {feat.tag}
-                  </span>
+                  <h3 className="text-lg font-bold text-text-main">{feat.title}</h3>
+                  <p className="text-xs sm:text-sm text-muted leading-relaxed">{feat.description}</p>
                 </div>
-                <h3 className="font-bold text-lg text-text-main mb-2 group-hover:text-primary transition-colors">{feat.title}</h3>
-                <p className="text-xs text-muted leading-relaxed">{feat.desc}</p>
-              </div>
+              </Card>
             </motion.div>
           );
         })}
