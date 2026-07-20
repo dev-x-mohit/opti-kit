@@ -11,9 +11,10 @@ npm-debug.log*
 # Environment files
 .env
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+
+# NPM credentials — use GitHub Actions secrets instead
+.npmrc
 
 # OS files
 .DS_Store

@@ -112,3 +112,87 @@ export function deepMerge(target: any, ...sources: any[]): any {
 
   return deepMerge(target, ...sources);
 }
+
+/**
+ * Flattens a nested object into a single-level object with dot-path keys.
+ * @param options.delimiter - Custom key delimiter, defaults to "."
+ * @param options.maxDepth  - Max depth to flatten (unlimited by default)
+ */
+export function flattenObject(
+  obj: Record<string, any>,
+  options?: { delimiter?: string; maxDepth?: number }
+): Record<string, any> {
+  const delimiter = options?.delimiter ?? ".";
+  const maxDepth = options?.maxDepth ?? Infinity;
+  const result: Record<string, any> = {};
+
+  function recurse(current: any, prefix: string, depth: number) {
+    for (const key in current) {
+      if (!Object.prototype.hasOwnProperty.call(current, key)) continue;
+      const newKey = prefix ? `${prefix}${delimiter}${key}` : key;
+      if (isObject(current[key]) && depth < maxDepth) {
+        recurse(current[key], newKey, depth + 1);
+      } else {
+        result[newKey] = current[key];
+      }
+    }
+  }
+
+  recurse(obj, "", 0);
+  return result;
+}
+
+/**
+ * Safely sets a nested value in an object using a dot-path string.
+ * Mutates and returns the object.
+ */
+export function set(obj: any, path: string, value: any): any {
+  if (obj == null) return obj;
+  const parts = path
+    .replace(/\[(\d+)\]/g, ".$1")
+    .split(".")
+    .filter(Boolean);
+  let current = obj;
+  for (let i = 0; i < parts.length - 1; i++) {
+    const key = parts[i];
+    if (current[key] == null || typeof current[key] !== "object") {
+      current[key] = {};
+    }
+    current = current[key];
+  }
+  current[parts[parts.length - 1]] = value;
+  return obj;
+}
+
+/**
+ * Creates a new object by mapping keys through a transform function.
+ * @param iteratee - Function that returns the new key for each entry
+ */
+export function mapKeys<T>(
+  obj: Record<string, T>,
+  iteratee: (key: string, val: T) => string
+): Record<string, T> {
+  const result: Record<string, T> = {};
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      result[iteratee(key, obj[key])] = obj[key];
+    }
+  }
+  return result;
+}
+
+/**
+ * Creates a new object by mapping values through a transform function.
+ */
+export function mapValues<T, U>(
+  obj: Record<string, T>,
+  iteratee: (val: T, key: string) => U
+): Record<string, U> {
+  const result: Record<string, U> = {};
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      result[key] = iteratee(obj[key], key);
+    }
+  }
+  return result;
+}
