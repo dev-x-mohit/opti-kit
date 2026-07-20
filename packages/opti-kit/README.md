@@ -132,6 +132,7 @@ const onSearch = debounce((query) => executeSearch(query), 300);
 
 ---
 
+
 ## Interactive Showcase & Documentation
 
 - 🌐 **Interactive Live Sandbox**: [opti-kit-showcase.vercel.app](https://opti-kit-showcase.vercel.app)
