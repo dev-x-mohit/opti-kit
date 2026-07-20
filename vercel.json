@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run build:package && npm run build:showcase",
+  "outputDirectory": "apps/showcase/dist",
+  "installCommand": "npm install"
+}

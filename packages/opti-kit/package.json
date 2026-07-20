@@ -1,6 +1,6 @@
 {
   "name": "@dev_x_mohit/opti-kit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An ultra-lightweight, high-performance, and tree-shakeable JavaScript/TypeScript utility kit containing casing converters, array operations, safe objects path resolvers, relative dates, color space calculators, validators, isomorphic storage wrappers, and event emitters.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -40,8 +40,17 @@
     "array-utils",
     "math-utils"
   ],
-  "author": "",
+  "author": "Mohit Lakhara",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-x-mohit/opti-kit.git",
+    "directory": "packages/opti-kit"
+  },
+  "homepage": "https://opti-kit-showcase.vercel.app",
+  "bugs": {
+    "url": "https://github.com/dev-x-mohit/opti-kit/issues"
+  },
   "devDependencies": {
     "typescript": "^5.4.5",
     "tsup": "^8.0.2",
