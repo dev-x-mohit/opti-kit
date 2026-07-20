@@ -121,46 +121,170 @@ export function Hero() {
 
         </div>
 
-        {/* Dynamic Code Preview Section */}
+        {/* Interactive Studio IDE Preview Section */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-14 max-w-4xl mx-auto"
+          className="mt-16 max-w-5xl mx-auto"
         >
-          <div className="rounded-2xl bg-code-bg border border-border shadow-2xl overflow-hidden relative">
-            <div className="bg-surface/80 border-b border-border px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
+          <div className="rounded-2xl bg-[#0f141c] border border-border/80 shadow-2xl overflow-hidden relative group">
+            {/* Ambient Backlight Glow */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 via-accent/20 to-purple-500/30 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity -z-10" />
+
+            {/* Editor Window Header */}
+            <div className="bg-[#161c28] border-b border-border/60 px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-4">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
-                <div className="flex items-center gap-2 px-2.5 py-1 bg-surface border border-border rounded-md">
-                  <Terminal size={13} className="text-primary" />
-                  <span className="text-xs font-mono font-medium text-text-main">index.ts</span>
+                
+                {/* Editor File Selector Tabs */}
+                <div className="flex items-center gap-1 overflow-x-auto">
+                  {[
+                    { id: 'string', file: 'string.ts', label: 'String' },
+                    { id: 'array', file: 'array.ts', label: 'Array' },
+                    { id: 'async', file: 'async.ts', label: 'Async' },
+                    { id: 'crypto', file: 'crypto.ts', label: 'Crypto' },
+                    { id: 'object', file: 'object.ts', label: 'Object' },
+                  ].map(tab => (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveCodeTab(tab.id as any)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-mono flex items-center gap-1.5 transition-all ${
+                        activeCodeTab === tab.id 
+                          ? 'bg-[#0f141c] text-primary font-semibold border border-primary/30 shadow-inner' 
+                          : 'text-muted hover:text-text-main hover:bg-[#1f2736]'
+                      }`}
+                    >
+                      <span className="text-[10px] font-bold text-accent">TS</span>
+                      <span>{tab.file}</span>
+                    </button>
+                  ))}
                 </div>
-
               </div>
 
-              {/* Code Snippet Tabs */}
-              <div className="flex gap-1 bg-background/80 border border-border p-1 rounded-lg text-xs font-medium">
-                {(['string', 'array', 'async', 'crypto', 'object'] as const).map(tab => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveCodeTab(tab)}
-                    className={`px-2.5 py-1 rounded transition-colors uppercase tracking-wider ${activeCodeTab === tab ? 'bg-primary/20 text-primary font-bold border border-primary/30' : 'text-muted hover:text-text-main'}`}
-                  >
-                    {tab}
-                  </button>
-                ))}
+              {/* Right Status Actions */}
+              <div className="flex items-center gap-3">
+                <span className="hidden sm:flex items-center gap-1.5 text-[11px] font-mono text-success bg-success/10 px-2.5 py-1 rounded-full border border-success/20">
+                  <Zap size={12} /> Live Engine • 0.2ms
+                </span>
+
+                <button
+                  onClick={() => navigate('/playground')}
+                  className="text-xs font-medium text-text-main hover:text-primary transition-colors flex items-center gap-1 bg-surface border border-border px-2.5 py-1 rounded-md"
+                >
+                  <ArrowRight size={13} /> Open Playground
+                </button>
               </div>
             </div>
 
-            <div className="p-6 font-mono text-xs md:text-sm leading-relaxed overflow-x-auto text-text-main bg-code-bg">
-              <pre className="whitespace-pre">
-                {codeSnippets[activeCodeTab]}
-              </pre>
+            {/* Split Editor & Console Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-border/60 bg-[#0f141c]">
+              
+              {/* Left Code Editor Pane */}
+              <div className="lg:col-span-7 p-6 font-mono text-xs md:text-sm leading-relaxed overflow-x-auto text-text-main flex gap-4">
+                <div className="text-muted/40 select-none text-right font-mono text-xs space-y-1">
+                  <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div>
+                </div>
+                <div className="flex-1">
+                  <pre className="whitespace-pre text-gray-200">
+                    {codeSnippets[activeCodeTab]}
+                  </pre>
+                </div>
+              </div>
+
+              {/* Right Interactive Console Output Pane */}
+              <div className="lg:col-span-5 bg-[#121824] p-6 flex flex-col justify-between border-t lg:border-t-0 border-border/60 font-mono text-xs">
+                <div>
+                  <div className="flex items-center justify-between text-muted text-[11px] uppercase tracking-wider mb-4 pb-2 border-b border-border/40">
+                    <span className="flex items-center gap-1.5 text-primary">
+                      <Terminal size={13} /> Console Output
+                    </span>
+                    <span className="text-success font-semibold">STATUS: OK</span>
+                  </div>
+
+                  <div className="space-y-3">
+                    {activeCodeTab === 'string' && (
+                      <>
+                        <div className="p-2.5 rounded bg-[#0b0f17] border border-border/40">
+                          <span className="text-muted text-[11px]">slugify("Modern TS Library 🚀")</span>
+                          <div className="text-success mt-1">"modern-ts-library"</div>
+                        </div>
+                        <div className="p-2.5 rounded bg-[#0b0f17] border border-border/40">
+                          <span className="text-muted text-[11px]">{'interpolate("Hello {{name}}!", ...)'}</span>
+
+                          <div className="text-success mt-1">"Hello Mohit!"</div>
+                        </div>
+                        <div className="p-2.5 rounded bg-[#0b0f17] border border-border/40">
+                          <span className="text-muted text-[11px]">mask("4532123456789012")</span>
+                          <div className="text-success mt-1">"4532************9012"</div>
+                        </div>
+                      </>
+                    )}
+
+                    {activeCodeTab === 'array' && (
+                      <>
+                        <div className="p-2.5 rounded bg-[#0b0f17] border border-border/40">
+                          <span className="text-muted text-[11px]">chunk([1, 2, 3, 4, 5], 2)</span>
+                          <div className="text-success mt-1">[[1, 2], [3, 4], [5]]</div>
+                        </div>
+                        <div className="p-2.5 rounded bg-[#0b0f17] border border-border/40">
+                          <span className="text-muted text-[11px]">uniqueBy([{'{'} id: 1 {'}'}, ...], x =&gt; x.id)</span>
+                          <div className="text-success mt-1">[{'{'} "id": 1 {'}'}]</div>
+                        </div>
+                      </>
+                    )}
+
+                    {activeCodeTab === 'async' && (
+                      <>
+                        <div className="p-2.5 rounded bg-[#0b0f17] border border-border/40">
+                          <span className="text-muted text-[11px]">retryWithBackoff(fn, retries: 3)</span>
+                          <div className="text-success mt-1">⚡ Resolved in 204ms (Attempt 1)</div>
+                        </div>
+                        <div className="p-2.5 rounded bg-[#0b0f17] border border-border/40">
+                          <span className="text-muted text-[11px]">pMap([1, 2, 3], async loadUser)</span>
+                          <div className="text-success mt-1">✓ 3 promises resolved in parallel</div>
+                        </div>
+                      </>
+                    )}
+
+                    {activeCodeTab === 'crypto' && (
+                      <>
+                        <div className="p-2.5 rounded bg-[#0b0f17] border border-border/40">
+                          <span className="text-muted text-[11px]">uuid()</span>
+                          <div className="text-success mt-1">"f47ac10b-58cc-4372-a567-0e02b2c3d479"</div>
+                        </div>
+                        <div className="p-2.5 rounded bg-[#0b0f17] border border-border/40">
+                          <span className="text-muted text-[11px]">sha256("opti-kit")</span>
+                          <div className="text-success mt-1 truncate">"e3b0c44298fc1c149afbf4c8996fb92..."</div>
+                        </div>
+                      </>
+                    )}
+
+                    {activeCodeTab === 'object' && (
+                      <>
+                        <div className="p-2.5 rounded bg-[#0b0f17] border border-border/40">
+                          <span className="text-muted text-[11px]">deepMerge(a, b)</span>
+                          <div className="text-success mt-1">{'{'} "a": {'{'} "b": 1, "c": 2 {'}'} {'}'}</div>
+                        </div>
+                        <div className="p-2.5 rounded bg-[#0b0f17] border border-border/40">
+                          <span className="text-muted text-[11px]">flattenObject(obj)</span>
+                          <div className="text-success mt-1">{'{'} "user.name": "Mohit" {'}'}</div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-border/40 flex items-center justify-between text-[10px] text-muted">
+                  <span>Zero runtime dependencies</span>
+                  <span>Pure TypeScript Native</span>
+                </div>
+              </div>
+
             </div>
           </div>
         </motion.div>
@@ -169,4 +293,5 @@ export function Hero() {
     </section>
   );
 }
+
 
