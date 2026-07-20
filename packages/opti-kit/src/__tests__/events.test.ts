@@ -1,5 +1,13 @@
 import { describe, it, expect, vi } from "vitest";
-import { EventEmitter } from "../events";
+import {
+  EventEmitter,
+  listen,
+  listenOnce,
+  triggerEvent,
+  delegateEvent,
+  waitForEvent,
+  stopEvent,
+} from "../events";
 
 describe("EventEmitter", () => {
   it("registers and triggers events", () => {
@@ -60,5 +68,58 @@ describe("EventEmitter", () => {
     emitter.emit("y");
 
     expect(mock).not.toHaveBeenCalled();
+  });
+});
+
+describe("DOM Event utilities", () => {
+  it("listen and unbind", () => {
+    const target = new EventTarget();
+    const handler = vi.fn();
+    const unbind = listen(target, "click", handler);
+    
+    target.dispatchEvent(new Event("click"));
+    expect(handler).toHaveBeenCalledTimes(1);
+
+    unbind();
+    target.dispatchEvent(new Event("click"));
+    expect(handler).toHaveBeenCalledTimes(1);
+  });
+
+  it("listenOnce", () => {
+    const target = new EventTarget();
+    const handler = vi.fn();
+    listenOnce(target, "click", handler as any);
+    
+    target.dispatchEvent(new Event("click"));
+    target.dispatchEvent(new Event("click"));
+    expect(handler).toHaveBeenCalledTimes(1);
+  });
+
+  it("waitForEvent resolves", async () => {
+    const target = new EventTarget();
+    setTimeout(() => target.dispatchEvent(new Event("ready")), 10);
+    const event = await waitForEvent(target, "ready", 100);
+    expect(event.type).toBe("ready");
+  });
+
+  it("waitForEvent rejects on timeout", async () => {
+    const target = new EventTarget();
+    await expect(waitForEvent(target, "ready", 10)).rejects.toThrow("waitForEvent: Timeout of 10ms exceeded");
+  });
+
+  it("stopEvent prevents default and propagation", () => {
+    const event = {
+      preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
+    } as any;
+    stopEvent(event);
+    expect(event.preventDefault).toHaveBeenCalled();
+    expect(event.stopPropagation).toHaveBeenCalled();
+  });
+
+  it("triggerEvent handles execution safely", () => {
+    const target = new EventTarget();
+    const result = triggerEvent(target, "custom");
+    expect(typeof result).toBe("boolean");
   });
 });

@@ -15,3 +15,12 @@ export * from "./tree";
 export * from "./number";
 export * from "./url";
 export * from "./regex";
+export * from "./functional";
+export * from "./statistics";
+export * from "./geometry";
+export * from "./collection";
+export * from "./random";
+export * from "./encoding";
+export * from "./units";
+export * from "./cache";
+

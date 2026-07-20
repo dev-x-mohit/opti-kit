@@ -19,6 +19,10 @@ describe("storage utilities", () => {
         clear: () => {
           mockStore = {};
         },
+        get length() {
+          return Object.keys(mockStore).length;
+        },
+        key: (index: number) => Object.keys(mockStore)[index] || null,
       },
     });
   });
@@ -54,5 +58,42 @@ describe("storage utilities", () => {
     safeStorage.clear();
     expect(safeStorage.getItem("a")).toBeNull();
     expect(safeStorage.getItem("b")).toBeNull();
+  });
+
+  it("getKeys", () => {
+    safeStorage.setItem("a", 1);
+    safeStorage.setItem("b", 2);
+    expect(safeStorage.getKeys()).toEqual(["a", "b"]);
+  });
+
+  it("hasItem", () => {
+    safeStorage.setItem("a", 1);
+    expect(safeStorage.hasItem("a")).toBe(true);
+    expect(safeStorage.hasItem("c")).toBe(false);
+  });
+
+  it("pullItem", () => {
+    safeStorage.setItem("data", "hello");
+    expect(safeStorage.pullItem("data")).toBe("hello");
+    expect(safeStorage.hasItem("data")).toBe(false);
+  });
+
+  it("pushItem and popItem", () => {
+    safeStorage.pushItem("list", 1);
+    safeStorage.pushItem("list", 2);
+    expect(safeStorage.getItem("list")).toEqual([1, 2]);
+    
+    expect(safeStorage.popItem("list")).toBe(2);
+    expect(safeStorage.getItem("list")).toEqual([1]);
+    
+    expect(safeStorage.popItem("list")).toBe(1);
+    expect(safeStorage.popItem("list")).toBeUndefined();
+  });
+
+  it("getSize", () => {
+    safeStorage.setItem("test", "data");
+    const size = safeStorage.getSize();
+    // "test" length is 4, plus JSON stringified payload length
+    expect(size).toBeGreaterThan(4);
   });
 });

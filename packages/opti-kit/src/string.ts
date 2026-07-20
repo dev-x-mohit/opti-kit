@@ -261,3 +261,315 @@ export function interpolate(
     key in data ? String(data[key]) : fallback
   );
 }
+
+/**
+ * Converts a string to PascalCase.
+ */
+export function pascalCase(str: string): string {
+  const c = camelCase(str);
+  if (!c) return "";
+  return c.charAt(0).toUpperCase() + c.slice(1);
+}
+
+/**
+ * Swaps the casing of each character in a string.
+ */
+export function swapCase(str: string): string {
+  if (!str) return "";
+  let result = "";
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+    const lower = char.toLowerCase();
+    const upper = char.toUpperCase();
+    if (char === lower) {
+      result += upper;
+    } else {
+      result += lower;
+    }
+  }
+  return result;
+}
+
+/**
+ * Removes all whitespace characters from a string.
+ */
+export function trimAll(str: string): string {
+  if (!str) return "";
+  return str.replace(/\s+/g, "");
+}
+
+/**
+ * Splits a string into an array of its characters.
+ */
+export function chars(str: string): string[] {
+  if (!str) return [];
+  return Array.from(str);
+}
+
+/**
+ * Chops a string into pieces of a specific length.
+ */
+export function chop(str: string, step: number): string[] {
+  if (!str || step <= 0) return [];
+  const result = [];
+  for (let i = 0; i < str.length; i += step) {
+    result.push(str.slice(i, i + step));
+  }
+  return result;
+}
+
+/**
+ * Checks if a string ends with any of the provided suffixes.
+ */
+export function endsWithAny(str: string, suffixes: string[]): boolean {
+  if (!str) return false;
+  return suffixes.some(suffix => str.endsWith(suffix));
+}
+
+/**
+ * Checks if a string starts with any of the provided prefixes.
+ */
+export function startsWithAny(str: string, prefixes: string[]): boolean {
+  if (!str) return false;
+  return prefixes.some(prefix => str.startsWith(prefix));
+}
+
+/**
+ * Inserts a substring at a specific index.
+ */
+export function insert(str: string, index: number, sub: string): string {
+  if (index < 0) index = 0;
+  if (index > str.length) index = str.length;
+  return str.slice(0, index) + sub + str.slice(index);
+}
+
+/**
+ * Reverses the characters in a string.
+ */
+export function reverse(str: string): string {
+  if (!str) return "";
+  return Array.from(str).reverse().join("");
+}
+
+/**
+ * Masks a string with a character, leaving some characters visible.
+ */
+export function mask(
+  str: string,
+  maskChar = "*",
+  visibleStart = 0,
+  visibleEnd = 4
+): string {
+  if (!str) return "";
+  if (str.length <= visibleStart + visibleEnd) return str;
+  const start = str.slice(0, visibleStart);
+  const end = visibleEnd > 0 ? str.slice(-visibleEnd) : "";
+  const maskedLength = str.length - visibleStart - visibleEnd;
+  return start + maskChar.repeat(Math.max(0, maskedLength)) + end;
+}
+
+/**
+ * Removes all non-word characters (everything except a-z, A-Z, 0-9, and _).
+ */
+export function removeNonWords(str: string): string {
+  if (!str) return "";
+  return str.replace(/[^\w]/g, "");
+}
+
+/**
+ * Checks if a string is empty or contains only whitespace.
+ */
+export function isBlank(str: string): boolean {
+  if (!str) return true;
+  return str.trim().length === 0;
+}
+
+
+/**
+ * Checks if a string is entirely lowercase.
+ */
+export function isLower(str: string): boolean {
+  if (!str) return false;
+  return str === str.toLowerCase();
+}
+
+/**
+ * Checks if a string is entirely uppercase.
+ */
+export function isUpper(str: string): boolean {
+  if (!str) return false;
+  return str === str.toUpperCase();
+}
+
+/**
+ * Surrounds a string with a prefix and suffix.
+ */
+export function surround(str: string, wrapper: string): string {
+  return wrapper + str + wrapper;
+}
+
+/**
+ * Checks if a string is a palindrome.
+ */
+export function isPalindrome(
+  str: string,
+  options?: { ignoreCase?: boolean; ignoreNonAlphanumeric?: boolean }
+): boolean {
+  if (!str) return true;
+  let text = str;
+  if (options?.ignoreNonAlphanumeric) {
+    text = text.replace(/[^a-zA-Z0-9]/g, "");
+  }
+  if (options?.ignoreCase) {
+    text = text.toLowerCase();
+  }
+  const reversed = Array.from(text).reverse().join("");
+  return text === reversed;
+}
+
+/**
+ * Collapses multiple consecutive whitespace characters into a single space and trims the result.
+ */
+export function collapseWhitespace(str: string): string {
+  if (!str) return "";
+  return str.replace(/\s+/g, " ").trim();
+}
+
+/**
+ * Converts a string to dot.case.
+ */
+export function dotCase(str: string): string {
+  return words(str)
+    .map((word) => word.toLowerCase())
+    .join(".");
+}
+
+/**
+ * Converts a string to Header-Case (Title-Kebab-Case).
+ */
+export function headerCase(str: string): string {
+  return words(str)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join("-");
+}
+
+/**
+ * Ensures a string starts with the given prefix.
+ */
+export function ensurePrefix(str: string, prefix: string): string {
+  if (!str) return prefix;
+  return str.startsWith(prefix) ? str : prefix + str;
+}
+
+/**
+ * Ensures a string ends with the given suffix.
+ */
+export function ensureSuffix(str: string, suffix: string): string {
+  if (!str) return suffix;
+  return str.endsWith(suffix) ? str : str + suffix;
+}
+
+/**
+ * Removes a prefix from the start of a string if present.
+ */
+export function stripPrefix(str: string, prefix: string): string {
+  if (!str || !prefix) return str || "";
+  return str.startsWith(prefix) ? str.slice(prefix.length) : str;
+}
+
+/**
+ * Removes a suffix from the end of a string if present.
+ */
+export function stripSuffix(str: string, suffix: string): string {
+  if (!str || !suffix) return str || "";
+  return str.endsWith(suffix) ? str.slice(0, -suffix.length) : str;
+}
+
+/**
+ * Splits a multi-line string into an array of individual lines.
+ */
+export function lines(str: string): string[] {
+  if (!str) return [];
+  return str.split(/\r?\n/);
+}
+
+/**
+ * Joins an array of line strings into a single multi-line string.
+ */
+export function unlines(linesArr: string[]): string {
+  return linesArr.join("\n");
+}
+
+/**
+ * Computes the Levenshtein distance (edit distance) between two strings.
+ */
+export function levenshteinDistance(a: string, b: string): number {
+  if (a === b) return 0;
+  if (!a.length) return b.length;
+  if (!b.length) return a.length;
+
+  const matrix: number[][] = [];
+  for (let i = 0; i <= b.length; i++) {
+    matrix[i] = [i];
+  }
+  for (let j = 0; j <= a.length; j++) {
+    matrix[0][j] = j;
+  }
+
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1,
+          matrix[i][j - 1] + 1,
+          matrix[i - 1][j] + 1
+        );
+      }
+    }
+  }
+
+  return matrix[b.length][a.length];
+}
+
+/**
+ * Calculates string similarity score between 0 and 1 using Levenshtein distance.
+ */
+export function stringSimilarity(a: string, b: string): number {
+  if (a === b) return 1;
+  const maxLen = Math.max(a.length, b.length);
+  if (maxLen === 0) return 1;
+  const dist = levenshteinDistance(a, b);
+  return (maxLen - dist) / maxLen;
+}
+
+export { isAlpha, isAlphanumeric } from "./validate";
+
+/**
+ * Extracts the file extension from a filename or path.
+ */
+export function getFileExtension(filename: string): string {
+
+
+  if (!filename) return "";
+  const parts = filename.split(".");
+  if (parts.length === 1 || (parts[0] === "" && parts.length === 2)) {
+    return "";
+  }
+  return parts.pop()?.toLowerCase() || "";
+}
+
+/**
+ * Extracts the filename without its extension.
+ */
+export function getFileName(filename: string): string {
+  if (!filename) return "";
+  const parts = filename.split(".");
+  if (parts.length === 1 || (parts[0] === "" && parts.length === 2)) {
+    return filename;
+  }
+  parts.pop();
+  return parts.join(".");
+}
+

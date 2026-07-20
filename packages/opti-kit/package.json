@@ -1,7 +1,9 @@
 {
   "name": "@dev_x_mohit/opti-kit",
-  "version": "1.0.5",
-  "description": "OptiKit is a zero-dependency, ultra-lightweight (~25KB ESM), fully tree-shakeable JavaScript/TypeScript utility library. It ships 17 hand-optimized modules — strings (slugify, truncate, pad, titleCase, interpolate, camelCase, kebabCase, snakeCase, escapeHtml, wordCount, countOccurrences), arrays (chunk, unique, uniqueBy, groupBy, shuffle, sample, difference, intersection), objects (pick, omit, get, set, deepClone, deepMerge, flattenObject, mapKeys, mapValues), math (clamp, lerp, round, random, sum, mean, median, standardDeviation, percentage, inRange), numbers (formatCurrency, formatBytes, formatNumber, formatCompact, toOrdinal), async (debounce, throttle, once, retry, delay with leading/trailing options), crypto (uuid, generateToken, sha256, fnv1a), validation (isEmail, isUrl, isUuid, isPhone, isStrongPassword, isIP, isDateValid), date utilities, color space converters, isomorphic storage, event emitter, DOM helpers, URL parsing, regex tools, and tree traversal. Every function is side-effect free, individually importable, and ships with full TypeScript declarations, CJS/ESM dual output, and 83 unit tests.",
+  "version": "1.0.6",
+
+  "description": "OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility monorepo library. It ships 25 hand-optimized isomorphic modules — strings, arrays, objects, math, numbers, async, crypto, validation, dates, color converters, storage, event emitter, DOM helpers, URL parsing, regex, tree traversal, statistics, geometry, units, encoding, cache, functional programming, collections, random, and types. Every function is side-effect free, individually importable, and ships with full TypeScript declarations, CJS/ESM dual output, 328+ utilities, and 300+ unit tests.",
+
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
