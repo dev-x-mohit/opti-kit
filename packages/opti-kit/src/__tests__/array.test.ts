@@ -7,6 +7,7 @@ import {
   groupBy,
   shuffle,
   sample,
+  uniqueBy,
 } from "../array";
 
 describe("array utilities", () => {
@@ -62,5 +63,22 @@ describe("array utilities", () => {
     const item = sample(arr);
     expect(arr).toContain(item);
     expect(sample([])).toBeUndefined();
+  });
+
+  it("uniqueBy", () => {
+    const list = [
+      { id: 1, name: "Alice" },
+      { id: 2, name: "Bob" },
+      { id: 1, name: "Charlie" },
+    ];
+    expect(uniqueBy(list, "id")).toEqual([
+      { id: 1, name: "Alice" },
+      { id: 2, name: "Bob" },
+    ]);
+    expect(uniqueBy(list, (x) => x.name.length)).toEqual([
+      { id: 1, name: "Alice" },
+      { id: 2, name: "Bob" },
+      { id: 1, name: "Charlie" },
+    ]);
   });
 });

@@ -22,12 +22,16 @@ describe("string utilities", () => {
     expect(slugify("Hello World!")).toBe("hello-world");
     expect(slugify("---test---")).toBe("test");
     expect(slugify("")).toBe("");
+    expect(slugify("Hello World!", { lower: false })).toBe("Hello-World");
+    expect(slugify("Hello World!", { replacement: "_" })).toBe("hello_world");
   });
 
   it("truncate", () => {
     expect(truncate("hello world", 8)).toBe("hello...");
     expect(truncate("hello", 10)).toBe("hello");
     expect(truncate("", 5)).toBe("");
+    expect(truncate("hello world", 10, { separator: " " })).toBe("hello...");
+    expect(truncate("hello-world-test", 15, { separator: /-/ })).toBe("hello-world...");
   });
 
   it("camelCase", () => {
