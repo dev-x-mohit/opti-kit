@@ -165,3 +165,99 @@ export function wordCount(str: string): number {
   if (!str) return 0;
   return words(str).length;
 }
+
+/**
+ * Pads a string to a target length with a fill character.
+ * @param options.position - "start" | "end" | "both" (default: "end")
+ * @param options.fill     - Fill character (default: " ")
+ */
+export function pad(
+  str: string,
+  length: number,
+  options?: { position?: "start" | "end" | "both"; fill?: string }
+): string {
+  const fill = options?.fill ?? " ";
+  const position = options?.position ?? "end";
+  if (str.length >= length) return str;
+  const totalPad = length - str.length;
+  if (position === "start") return str.padStart(length, fill);
+  if (position === "end") return str.padEnd(length, fill);
+  const padStart = Math.floor(totalPad / 2);
+  const padEnd = totalPad - padStart;
+  return fill.repeat(padStart) + str + fill.repeat(padEnd);
+}
+
+/**
+ * Repeats a string a given number of times with an optional separator.
+ */
+export function repeat(str: string, count: number, separator = ""): string {
+  if (!str || count <= 0) return "";
+  return Array(count).fill(str).join(separator);
+}
+
+/**
+ * Reverses the order of words in a string.
+ */
+export function reverseWords(str: string): string {
+  if (!str) return "";
+  return str.trim().split(/\s+/).reverse().join(" ");
+}
+
+/**
+ * Converts a string to Title Case.
+ * @param options.keepUpperCase - If true, fully uppercase words stay uppercase (e.g. "API" → "API")
+ */
+export function titleCase(
+  str: string,
+  options?: { keepUpperCase?: boolean }
+): string {
+  if (!str) return "";
+  return str.replace(/\S+/g, (word) => {
+    if (options?.keepUpperCase && word === word.toUpperCase() && word.length > 1) {
+      return word;
+    }
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  });
+}
+
+/**
+ * Counts how many times a substring appears in a string.
+ * @param options.overlapping - If true, counts overlapping occurrences
+ */
+export function countOccurrences(
+  str: string,
+  sub: string,
+  options?: { overlapping?: boolean }
+): number {
+  if (!str || !sub) return 0;
+  if (options?.overlapping) {
+    let count = 0;
+    let idx = 0;
+    while ((idx = str.indexOf(sub, idx)) !== -1) {
+      count++;
+      idx++;
+    }
+    return count;
+  }
+  return str.split(sub).length - 1;
+}
+
+/**
+ * Interpolates template variables in a string using a data object.
+ * @param template - String with `{{variable}}` placeholders
+ * @param data     - Object with replacement values
+ * @param options.fallback - Value to use when a key is missing (default: "")
+ *
+ * @example
+ * interpolate("Hello {{name}}!", { name: "Mohit" }) // → "Hello Mohit!"
+ */
+export function interpolate(
+  template: string,
+  data: Record<string, any>,
+  options?: { fallback?: string }
+): string {
+  const fallback = options?.fallback ?? "";
+  return template.replace(/\{\{\s*(\w+)\s*\}\}/g, (_, key) =>
+    key in data ? String(data[key]) : fallback
+  );
+}
