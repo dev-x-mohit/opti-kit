@@ -4,26 +4,29 @@
 
 [![NPM Version](https://img.shields.io/npm/v/@dev_x_mohit/opti-kit?style=flat-square&color=a855f7)](https://www.npmjs.com/package/@dev_x_mohit/opti-kit)
 [![Socket Security](https://img.shields.io/badge/Socket%20Security-100%2F100-success?style=flat-square)](https://socket.dev/npm/package/@dev_x_mohit/opti-kit)
-[![Bundlephobia Size](https://img.shields.io/badge/Minified%20%2B%20Gzip-14%20KB-blue?style=flat-square)](https://bundlephobia.com/package/@dev_x_mohit/opti-kit)
+[![Bundlephobia Size](https://img.shields.io/badge/Minified%20%2B%20Gzip-16%20KB-blue?style=flat-square)](https://bundlephobia.com/package/@dev_x_mohit/opti-kit)
 [![Dependencies](https://img.shields.io/badge/Dependencies-0-brightgreen?style=flat-square)](https://www.npmjs.com/package/@dev_x_mohit/opti-kit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility engine designed to replace legacy monolithic packages like Lodash, Moment, and Ramda. Built natively in TypeScript, it ships **37 hand-optimized modules** containing **429+ functions** in both ES Modules (`.mjs`) and CommonJS (`.js`) formats.
+OptiKit is a modern, zero-dependency utility engine designed as a drop-in replacement for legacy, monolithic libraries like Lodash, Rambda, and Moment. Natively built in TypeScript, it packages **37 hand-optimized modules** containing **429+ utility functions**. 
+
+Every export is designed with standard ESM + CJS compatibility, full TypeScript declarations, side-effects-free tree-shaking, and 100% passing test coverage.
 
 ---
 
-## Key Highlights
+## ⚡ Key Highlights
 
-- ⚡ **16.0 KB Minified + Gzipped**
-- 🛡️ **100/100 Security & Vulnerability Score** (Socket Security Verified)
-- 📦 **0 External Dependencies** — Immune to supply-chain attacks
-- 🌳 **100% Tree-Shakeable** — Ships with `"sideEffects": false`
-- 🎯 **429+ Isomorphic Utilities** across 37 dedicated domain modules
-- 🧪 **418 Unit Tests** with 100% passing test coverage
+*   🌳 **100% Tree-Shakeable:** Structured with `"sideEffects": false` so your bundle only includes the functions you actually import.
+*   🛡️ **Supply-Chain Immune:** 0 external dependencies, 0 network access, and 0 environment variable access. Safe for security-critical applications.
+*   🌐 **Isomorphic & Universal:** Fully compatible with Node.js (>=18), modern browsers, Cloudflare Workers, Vercel Serverless, Bun, and Deno.
+*   ⚡ **Ultra-Lightweight:** The entire engine of 37 modules and 429+ utilities takes only **16.0 KB minified + gzipped**.
+*   🧪 **Production-Grade Reliability:** Covered by 418+ unit tests with 100% test coverage.
 
 ---
 
-## Installation
+## 📦 Installation
+
+Install the package via your preferred package manager:
 
 ```bash
 # npm
@@ -41,123 +44,121 @@ bun add @dev_x_mohit/opti-kit
 
 ---
 
-## 37 Modules Overview
+## 📂 Categorized Modules (37 Modules)
 
-| Module | Utilities Count | Description |
-| :--- | :--- | :--- |
-| **`string`** | 45 utils | `slugify`, `truncate`, `capitalize`, `escapeHtml`, `interpolate`, `titleCase`, `levenshteinDistance` |
-| **`array`** | 40 utils | `chunk`, `unique`, `groupBy`, `partition`, `shuffle`, `intersection`, `difference`, `zip` |
-| **`math`** | 32 utils | `clamp`, `lerp`, `mean`, `median`, `standardDeviation`, `factorial`, `isPrime`, `gcd`, `lcm` |
-| **`object`** | 31 utils | `deepClone`, `deepMerge`, `flattenObject`, `pick`, `omit`, `get`, `set`, `compactObject` |
-| **`validate`** | 28 utils | `isEmail`, `isUrl`, `isUuid`, `isIP`, `isSemVer`, `isCreditCard`, `isJWT`, `isStrongPassword` |
-| **`date`** | 20 utils | `relativeTime`, `formatDate`, `isLeapYear`, `addDays`, `subMonths`, `diffInDays`, `daysInMonth` |
-| **`async`** | 19 utils | `debounce`, `throttle`, `retry`, `retryWithBackoff`, `delay`, `asyncPool`, `pMap`, `timeout` |
-| **`number`** | 18 utils | `formatCurrency`, `formatCompact` (1K/1M), `toOrdinal`, `formatFileSize`, `roundToNearest` |
-| **`crypto`** | 10 utils | `uuid`, `fnv1a`, `cyrb53`, `sha256`, `sha384`, `sha512`, `hmacSha256`, `generateToken` |
-| **`color`** | 10 utils | `hexToRgb`, `rgbToHex`, `hslToRgb`, `rgbToHsl`, `hexToHsl`, `lighten`, `darken`, `getContrastRatio` |
-| **`storage`** | 1 obj | `safeStorage` (Isomorphic localStorage/sessionStorage wrapper with JSON & expiry) |
-| **`events`** | 7 utils | `EventEmitter` (Pub/Sub pattern), `listen`, `listenOnce`, `delegateEvent`, `waitForEvent` |
-| **`dom`** | 14 utils | `copyToClipboard`, `setCookie`, `getCookie`, `deleteCookie`, `createElement`, `scrollToTop` |
-| **`url`** | 8 utils | `joinPaths`, `parseUrl`, `stringifyQuery`, `buildUrl`, `isAbsoluteUrl` |
-| **`functional`** | 14 utils | `curry`, `partial`, `pipe`, `compose`, `onceFn`, `memoize`, `constant`, `not`, `trampoline` |
-| **`types`** | 14 utils | `isNil`, `isObject`, `isFunction`, `isDate`, `isRegExp`, `isString`, `isNumber`, `isPromise` |
-| **`units`** | 8 utils | `celsiusToFahrenheit`, `fahrenheitToCelsius`, `milesToKilometers`, `poundsToKilograms` |
-| **`geometry`** | 9 utils | `distance2D`, `distance3D`, `midpoint`, `angleBetween`, `rotatePoint`, `circleArea` |
-| **`statistics`** | 12 utils | `variance`, `standardDeviation`, `zScore`, `percentile`, `covariance`, `correlation`, `skewness` |
-| **`cache`** | 2 utils | `LRUCache`, `memoizeWithTTL` |
-| **`regex`** | 1 obj | Pre-compiled regex patterns & validation generators |
-| **`tree`** | 2 utils | `arrayToTree`, `treeToArray` hierarchical traversals |
-| **`collection`** | 12 utils | `countBy`, `keyBy`, `sortBy`, `symmetricDifference`, `mergeMaps`, `frequencies`, `filterMap` |
-| **`random`** | 9 utils | `randomUUID`, `randomColor`, `randomBoolean`, `randomFloat`, `randomItem`, `randomIntFast` |
-| **`encoding`** | 8 utils | `utf8Encode`, `utf8Decode`, `hexEncode`, `hexDecode`, `base64Encode`, `base64Decode` |
-| **`guard`** | 12 utils | `safeJsonParse`, `safeJsonStringify`, `safeParseInt`, `attempt`, `invariant`, `assertDefined` |
-| **`format`** | 9 utils | `formatDuration`, `formatPhoneNumber`, `formatCreditCardNumber`, `formatPercentage`, `pluralize` |
-| **`schema`** | 12 utils | Lightweight rule validation runner (`validateObject`, `required`, `minLength`, `minValue`) |
-| **`browser`** | 16 utils | SSR-safe browser feature and environment checks (`isBrowser`, `isChrome`, `isMobile`) |
-| **`json`** | 6 utils | Deep JSON utilities (`jsonClone`, `jsonFlatten`, `jsonUnflatten`, `jsonPath`, `jsonMerge`, `jsonDiff`) |
-| **`store`** | 4 utils | Ultra-lightweight reactive primitives (`signal`, `computed`, `effect`, `createStore`) |
-| **`csv`** | 2 utils | Table processing utilities (`csvParse`, `csvStringify`) |
-| **`log`** | 2 utils | Custom level-based ANSI loggers (`createLogger`, `ansi`) |
-| **`ds`** | 4 classes | Advanced standard data structures (`Stack`, `Queue`, `PriorityQueue`, `BiMap`) |
-| **`template`** | 2 utils | Isomorphic logic-less micro template engine (`render`, `compile`) |
-| **`keyboard`** | 2 utils | Isomorphic hotkeys listener and key press state checking (`registerShortcut`, `isKeyPressed`) |
-| **`semver`** | 5 utils | SemVer 2.0 parser, validator, comparator, and range checker (`semverCompare`, `semverSatisfies`) |
+Rather than dumping a monolithic API, OptiKit organizes its 429+ utilities into dedicated, clean domains:
 
+### 🗃️ Data & Collections
+*   **`string`** (45 utils) — Modern string manipulations: `slugify`, `truncate`, `escapeHtml`, `titleCase`.
+*   **`array`** (40 utils) — Safe list processing: `chunk`, `unique`, `groupBy`, `partition`, `intersection`.
+*   **`object`** (31 utils) — Deep manipulations: `deepClone`, `deepMerge`, `flattenObject`, `pick`, `omit`.
+*   **`collection`** (12 utils) — Aggregations: `countBy`, `keyBy`, `sortBy`, `symmetricDifference`.
+*   **`tree`** (2 utils) — Hierarchical traversals: `arrayToTree`, `treeToArray`.
+*   **`json`** (6 utils) — Deep JSON operations: `jsonClone`, `jsonFlatten`, `jsonUnflatten`, `jsonPath`, `jsonMerge`, `jsonDiff`.
+*   **`csv`** (2 utils) — Micro CSV parsers: `csvParse`, `csvStringify`.
+*   **`ds`** (4 classes) — Optimized structures: `Stack`, `Queue`, `PriorityQueue`, `BiMap`.
+
+### ⚙️ Logic & Control Flow
+*   **`async`** (19 utils) — Concurrency control: `debounce`, `throttle`, `retry`, `delay`, `asyncPool`, `timeout`.
+*   **`functional`** (14 utils) — FP primitives: `curry`, `partial`, `pipe`, `compose`, `onceFn`.
+*   **`events`** (7 utils) — Pub/Sub emitter: `EventEmitter`, `listen`, `listenOnce`, `delegateEvent`.
+*   **`store`** (4 utils) — Micro reactive signals: `signal`, `computed`, `effect`, `createStore`.
+*   **`cache`** (2 utils) — TTL caching: `LRUCache`, `memoizeWithTTL`.
+*   **`guard`** (12 utils) — Safe parse boundaries: `safeJsonParse`, `safeParseInt`, `invariant`, `attempt`.
+
+### 🛡️ Security & Parsers
+*   **`crypto`** (10 utils) — Cryptographic utilities: `uuid`, `sha256`, `sha512`, `hmacSha256`, `generateToken`.
+*   **`encoding`** (8 utils) — Fast converters: `utf8Encode`, `utf8Decode`, `hexEncode`, `base64Encode`.
+*   **`validate`** (28 utils) — Robust format checks: `isEmail`, `isUrl`, `isUuid`, `isCreditCard`, `isJWT`.
+*   **`semver`** (5 utils) — SemVer parser/validator: `semverCompare`, `semverSatisfies`.
+*   **`regex`** (1 obj) — Pre-compiled patterns.
+
+### 🌐 Web & Dom
+*   **`dom`** (14 utils) — Browser interaction: `copyToClipboard`, `setCookie`, `getCookie`, `createElement`.
+*   **`storage`** (1 obj) — SSR-safe storage: `safeStorage` (LocalStorage/SessionStorage with JSON + expiry).
+*   **`browser`** (16 utils) — Environment checks: `isBrowser`, `isChrome`, `isMobile`, `isTouchDevice`.
+*   **`keyboard`** (2 utils) — Hotkey event handlers: `registerShortcut`, `isKeyPressed`.
+*   **`url`** (8 utils) — Safe URL parser & builder: `joinPaths`, `parseUrl`, `buildUrl`.
+
+### 🧮 Math & Science
+*   **`math`** (32 utils) — Math operations: `clamp`, `lerp`, `mean`, `median`, `factorial`, `isPrime`, `gcd`.
+*   **`statistics`** (12 utils) — Data science math: `variance`, `standardDeviation`, `covariance`, `correlation`.
+*   **`geometry`** (9 utils) — Coord geometry: `distance2D`, `midpoint`, `rotatePoint`, `circleArea`.
+*   **`units`** (8 utils) — Converter helper: `celsiusToFahrenheit`, `milesToKilometers`.
+*   **`color`** (10 utils) — Color convert & contrasts: `hexToRgb`, `rgbToHex`, `rgbToHsl`, `lighten`, `darken`.
+
+### 🛠️ Common Utilities
+*   **`types`** (14 utils) — Precise runtime check: `isNil`, `isObject`, `isPromise`, `isDate`.
+*   **`format`** (9 utils) — Format helpers: `formatDuration`, `formatPhoneNumber`, `pluralize`.
+*   **`schema`** (12 utils) — Simple rule runner: `validateObject`, `required`, `minLength`.
+*   **`date`** (20 utils) — Iso-time: `relativeTime`, `formatDate`, `diffInDays`, `addDays`.
+*   **`template`** (2 utils) — Simple template engine: `render`, `compile`.
+*   **`log`** (2 utils) — Colored ANSI logger: `createLogger`, `ansi`.
 
 ---
 
-## Code Examples
+## 🚀 Code Examples
 
-### 1. String Casing & Formatting
+### 1. Reactive Store (`store`)
+Create ultra-lightweight reactive states in just 4 lines of code:
 ```typescript
-import { slugify, truncate, escapeHtml } from '@dev_x_mohit/opti-kit';
+import { signal, computed, effect } from '@dev_x_mohit/opti-kit';
 
-slugify('OptiKit Zero Dependency!'); // "optikit-zero-dependency"
-truncate('Building high performance web apps', 18); // "Building high..."
-escapeHtml('<h1>Hello World</h1>'); // "&lt;h1&gt;Hello World&lt;/h1&gt;"
+const count = signal(0);
+const doubleCount = computed(() => count.value * 2);
+
+effect(() => console.log(`Count is: ${count.value}, Double is: ${doubleCount.value}`));
+// Log: Count is: 0, Double is: 0
+
+count.value = 5;
+// Log: Count is: 5, Double is: 10
 ```
 
-### 2. Array & Object Operations
-```typescript
-import { chunk, unique, groupBy, deepClone, deepMerge } from '@dev_x_mohit/opti-kit';
-
-chunk([1, 2, 3, 4, 5, 6], 2); // [[1, 2], [3, 4], [5, 6]]
-unique([1, 1, 2, 3, 3]); // [1, 2, 3]
-groupBy([{ r: 'admin' }, { r: 'user' }, { r: 'admin' }], i => i.r); // { admin: [...], user: [...] }
-
-const merged = deepMerge({ a: 1 }, { b: 2 }); // { a: 1, b: 2 }
-```
-
-### 3. Isomorphic `safeStorage` Wrapper
+### 2. Zero-Throw Storage (`storage`)
+Work with storage in Next.js / SSR environments without window checks or throwing errors:
 ```typescript
 import { safeStorage } from '@dev_x_mohit/opti-kit';
 
-// Zero-throw wrapper: works in Next.js/React SSR without window errors!
-// Supports native object JSON parsing and custom millisecond expiration times:
-safeStorage.setItem('user_session', { id: 'usr_99', role: 'admin' }, 60000); // 1 minute expiration
-const session = safeStorage.getItem('user_session'); // { id: 'usr_99', role: 'admin' }
+// Saves with native JSON serialization and an optional 1-minute expiration timer
+safeStorage.setItem('session', { userId: 'usr_88', role: 'editor' }, 60000);
+
+// Safely retrieves and parses the object; returns null if expired or missing
+const session = safeStorage.getItem('session'); 
 ```
 
-### 4. Async Retry & Debounce
+### 3. Concurrency Pool (`async`)
+Limit concurrency when executing large batches of async tasks:
 ```typescript
-import { delay, retry, debounce } from '@dev_x_mohit/opti-kit';
+import { asyncPool } from '@dev_x_mohit/opti-kit';
 
-await delay(500); // sleep 500ms
+const urls = ['/api/1', '/api/2', '/api/3', '/api/4'];
+const fetchTask = async (url: string) => fetch(url).then(r => r.json());
 
-// Automatically retry failed API calls 3 times with exponential backoff
-const data = await retry(async () => fetchApiData(), 3, 500);
+// Executes fetch tasks, processing a maximum of 2 requests concurrently
+const results = await asyncPool(2, urls, fetchTask);
+```
 
-// Debounce expensive handlers
-const onSearch = debounce((query) => executeSearch(query), 300);
+### 4. Deep Merge & Object Flattening (`object`)
+```typescript
+import { deepMerge, flattenObject } from '@dev_x_mohit/opti-kit';
+
+const merged = deepMerge({ a: { b: 1 } }, { a: { c: 2 } }); 
+// { a: { b: 1, c: 2 } }
+
+const flat = flattenObject({ user: { address: { city: 'NYC' } } });
+// { 'user.address.city': 'NYC' }
 ```
 
 ---
 
-## Version Release History
+## 🌐 Showcase & Interactive Sandbox
 
-- **`v1.0.6`**: Verified 100/100 Socket Security & 14.0 KB Gzip Bundlephobia audit. Added cookie helpers (`setCookie`, `getCookie`, `deleteCookie`) and file helpers (`getFileExtension`, `getFileName`, `formatFileSize`).
-- **`v1.0.5`**: Added `safeStorage` isomorphic wrapper and `EventEmitter`. Fixed DTS ambient `Buffer` type declaration generator errors.
-- **`v1.0.4`**: Added functional programming helpers (`curry`, `partial`, `noop`) and extended string/validation functions.
-- **`v1.0.3`**: Added `color` and `crypto` modules (`uuid`, `randomUUID`, `fnv1a`, `cyrb53`, `sha256`, `sha512`).
-- **`v1.0.2`**: Added `statistics` and `geometry` modules.
-- **`v1.0.1`**: Added `units` and `cache` (`LRUCache`, `memoizeWithTTL`) modules.
-- **`v1.0.0`**: Initial release of `@dev_x_mohit/opti-kit` utility monorepo.
+*   🌐 **Interactive Live Showcase:** [opti-kit-showcase.vercel.app](https://opti-kit-showcase.vercel.app)
+*   🛡️ **Socket Security Audit:** [socket.dev/npm/package/@dev_x_mohit/opti-kit](https://socket.dev/npm/package/@dev_x_mohit/opti-kit)
+*   ⚡ **Bundlephobia Audit:** [bundlephobia.com/package/@dev_x_mohit/opti-kit](https://bundlephobia.com/package/@dev_x_mohit/opti-kit)
 
 ---
 
-
-## Interactive Showcase & Documentation
-
-- 🌐 **Interactive Live Sandbox**: [opti-kit-showcase.vercel.app](https://opti-kit-showcase.vercel.app)
-- 👨‍💻 **Developer Portfolio**: [mohitlakhara.vercel.app](https://mohitlakhara.vercel.app)
-- 📦 **NPM Package**: [npmjs.com/package/@dev_x_mohit/opti-kit](https://www.npmjs.com/package/@dev_x_mohit/opti-kit)
-- 🛡️ **Socket Security Audit**: [socket.dev/npm/package/@dev_x_mohit/opti-kit](https://socket.dev/npm/package/@dev_x_mohit/opti-kit)
-- ⚡ **Bundlephobia Audit**: [bundlephobia.com/package/@dev_x_mohit/opti-kit](https://bundlephobia.com/package/@dev_x_mohit/opti-kit)
-
----
-
-## License
+## 📄 License
 
 MIT © [Mohit Lakhara](https://mohitlakhara.vercel.app)
-
-
