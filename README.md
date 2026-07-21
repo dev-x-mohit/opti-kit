@@ -9,7 +9,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![Developer](https://img.shields.io/badge/Developer-Mohit%20Lakhara-a855f7?style=flat-square)](https://mohitlakhara.vercel.app)
 
-
 ---
 
 ## Workspace Structure
@@ -31,57 +30,32 @@ opti-kit/
 
 ---
 
-## Packages
+## Packages & Apps
 
-| Package | Version | Description |
-|---|---|---|
-| [`@dev_x_mohit/opti-kit`](./packages/opti-kit) | ![npm](https://img.shields.io/npm/v/@dev_x_mohit/opti-kit) | Core utility library |
-
-## Apps
-
-| App | URL | Description |
-|---|---|---|
-| [showcase](./apps/showcase) | [opti-kit-showcase.vercel.app](https://opti-kit-showcase.vercel.app) | Interactive live demo site |
+- 📦 Core Package: [`@dev_x_mohit/opti-kit`](./packages/opti-kit)
+- 🌐 Showcase Site: [opti-kit-showcase.vercel.app](https://opti-kit-showcase.vercel.app)
 
 ---
 
 ## CI/CD Automation
 
-### NPM Auto-Publish
-Every time a version tag is pushed (e.g. `v1.0.3`), the `npm-publish.yml` workflow automatically:
-1. Installs dependencies
-2. Builds the package
-3. Runs all tests
-4. Publishes to NPM
+The monorepo features fully automated publishing and deployments via GitHub Actions:
+
+- **NPM Auto-Publish:** Every time a version tag is pushed, the `npm-publish.yml` workflow automatically builds, tests, and publishes the package to NPM.
+- **Vercel Auto-Deploy:** Every push to `main` automatically builds and deploys the showcase site to Vercel.
 
 **To release a new version:**
 ```bash
 # 1. Bump version in packages/opti-kit/package.json
-# 2. Commit the bump
-git add . && git commit -m "chore: release v1.0.3"
-# 3. Create and push the tag (triggers auto-publish)
+# 2. Run the release command (bypasses manual tag and push steps)
 npm run release
 ```
-
-### Vercel Auto-Deploy
-Every push to `main` automatically builds the monorepo and deploys the showcase site to Vercel.
-
----
-
-## Required GitHub Secrets
-
-To enable CI/CD, add these secrets in your GitHub repository settings (`Settings → Secrets and variables → Actions`):
-
-| Secret | Where to get it |
-|---|---|
-| `NPM_TOKEN` | [npmjs.com → Access Tokens](https://www.npmjs.com/settings/~/tokens) — create an **Automation** token |
-| `VERCEL_TOKEN` | [vercel.com → Account Settings → Tokens](https://vercel.com/account/tokens) |
-| `VERCEL_ORG_ID` | From your `.vercel/project.json` in `apps/showcase` |
-| `VERCEL_PROJECT_ID` | From your `.vercel/project.json` in `apps/showcase` |
 
 ---
 
 ## Local Development
+
+Get started with the project locally:
 
 ```bash
 # Clone the repo
@@ -115,3 +89,4 @@ npm run test:package
 ## License
 
 MIT © [Mohit Lakhara](https://mohitlakhara.vercel.app)
+
