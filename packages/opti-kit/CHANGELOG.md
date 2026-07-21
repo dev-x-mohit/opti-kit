@@ -4,6 +4,32 @@ All notable changes to `@dev_x_mohit/opti-kit` will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.9] - 2026-07-21
+
+### Added
+- Added `isPrimitive` type guard helper function to `types.ts`.
+
+### Changed
+- Rewrote the package `README.md` for a professional and modern look on NPM.
+
+### Security
+- Addressed security vulnerability and socket.dev alerts by removing the network-accessing `http` module and removing process environment (`process.env`) references from `log.ts`. The library is now 100% supply-chain safe with 0 dependencies, 0 network access, and 0 environment variable access.
+
+---
+
+## [1.0.8] - 2026-07-21
+
+### Added
+- Added 13 new utility modules: `guard`, `format`, `schema`, `browser`, `json`, `store`, `http` (subsequently deprecated in 1.0.9), `csv`, `log`, `ds`, `template`, `keyboard`, and `semver`.
+- Reached 429 utilities and 418 unit tests.
+
+---
+
+## [1.0.7] - 2026-07-21
+
+### Changed
+- Internal repository maintenance update.
+
 ---
 
 ## [1.0.6] - 2026-07-20

@@ -83,7 +83,7 @@ export function HomePage() {
             onClick={() => navigate('/modules')}
             className="text-xs sm:text-sm font-semibold text-primary hover:text-accent transition-colors inline-flex items-center gap-1.5 underline-offset-4 hover:underline"
           >
-            View all 37 modules & 429+ utilities <ArrowRight size={16} />
+            View all 37 modules & 430 utilities <ArrowRight size={16} />
           </button>
         </div>
       </section>

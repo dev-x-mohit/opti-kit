@@ -8,7 +8,7 @@
 [![Dependencies](https://img.shields.io/badge/Dependencies-0-brightgreen?style=flat-square)](https://www.npmjs.com/package/@dev_x_mohit/opti-kit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-OptiKit is a modern, zero-dependency utility engine designed as a drop-in replacement for legacy, monolithic libraries like Lodash, Rambda, and Moment. Natively built in TypeScript, it packages **37 hand-optimized modules** containing **429+ utility functions**. 
+OptiKit is a modern, zero-dependency utility engine designed as a drop-in replacement for legacy, monolithic libraries like Lodash, Rambda, and Moment. Natively built in TypeScript, it packages **37 hand-optimized modules** containing **430 utility functions**. 
 
 Every export is designed with standard ESM + CJS compatibility, full TypeScript declarations, side-effects-free tree-shaking, and 100% passing test coverage.
 
@@ -19,8 +19,8 @@ Every export is designed with standard ESM + CJS compatibility, full TypeScript 
 *   🌳 **100% Tree-Shakeable:** Structured with `"sideEffects": false` so your bundle only includes the functions you actually import.
 *   🛡️ **Supply-Chain Immune:** 0 external dependencies, 0 network access, and 0 environment variable access. Safe for security-critical applications.
 *   🌐 **Isomorphic & Universal:** Fully compatible with Node.js (>=18), modern browsers, Cloudflare Workers, Vercel Serverless, Bun, and Deno.
-*   ⚡ **Ultra-Lightweight:** The entire engine of 37 modules and 429+ utilities takes only **16.0 KB minified + gzipped**.
-*   🧪 **Production-Grade Reliability:** Covered by 418+ unit tests with 100% test coverage.
+*   ⚡ **Ultra-Lightweight:** The entire engine of 37 modules and 430 utilities takes only **16.0 KB minified + gzipped**.
+*   🧪 **Production-Grade Reliability:** Covered by 419 unit tests with 100% test coverage.
 
 ---
 
@@ -46,7 +46,7 @@ bun add @dev_x_mohit/opti-kit
 
 ## 📂 Categorized Modules (37 Modules)
 
-Rather than dumping a monolithic API, OptiKit organizes its 429+ utilities into dedicated, clean domains:
+Rather than dumping a monolithic API, OptiKit organizes its 430 utilities into dedicated, clean domains:
 
 ### 🗃️ Data & Collections
 *   **`string`** (45 utils) — Modern string manipulations: `slugify`, `truncate`, `escapeHtml`, `titleCase`.
@@ -88,7 +88,7 @@ Rather than dumping a monolithic API, OptiKit organizes its 429+ utilities into 
 *   **`color`** (10 utils) — Color convert & contrasts: `hexToRgb`, `rgbToHex`, `rgbToHsl`, `lighten`, `darken`.
 
 ### 🛠️ Common Utilities
-*   **`types`** (14 utils) — Precise runtime check: `isNil`, `isObject`, `isPromise`, `isDate`.
+*   **`types`** (16 utils) — Precise runtime check: `isNil`, `isObject`, `isPromise`, `isDate`.
 *   **`format`** (9 utils) — Format helpers: `formatDuration`, `formatPhoneNumber`, `pluralize`.
 *   **`schema`** (12 utils) — Simple rule runner: `validateObject`, `required`, `minLength`.
 *   **`date`** (20 utils) — Iso-time: `relativeTime`, `formatDate`, `diffInDays`, `addDays`.

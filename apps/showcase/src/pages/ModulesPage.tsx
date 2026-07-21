@@ -231,7 +231,7 @@ export function ModulesPage() {
             type="text" 
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search 429+ utilities..." 
+            placeholder="Search 430 utilities..." 
             className="w-full bg-surface border border-border rounded-lg py-2 pl-10 pr-4 text-sm text-text-main placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all shadow-sm"
           />
         </div>

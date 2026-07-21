@@ -1,6 +1,6 @@
 # OptiKit Roadmap
 
-> **Current state: v1.0.8 — 37 modules, 429 utilities, 418 unit tests**
+> **Current state: v1.0.9 — 37 modules, 430 utilities, 419 unit tests**
 
 ## Module Status
 
@@ -84,7 +84,7 @@ Lightweight schema validator: `createSchema`, `validateSchema`, `isRequired`, `i
 
 ## Infrastructure Goals
 
-- [ ] Publish with npm provenance (v1.0.8)
+- [x] Publish with npm provenance (v1.0.8)
 - [ ] Socket.dev score ≥ 95
 - [ ] Add `exports` map for per-module imports (`@dev_x_mohit/opti-kit/string`)
 - [ ] Generate API documentation from JSDoc

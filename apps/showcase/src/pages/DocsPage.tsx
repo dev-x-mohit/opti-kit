@@ -203,7 +203,7 @@ const session = safeStorage.getItem("user_session");`;
             Getting Started with OptiKit
           </h1>
           <p className="text-lg text-muted leading-relaxed mb-6">
-            OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable utility library engineered for modern TypeScript and JavaScript applications. Designed to replace legacy monoliths like Lodash, it ships 37 modules and 429+ utilities in a dual CJS/ESM package.
+            OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable utility library engineered for modern TypeScript and JavaScript applications. Designed to replace legacy monoliths like Lodash, it ships 37 modules and 430 utilities in a dual CJS/ESM package.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

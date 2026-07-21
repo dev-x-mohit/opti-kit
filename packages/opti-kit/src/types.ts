@@ -113,3 +113,14 @@ export function isSymbol(val: any): val is symbol {
 export function isError(val: any): val is Error {
   return val instanceof Error;
 }
+
+/**
+ * Checks if a value is a JavaScript primitive (string, number, bigint, boolean, undefined, symbol, or null).
+ * @param val The value to check.
+ */
+export function isPrimitive(val: any): boolean {
+  if (val === null) return true;
+  const type = typeof val;
+  return type !== "object" && type !== "function";
+}
+

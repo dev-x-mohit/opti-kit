@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 export function Stats() {
   const stats = [
     { label: "Modules", value: "37" },
-    { label: "Utilities", value: "429+" },
+    { label: "Utilities", value: "430" },
     { label: "Size (Gzip)", value: "16 KB" },
     { label: "Security Score", value: "100/100" },
     { label: "Dependencies", value: "0" },
-    { label: "Unit Tests", value: "418" },
+    { label: "Unit Tests", value: "419" },
   ];
 
 

@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   isNil, isObject, isFunction, isDate, isRegExp,
   isString, isNumber, isBoolean, isArray, isPromise,
-  isMap, isSet, isSymbol, isError
+  isMap, isSet, isSymbol, isError, isPrimitive
 } from "../types";
 
 describe("types", () => {
@@ -101,6 +101,22 @@ describe("types", () => {
     expect(isError(new TypeError("oops"))).toBe(true);
     expect(isError({ message: "not an error" })).toBe(false);
     expect(isError(null)).toBe(false);
+  });
+
+  it("isPrimitive", () => {
+    expect(isPrimitive("hello")).toBe(true);
+    expect(isPrimitive(42)).toBe(true);
+    expect(isPrimitive(true)).toBe(true);
+    expect(isPrimitive(undefined)).toBe(true);
+    expect(isPrimitive(null)).toBe(true);
+    expect(isPrimitive(Symbol("sym"))).toBe(true);
+    expect(isPrimitive(10n)).toBe(true);
+
+    expect(isPrimitive({})).toBe(false);
+    expect(isPrimitive([])).toBe(false);
+    expect(isPrimitive(() => {})).toBe(false);
+    expect(isPrimitive(new Map())).toBe(false);
+    expect(isPrimitive(new RegExp("abc"))).toBe(false);
   });
 });
 
