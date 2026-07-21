@@ -1,8 +1,7 @@
 {
   "name": "@dev_x_mohit/opti-kit",
-  "version": "1.0.7",
-
-  "description": "OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility monorepo library. It ships 25 hand-optimized isomorphic modules — strings, arrays, objects, math, numbers, async, crypto, validation, dates, color converters, storage, event emitter, DOM helpers, URL parsing, regex, tree traversal, statistics, geometry, units, encoding, cache, functional programming, collections, random, and types. Every function is side-effect free, individually importable, and ships with full TypeScript declarations, CJS/ESM dual output, 328+ utilities, and 300+ unit tests.",
+  "version": "1.0.8",
+  "description": "OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility monorepo library. It ships 38 hand-optimized isomorphic modules. Every function is side-effect free, individually importable, and ships with full TypeScript declarations, CJS/ESM dual output, 434+ utilities, and 426+ unit tests.",
 
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -101,6 +100,13 @@
     "directory": "packages/opti-kit"
   },
   "homepage": "https://opti-kit-showcase.vercel.app",
+  "engines": {
+    "node": ">=18"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/dev-x-mohit"
+  },
   "bugs": {
     "url": "https://github.com/dev-x-mohit/opti-kit/issues"
   },

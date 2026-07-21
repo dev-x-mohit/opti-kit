@@ -102,3 +102,82 @@ export function covariance(nums1: number[], nums2: number[], population = false)
   const divisor = population ? nums1.length : nums1.length - 1;
   return total / divisor;
 }
+
+/**
+ * Calculates the Pearson correlation coefficient between two arrays.
+ * Returns a value between -1 and 1.
+ */
+export function correlation(nums1: number[], nums2: number[], population = false): number {
+  if (nums1.length !== nums2.length || nums1.length === 0) return 0;
+  const cov = covariance(nums1, nums2, population);
+  const sd1 = standardDeviation(nums1, population);
+  const sd2 = standardDeviation(nums2, population);
+  if (sd1 === 0 || sd2 === 0) return 0;
+  return cov / (sd1 * sd2);
+}
+
+/**
+ * Calculates the skewness (asymmetry) of a dataset.
+ */
+export function skewness(nums: number[]): number {
+  if (nums.length < 3) return 0;
+  const n = nums.length;
+  const avg = mean(nums);
+  const sd = standardDeviation(nums);
+  if (sd === 0) return 0;
+  const m3 = sum(nums.map((x) => Math.pow((x - avg) / sd, 3))) / n;
+  return m3;
+}
+
+/**
+ * Calculates the excess kurtosis (tailedness) of a dataset.
+ * Normal distribution has kurtosis of 0.
+ */
+export function kurtosis(nums: number[]): number {
+  if (nums.length < 4) return 0;
+  const n = nums.length;
+  const avg = mean(nums);
+  const sd = standardDeviation(nums);
+  if (sd === 0) return 0;
+  const m4 = sum(nums.map((x) => Math.pow((x - avg) / sd, 4))) / n;
+  return m4 - 3;
+}
+
+/**
+ * Calculates the simple moving average of an array with a given window size.
+ */
+export function movingAverage(nums: number[], windowSize: number): number[] {
+  if (windowSize <= 0 || nums.length === 0) return [];
+  const result: number[] = [];
+  for (let i = 0; i <= nums.length - windowSize; i++) {
+    const window = nums.slice(i, i + windowSize);
+    result.push(mean(window));
+  }
+  return result;
+}
+
+/**
+ * Calculates the weighted average of values with corresponding weights.
+ */
+export function weightedAverage(values: number[], weights: number[]): number {
+  if (values.length === 0 || values.length !== weights.length) return 0;
+  let totalWeight = 0;
+  let totalValue = 0;
+  for (let i = 0; i < values.length; i++) {
+    totalValue += values[i] * weights[i];
+    totalWeight += weights[i];
+  }
+  if (totalWeight === 0) return 0;
+  return totalValue / totalWeight;
+}
+
+/**
+ * Calculates the geometric mean of an array of positive numbers.
+ * Useful for growth rates and ratios.
+ */
+export function geometricMean(nums: number[]): number {
+  if (nums.length === 0) return 0;
+  if (nums.some((n) => n <= 0)) return 0;
+  const logSum = sum(nums.map((n) => Math.log(n)));
+  return Math.exp(logSum / nums.length);
+}

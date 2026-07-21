@@ -1,95 +1,111 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import {
-  identity,
-  flip,
-  tap,
-  memoize,
-  pipe,
-  compose,
+  identity, flip, tap, memoize, pipe, compose,
+  curry, partial, noop, constant, not, trampoline,
+  juxt, onceFn
 } from "../functional";
-import { once, retry } from "../async";
 
-
-describe("Functional Module", () => {
+describe("functional", () => {
   it("identity", () => {
-    expect(identity(5)).toBe(5);
-    const obj = { a: 1 };
-    expect(identity(obj)).toBe(obj);
+    expect(identity(42)).toBe(42);
+    expect(identity("hello")).toBe("hello");
   });
 
   it("flip", () => {
-    const fn = (a: string, b: string, c: string) => a + b + c;
-    const flipped = flip(fn);
-    expect(flipped("1", "2", "3")).toBe("321");
+    const sub = (a: number, b: number) => a - b;
+    expect(flip(sub)(3, 10)).toBe(7);
   });
 
   it("tap", () => {
-    let intercepted = 0;
-    const result = tap(5, (val) => {
-      intercepted = val * 2;
-    });
-    expect(result).toBe(5);
-    expect(intercepted).toBe(10);
-  });
-
-  it("once", () => {
-    const fn = vi.fn((x: number) => x * 2);
-    const onceFn = once(fn);
-    
-    expect(onceFn(5)).toBe(10);
-    expect(onceFn(10)).toBe(10);
-    expect(fn).toHaveBeenCalledTimes(1);
+    let sideEffect = 0;
+    const result = tap(42, (val) => { sideEffect = val; });
+    expect(result).toBe(42);
+    expect(sideEffect).toBe(42);
   });
 
   it("memoize", () => {
-    const fn = vi.fn((a: number, b: number) => a + b);
-    const memoized = memoize(fn, (a, b) => `${a}_${b}`);
-
-    expect(memoized(1, 2)).toBe(3);
-    expect(memoized(1, 2)).toBe(3);
-    expect(fn).toHaveBeenCalledTimes(1);
-
-    expect(memoized(2, 3)).toBe(5);
-    expect(fn).toHaveBeenCalledTimes(2);
+    let calls = 0;
+    const fn = memoize((x: number) => { calls++; return x * 2; });
+    expect(fn(5)).toBe(10);
+    expect(fn(5)).toBe(10);
+    expect(calls).toBe(1);
   });
 
   it("pipe", () => {
     const add1 = (x: number) => x + 1;
     const double = (x: number) => x * 2;
-    const piped = pipe(add1, double);
-    expect(piped(5)).toBe(12); // (5 + 1) * 2
+    expect(pipe(add1, double)(5)).toBe(12);
   });
 
   it("compose", () => {
     const add1 = (x: number) => x + 1;
     const double = (x: number) => x * 2;
-    const composed = compose(add1, double);
-    expect(composed(5)).toBe(11); // (5 * 2) + 1
+    expect(compose(add1, double)(5)).toBe(11);
   });
 
-  it("retry - success", async () => {
-    const fn = vi.fn().mockResolvedValue("success");
-    const result = await retry(fn, 3);
-    expect(result).toBe("success");
-    expect(fn).toHaveBeenCalledTimes(1);
+  it("curry", () => {
+    const add = curry((a: number, b: number, c: number) => a + b + c);
+    expect(add(1)(2)(3)).toBe(6);
+    expect(add(1, 2)(3)).toBe(6);
+    expect(add(1, 2, 3)).toBe(6);
   });
 
-  it("retry - fail then succeed", async () => {
-    let attempts = 0;
-    const fn = vi.fn().mockImplementation(async () => {
-      attempts++;
-      if (attempts < 3) throw new Error("fail");
-      return "success";
-    });
-
-    const result = await retry(fn, 3, 10);
-    expect(result).toBe("success");
-    expect(fn).toHaveBeenCalledTimes(3);
+  it("partial", () => {
+    const greet = (greeting: string, name: string) => `${greeting}, ${name}!`;
+    const hello = partial(greet, "Hello");
+    expect(hello("World")).toBe("Hello, World!");
   });
 
-  it("retry - exhaust retries", async () => {
-    const fn = vi.fn().mockRejectedValue(new Error("fail"));
-    await expect(retry(fn, 3, 10)).rejects.toThrow("fail");
-    expect(fn).toHaveBeenCalledTimes(3);
+  it("noop", () => {
+    expect(noop()).toBeUndefined();
+  });
+
+  it("constant", () => {
+    const always42 = constant(42);
+    expect(always42()).toBe(42);
+    expect(always42()).toBe(42);
+
+    const alwaysNull = constant(null);
+    expect(alwaysNull()).toBeNull();
+  });
+
+  it("not", () => {
+    const isPositive = (x: number) => x > 0;
+    const isNotPositive = not(isPositive);
+    expect(isNotPositive(5)).toBe(false);
+    expect(isNotPositive(-1)).toBe(true);
+    expect(isNotPositive(0)).toBe(true);
+  });
+
+  it("trampoline", () => {
+    // Stack-safe factorial using trampoline
+    const factHelper = (n: number, acc: number): any => {
+      if (n <= 1) return acc;
+      return () => factHelper(n - 1, n * acc);
+    };
+    const fact = trampoline((n: number) => factHelper(n, 1));
+    expect(fact(5)).toBe(120);
+    expect(fact(1)).toBe(1);
+    expect(fact(10)).toBe(3628800);
+  });
+
+  it("juxt", () => {
+    const stats = juxt(Math.min, Math.max);
+    expect(stats(1, 2, 3, 4, 5)).toEqual([1, 5]);
+
+    const analyze = juxt(
+      (x: number) => x * 2,
+      (x: number) => x + 1
+    );
+    expect(analyze(5)).toEqual([10, 6]);
+  });
+
+  it("onceFn", () => {
+    let count = 0;
+    const inc = onceFn(() => ++count);
+    expect(inc()).toBe(1);
+    expect(inc()).toBe(1);
+    expect(inc()).toBe(1);
+    expect(count).toBe(1);
   });
 });

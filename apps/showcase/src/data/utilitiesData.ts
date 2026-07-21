@@ -541,6 +541,150 @@ export const utilitiesData: UtilityMeta[] = [
     "output": "..."
   },
   {
+    "id": "isbrowser",
+    "name": "isBrowser",
+    "module": "Browser",
+    "description": "Safe client-side environment and browser feature detection utilities.",
+    "signature": "isBrowser(): boolean",
+    "example": "isBrowser(...)",
+    "output": "..."
+  },
+  {
+    "id": "isserver",
+    "name": "isServer",
+    "module": "Browser",
+    "description": "Checks if the code is running in a server environment (e.g. Node.js, SSR).",
+    "signature": "isServer(): boolean",
+    "example": "isServer(...)",
+    "output": "..."
+  },
+  {
+    "id": "ischrome",
+    "name": "isChrome",
+    "module": "Browser",
+    "description": "Checks if the current browser is Google Chrome.",
+    "signature": "isChrome(): boolean",
+    "example": "isChrome(...)",
+    "output": "..."
+  },
+  {
+    "id": "isfirefox",
+    "name": "isFirefox",
+    "module": "Browser",
+    "description": "Checks if the current browser is Mozilla Firefox.",
+    "signature": "isFirefox(): boolean",
+    "example": "isFirefox(...)",
+    "output": "..."
+  },
+  {
+    "id": "issafari",
+    "name": "isSafari",
+    "module": "Browser",
+    "description": "Checks if the current browser is Apple Safari.",
+    "signature": "isSafari(): boolean",
+    "example": "isSafari(...)",
+    "output": "..."
+  },
+  {
+    "id": "isedge",
+    "name": "isEdge",
+    "module": "Browser",
+    "description": "Checks if the current browser is Microsoft Edge.",
+    "signature": "isEdge(): boolean",
+    "example": "isEdge(...)",
+    "output": "..."
+  },
+  {
+    "id": "isios",
+    "name": "isIOS",
+    "module": "Browser",
+    "description": "Checks if the current operating system is iOS.",
+    "signature": "isIOS(): boolean",
+    "example": "isIOS(...)",
+    "output": "..."
+  },
+  {
+    "id": "isandroid",
+    "name": "isAndroid",
+    "module": "Browser",
+    "description": "Checks if the current operating system is Android.",
+    "signature": "isAndroid(): boolean",
+    "example": "isAndroid(...)",
+    "output": "..."
+  },
+  {
+    "id": "ismobile",
+    "name": "isMobile",
+    "module": "Browser",
+    "description": "Checks if the device is a mobile device (phone or tablet).",
+    "signature": "isMobile(): boolean",
+    "example": "isMobile(...)",
+    "output": "..."
+  },
+  {
+    "id": "isdesktop",
+    "name": "isDesktop",
+    "module": "Browser",
+    "description": "Checks if the device is a desktop.",
+    "signature": "isDesktop(): boolean",
+    "example": "isDesktop(...)",
+    "output": "..."
+  },
+  {
+    "id": "istouchdevice",
+    "name": "isTouchDevice",
+    "module": "Browser",
+    "description": "Checks if the device supports touch interaction.",
+    "signature": "isTouchDevice(): boolean",
+    "example": "isTouchDevice(...)",
+    "output": "..."
+  },
+  {
+    "id": "supportswebgl",
+    "name": "supportsWebGL",
+    "module": "Browser",
+    "description": "Checks if the browser supports WebGL.",
+    "signature": "supportsWebGL(): boolean",
+    "example": "supportsWebGL(...)",
+    "output": "..."
+  },
+  {
+    "id": "supportsserviceworker",
+    "name": "supportsServiceWorker",
+    "module": "Browser",
+    "description": "Checks if the browser supports Service Workers.",
+    "signature": "supportsServiceWorker(): boolean",
+    "example": "supportsServiceWorker(...)",
+    "output": "..."
+  },
+  {
+    "id": "getdevicepixelratio",
+    "name": "getDevicePixelRatio",
+    "module": "Browser",
+    "description": "Returns the device pixel ratio (DPR). Falls back to 1 on the server.",
+    "signature": "getDevicePixelRatio(): number",
+    "example": "getDevicePixelRatio(...)",
+    "output": "..."
+  },
+  {
+    "id": "getpreferredlanguage",
+    "name": "getPreferredLanguage",
+    "module": "Browser",
+    "description": "Returns the preferred language code of the client. Falls back to \"en\" on the server.",
+    "signature": "getPreferredLanguage(): string",
+    "example": "getPreferredLanguage(...)",
+    "output": "..."
+  },
+  {
+    "id": "isonline",
+    "name": "isOnline",
+    "module": "Browser",
+    "description": "Checks if the client has an active internet connection. Falls back to true on the server.",
+    "signature": "isOnline(): boolean",
+    "example": "isOnline(...)",
+    "output": "..."
+  },
+  {
     "id": "memoizewithttl",
     "name": "memoizeWithTTL",
     "module": "Cache",
@@ -586,6 +730,78 @@ export const utilitiesData: UtilityMeta[] = [
     "output": "..."
   },
   {
+    "id": "symmetricdifference",
+    "name": "symmetricDifference",
+    "module": "Collection",
+    "description": "Returns a new Set containing elements present in either set but not both.",
+    "signature": "symmetricDifference<T>(setA: Set<T>, setB: Set<T>): Set<T>",
+    "example": "symmetricDifference(...)",
+    "output": "..."
+  },
+  {
+    "id": "mergemaps",
+    "name": "mergeMaps",
+    "module": "Collection",
+    "description": "Merges two Maps into a new Map. Values from the second map overwrite the first.",
+    "signature": "mergeMaps<K, V>(mapA: Map<K, V>, mapB: Map<K, V>): Map<K, V>",
+    "example": "mergeMaps(...)",
+    "output": "..."
+  },
+  {
+    "id": "frequencies",
+    "name": "frequencies",
+    "module": "Collection",
+    "description": "Counts the frequency of each element in an array.",
+    "signature": "frequencies<T>(arr: T[]): Map<T, number>",
+    "example": "frequencies(...)",
+    "output": "..."
+  },
+  {
+    "id": "filtermap",
+    "name": "filterMap",
+    "module": "Collection",
+    "description": "Maps and filters in a single pass. Returns only items where the callback does not return undefined.",
+    "signature": "filterMap<T, R>(arr: T[], fn: (item: T, index: number) => R | undefined): R[]",
+    "example": "filterMap(...)",
+    "output": "..."
+  },
+  {
+    "id": "maprecordvalues",
+    "name": "mapRecordValues",
+    "module": "Collection",
+    "description": "Creates a new object with the same keys but with values transformed by the callback.",
+    "signature": "mapRecordValues<V, R>( obj: Record<string, V>, fn: (value: V, key: string) => R ): Record<string, R>",
+    "example": "mapRecordValues(...)",
+    "output": "..."
+  },
+  {
+    "id": "filterrecord",
+    "name": "filterRecord",
+    "module": "Collection",
+    "description": "Creates a new object containing only the entries where the predicate returns true.",
+    "signature": "filterRecord<V>( obj: Record<string, V>, fn: (value: V, key: string) => boolean ): Record<string, V>",
+    "example": "filterRecord(...)",
+    "output": "..."
+  },
+  {
+    "id": "issubset",
+    "name": "isSubset",
+    "module": "Collection",
+    "description": "Checks if a Set is a subset of another Set.",
+    "signature": "isSubset<T>(subset: Set<T>, superset: Set<T>): boolean",
+    "example": "isSubset(...)",
+    "output": "..."
+  },
+  {
+    "id": "issuperset",
+    "name": "isSuperset",
+    "module": "Collection",
+    "description": "Checks if a Set is a superset of another Set.",
+    "signature": "isSuperset<T>(superset: Set<T>, subset: Set<T>): boolean",
+    "example": "isSuperset(...)",
+    "output": "..."
+  },
+  {
     "id": "hextorgb",
     "name": "hexToRgb",
     "module": "Color",
@@ -610,6 +826,69 @@ export const utilitiesData: UtilityMeta[] = [
     "description": "Converts HSL values (h: 0-360, s: 0-100, l: 0-100) to an RGB object.",
     "signature": "hslToRgb( h: number, s: number, l: number )",
     "example": "hslToRgb(...)",
+    "output": "..."
+  },
+  {
+    "id": "rgbtohsl",
+    "name": "rgbToHsl",
+    "module": "Color",
+    "description": "Converts RGB components (0-255) to HSL values (h: 0-360, s: 0-100, l: 0-100).",
+    "signature": "rgbToHsl( r: number, g: number, b: number )",
+    "example": "rgbToHsl(...)",
+    "output": "..."
+  },
+  {
+    "id": "hextohsl",
+    "name": "hexToHsl",
+    "module": "Color",
+    "description": "Converts a hex color string to HSL values.",
+    "signature": "hexToHsl(hex: string)",
+    "example": "hexToHsl(...)",
+    "output": "..."
+  },
+  {
+    "id": "hsltohex",
+    "name": "hslToHex",
+    "module": "Color",
+    "description": "Converts HSL values to a hex color string.",
+    "signature": "hslToHex(h: number, s: number, l: number): string",
+    "example": "hslToHex(...)",
+    "output": "..."
+  },
+  {
+    "id": "lighten",
+    "name": "lighten",
+    "module": "Color",
+    "description": "Lightens a hex color by a given amount (0 to 1).",
+    "signature": "lighten(hex: string, amount: number): string",
+    "example": "lighten(...)",
+    "output": "..."
+  },
+  {
+    "id": "darken",
+    "name": "darken",
+    "module": "Color",
+    "description": "Darkens a hex color by a given amount (0 to 1).",
+    "signature": "darken(hex: string, amount: number): string",
+    "example": "darken(...)",
+    "output": "..."
+  },
+  {
+    "id": "isvalidhex",
+    "name": "isValidHex",
+    "module": "Color",
+    "description": "Validates whether a string is a valid hex color (3 or 6 characters, with or without #).",
+    "signature": "isValidHex(hex: string): boolean",
+    "example": "isValidHex(...)",
+    "output": "..."
+  },
+  {
+    "id": "getcontrastratio",
+    "name": "getContrastRatio",
+    "module": "Color",
+    "description": "Calculates the WCAG contrast ratio between two hex colors.",
+    "signature": "getContrastRatio(hex1: string, hex2: string): number",
+    "example": "getContrastRatio(...)",
     "output": "..."
   },
   {
@@ -700,6 +979,24 @@ export const utilitiesData: UtilityMeta[] = [
     "description": "Calculates a fast, 53-bit non-cryptographic string hash using the cyrb53 algorithm.",
     "signature": "cyrb53(str: string, seed = 0): number",
     "example": "cyrb53(...)",
+    "output": "..."
+  },
+  {
+    "id": "csvparse",
+    "name": "csvParse",
+    "module": "Csv",
+    "description": "Parses a CSV/TSV string into an array of objects (if headers are present) or raw string arrays.",
+    "signature": "csvParse( csv: string, options: CsvParseOptions =",
+    "example": "csvParse(...)",
+    "output": "..."
+  },
+  {
+    "id": "csvstringify",
+    "name": "csvStringify",
+    "module": "Csv",
+    "description": "Stringifies an array of objects or an array of arrays into a CSV/TSV table.",
+    "signature": "csvStringify( data: any[], options: CsvStringifyOptions =",
+    "example": "csvStringify(...)",
     "output": "..."
   },
   {
@@ -1153,6 +1450,87 @@ export const utilitiesData: UtilityMeta[] = [
     "output": "..."
   },
   {
+    "id": "formatduration",
+    "name": "formatDuration",
+    "module": "Format",
+    "description": "Formats a duration in milliseconds to a human-readable string.",
+    "signature": "formatDuration(ms: number): string",
+    "example": "formatDuration(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatphonenumber",
+    "name": "formatPhoneNumber",
+    "module": "Format",
+    "description": "Formats a US phone number string.",
+    "signature": "formatPhoneNumber(phone: string): string",
+    "example": "formatPhoneNumber(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatcreditcardnumber",
+    "name": "formatCreditCardNumber",
+    "module": "Format",
+    "description": "Formats a credit card number with spaces every 4 digits.",
+    "signature": "formatCreditCardNumber(num: string): string",
+    "example": "formatCreditCardNumber(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatpercentage",
+    "name": "formatPercentage",
+    "module": "Format",
+    "description": "Formats a number as a percentage string.",
+    "signature": "formatPercentage(value: number, decimals: number = 0): string",
+    "example": "formatPercentage(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatlistjoin",
+    "name": "formatListJoin",
+    "module": "Format",
+    "description": "Joins an array of strings with a conjunction before the last item.",
+    "signature": "formatListJoin(items: string[], conjunction: string = \"and\"): string",
+    "example": "formatListJoin(...)",
+    "output": "..."
+  },
+  {
+    "id": "pluralize",
+    "name": "pluralize",
+    "module": "Format",
+    "description": "Returns a count with a properly pluralized noun.",
+    "signature": "pluralize(count: number, singular: string, plural?: string): string",
+    "example": "pluralize(...)",
+    "output": "..."
+  },
+  {
+    "id": "maskstring",
+    "name": "maskString",
+    "module": "Format",
+    "description": "Masks a string, showing only the last N characters.",
+    "signature": "maskString(str: string, visibleChars: number = 4, maskChar: string = \"*\"): string",
+    "example": "maskString(...)",
+    "output": "..."
+  },
+  {
+    "id": "truncatemiddle",
+    "name": "truncateMiddle",
+    "module": "Format",
+    "description": "Truncates a string in the middle, preserving the beginning and end.",
+    "signature": "truncateMiddle(str: string, maxLen: number, separator: string = \"…\"): string",
+    "example": "truncateMiddle(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatwithseparator",
+    "name": "formatWithSeparator",
+    "module": "Format",
+    "description": "Formats a number with a thousands separator.",
+    "signature": "formatWithSeparator(num: number, separator: string = \",\"): string",
+    "example": "formatWithSeparator(...)",
+    "output": "..."
+  },
+  {
     "id": "identity",
     "name": "identity",
     "module": "Functional",
@@ -1234,6 +1612,51 @@ export const utilitiesData: UtilityMeta[] = [
     "output": "..."
   },
   {
+    "id": "constant",
+    "name": "constant",
+    "module": "Functional",
+    "description": "Creates a function that always returns the same value.",
+    "signature": "constant<T>(val: T): () => T",
+    "example": "constant(...)",
+    "output": "..."
+  },
+  {
+    "id": "not",
+    "name": "not",
+    "module": "Functional",
+    "description": "Creates a function that negates the result of a predicate.",
+    "signature": "not<T extends (...args: any[]) => any>( fn: T ): (...args: Parameters<T>) => boolean",
+    "example": "not(...)",
+    "output": "..."
+  },
+  {
+    "id": "trampoline",
+    "name": "trampoline",
+    "module": "Functional",
+    "description": "Trampoline for stack-safe recursion.",
+    "signature": "trampoline<T>(fn: (...args: any[]) => T | (() => T)): (...args: any[]) => T",
+    "example": "trampoline(...)",
+    "output": "..."
+  },
+  {
+    "id": "juxt",
+    "name": "juxt",
+    "module": "Functional",
+    "description": "Applies multiple functions to the same arguments and returns an array of results.",
+    "signature": "juxt<T extends any[]>( ...fns: Array<(...args: T) => any> ): (...args: T) => any[]",
+    "example": "juxt(...)",
+    "output": "..."
+  },
+  {
+    "id": "oncefn",
+    "name": "onceFn",
+    "module": "Functional",
+    "description": "Creates a function that is restricted to being called only once.",
+    "signature": "onceFn<T extends (...args: any[]) => any>(fn: T): T",
+    "example": "onceFn(...)",
+    "output": "..."
+  },
+  {
     "id": "distance2d",
     "name": "distance2D",
     "module": "Geometry",
@@ -1312,6 +1735,240 @@ export const utilitiesData: UtilityMeta[] = [
     "description": "Calculates the area of a triangle given its base and height.",
     "signature": "triangleArea(base: number, height: number): number",
     "example": "triangleArea(...)",
+    "output": "..."
+  },
+  {
+    "id": "safejsonparse",
+    "name": "safeJsonParse",
+    "module": "Guard",
+    "description": "Safely parses a JSON string. Returns the parsed value or the fallback on failure.",
+    "signature": "safeJsonParse<T = any>(str: string, fallback?: T): T | null",
+    "example": "safeJsonParse(...)",
+    "output": "..."
+  },
+  {
+    "id": "safejsonstringify",
+    "name": "safeJsonStringify",
+    "module": "Guard",
+    "description": "Safely stringifies a value to JSON. Handles circular references gracefully.",
+    "signature": "safeJsonStringify(val: any, fallback?: string): string",
+    "example": "safeJsonStringify(...)",
+    "output": "..."
+  },
+  {
+    "id": "safeparseint",
+    "name": "safeParseInt",
+    "module": "Guard",
+    "description": "Safely parses an integer. Returns the fallback (default 0) if parsing fails or produces NaN.",
+    "signature": "safeParseInt(val: string, fallback: number = 0, radix: number = 10): number",
+    "example": "safeParseInt(...)",
+    "output": "..."
+  },
+  {
+    "id": "safeparsefloat",
+    "name": "safeParseFloat",
+    "module": "Guard",
+    "description": "Safely parses a float. Returns the fallback (default 0) if parsing fails or produces NaN.",
+    "signature": "safeParseFloat(val: string, fallback: number = 0): number",
+    "example": "safeParseFloat(...)",
+    "output": "..."
+  },
+  {
+    "id": "safeparsedate",
+    "name": "safeParseDate",
+    "module": "Guard",
+    "description": "Safely parses a date string. Returns the fallback or null if parsing fails.",
+    "signature": "safeParseDate(val: string, fallback?: Date): Date | null",
+    "example": "safeParseDate(...)",
+    "output": "..."
+  },
+  {
+    "id": "coalesce",
+    "name": "coalesce",
+    "module": "Guard",
+    "description": "Returns the first non-null and non-undefined value from the arguments.",
+    "signature": "coalesce<T>(...values: (T | null | undefined)[]): T | undefined",
+    "example": "coalesce(...)",
+    "output": "..."
+  },
+  {
+    "id": "attempt",
+    "name": "attempt",
+    "module": "Guard",
+    "description": "Wraps a synchronous function call in a try/catch. Returns the fallback on failure.",
+    "signature": "attempt<T>(fn: () => T, fallback?: T): T | undefined",
+    "example": "attempt(...)",
+    "output": "..."
+  },
+  {
+    "id": "attemptasync",
+    "name": "attemptAsync",
+    "module": "Guard",
+    "description": "Wraps an asynchronous function call in a try/catch. Returns the fallback on failure.",
+    "signature": "attemptAsync<T>(fn: () => Promise<T>, fallback?: T): Promise<T | undefined>",
+    "example": "attemptAsync(...)",
+    "output": "..."
+  },
+  {
+    "id": "invariant",
+    "name": "invariant",
+    "module": "Guard",
+    "description": "Asserts that a condition is true. Throws an error with the given message if not.",
+    "signature": "invariant(condition: boolean, message: string): asserts condition",
+    "example": "invariant(...)",
+    "output": "..."
+  },
+  {
+    "id": "assertdefined",
+    "name": "assertDefined",
+    "module": "Guard",
+    "description": "Asserts that a value is not null or undefined. Throws if it is.",
+    "signature": "assertDefined<T>(val: T | null | undefined, name?: string): T",
+    "example": "assertDefined(...)",
+    "output": "..."
+  },
+  {
+    "id": "assertnever",
+    "name": "assertNever",
+    "module": "Guard",
+    "description": "Used for exhaustive checks in switch statements. Throws if called.",
+    "signature": "assertNever(val: never): never",
+    "example": "assertNever(...)",
+    "output": "..."
+  },
+  {
+    "id": "withdefault",
+    "name": "withDefault",
+    "module": "Guard",
+    "description": "Returns the value if it is not null/undefined, otherwise returns the default value.",
+    "signature": "withDefault<T>(val: T | null | undefined, defaultVal: T): T",
+    "example": "withDefault(...)",
+    "output": "..."
+  },
+  {
+    "id": "fetchwithtimeout",
+    "name": "fetchWithTimeout",
+    "module": "Http",
+    "description": "Isomorphic network utility functions for fetch-based requests.",
+    "signature": "fetchWithTimeout( url: string, timeoutMs: number, options?: RequestInit ): Promise<Response>",
+    "example": "fetchWithTimeout(...)",
+    "output": "..."
+  },
+  {
+    "id": "fetchwithretry",
+    "name": "fetchWithRetry",
+    "module": "Http",
+    "description": "Performs a fetch request with a specified number of retries and a delay between attempts.",
+    "signature": "fetchWithRetry( url: string, options: RequestInit &",
+    "example": "fetchWithRetry(...)",
+    "output": "..."
+  },
+  {
+    "id": "fetchjson",
+    "name": "fetchJson",
+    "module": "Http",
+    "description": "Safely fetches a URL and parses it as JSON. Supports timeout.",
+    "signature": "fetchJson<T = any>( url: string, options: RequestInit &",
+    "example": "fetchJson(...)",
+    "output": "..."
+  },
+  {
+    "id": "isnetworkerror",
+    "name": "isNetworkError",
+    "module": "Http",
+    "description": "Type guard to check if an error is a network/connection failure or timeout.",
+    "signature": "isNetworkError(err: any): boolean",
+    "example": "isNetworkError(...)",
+    "output": "..."
+  },
+  {
+    "id": "parseheaders",
+    "name": "parseHeaders",
+    "module": "Http",
+    "description": "Converts standard fetch HeadersInit into a clean key-value object representation.",
+    "signature": "parseHeaders(headers?: HeadersInit): Record<string, string>",
+    "example": "parseHeaders(...)",
+    "output": "..."
+  },
+  {
+    "id": "jsonclone",
+    "name": "jsonClone",
+    "module": "Json",
+    "description": "Creates a fast JSON-based deep clone of a value.",
+    "signature": "jsonClone<T>(obj: T): T",
+    "example": "jsonClone(...)",
+    "output": "..."
+  },
+  {
+    "id": "jsonflatten",
+    "name": "jsonFlatten",
+    "module": "Json",
+    "description": "Flattens a nested object or array into a single-level object with dot-notation and bracket-notation paths.",
+    "signature": "jsonFlatten(obj: any, prefix = \"\"): Record<string, any>",
+    "example": "jsonFlatten(...)",
+    "output": "..."
+  },
+  {
+    "id": "jsonunflatten",
+    "name": "jsonUnflatten",
+    "module": "Json",
+    "description": "Reconstructs a flattened object (created by jsonFlatten) back into its nested structure.",
+    "signature": "jsonUnflatten(flat: Record<string, any>): any",
+    "example": "jsonUnflatten(...)",
+    "output": "..."
+  },
+  {
+    "id": "jsonpath",
+    "name": "jsonPath",
+    "module": "Json",
+    "description": "Queries nested values in an object using path strings (e.g. \"users[0].address.city\").",
+    "signature": "jsonPath(obj: any, pathStr: string, fallback?: any): any",
+    "example": "jsonPath(...)",
+    "output": "..."
+  },
+  {
+    "id": "jsonmerge",
+    "name": "jsonMerge",
+    "module": "Json",
+    "description": "Performs a deep merge of two JSON-serializable structures.",
+    "signature": "jsonMerge(target: any, source: any): any",
+    "example": "jsonMerge(...)",
+    "output": "..."
+  },
+  {
+    "id": "jsondiff",
+    "name": "jsonDiff",
+    "module": "Json",
+    "description": "Computes structured differences between two JSON-serializable structures.",
+    "signature": "jsonDiff(obj1: any, obj2: any): Record<string, JsonDiffEntry>",
+    "example": "jsonDiff(...)",
+    "output": "..."
+  },
+  {
+    "id": "registershortcut",
+    "name": "registerShortcut",
+    "module": "Keyboard",
+    "description": "Registers a global or target-specific keyboard shortcut listener.",
+    "signature": "registerShortcut( shortcut: string, callback: (e: KeyboardEvent) => void, options: ShortcutOptions =",
+    "example": "registerShortcut(...)",
+    "output": "..."
+  },
+  {
+    "id": "iskeypressed",
+    "name": "isKeyPressed",
+    "module": "Keyboard",
+    "description": "Checks if a specific keyboard key is currently pressed down.",
+    "signature": "isKeyPressed(key: string): boolean",
+    "example": "isKeyPressed(...)",
+    "output": "..."
+  },
+  {
+    "id": "createlogger",
+    "name": "createLogger",
+    "module": "Log",
+    "description": "Creates a customizable console logger with level-based filtering and optional color styling.",
+    "signature": "createLogger(options: LoggerOptions =",
+    "example": "createLogger(...)",
     "output": "..."
   },
   {
@@ -2089,6 +2746,195 @@ export const utilitiesData: UtilityMeta[] = [
     "output": "..."
   },
   {
+    "id": "randomintfast",
+    "name": "randomIntFast",
+    "module": "Random",
+    "description": "Generates a random integer between min and max (inclusive) using Math.random (non-cryptographically secure).",
+    "signature": "randomIntFast(min: number, max: number): number",
+    "example": "randomIntFast(...)",
+    "output": "..."
+  },
+  {
+    "id": "randomstring",
+    "name": "randomString",
+    "module": "Random",
+    "description": "Generates a random alphanumeric string of a given length.",
+    "signature": "randomString(length: number, charset?: string): string",
+    "example": "randomString(...)",
+    "output": "..."
+  },
+  {
+    "id": "randomsample",
+    "name": "randomSample",
+    "module": "Random",
+    "description": "Returns N unique random items from an array (no repeats).",
+    "signature": "randomSample<T>(arr: T[], n: number): T[]",
+    "example": "randomSample(...)",
+    "output": "..."
+  },
+  {
+    "id": "weightedrandom",
+    "name": "weightedRandom",
+    "module": "Random",
+    "description": "Selects a random item from a weighted list.",
+    "signature": "weightedRandom<T>(items",
+    "example": "weightedRandom(...)",
+    "output": "..."
+  },
+  {
+    "id": "validate",
+    "name": "validate",
+    "module": "Schema",
+    "description": "Validates a single value against an array of rules.",
+    "signature": "validate(val: any, rules: Rule[]): ValidationResult",
+    "example": "validate(...)",
+    "output": "..."
+  },
+  {
+    "id": "isvalid",
+    "name": "isValid",
+    "module": "Schema",
+    "description": "Checks if a value is valid against a list of rules (returns boolean).",
+    "signature": "isValid(val: any, rules: Rule[]): boolean",
+    "example": "isValid(...)",
+    "output": "..."
+  },
+  {
+    "id": "validateobject",
+    "name": "validateObject",
+    "module": "Schema",
+    "description": "Validates an object against a schema of fields and their rules.",
+    "signature": "validateObject( obj: Record<string, any>, schema: Record<string, Rule[]> ): ObjectValidationResult",
+    "example": "validateObject(...)",
+    "output": "..."
+  },
+  {
+    "id": "required",
+    "name": "required",
+    "module": "Schema",
+    "description": "Rule: Value must be present (not null, undefined, or empty string).",
+    "signature": "required(msg?: string): Rule",
+    "example": "required(...)",
+    "output": "..."
+  },
+  {
+    "id": "minlength",
+    "name": "minLength",
+    "module": "Schema",
+    "description": "Rule: Value must have a minimum length (works for strings and arrays).",
+    "signature": "minLength(len: number, msg?: string): Rule",
+    "example": "minLength(...)",
+    "output": "..."
+  },
+  {
+    "id": "maxlength",
+    "name": "maxLength",
+    "module": "Schema",
+    "description": "Rule: Value must have a maximum length (works for strings and arrays).",
+    "signature": "maxLength(len: number, msg?: string): Rule",
+    "example": "maxLength(...)",
+    "output": "..."
+  },
+  {
+    "id": "pattern",
+    "name": "pattern",
+    "module": "Schema",
+    "description": "Rule: Value must match the regex pattern.",
+    "signature": "pattern(regex: RegExp, msg?: string): Rule",
+    "example": "pattern(...)",
+    "output": "..."
+  },
+  {
+    "id": "minvalue",
+    "name": "minValue",
+    "module": "Schema",
+    "description": "Rule: Value must be >= limit.",
+    "signature": "minValue(limit: number, msg?: string): Rule",
+    "example": "minValue(...)",
+    "output": "..."
+  },
+  {
+    "id": "maxvalue",
+    "name": "maxValue",
+    "module": "Schema",
+    "description": "Rule: Value must be <= limit.",
+    "signature": "maxValue(limit: number, msg?: string): Rule",
+    "example": "maxValue(...)",
+    "output": "..."
+  },
+  {
+    "id": "isin",
+    "name": "isIn",
+    "module": "Schema",
+    "description": "Rule: Value must be one of the allowed values.",
+    "signature": "isIn(allowed: any[], msg?: string): Rule",
+    "example": "isIn(...)",
+    "output": "..."
+  },
+  {
+    "id": "istype",
+    "name": "isType",
+    "module": "Schema",
+    "description": "Rule: Value must match the expected type.",
+    "signature": "isType( expected: \"string\" | \"number\" | \"boolean\" | \"object\" | \"array\" | \"function\", msg?: string ): Rule",
+    "example": "isType(...)",
+    "output": "..."
+  },
+  {
+    "id": "custom",
+    "name": "custom",
+    "module": "Schema",
+    "description": "Rule: Value must satisfy a custom predicate.",
+    "signature": "custom(fn: (val: any) => boolean, msg?: string): Rule",
+    "example": "custom(...)",
+    "output": "..."
+  },
+  {
+    "id": "semverparse",
+    "name": "semverParse",
+    "module": "Semver",
+    "description": "Parses a semantic version string into a SemVer object.",
+    "signature": "semverParse(version: string): SemVer | null",
+    "example": "semverParse(...)",
+    "output": "..."
+  },
+  {
+    "id": "semverclean",
+    "name": "semverClean",
+    "module": "Semver",
+    "description": "Cleans the semantic version string, stripping leading \"v\" or whitespace.",
+    "signature": "semverClean(version: string): string | null",
+    "example": "semverClean(...)",
+    "output": "..."
+  },
+  {
+    "id": "semverisvalid",
+    "name": "semverIsValid",
+    "module": "Semver",
+    "description": "Checks if a string is a valid SemVer format.",
+    "signature": "semverIsValid(version: string): boolean",
+    "example": "semverIsValid(...)",
+    "output": "..."
+  },
+  {
+    "id": "semvercompare",
+    "name": "semverCompare",
+    "module": "Semver",
+    "description": "Compares two semantic version strings.",
+    "signature": "semverCompare(v1: string, v2: string): number",
+    "example": "semverCompare(...)",
+    "output": "..."
+  },
+  {
+    "id": "semversatisfies",
+    "name": "semverSatisfies",
+    "module": "Semver",
+    "description": "Checks if a version satisfies a range expression (e.g. \"^1.2.3\", \">=1.0.0 <2.0.0\", \"~1.0.0 || ^2.0.0\").",
+    "signature": "semverSatisfies(version: string, range: string): boolean",
+    "example": "semverSatisfies(...)",
+    "output": "..."
+  },
+  {
     "id": "mode",
     "name": "mode",
     "module": "Statistics",
@@ -2140,6 +2986,96 @@ export const utilitiesData: UtilityMeta[] = [
     "description": "Calculates the covariance between two equally-sized arrays of numbers.",
     "signature": "covariance(nums1: number[], nums2: number[], population = false): number",
     "example": "covariance(...)",
+    "output": "..."
+  },
+  {
+    "id": "correlation",
+    "name": "correlation",
+    "module": "Statistics",
+    "description": "Calculates the Pearson correlation coefficient between two arrays.",
+    "signature": "correlation(nums1: number[], nums2: number[], population = false): number",
+    "example": "correlation(...)",
+    "output": "..."
+  },
+  {
+    "id": "skewness",
+    "name": "skewness",
+    "module": "Statistics",
+    "description": "Calculates the skewness (asymmetry) of a dataset.",
+    "signature": "skewness(nums: number[]): number",
+    "example": "skewness(...)",
+    "output": "..."
+  },
+  {
+    "id": "kurtosis",
+    "name": "kurtosis",
+    "module": "Statistics",
+    "description": "Calculates the excess kurtosis (tailedness) of a dataset.",
+    "signature": "kurtosis(nums: number[]): number",
+    "example": "kurtosis(...)",
+    "output": "..."
+  },
+  {
+    "id": "movingaverage",
+    "name": "movingAverage",
+    "module": "Statistics",
+    "description": "Calculates the simple moving average of an array with a given window size.",
+    "signature": "movingAverage(nums: number[], windowSize: number): number[]",
+    "example": "movingAverage(...)",
+    "output": "..."
+  },
+  {
+    "id": "weightedaverage",
+    "name": "weightedAverage",
+    "module": "Statistics",
+    "description": "Calculates the weighted average of values with corresponding weights.",
+    "signature": "weightedAverage(values: number[], weights: number[]): number",
+    "example": "weightedAverage(...)",
+    "output": "..."
+  },
+  {
+    "id": "geometricmean",
+    "name": "geometricMean",
+    "module": "Statistics",
+    "description": "Calculates the geometric mean of an array of positive numbers.",
+    "signature": "geometricMean(nums: number[]): number",
+    "example": "geometricMean(...)",
+    "output": "..."
+  },
+  {
+    "id": "signal",
+    "name": "signal",
+    "module": "Store",
+    "description": "Creates a reactive signal primitive that tracks dependencies and propagates changes.",
+    "signature": "signal<T>(initialValue: T): Signal<T>",
+    "example": "signal(...)",
+    "output": "..."
+  },
+  {
+    "id": "computed",
+    "name": "computed",
+    "module": "Store",
+    "description": "Creates a derived reactive computation that caches values and updates automatically when dependencies change.",
+    "signature": "computed<T>(fn: () => T): Computed<T>",
+    "example": "computed(...)",
+    "output": "..."
+  },
+  {
+    "id": "effect",
+    "name": "effect",
+    "module": "Store",
+    "description": "Runs a side-effect function that automatically re-runs whenever any read signal changes.",
+    "signature": "effect(fn: () => void): () => void",
+    "example": "effect(...)",
+    "output": "..."
+  },
+  {
+    "id": "createstore",
+    "name": "createStore",
+    "module": "Store",
+    "description": "Creates a lightweight state store using a publish-subscribe model (Zustand style).",
+    "signature": "createStore<T extends Record<string, any>>(initialState: T): Store<T>",
+    "example": "createStore(...)",
     "output": "..."
   },
   {
@@ -2545,6 +3481,24 @@ export const utilitiesData: UtilityMeta[] = [
     "description": "Extracts the filename without its extension.",
     "signature": "getFileName(filename: string): string",
     "example": "getFileName(...)",
+    "output": "..."
+  },
+  {
+    "id": "render",
+    "name": "render",
+    "module": "Template",
+    "description": "Renders a logic-less template string by interpolating data, loops, and conditionals.",
+    "signature": "render(template: string, data: Record<string, any>): string",
+    "example": "render(...)",
+    "output": "..."
+  },
+  {
+    "id": "compile",
+    "name": "compile",
+    "module": "Template",
+    "description": "Pre-compiles a template string into a reusable rendering function for faster execution.",
+    "signature": "compile( template: string ): (data: Record<string, any>) => string",
+    "example": "compile(...)",
     "output": "..."
   },
   {

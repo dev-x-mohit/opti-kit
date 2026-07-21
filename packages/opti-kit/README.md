@@ -8,18 +8,18 @@
 [![Dependencies](https://img.shields.io/badge/Dependencies-0-brightgreen?style=flat-square)](https://www.npmjs.com/package/@dev_x_mohit/opti-kit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility engine designed to replace legacy monolithic packages like Lodash, Moment, and Ramda. Built natively in TypeScript, it ships **25 hand-optimized modules** containing **328+ functions** in both ES Modules (`.mjs`) and CommonJS (`.js`) formats.
+OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility engine designed to replace legacy monolithic packages like Lodash, Moment, and Ramda. Built natively in TypeScript, it ships **38 hand-optimized modules** containing **434+ functions** in both ES Modules (`.mjs`) and CommonJS (`.js`) formats.
 
 ---
 
 ## Key Highlights
 
-- ⚡ **14.0 KB Minified + Gzipped** (`43.6 KB` uncompressed total library size)
+- ⚡ **16.0 KB Minified + Gzipped**
 - 🛡️ **100/100 Security & Vulnerability Score** (Socket Security Verified)
 - 📦 **0 External Dependencies** — Immune to supply-chain attacks
 - 🌳 **100% Tree-Shakeable** — Ships with `"sideEffects": false`
-- 🎯 **328+ Isomorphic Utilities** across 25 dedicated domain modules
-- 🧪 **306 Unit Tests** with 100% passing test coverage
+- 🎯 **434+ Isomorphic Utilities** across 38 dedicated domain modules
+- 🧪 **426 Unit Tests** with 100% passing test coverage
 
 ---
 
@@ -41,7 +41,7 @@ bun add @dev_x_mohit/opti-kit
 
 ---
 
-## 25 Modules Overview
+## 38 Modules Overview
 
 | Module | Utilities Count | Description |
 | :--- | :--- | :--- |
@@ -53,23 +53,37 @@ bun add @dev_x_mohit/opti-kit
 | **`date`** | 20 utils | `relativeTime`, `formatDate`, `isLeapYear`, `addDays`, `subMonths`, `diffInDays`, `daysInMonth` |
 | **`async`** | 19 utils | `debounce`, `throttle`, `retry`, `retryWithBackoff`, `delay`, `asyncPool`, `pMap`, `timeout` |
 | **`number`** | 18 utils | `formatCurrency`, `formatCompact` (1K/1M), `toOrdinal`, `formatFileSize`, `roundToNearest` |
-| **`crypto`** | 14 utils | `uuid`, `randomUUID`, `fnv1a`, `cyrb53`, `sha256`, `sha384`, `sha512`, `hmacSha256`, `base64Encode` |
-| **`color`** | 6 utils | `hexToRgb`, `rgbToHex`, `hslToRgb`, `isHexColor`, `randomColor` |
-| **`storage`** | 1 util | `safeStorage` (Isomorphic localStorage/sessionStorage wrapper with JSON & expiry) |
-| **`events`** | 3 utils | `EventEmitter` (Pub/Sub pattern), `delegateEvent`, `stopEvent` |
-| **`dom`** | 12 utils | `copyToClipboard`, `setCookie`, `getCookie`, `deleteCookie`, `createElement`, `scrollToTop` |
-| **`url`** | 8 utils | `getQueryParams`, `addQueryParam`, `removeQuery`, `buildUrl`, `parseUrl`, `isAbsoluteUrl` |
-| **`functional`** | 10 utils | `curry`, `partial`, `pipe`, `compose`, `once`, `memoize`, `memoizeWithTTL`, `tap`, `noop` |
-| **`types`** | 20 utils | `isNil`, `isObject`, `isFunction`, `isDate`, `isRegExp`, `isEqual`, `isEmpty`, `isBooleanString` |
-| **`units`** | 6 utils | `celsiusToFahrenheit`, `fahrenheitToCelsius`, `milesToKilometers`, `poundsToKilograms` |
+| **`crypto`** | 10 utils | `uuid`, `fnv1a`, `cyrb53`, `sha256`, `sha384`, `sha512`, `hmacSha256`, `generateToken` |
+| **`color`** | 10 utils | `hexToRgb`, `rgbToHex`, `hslToRgb`, `rgbToHsl`, `hexToHsl`, `lighten`, `darken`, `getContrastRatio` |
+| **`storage`** | 1 obj | `safeStorage` (Isomorphic localStorage/sessionStorage wrapper with JSON & expiry) |
+| **`events`** | 7 utils | `EventEmitter` (Pub/Sub pattern), `listen`, `listenOnce`, `delegateEvent`, `waitForEvent` |
+| **`dom`** | 14 utils | `copyToClipboard`, `setCookie`, `getCookie`, `deleteCookie`, `createElement`, `scrollToTop` |
+| **`url`** | 8 utils | `joinPaths`, `parseUrl`, `stringifyQuery`, `buildUrl`, `isAbsoluteUrl` |
+| **`functional`** | 14 utils | `curry`, `partial`, `pipe`, `compose`, `onceFn`, `memoize`, `constant`, `not`, `trampoline` |
+| **`types`** | 14 utils | `isNil`, `isObject`, `isFunction`, `isDate`, `isRegExp`, `isString`, `isNumber`, `isPromise` |
+| **`units`** | 8 utils | `celsiusToFahrenheit`, `fahrenheitToCelsius`, `milesToKilometers`, `poundsToKilograms` |
 | **`geometry`** | 9 utils | `distance2D`, `distance3D`, `midpoint`, `angleBetween`, `rotatePoint`, `circleArea` |
-| **`statistics`** | 7 utils | `variance`, `standardDeviation`, `zScore`, `percentile`, `quartiles`, `covariance`, `mode` |
+| **`statistics`** | 12 utils | `variance`, `standardDeviation`, `zScore`, `percentile`, `covariance`, `correlation`, `skewness` |
 | **`cache`** | 2 utils | `LRUCache`, `memoizeWithTTL` |
-| **`regex`** | 2 utils | Pre-compiled regex patterns & validation generators |
+| **`regex`** | 1 obj | Pre-compiled regex patterns & validation generators |
 | **`tree`** | 2 utils | `arrayToTree`, `treeToArray` hierarchical traversals |
-| **`collection`** | 12 utils | `countBy`, `keyBy`, `sortBy`, `sample`, `sampleSize`, `intersperse` |
-| **`random`** | 8 utils | `randomInt`, `randomFloat`, `randomBoolean`, `randomItem` |
-| **`encoding`** | 4 utils | `utf8Encode`, `utf8Decode`, `hexEncode`, `hexDecode` |
+| **`collection`** | 12 utils | `countBy`, `keyBy`, `sortBy`, `symmetricDifference`, `mergeMaps`, `frequencies`, `filterMap` |
+| **`random`** | 9 utils | `randomUUID`, `randomColor`, `randomBoolean`, `randomFloat`, `randomItem`, `randomIntFast` |
+| **`encoding`** | 8 utils | `utf8Encode`, `utf8Decode`, `hexEncode`, `hexDecode`, `base64Encode`, `base64Decode` |
+| **`guard`** | 12 utils | `safeJsonParse`, `safeJsonStringify`, `safeParseInt`, `attempt`, `invariant`, `assertDefined` |
+| **`format`** | 9 utils | `formatDuration`, `formatPhoneNumber`, `formatCreditCardNumber`, `formatPercentage`, `pluralize` |
+| **`schema`** | 12 utils | Lightweight rule validation runner (`validateObject`, `required`, `minLength`, `minValue`) |
+| **`browser`** | 16 utils | SSR-safe browser feature and environment checks (`isBrowser`, `isChrome`, `isMobile`) |
+| **`json`** | 6 utils | Deep JSON utilities (`jsonClone`, `jsonFlatten`, `jsonUnflatten`, `jsonPath`, `jsonMerge`, `jsonDiff`) |
+| **`store`** | 4 utils | Ultra-lightweight reactive primitives (`signal`, `computed`, `effect`, `createStore`) |
+| **`http`** | 5 utils | Isomorphic network fetch wrappers (`fetchJson`, `fetchWithTimeout`, `fetchWithRetry`) |
+| **`csv`** | 2 utils | Table processing utilities (`csvParse`, `csvStringify`) |
+| **`log`** | 2 utils | Custom level-based ANSI loggers (`createLogger`, `ansi`) |
+| **`ds`** | 4 classes | Advanced standard data structures (`Stack`, `Queue`, `PriorityQueue`, `BiMap`) |
+| **`template`** | 2 utils | Isomorphic logic-less micro template engine (`render`, `compile`) |
+| **`keyboard`** | 2 utils | Isomorphic hotkeys listener and key press state checking (`registerShortcut`, `isKeyPressed`) |
+| **`semver`** | 5 utils | SemVer 2.0 parser, validator, comparator, and range checker (`semverCompare`, `semverSatisfies`) |
+
 
 ---
 

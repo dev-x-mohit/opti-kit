@@ -37,3 +37,79 @@ export function isDate(val: any): val is Date {
 export function isRegExp(val: any): val is RegExp {
   return val instanceof RegExp;
 }
+
+/**
+ * Checks if a value is a string.
+ * @param val The value to check.
+ */
+export function isString(val: any): val is string {
+  return typeof val === "string";
+}
+
+/**
+ * Checks if a value is a finite number (excludes NaN and Infinity).
+ * @param val The value to check.
+ */
+export function isNumber(val: any): val is number {
+  return typeof val === "number" && Number.isFinite(val);
+}
+
+/**
+ * Checks if a value is a boolean.
+ * @param val The value to check.
+ */
+export function isBoolean(val: any): val is boolean {
+  return typeof val === "boolean";
+}
+
+/**
+ * Checks if a value is an array.
+ * @param val The value to check.
+ */
+export function isArray(val: any): val is any[] {
+  return Array.isArray(val);
+}
+
+/**
+ * Checks if a value is a Promise or thenable.
+ * @param val The value to check.
+ */
+export function isPromise(val: any): val is Promise<any> {
+  return (
+    val != null &&
+    (val instanceof Promise ||
+      (typeof val === "object" && typeof val.then === "function"))
+  );
+}
+
+/**
+ * Checks if a value is a Map instance.
+ * @param val The value to check.
+ */
+export function isMap(val: any): val is Map<any, any> {
+  return val instanceof Map;
+}
+
+/**
+ * Checks if a value is a Set instance.
+ * @param val The value to check.
+ */
+export function isSet(val: any): val is Set<any> {
+  return val instanceof Set;
+}
+
+/**
+ * Checks if a value is a Symbol.
+ * @param val The value to check.
+ */
+export function isSymbol(val: any): val is symbol {
+  return typeof val === "symbol";
+}
+
+/**
+ * Checks if a value is an Error instance.
+ * @param val The value to check.
+ */
+export function isError(val: any): val is Error {
+  return val instanceof Error;
+}

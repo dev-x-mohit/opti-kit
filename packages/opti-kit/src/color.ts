@@ -54,3 +54,108 @@ export function hslToRgb(
     b: Math.round(f(4) * 255),
   };
 }
+
+/**
+ * Converts RGB components (0-255) to HSL values (h: 0-360, s: 0-100, l: 0-100).
+ */
+export function rgbToHsl(
+  r: number,
+  g: number,
+  b: number
+): { h: number; s: number; l: number } {
+  const rn = r / 255;
+  const gn = g / 255;
+  const bn = b / 255;
+  const max = Math.max(rn, gn, bn);
+  const min = Math.min(rn, gn, bn);
+  const l = (max + min) / 2;
+  let h = 0;
+  let s = 0;
+
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case rn:
+        h = ((gn - bn) / d + (gn < bn ? 6 : 0)) / 6;
+        break;
+      case gn:
+        h = ((bn - rn) / d + 2) / 6;
+        break;
+      case bn:
+        h = ((rn - gn) / d + 4) / 6;
+        break;
+    }
+  }
+
+  return {
+    h: Math.round(h * 360),
+    s: Math.round(s * 100),
+    l: Math.round(l * 100),
+  };
+}
+
+/**
+ * Converts a hex color string to HSL values.
+ */
+export function hexToHsl(hex: string): { h: number; s: number; l: number } | null {
+  const rgb = hexToRgb(hex);
+  if (!rgb) return null;
+  return rgbToHsl(rgb.r, rgb.g, rgb.b);
+}
+
+/**
+ * Converts HSL values to a hex color string.
+ */
+export function hslToHex(h: number, s: number, l: number): string {
+  const rgb = hslToRgb(h, s, l);
+  return rgbToHex(rgb.r, rgb.g, rgb.b);
+}
+
+/**
+ * Lightens a hex color by a given amount (0 to 1).
+ */
+export function lighten(hex: string, amount: number): string {
+  const hsl = hexToHsl(hex);
+  if (!hsl) return hex;
+  const newL = Math.min(100, hsl.l + hsl.l * amount);
+  return hslToHex(hsl.h, hsl.s, Math.round(newL));
+}
+
+/**
+ * Darkens a hex color by a given amount (0 to 1).
+ */
+export function darken(hex: string, amount: number): string {
+  const hsl = hexToHsl(hex);
+  if (!hsl) return hex;
+  const newL = Math.max(0, hsl.l - hsl.l * amount);
+  return hslToHex(hsl.h, hsl.s, Math.round(newL));
+}
+
+/**
+ * Validates whether a string is a valid hex color (3 or 6 characters, with or without #).
+ */
+export function isValidHex(hex: string): boolean {
+  return /^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$/.test(hex);
+}
+
+/**
+ * Calculates the WCAG contrast ratio between two hex colors.
+ * Returns a ratio between 1 and 21. WCAG AA requires >= 4.5 for normal text.
+ */
+export function getContrastRatio(hex1: string, hex2: string): number {
+  const luminance = (hex: string): number => {
+    const rgb = hexToRgb(hex);
+    if (!rgb) return 0;
+    const [rs, gs, bs] = [rgb.r / 255, rgb.g / 255, rgb.b / 255].map((c) =>
+      c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)
+    );
+    return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+  };
+
+  const l1 = luminance(hex1);
+  const l2 = luminance(hex2);
+  const lighter = Math.max(l1, l2);
+  const darker = Math.min(l1, l2);
+  return Number(((lighter + 0.05) / (darker + 0.05)).toFixed(2));
+}
