@@ -1846,51 +1846,6 @@ export const utilitiesData: UtilityMeta[] = [
     "output": "..."
   },
   {
-    "id": "fetchwithtimeout",
-    "name": "fetchWithTimeout",
-    "module": "Http",
-    "description": "Isomorphic network utility functions for fetch-based requests.",
-    "signature": "fetchWithTimeout( url: string, timeoutMs: number, options?: RequestInit ): Promise<Response>",
-    "example": "fetchWithTimeout(...)",
-    "output": "..."
-  },
-  {
-    "id": "fetchwithretry",
-    "name": "fetchWithRetry",
-    "module": "Http",
-    "description": "Performs a fetch request with a specified number of retries and a delay between attempts.",
-    "signature": "fetchWithRetry( url: string, options: RequestInit &",
-    "example": "fetchWithRetry(...)",
-    "output": "..."
-  },
-  {
-    "id": "fetchjson",
-    "name": "fetchJson",
-    "module": "Http",
-    "description": "Safely fetches a URL and parses it as JSON. Supports timeout.",
-    "signature": "fetchJson<T = any>( url: string, options: RequestInit &",
-    "example": "fetchJson(...)",
-    "output": "..."
-  },
-  {
-    "id": "isnetworkerror",
-    "name": "isNetworkError",
-    "module": "Http",
-    "description": "Type guard to check if an error is a network/connection failure or timeout.",
-    "signature": "isNetworkError(err: any): boolean",
-    "example": "isNetworkError(...)",
-    "output": "..."
-  },
-  {
-    "id": "parseheaders",
-    "name": "parseHeaders",
-    "module": "Http",
-    "description": "Converts standard fetch HeadersInit into a clean key-value object representation.",
-    "signature": "parseHeaders(headers?: HeadersInit): Record<string, string>",
-    "example": "parseHeaders(...)",
-    "output": "..."
-  },
-  {
     "id": "jsonclone",
     "name": "jsonClone",
     "module": "Json",

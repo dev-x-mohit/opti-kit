@@ -29,7 +29,6 @@ export * from "./schema";
 export * from "./browser";
 export * from "./json";
 export * from "./store";
-export * from "./http";
 export * from "./csv";
 export * from "./log";
 export * from "./ds";

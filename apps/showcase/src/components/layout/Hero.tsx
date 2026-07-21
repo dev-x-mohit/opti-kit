@@ -49,7 +49,7 @@ export function Hero() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
           </span>
-          <span>OptiKit v1.0.6 • 14 KB Gzip • 100/100 Security Score • 328+ Utilities</span>
+          <span>OptiKit v1.0.8 • 16 KB Gzip • 100/100 Security Score • 429+ Utilities</span>
 
         </motion.div>
 
@@ -73,7 +73,7 @@ export function Hero() {
           transition={{ delay: 0.1 }}
           className="text-base sm:text-xl text-muted max-w-3xl mx-auto leading-relaxed"
         >
-          Say goodbye to monolithic legacy utilities like Lodash and Moment. OptiKit delivers 328+ pure, zero-dependency utility functions natively built in TypeScript with perfect tree shaking.
+          Say goodbye to monolithic legacy utilities like Lodash and Moment. OptiKit delivers 429+ pure, zero-dependency utility functions natively built in TypeScript with perfect tree shaking.
         </motion.p>
 
         {/* Terminal Command Bar */}
@@ -107,7 +107,7 @@ export function Hero() {
             Get Started <ArrowRight size={16} />
           </Button>
           <Button variant="outline" className="w-full sm:w-auto px-8 py-3.5 text-sm flex items-center justify-center gap-2" onClick={() => navigate('/modules')}>
-            Explore 328+ Utilities
+            Explore 429+ Utilities
           </Button>
         </motion.div>
 

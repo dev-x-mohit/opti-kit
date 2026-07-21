@@ -1,6 +1,6 @@
 # OptiKit Roadmap
 
-> **Current state: v1.0.7 — 25 modules, 335 utilities, 317 unit tests**
+> **Current state: v1.0.8 — 37 modules, 429 utilities, 418 unit tests**
 
 ## Module Status
 

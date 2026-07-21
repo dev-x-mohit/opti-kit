@@ -84,7 +84,7 @@ export function ModulesPage() {
     return groups;
   }, []);
 
-  // Category mappings for 25 modules
+  // Category mappings for modules
   const moduleCategories: Record<string, string> = {
     String: 'Data',
     Array: 'Data',
@@ -110,6 +110,18 @@ export function ModulesPage() {
     Regex: 'Utilities',
     Types: 'Utilities',
     Cache: 'Utilities',
+    Guard: 'Utilities',
+    Format: 'Utilities',
+    Schema: 'Utilities',
+    Browser: 'Web',
+    Json: 'Data',
+    Store: 'Data',
+    Csv: 'Data',
+    Log: 'Utilities',
+    Ds: 'Data',
+    Template: 'Web',
+    Keyboard: 'Web',
+    Semver: 'Utilities',
   };
 
   const [activeCategory, setActiveCategory] = useState<string>('All');
@@ -219,7 +231,7 @@ export function ModulesPage() {
             type="text" 
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search 328+ utilities..." 
+            placeholder="Search 429+ utilities..." 
             className="w-full bg-surface border border-border rounded-lg py-2 pl-10 pr-4 text-sm text-text-main placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all shadow-sm"
           />
         </div>

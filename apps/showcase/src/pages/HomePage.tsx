@@ -50,7 +50,7 @@ export function HomePage() {
       <section className="container mx-auto px-4 py-16 max-w-7xl">
         <div className="text-center mb-12 space-y-3">
           <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold border border-primary/20 shadow-sm inline-flex items-center gap-1.5">
-            <Layers size={13} /> 25 Hand-Crafted Modules
+            <Layers size={13} /> 37 Hand-Crafted Modules
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-text-main tracking-tight">Explore the Utility Ecosystem</h2>
           <p className="text-muted max-w-2xl mx-auto text-base">
@@ -83,7 +83,7 @@ export function HomePage() {
             onClick={() => navigate('/modules')}
             className="text-xs sm:text-sm font-semibold text-primary hover:text-accent transition-colors inline-flex items-center gap-1.5 underline-offset-4 hover:underline"
           >
-            View all 25 modules & 328+ utilities <ArrowRight size={16} />
+            View all 37 modules & 429+ utilities <ArrowRight size={16} />
           </button>
         </div>
       </section>

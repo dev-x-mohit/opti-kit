@@ -8,7 +8,7 @@
 [![Dependencies](https://img.shields.io/badge/Dependencies-0-brightgreen?style=flat-square)](https://www.npmjs.com/package/@dev_x_mohit/opti-kit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility engine designed to replace legacy monolithic packages like Lodash, Moment, and Ramda. Built natively in TypeScript, it ships **38 hand-optimized modules** containing **434+ functions** in both ES Modules (`.mjs`) and CommonJS (`.js`) formats.
+OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility engine designed to replace legacy monolithic packages like Lodash, Moment, and Ramda. Built natively in TypeScript, it ships **37 hand-optimized modules** containing **429+ functions** in both ES Modules (`.mjs`) and CommonJS (`.js`) formats.
 
 ---
 
@@ -18,8 +18,8 @@ OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaSc
 - 🛡️ **100/100 Security & Vulnerability Score** (Socket Security Verified)
 - 📦 **0 External Dependencies** — Immune to supply-chain attacks
 - 🌳 **100% Tree-Shakeable** — Ships with `"sideEffects": false`
-- 🎯 **434+ Isomorphic Utilities** across 38 dedicated domain modules
-- 🧪 **426 Unit Tests** with 100% passing test coverage
+- 🎯 **429+ Isomorphic Utilities** across 37 dedicated domain modules
+- 🧪 **418 Unit Tests** with 100% passing test coverage
 
 ---
 
@@ -41,7 +41,7 @@ bun add @dev_x_mohit/opti-kit
 
 ---
 
-## 38 Modules Overview
+## 37 Modules Overview
 
 | Module | Utilities Count | Description |
 | :--- | :--- | :--- |
@@ -76,7 +76,6 @@ bun add @dev_x_mohit/opti-kit
 | **`browser`** | 16 utils | SSR-safe browser feature and environment checks (`isBrowser`, `isChrome`, `isMobile`) |
 | **`json`** | 6 utils | Deep JSON utilities (`jsonClone`, `jsonFlatten`, `jsonUnflatten`, `jsonPath`, `jsonMerge`, `jsonDiff`) |
 | **`store`** | 4 utils | Ultra-lightweight reactive primitives (`signal`, `computed`, `effect`, `createStore`) |
-| **`http`** | 5 utils | Isomorphic network fetch wrappers (`fetchJson`, `fetchWithTimeout`, `fetchWithRetry`) |
 | **`csv`** | 2 utils | Table processing utilities (`csvParse`, `csvStringify`) |
 | **`log`** | 2 utils | Custom level-based ANSI loggers (`createLogger`, `ansi`) |
 | **`ds`** | 4 classes | Advanced standard data structures (`Stack`, `Queue`, `PriorityQueue`, `BiMap`) |

@@ -23,10 +23,7 @@ const levels = {
 const isColorSupported = (): boolean => {
   if (typeof window !== "undefined") return false;
   if (typeof process === "undefined") return false;
-  return (
-    !!(process.stdout && process.stdout.isTTY) ||
-    process.env.FORCE_COLOR === "1"
-  );
+  return !!(process.stdout && process.stdout.isTTY);
 };
 
 export const ansi = {
