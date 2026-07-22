@@ -1,6 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #F6F7FB;
+  --surface: #FFFFFF;
+  --primary: #4F8DFD;
+  --accent-indigo: #6B6CF7;
+  --accent: #8B5CF6;
+  --success: #10B981;
+  --text-main: #000000;
+  --muted: #111827;
+  --border: #DCE3F0;
+  --code-bg: #EEF2F8;
+  --soft-lavender: #C9D4FF;
+  --highlight-glow: #E7EDFF;
+}
+
+.dark {
+  --bg: #0B0F19;
+  --surface: #111827;
+  --primary: #4F8DFD;
+  --accent-indigo: #6B6CF7;
+  --accent: #8B5CF6;
+  --success: #10B981;
+  --text-main: #F9FAFB;
+  --muted: #9CA3AF;
+  --border: rgba(255, 255, 255, 0.12);
+  --code-bg: #1F2937;
+  --soft-lavender: #3B82F6;
+  --highlight-glow: rgba(79, 141, 253, 0.15);
+}
+
 @theme {
   --color-background: var(--bg);
   --color-surface: var(--surface);
@@ -13,40 +45,40 @@
   --color-code-bg: var(--code-bg);
 }
 
-@layer base {
-  :root {
-    --bg: #ffffff;
-    --surface: #f8fafc;
-    --primary: #3B82F6;
-    --accent: #8B5CF6;
-    --success: #10B981;
-    --text-main: #0f172a;
-    --muted: #64748b;
-    --border: #e2e8f0;
-    --code-bg: #f1f5f9;
-  }
+body {
+  background-color: var(--bg);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+}
 
-  .dark {
-    --bg: #09090B;
-    --surface: #111827;
-    --primary: #3B82F6;
-    --accent: #8B5CF6;
-    --success: #10B981;
-    --text-main: #FFFFFF;
-    --muted: #9CA3AF;
-    --border: rgba(255, 255, 255, 0.1);
-    --code-bg: #09090B;
-  }
+/* Explicit class mappings for guaranteed light mode black text visibility */
+.text-text-main {
+  color: var(--text-main);
+}
 
-  body {
-    background-color: var(--color-background);
-    color: var(--color-text-main);
-    font-family: 'Inter', sans-serif;
-  }
+.text-muted {
+  color: var(--muted);
+}
+
+.bg-background {
+  background-color: var(--bg);
+}
+
+.bg-surface {
+  background-color: var(--surface);
+}
+
+.bg-code-bg {
+  background-color: var(--code-bg);
+}
+
+.border-border {
+  border-color: var(--border);
 }
 
 .text-gradient {
-  background: linear-gradient(to right, var(--color-primary), var(--color-accent));
+  background: linear-gradient(135deg, #4F8DFD 0%, #6B6CF7 50%, #8B5CF6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -56,6 +88,6 @@
   display: none;
 }
 .custom-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

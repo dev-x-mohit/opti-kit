@@ -53,11 +53,11 @@ export function Features() {
   return (
     <section className="container mx-auto px-4 py-20 max-w-7xl">
       <div className="text-center mb-16 space-y-3">
-        <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold border border-primary/20 shadow-sm inline-flex items-center gap-1.5">
+        <span className="px-3 py-1 bg-[#E7EDFF] dark:bg-primary/10 text-[#4F8DFD] rounded-full text-xs font-semibold border border-[#C9D4FF]/60 dark:border-primary/20 shadow-sm inline-flex items-center gap-1.5">
           <Zap size={13} /> Built for Speed & Precision
         </span>
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-text-main tracking-tight">Why Engineering Teams Choose OptiKit</h2>
-        <p className="text-muted max-w-2xl mx-auto text-base">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-black dark:text-white tracking-tight">Why Engineering Teams Choose OptiKit</h2>
+        <p className="text-black dark:text-muted max-w-2xl mx-auto text-base font-medium">
           A modern utility suite engineered to solve everyday developer problems with zero bloat and absolute reliability.
         </p>
       </div>
@@ -73,13 +73,13 @@ export function Features() {
           const Icon = feat.icon;
           return (
             <motion.div key={i} variants={item}>
-              <Card className="p-6 h-full flex flex-col justify-between border-primary/15 hover:border-primary/40 transition-colors shadow-md group">
+              <Card className="p-6 h-full flex flex-col justify-between hover:border-primary/40 transition-colors shadow-md group">
                 <div className="space-y-3">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-[#E7EDFF] dark:bg-primary/10 border border-[#C9D4FF]/60 dark:border-primary/20 flex items-center justify-center text-[#2563EB] dark:text-[#4F8DFD] group-hover:scale-110 transition-transform">
                     <Icon size={20} />
                   </div>
-                  <h3 className="text-lg font-bold text-text-main">{feat.title}</h3>
-                  <p className="text-xs sm:text-sm text-muted leading-relaxed">{feat.description}</p>
+                  <h3 className="text-lg font-bold text-black dark:text-white">{feat.title}</h3>
+                  <p className="text-xs sm:text-sm text-black dark:text-muted leading-relaxed font-medium">{feat.description}</p>
                 </div>
               </Card>
             </motion.div>

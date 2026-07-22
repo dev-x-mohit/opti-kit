@@ -387,12 +387,12 @@ export function ModulesPage() {
             {/* Header */}
             <div className="border-b border-border pb-6">
               <div className="flex items-center gap-3 mb-2">
-                <span className="px-2.5 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold border border-primary/20 shadow-sm">
+                <span className="px-2.5 py-1 bg-[#E7EDFF] dark:bg-primary/10 text-[#4F8DFD] rounded-full text-xs font-semibold border border-[#C9D4FF]/60 dark:border-primary/20 shadow-sm">
                   {selectedUtility.module}
                 </span>
               </div>
-              <h1 className="text-4xl font-bold text-text-main mb-4">{selectedUtility.name}</h1>
-              <p className="text-lg text-muted leading-relaxed">
+              <h1 className="text-4xl font-bold text-[#1F2937] dark:text-white mb-4">{selectedUtility.name}</h1>
+              <p className="text-lg text-[#667085] dark:text-muted leading-relaxed">
                 {selectedUtility.description}
               </p>
             </div>

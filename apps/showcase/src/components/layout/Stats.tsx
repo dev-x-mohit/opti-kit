@@ -36,9 +36,9 @@ export function Stats() {
         className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
       >
         {stats.map((stat, i) => (
-          <motion.div key={i} variants={item} className="bg-surface border border-border rounded-xl p-6 text-center hover:border-primary/50 transition-colors">
-            <div className="text-3xl font-bold text-text-main mb-1">{stat.value}</div>
-            <div className="text-sm font-medium text-muted uppercase tracking-wider">{stat.label}</div>
+          <motion.div key={i} variants={item} className="bg-surface border border-border rounded-[24px] p-6 text-center shadow-[0_10px_40px_rgba(15,23,42,0.05)] hover:border-primary/40 transition-all">
+            <div className="text-3xl font-extrabold text-gradient mb-1">{stat.value}</div>
+            <div className="text-xs font-bold text-black dark:text-muted uppercase tracking-wider">{stat.label}</div>
           </motion.div>
         ))}
       </motion.div>

@@ -43,11 +43,11 @@ export function Hero() {
         <motion.div 
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs font-semibold shadow-sm backdrop-blur-md"
+          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#E7EDFF] dark:bg-primary/10 border border-[#C9D4FF]/60 dark:border-primary/30 text-[#4F8DFD] text-xs font-semibold shadow-sm backdrop-blur-md"
         >
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#4F8DFD] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#4F8DFD]"></span>
           </span>
           <span>OptiKit v1.0.9 • 16 KB Gzip • 100/100 Security Score • 430 Utilities</span>
 
@@ -58,10 +58,10 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
-          className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-text-main leading-[1.1] max-w-4xl mx-auto"
+          className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-black dark:text-white leading-[1.1] max-w-4xl mx-auto"
         >
           The Zero-Dependency <br />
-          <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+          <span className="text-gradient">
             Utility Engine
           </span> for JS & TS.
         </motion.h1>
@@ -71,7 +71,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-base sm:text-xl text-muted max-w-3xl mx-auto leading-relaxed"
+          className="text-base sm:text-xl text-black dark:text-muted max-w-3xl mx-auto leading-relaxed font-medium"
         >
           Say goodbye to monolithic legacy utilities like Lodash and Moment. OptiKit delivers 430 pure, zero-dependency utility functions natively built in TypeScript with perfect tree shaking.
         </motion.p>
@@ -81,15 +81,15 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="inline-flex items-center justify-between gap-3 bg-code-bg border border-border rounded-2xl p-2.5 pl-5 max-w-lg w-full shadow-2xl"
+          className="inline-flex items-center justify-between gap-3 bg-code-bg border border-border rounded-2xl p-2.5 pl-5 max-w-lg w-full shadow-lg"
         >
-          <div className="flex items-center gap-3 font-mono text-xs sm:text-sm text-text-main overflow-x-auto">
+          <div className="flex items-center gap-3 font-mono text-xs sm:text-sm text-black dark:text-white font-semibold overflow-x-auto">
             <Terminal size={18} className="text-primary shrink-0" />
             <span>{installCmd}</span>
           </div>
           <button
             onClick={handleCopyInstall}
-            className="p-2.5 rounded-xl bg-surface border border-border text-muted hover:text-primary transition-colors shrink-0"
+            className="p-2.5 rounded-xl bg-surface border border-border text-black dark:text-muted hover:text-primary transition-colors shrink-0"
             title="Copy command"
           >
             {copiedInstall ? <Check size={16} className="text-success" /> : <Copy size={16} />}
@@ -103,10 +103,10 @@ export function Hero() {
           transition={{ delay: 0.2 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-1"
         >
-          <Button variant="primary" className="w-full sm:w-auto px-8 py-3.5 text-sm flex items-center justify-center gap-2 shadow-xl shadow-primary/20" onClick={() => navigate('/docs')}>
+          <Button variant="primary" className="w-full sm:w-auto px-8 py-3.5 text-sm flex items-center justify-center gap-2 shadow-xl shadow-primary/20 bg-gradient-to-r from-[#4F8DFD] via-[#6B6CF7] to-[#8B5CF6] text-white border-0 hover:opacity-95 font-semibold" onClick={() => navigate('/docs')}>
             Get Started <ArrowRight size={16} />
           </Button>
-          <Button variant="outline" className="w-full sm:w-auto px-8 py-3.5 text-sm flex items-center justify-center gap-2" onClick={() => navigate('/modules')}>
+          <Button variant="outline" className="w-full sm:w-auto px-8 py-3.5 text-sm flex items-center justify-center gap-2 border-border text-black dark:text-white hover:bg-[#EEF2F8] dark:hover:bg-white/5 font-semibold" onClick={() => navigate('/modules')}>
             Explore 430 Utilities
           </Button>
         </motion.div>
@@ -116,7 +116,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.25 }}
-          className="pt-2 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs sm:text-sm text-muted font-medium"
+          className="pt-2 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs sm:text-sm text-black dark:text-muted font-bold"
         >
           <span className="flex items-center gap-1.5"><ShieldCheck size={16} className="text-success" /> 0 External Dependencies</span>
           <span className="flex items-center gap-1.5"><Layers size={16} className="text-primary" /> Tree-Shakeable ESM</span>
@@ -130,7 +130,7 @@ export function Hero() {
           transition={{ delay: 0.3 }}
           className="max-w-3xl mx-auto pt-6"
         >
-          <div className="bg-surface/50 border border-primary/20 rounded-2xl p-5 shadow-lg backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="bg-surface border border-border rounded-[24px] p-6 shadow-[0_10px_40px_rgba(15,23,42,0.05)] backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-left space-y-1 flex-1">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
                 <Scale size={15} /> Tree Shaking Bundle Calculator

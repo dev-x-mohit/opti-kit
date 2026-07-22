@@ -2,27 +2,40 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Code2, Package, Search, Sun, Moon } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { OptiKitLogo } from '../ui/OptiKitLogo';
+
 export function Navbar() {
-  const [isDark, setIsDark] = useState(() => {
+  const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
-      return document.documentElement.classList.contains('dark') || 
-             (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      return localStorage.getItem('theme') === 'dark';
     }
-    return true;
+    return false;
   });
 
   const searchInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isDark) {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextDark = !isDark;
+    setIsDark(nextDark);
+    if (nextDark) {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
-  }, [isDark]);
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -45,11 +58,10 @@ export function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/60 backdrop-blur-xl">
+    <nav className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/80 backdrop-blur-xl transition-colors">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between max-w-7xl">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="font-bold text-xl tracking-tight text-text-main">OptiKit</span>
-          <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-semibold ml-2 border border-primary/20">v1.0.6</span>
+        <Link to="/" className="flex items-center">
+          <OptiKitLogo showVersion size={34} />
         </Link>
 
         
@@ -69,24 +81,24 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-4">
-          <Link to="/docs" className="text-sm font-medium text-muted hover:text-text-main transition-colors">Docs</Link>
-          <Link to="/modules" className="text-sm font-medium text-muted hover:text-text-main transition-colors">Modules</Link>
-          <Link to="/playground" className="text-sm font-medium text-muted hover:text-text-main transition-colors">Playground</Link>
+          <Link to="/docs" className="text-sm font-semibold text-black dark:text-muted hover:text-primary transition-colors">Docs</Link>
+          <Link to="/modules" className="text-sm font-semibold text-black dark:text-muted hover:text-primary transition-colors">Modules</Link>
+          <Link to="/playground" className="text-sm font-semibold text-black dark:text-muted hover:text-primary transition-colors">Playground</Link>
           
           <div className="w-px h-4 bg-border mx-2"></div>
           
           <button 
-            onClick={() => setIsDark(!isDark)} 
-            className="text-muted hover:text-text-main transition-colors p-1"
+            onClick={toggleTheme} 
+            className="text-black dark:text-muted hover:text-primary transition-colors p-1"
             aria-label="Toggle theme"
           >
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
           
-          <a href="https://github.com/dev-x-mohit/opti-kit" className="text-muted hover:text-text-main transition-colors">
+          <a href="https://github.com/dev-x-mohit/opti-kit" className="text-black dark:text-muted hover:text-primary transition-colors">
             <Code2 size={20} />
           </a>
-          <a href="https://npmjs.com/package/@dev_x_mohit/opti-kit" className="text-muted hover:text-text-main transition-colors">
+          <a href="https://npmjs.com/package/@dev_x_mohit/opti-kit" className="text-black dark:text-muted hover:text-primary transition-colors">
             <Package size={20} />
           </a>
         </div>
