@@ -573,3 +573,11 @@ export function getFileName(filename: string): string {
   return parts.join(".");
 }
 
+/**
+ * Escapes special characters in a string for use in a regular expression.
+ */
+export function escapeRegExp(str: string): string {
+  if (!str) return "";
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+

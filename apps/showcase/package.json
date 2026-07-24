@@ -9,9 +9,9 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "dev": "cross-env ROLLDOWN_OPTIONS_VALIDATION=loose vite",
+    "build": "tsc && cross-env ROLLDOWN_OPTIONS_VALIDATION=loose vite build",
+    "preview": "cross-env ROLLDOWN_OPTIONS_VALIDATION=loose vite preview"
   },
   "dependencies": {
     "@dev_x_mohit/opti-kit": "*",
@@ -27,6 +27,7 @@
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.5.4",
+    "cross-env": "^10.1.0",
     "postcss": "^8.5.20",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",

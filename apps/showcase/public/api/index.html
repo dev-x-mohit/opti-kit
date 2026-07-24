@@ -1,0 +1,166 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>OptiKit API</title><meta name="description" content="Documentation for OptiKit API"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container"><a href="index.html" class="title">OptiKit API</a>
+<div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/>
+<ul role="listbox" id="tsd-search-results"></ul>
+<div id="tsd-search-status" aria-live="polite" aria-atomic="true">
+<div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header>
+<div class="container container-main">
+<div class="col-content">
+<div class="tsd-page-title">
+<h1>OptiKit API</h1></div>
+<div class="tsd-panel tsd-typography"><h1 id="optikit" class="tsd-anchor-link">OptiKit<a href="#optikit" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<blockquote>
+<p><strong>The Zero-Dependency, Ultra-Lightweight Utility Engine for Modern JavaScript &amp; TypeScript.</strong></p>
+</blockquote>
+<p><a href="https://www.npmjs.com/package/@dev_x_mohit/opti-kit"><img src="https://img.shields.io/npm/v/@dev_x_mohit/opti-kit?style=flat-square&amp;color=a855f7" alt="NPM Version"></a>
+<a href="https://socket.dev/npm/package/@dev_x_mohit/opti-kit"><img src="https://img.shields.io/badge/Socket%20Security-100%2F100-success?style=flat-square" alt="Socket Security"></a>
+<a href="https://bundlephobia.com/package/@dev_x_mohit/opti-kit"><img src="https://img.shields.io/badge/Minified%20%2B%20Gzip-16%20KB-blue?style=flat-square" alt="Bundlephobia Size"></a>
+<a href="https://www.npmjs.com/package/@dev_x_mohit/opti-kit"><img src="https://img.shields.io/badge/Dependencies-0-brightgreen?style=flat-square" alt="Dependencies"></a>
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="License: MIT"></a></p>
+<p>OptiKit is a modern, zero-dependency utility engine designed as a drop-in replacement for legacy, monolithic libraries like Lodash, Rambda, and Moment. Natively built in TypeScript, it packages <strong>37 hand-optimized modules</strong> containing <strong>430 utility functions</strong>.</p>
+<p>Every export is designed with standard ESM + CJS compatibility, full TypeScript declarations, side-effects-free tree-shaking, and 100% passing test coverage.</p>
+<hr>
+<h2 id="⚡-key-highlights" class="tsd-anchor-link">⚡ Key Highlights<a href="#⚡-key-highlights" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li>🌳 <strong>100% Tree-Shakeable:</strong> Structured with <code>&quot;sideEffects&quot;: false</code> so your bundle only includes the functions you actually import.</li>
+<li>🛡️ <strong>Supply-Chain Immune:</strong> 0 external dependencies, 0 network access, and 0 environment variable access. Safe for security-critical applications.</li>
+<li>🌐 <strong>Isomorphic &amp; Universal:</strong> Fully compatible with Node.js (&gt;=18), modern browsers, Cloudflare Workers, Vercel Serverless, Bun, and Deno.</li>
+<li>⚡ <strong>Ultra-Lightweight:</strong> The entire engine of 37 modules and 430 utilities takes only <strong>16.0 KB minified + gzipped</strong>.</li>
+<li>🧪 <strong>Production-Grade Reliability:</strong> Covered by 419 unit tests with 100% test coverage.</li>
+</ul>
+<hr>
+<h2 id="📦-installation" class="tsd-anchor-link">📦 Installation<a href="#📦-installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Install the package via your preferred package manager:</p>
+<pre><code class="bash"><span class="hl-0"># npm</span><br/><span class="hl-1">npm</span><span class="hl-2"> </span><span class="hl-3">install</span><span class="hl-2"> </span><span class="hl-3">@dev_x_mohit/opti-kit</span><br/><br/><span class="hl-0"># pnpm</span><br/><span class="hl-1">pnpm</span><span class="hl-2"> </span><span class="hl-3">add</span><span class="hl-2"> </span><span class="hl-3">@dev_x_mohit/opti-kit</span><br/><br/><span class="hl-0"># yarn</span><br/><span class="hl-1">yarn</span><span class="hl-2"> </span><span class="hl-3">add</span><span class="hl-2"> </span><span class="hl-3">@dev_x_mohit/opti-kit</span><br/><br/><span class="hl-0"># bun</span><br/><span class="hl-1">bun</span><span class="hl-2"> </span><span class="hl-3">add</span><span class="hl-2"> </span><span class="hl-3">@dev_x_mohit/opti-kit</span>
+</code><button type="button">Copy</button></pre>
+
+<hr>
+<h2 id="📂-categorized-modules-37-modules" class="tsd-anchor-link">📂 Categorized Modules (37 Modules)<a href="#📂-categorized-modules-37-modules" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Rather than dumping a monolithic API, OptiKit organizes its 430 utilities into dedicated, clean domains:</p>
+<h3 id="🗃️-data-collections" class="tsd-anchor-link">🗃️ Data &amp; Collections<a href="#🗃️-data-collections" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><strong><code>string</code></strong> (45 utils) — Modern string manipulations: <code>slugify</code>, <code>truncate</code>, <code>escapeHtml</code>, <code>titleCase</code>.</li>
+<li><strong><code>array</code></strong> (40 utils) — Safe list processing: <code>chunk</code>, <code>unique</code>, <code>groupBy</code>, <code>partition</code>, <code>intersection</code>.</li>
+<li><strong><code>object</code></strong> (31 utils) — Deep manipulations: <code>deepClone</code>, <code>deepMerge</code>, <code>flattenObject</code>, <code>pick</code>, <code>omit</code>.</li>
+<li><strong><code>collection</code></strong> (12 utils) — Aggregations: <code>countBy</code>, <code>keyBy</code>, <code>sortBy</code>, <code>symmetricDifference</code>.</li>
+<li><strong><code>tree</code></strong> (2 utils) — Hierarchical traversals: <code>arrayToTree</code>, <code>treeToArray</code>.</li>
+<li><strong><code>json</code></strong> (6 utils) — Deep JSON operations: <code>jsonClone</code>, <code>jsonFlatten</code>, <code>jsonUnflatten</code>, <code>jsonPath</code>, <code>jsonMerge</code>, <code>jsonDiff</code>.</li>
+<li><strong><code>csv</code></strong> (2 utils) — Micro CSV parsers: <code>csvParse</code>, <code>csvStringify</code>.</li>
+<li><strong><code>ds</code></strong> (4 classes) — Optimized structures: <code>Stack</code>, <code>Queue</code>, <code>PriorityQueue</code>, <code>BiMap</code>.</li>
+</ul>
+<h3 id="⚙️-logic-control-flow" class="tsd-anchor-link">⚙️ Logic &amp; Control Flow<a href="#⚙️-logic-control-flow" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><strong><code>async</code></strong> (19 utils) — Concurrency control: <code>debounce</code>, <code>throttle</code>, <code>retry</code>, <code>delay</code>, <code>asyncPool</code>, <code>timeout</code>.</li>
+<li><strong><code>functional</code></strong> (14 utils) — FP primitives: <code>curry</code>, <code>partial</code>, <code>pipe</code>, <code>compose</code>, <code>onceFn</code>.</li>
+<li><strong><code>events</code></strong> (7 utils) — Pub/Sub emitter: <code>EventEmitter</code>, <code>listen</code>, <code>listenOnce</code>, <code>delegateEvent</code>.</li>
+<li><strong><code>store</code></strong> (4 utils) — Micro reactive signals: <code>signal</code>, <code>computed</code>, <code>effect</code>, <code>createStore</code>.</li>
+<li><strong><code>cache</code></strong> (2 utils) — TTL caching: <code>LRUCache</code>, <code>memoizeWithTTL</code>.</li>
+<li><strong><code>guard</code></strong> (12 utils) — Safe parse boundaries: <code>safeJsonParse</code>, <code>safeParseInt</code>, <code>invariant</code>, <code>attempt</code>.</li>
+</ul>
+<h3 id="🛡️-security-parsers" class="tsd-anchor-link">🛡️ Security &amp; Parsers<a href="#🛡️-security-parsers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><strong><code>crypto</code></strong> (10 utils) — Cryptographic utilities: <code>uuid</code>, <code>sha256</code>, <code>sha512</code>, <code>hmacSha256</code>, <code>generateToken</code>.</li>
+<li><strong><code>encoding</code></strong> (8 utils) — Fast converters: <code>utf8Encode</code>, <code>utf8Decode</code>, <code>hexEncode</code>, <code>base64Encode</code>.</li>
+<li><strong><code>validate</code></strong> (28 utils) — Robust format checks: <code>isEmail</code>, <code>isUrl</code>, <code>isUuid</code>, <code>isCreditCard</code>, <code>isJWT</code>.</li>
+<li><strong><code>semver</code></strong> (5 utils) — SemVer parser/validator: <code>semverCompare</code>, <code>semverSatisfies</code>.</li>
+<li><strong><code>regex</code></strong> (1 obj) — Pre-compiled patterns.</li>
+</ul>
+<h3 id="🌐-web-dom" class="tsd-anchor-link">🌐 Web &amp; Dom<a href="#🌐-web-dom" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><strong><code>dom</code></strong> (14 utils) — Browser interaction: <code>copyToClipboard</code>, <code>setCookie</code>, <code>getCookie</code>, <code>createElement</code>.</li>
+<li><strong><code>storage</code></strong> (1 obj) — SSR-safe storage: <code>safeStorage</code> (LocalStorage/SessionStorage with JSON + expiry).</li>
+<li><strong><code>browser</code></strong> (16 utils) — Environment checks: <code>isBrowser</code>, <code>isChrome</code>, <code>isMobile</code>, <code>isTouchDevice</code>.</li>
+<li><strong><code>keyboard</code></strong> (2 utils) — Hotkey event handlers: <code>registerShortcut</code>, <code>isKeyPressed</code>.</li>
+<li><strong><code>url</code></strong> (8 utils) — Safe URL parser &amp; builder: <code>joinPaths</code>, <code>parseUrl</code>, <code>buildUrl</code>.</li>
+</ul>
+<h3 id="🧮-math-science" class="tsd-anchor-link">🧮 Math &amp; Science<a href="#🧮-math-science" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><strong><code>math</code></strong> (32 utils) — Math operations: <code>clamp</code>, <code>lerp</code>, <code>mean</code>, <code>median</code>, <code>factorial</code>, <code>isPrime</code>, <code>gcd</code>.</li>
+<li><strong><code>statistics</code></strong> (12 utils) — Data science math: <code>variance</code>, <code>standardDeviation</code>, <code>covariance</code>, <code>correlation</code>.</li>
+<li><strong><code>geometry</code></strong> (9 utils) — Coord geometry: <code>distance2D</code>, <code>midpoint</code>, <code>rotatePoint</code>, <code>circleArea</code>.</li>
+<li><strong><code>units</code></strong> (8 utils) — Converter helper: <code>celsiusToFahrenheit</code>, <code>milesToKilometers</code>.</li>
+<li><strong><code>color</code></strong> (10 utils) — Color convert &amp; contrasts: <code>hexToRgb</code>, <code>rgbToHex</code>, <code>rgbToHsl</code>, <code>lighten</code>, <code>darken</code>.</li>
+</ul>
+<h3 id="🛠️-common-utilities" class="tsd-anchor-link">🛠️ Common Utilities<a href="#🛠️-common-utilities" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><strong><code>types</code></strong> (16 utils) — Precise runtime check: <code>isNil</code>, <code>isObject</code>, <code>isPromise</code>, <code>isDate</code>.</li>
+<li><strong><code>format</code></strong> (9 utils) — Format helpers: <code>formatDuration</code>, <code>formatPhoneNumber</code>, <code>pluralize</code>.</li>
+<li><strong><code>schema</code></strong> (12 utils) — Simple rule runner: <code>validateObject</code>, <code>required</code>, <code>minLength</code>.</li>
+<li><strong><code>date</code></strong> (20 utils) — Iso-time: <code>relativeTime</code>, <code>formatDate</code>, <code>diffInDays</code>, <code>addDays</code>.</li>
+<li><strong><code>template</code></strong> (2 utils) — Simple template engine: <code>render</code>, <code>compile</code>.</li>
+<li><strong><code>log</code></strong> (2 utils) — Colored ANSI logger: <code>createLogger</code>, <code>ansi</code>.</li>
+</ul>
+<hr>
+<h2 id="🚀-code-examples" class="tsd-anchor-link">🚀 Code Examples<a href="#🚀-code-examples" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h3 id="1-reactive-store-" class="tsd-anchor-link">1. Reactive Store (<code>store</code>)<a href="#1-reactive-store-" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Create ultra-lightweight reactive states in just 4 lines of code:</p>
+<pre><code class="typescript"><span class="hl-4">import</span><span class="hl-2"> { </span><span class="hl-5">signal</span><span class="hl-2">, </span><span class="hl-5">computed</span><span class="hl-2">, </span><span class="hl-5">effect</span><span class="hl-2"> } </span><span class="hl-4">from</span><span class="hl-2"> </span><span class="hl-3">&#39;@dev_x_mohit/opti-kit&#39;</span><span class="hl-2">;</span><br/><br/><span class="hl-6">const</span><span class="hl-2"> </span><span class="hl-7">count</span><span class="hl-2"> = </span><span class="hl-1">signal</span><span class="hl-2">(</span><span class="hl-8">0</span><span class="hl-2">);</span><br/><span class="hl-6">const</span><span class="hl-2"> </span><span class="hl-7">doubleCount</span><span class="hl-2"> = </span><span class="hl-1">computed</span><span class="hl-2">(() </span><span class="hl-6">=&gt;</span><span class="hl-2"> </span><span class="hl-5">count</span><span class="hl-2">.</span><span class="hl-5">value</span><span class="hl-2"> * </span><span class="hl-8">2</span><span class="hl-2">);</span><br/><br/><span class="hl-1">effect</span><span class="hl-2">(() </span><span class="hl-6">=&gt;</span><span class="hl-2"> </span><span class="hl-5">console</span><span class="hl-2">.</span><span class="hl-1">log</span><span class="hl-2">(</span><span class="hl-3">`Count is: </span><span class="hl-6">${</span><span class="hl-5">count</span><span class="hl-9">.</span><span class="hl-5">value</span><span class="hl-6">}</span><span class="hl-3">, Double is: </span><span class="hl-6">${</span><span class="hl-5">doubleCount</span><span class="hl-9">.</span><span class="hl-5">value</span><span class="hl-6">}</span><span class="hl-3">`</span><span class="hl-2">));</span><br/><span class="hl-0">// Log: Count is: 0, Double is: 0</span><br/><br/><span class="hl-5">count</span><span class="hl-2">.</span><span class="hl-5">value</span><span class="hl-2"> = </span><span class="hl-8">5</span><span class="hl-2">;</span><br/><span class="hl-0">// Log: Count is: 5, Double is: 10</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="2-zero-throw-storage-" class="tsd-anchor-link">2. Zero-Throw Storage (<code>storage</code>)<a href="#2-zero-throw-storage-" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Work with storage in Next.js / SSR environments without window checks or throwing errors:</p>
+<pre><code class="typescript"><span class="hl-4">import</span><span class="hl-2"> { </span><span class="hl-5">safeStorage</span><span class="hl-2"> } </span><span class="hl-4">from</span><span class="hl-2"> </span><span class="hl-3">&#39;@dev_x_mohit/opti-kit&#39;</span><span class="hl-2">;</span><br/><br/><span class="hl-0">// Saves with native JSON serialization and an optional 1-minute expiration timer</span><br/><span class="hl-5">safeStorage</span><span class="hl-2">.</span><span class="hl-1">setItem</span><span class="hl-2">(</span><span class="hl-3">&#39;session&#39;</span><span class="hl-2">, { </span><span class="hl-5">userId:</span><span class="hl-2"> </span><span class="hl-3">&#39;usr_88&#39;</span><span class="hl-2">, </span><span class="hl-5">role:</span><span class="hl-2"> </span><span class="hl-3">&#39;editor&#39;</span><span class="hl-2"> }, </span><span class="hl-8">60000</span><span class="hl-2">);</span><br/><br/><span class="hl-0">// Safely retrieves and parses the object; returns null if expired or missing</span><br/><span class="hl-6">const</span><span class="hl-2"> </span><span class="hl-7">session</span><span class="hl-2"> = </span><span class="hl-5">safeStorage</span><span class="hl-2">.</span><span class="hl-1">getItem</span><span class="hl-2">(</span><span class="hl-3">&#39;session&#39;</span><span class="hl-2">); </span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="3-concurrency-pool-" class="tsd-anchor-link">3. Concurrency Pool (<code>async</code>)<a href="#3-concurrency-pool-" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Limit concurrency when executing large batches of async tasks:</p>
+<pre><code class="typescript"><span class="hl-4">import</span><span class="hl-2"> { </span><span class="hl-5">asyncPool</span><span class="hl-2"> } </span><span class="hl-4">from</span><span class="hl-2"> </span><span class="hl-3">&#39;@dev_x_mohit/opti-kit&#39;</span><span class="hl-2">;</span><br/><br/><span class="hl-6">const</span><span class="hl-2"> </span><span class="hl-7">urls</span><span class="hl-2"> = [</span><span class="hl-3">&#39;/api/1&#39;</span><span class="hl-2">, </span><span class="hl-3">&#39;/api/2&#39;</span><span class="hl-2">, </span><span class="hl-3">&#39;/api/3&#39;</span><span class="hl-2">, </span><span class="hl-3">&#39;/api/4&#39;</span><span class="hl-2">];</span><br/><span class="hl-6">const</span><span class="hl-2"> </span><span class="hl-1">fetchTask</span><span class="hl-2"> = </span><span class="hl-6">async</span><span class="hl-2"> (</span><span class="hl-5">url</span><span class="hl-2">: </span><span class="hl-10">string</span><span class="hl-2">) </span><span class="hl-6">=&gt;</span><span class="hl-2"> </span><span class="hl-1">fetch</span><span class="hl-2">(</span><span class="hl-5">url</span><span class="hl-2">).</span><span class="hl-1">then</span><span class="hl-2">(</span><span class="hl-5">r</span><span class="hl-2"> </span><span class="hl-6">=&gt;</span><span class="hl-2"> </span><span class="hl-5">r</span><span class="hl-2">.</span><span class="hl-1">json</span><span class="hl-2">());</span><br/><br/><span class="hl-0">// Executes fetch tasks, processing a maximum of 2 requests concurrently</span><br/><span class="hl-6">const</span><span class="hl-2"> </span><span class="hl-7">results</span><span class="hl-2"> = </span><span class="hl-4">await</span><span class="hl-2"> </span><span class="hl-1">asyncPool</span><span class="hl-2">(</span><span class="hl-8">2</span><span class="hl-2">, </span><span class="hl-5">urls</span><span class="hl-2">, </span><span class="hl-5">fetchTask</span><span class="hl-2">);</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="4-deep-merge-object-flattening-" class="tsd-anchor-link">4. Deep Merge &amp; Object Flattening (<code>object</code>)<a href="#4-deep-merge-object-flattening-" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<pre><code class="typescript"><span class="hl-4">import</span><span class="hl-2"> { </span><span class="hl-5">deepMerge</span><span class="hl-2">, </span><span class="hl-5">flattenObject</span><span class="hl-2"> } </span><span class="hl-4">from</span><span class="hl-2"> </span><span class="hl-3">&#39;@dev_x_mohit/opti-kit&#39;</span><span class="hl-2">;</span><br/><br/><span class="hl-6">const</span><span class="hl-2"> </span><span class="hl-7">merged</span><span class="hl-2"> = </span><span class="hl-1">deepMerge</span><span class="hl-2">({ </span><span class="hl-5">a:</span><span class="hl-2"> { </span><span class="hl-5">b:</span><span class="hl-2"> </span><span class="hl-8">1</span><span class="hl-2"> } }, { </span><span class="hl-5">a:</span><span class="hl-2"> { </span><span class="hl-5">c:</span><span class="hl-2"> </span><span class="hl-8">2</span><span class="hl-2"> } }); </span><br/><span class="hl-0">// { a: { b: 1, c: 2 } }</span><br/><br/><span class="hl-6">const</span><span class="hl-2"> </span><span class="hl-7">flat</span><span class="hl-2"> = </span><span class="hl-1">flattenObject</span><span class="hl-2">({ </span><span class="hl-5">user:</span><span class="hl-2"> { </span><span class="hl-5">address:</span><span class="hl-2"> { </span><span class="hl-5">city:</span><span class="hl-2"> </span><span class="hl-3">&#39;NYC&#39;</span><span class="hl-2"> } } });</span><br/><span class="hl-0">// { &#39;user.address.city&#39;: &#39;NYC&#39; }</span>
+</code><button type="button">Copy</button></pre>
+
+<hr>
+<h2 id="🌐-showcase-interactive-sandbox" class="tsd-anchor-link">🌐 Showcase &amp; Interactive Sandbox<a href="#🌐-showcase-interactive-sandbox" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li>🌐 <strong>Interactive Live Showcase:</strong> <a href="https://opti-kit-showcase.vercel.app">opti-kit-showcase.vercel.app</a></li>
+<li>🛡️ <strong>Socket Security Audit:</strong> <a href="https://socket.dev/npm/package/@dev_x_mohit/opti-kit">socket.dev/npm/package/@dev_x_mohit/opti-kit</a></li>
+<li>⚡ <strong>Bundlephobia Audit:</strong> <a href="https://bundlephobia.com/package/@dev_x_mohit/opti-kit">bundlephobia.com/package/@dev_x_mohit/opti-kit</a></li>
+</ul>
+<hr>
+<h2 id="📄-license" class="tsd-anchor-link">📄 License<a href="#📄-license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>MIT © <a href="https://mohitlakhara.vercel.app">Mohit Lakhara</a></p>
+</div></div>
+<div class="col-sidebar">
+<div class="page-menu">
+<div class="tsd-navigation settings">
+<details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div>
+<div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>On This Page</h3></summary>
+<div class="tsd-accordion-details"><a href="#optikit"><span>Opti<wbr/>Kit</span></a>
+<ul>
+<li><a href="#⚡-key-highlights"><span>⚡ <wbr/>Key <wbr/>Highlights</span></a></li>
+<li><a href="#📦-installation"><span>📦 <wbr/>Installation</span></a></li>
+<li><a href="#📂-categorized-modules-37-modules"><span>📂 <wbr/>Categorized <wbr/>Modules (37 <wbr/>Modules)</span></a></li>
+<li>
+<ul>
+<li><a href="#🗃️-data-collections"><span>🗃️ <wbr/>Data &amp; <wbr/>Collections</span></a></li>
+<li><a href="#⚙️-logic-control-flow"><span>⚙️ <wbr/>Logic &amp; <wbr/>Control <wbr/>Flow</span></a></li>
+<li><a href="#🛡️-security-parsers"><span>🛡️ <wbr/>Security &amp; <wbr/>Parsers</span></a></li>
+<li><a href="#🌐-web-dom"><span>🌐 <wbr/>Web &amp; <wbr/>Dom</span></a></li>
+<li><a href="#🧮-math-science"><span>🧮 <wbr/>Math &amp; <wbr/>Science</span></a></li>
+<li><a href="#🛠️-common-utilities"><span>🛠️ <wbr/>Common <wbr/>Utilities</span></a></li></ul></li>
+<li><a href="#🚀-code-examples"><span>🚀 <wbr/>Code <wbr/>Examples</span></a></li>
+<li>
+<ul>
+<li><a href="#1-reactive-store-"><span>1. <wbr/>Reactive <wbr/>Store ()</span></a></li>
+<li><a href="#2-zero-throw-storage-"><span>2. <wbr/>Zero-<wbr/>Throw <wbr/>Storage ()</span></a></li>
+<li><a href="#3-concurrency-pool-"><span>3. <wbr/>Concurrency <wbr/>Pool ()</span></a></li>
+<li><a href="#4-deep-merge-object-flattening-"><span>4. <wbr/>Deep <wbr/>Merge &amp; <wbr/>Object <wbr/>Flattening ()</span></a></li></ul></li>
+<li><a href="#🌐-showcase-interactive-sandbox"><span>🌐 <wbr/>Showcase &amp; <wbr/>Interactive <wbr/>Sandbox</span></a></li>
+<li><a href="#📄-license"><span>📄 <wbr/>License</span></a></li></ul></div></details></div>
+<div class="site-menu">
+<nav class="tsd-navigation"><a href="modules.html">OptiKit API</a>
+<ul class="tsd-small-nested-navigation" id="tsd-nav-container">
+<li>Loading...</li></ul></nav></div></div></div><footer>
+<p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer>
+<div class="overlay"></div></body></html>

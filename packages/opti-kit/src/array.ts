@@ -462,3 +462,265 @@ export function flatDeep<T>(arr: any[], depth = Infinity): T[] {
     return acc;
   }, [] as T[]);
 }
+
+/**
+ * Creates an array of array values not included in the other given array using an iteratee.
+ */
+export function differenceBy<T, R>(
+  arr: T[],
+  other: T[],
+  iteratee: keyof T | ((val: T) => R)
+): T[] {
+  if (!arr || !Array.isArray(arr)) return [];
+  if (!other || !Array.isArray(other)) return [...arr];
+
+  const getIteratee = (val: T): any => {
+    if (typeof iteratee === "function") {
+      return (iteratee as any)(val);
+    }
+    return val[iteratee as keyof T];
+  };
+
+  const otherSet = new Set(other.map(getIteratee));
+  return arr.filter((x) => !otherSet.has(getIteratee(x)));
+}
+
+/**
+ * Creates an array of unique values that are included in all given arrays using an iteratee.
+ */
+export function intersectionBy<T, R>(
+  arr: T[],
+  other: T[],
+  iteratee: keyof T | ((val: T) => R)
+): T[] {
+  if (!arr || !Array.isArray(arr)) return [];
+  if (!other || !Array.isArray(other)) return [];
+
+  const getIteratee = (val: T): any => {
+    if (typeof iteratee === "function") {
+      return (iteratee as any)(val);
+    }
+    return val[iteratee as keyof T];
+  };
+
+  const otherSet = new Set(other.map(getIteratee));
+  return arr.filter((x) => otherSet.has(getIteratee(x)));
+}
+
+/**
+ * Creates an array of unique values that is the symmetric difference of the given arrays.
+ */
+export function xor<T>(...arrays: T[][]): T[] {
+  const countMap = new Map<T, number>();
+  
+  for (const arr of arrays) {
+    if (!Array.isArray(arr)) continue;
+    const uniqueInArr = new Set(arr);
+    for (const val of uniqueInArr) {
+      countMap.set(val, (countMap.get(val) || 0) + 1);
+    }
+  }
+
+  const result: T[] = [];
+  for (const [key, count] of countMap.entries()) {
+    if (count === 1) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+/**
+ * Creates a slice of array excluding elements dropped from the beginning until predicate returns falsy.
+ */
+export function dropWhile<T>(arr: T[], predicate: (val: T, index: number) => boolean): T[] {
+  if (!arr || !Array.isArray(arr)) return [];
+  const idx = arr.findIndex((x, i) => !predicate(x, i));
+  return idx === -1 ? [] : arr.slice(idx);
+}
+
+/**
+ * Creates a slice of array with elements taken from the beginning until predicate returns falsy.
+ */
+export function takeWhile<T>(arr: T[], predicate: (val: T, index: number) => boolean): T[] {
+  if (!arr || !Array.isArray(arr)) return [];
+  const idx = arr.findIndex((x, i) => !predicate(x, i));
+  return idx === -1 ? [...arr] : arr.slice(0, idx);
+}
+
+/**
+ * Creates an array of unique values, in order, from all given arrays using an iteratee.
+ */
+export function unionBy<T, R>(iteratee: keyof T | ((val: T) => R), ...arrays: T[][]): T[] {
+  const result: T[] = [];
+  const seen = new Set<any>();
+
+  const getIteratee = (val: T): any => {
+    if (typeof iteratee === "function") {
+      return (iteratee as any)(val);
+    }
+    return val[iteratee as keyof T];
+  };
+
+  for (const arr of arrays) {
+    if (!Array.isArray(arr)) continue;
+    for (const val of arr) {
+      const mapped = getIteratee(val);
+      if (!seen.has(mapped)) {
+        seen.add(mapped);
+        result.push(val);
+      }
+    }
+  }
+  return result;
+}
+
+/**
+ * Creates an array of unique values, in order, from all given arrays using a comparator.
+ */
+export function unionWith<T>(comparator: (a: T, b: T) => boolean, ...arrays: T[][]): T[] {
+  const result: T[] = [];
+  for (const arr of arrays) {
+    if (!Array.isArray(arr)) continue;
+    for (const val of arr) {
+      if (!result.some((res) => comparator(res, val))) {
+        result.push(val);
+      }
+    }
+  }
+  return result;
+}
+
+/**
+ * Creates an array of array values not included in the other given arrays using a comparator.
+ */
+export function differenceWith<T>(arr: T[], other: T[], comparator: (a: T, b: T) => boolean): T[] {
+  if (!arr || !Array.isArray(arr)) return [];
+  if (!other || !Array.isArray(other)) return [...arr];
+  return arr.filter((x) => !other.some((y) => comparator(x, y)));
+}
+
+/**
+ * Creates an array of unique values that are included in all given arrays using a comparator.
+ */
+export function intersectionWith<T>(arr: T[], other: T[], comparator: (a: T, b: T) => boolean): T[] {
+  if (!arr || !Array.isArray(arr)) return [];
+  if (!other || !Array.isArray(other)) return [];
+  return arr.filter((x) => other.some((y) => comparator(x, y)));
+}
+
+/**
+ * Creates an array of unique values that is the symmetric difference of the given arrays using an iteratee.
+ */
+export function xorBy<T, R>(iteratee: keyof T | ((val: T) => R), ...arrays: T[][]): T[] {
+  const countMap = new Map<any, { count: number; val: T }>();
+
+  const getIteratee = (val: T): any => {
+    if (typeof iteratee === "function") {
+      return (iteratee as any)(val);
+    }
+    return val[iteratee as keyof T];
+  };
+
+  for (const arr of arrays) {
+    if (!Array.isArray(arr)) continue;
+    
+    const uniqueInArr = new Map<any, T>();
+    for (const val of arr) {
+      const mapped = getIteratee(val);
+      if (!uniqueInArr.has(mapped)) {
+        uniqueInArr.set(mapped, val);
+      }
+    }
+
+    for (const [mapped, val] of uniqueInArr.entries()) {
+      const existing = countMap.get(mapped);
+      if (existing) {
+        existing.count++;
+      } else {
+        countMap.set(mapped, { count: 1, val });
+      }
+    }
+  }
+
+  const result: T[] = [];
+  for (const entry of countMap.values()) {
+    if (entry.count === 1) {
+      result.push(entry.val);
+    }
+  }
+  return result;
+}
+
+/**
+ * Creates an array of unique values that is the symmetric difference of the given arrays using a comparator.
+ */
+export function xorWith<T>(comparator: (a: T, b: T) => boolean, ...arrays: T[][]): T[] {
+  let combined: T[] = [];
+  for (const arr of arrays) {
+    if (!Array.isArray(arr)) continue;
+    const uniqueInArr: T[] = [];
+    for (const val of arr) {
+      if (!uniqueInArr.some(x => comparator(x, val))) {
+        uniqueInArr.push(val);
+      }
+    }
+    combined = combined.concat(uniqueInArr);
+  }
+
+  const result: T[] = [];
+  for (let i = 0; i < combined.length; i++) {
+    const item = combined[i];
+    let count = 0;
+    for (let j = 0; j < combined.length; j++) {
+      if (comparator(item, combined[j])) {
+        count++;
+      }
+    }
+    if (count === 1) {
+      result.push(item);
+    }
+  }
+  return result;
+}
+
+/**
+ * This method is like Object.fromEntries except that it accepts two arrays, one of property identifiers and one of corresponding values.
+ */
+export function zipObject<K extends string | number | symbol, V>(props: K[], values: V[]): Record<K, V> {
+  const result = {} as Record<K, V>;
+  if (!props || !Array.isArray(props)) return result;
+  for (let i = 0; i < props.length; i++) {
+    result[props[i]] = values ? values[i] : (undefined as any);
+  }
+  return result;
+}
+
+/**
+ * Removes all given values from array using strict equality.
+ */
+export function pull<T>(arr: T[], ...values: T[]): T[] {
+  if (!arr || !Array.isArray(arr)) return [];
+  const valueSet = new Set(values);
+  return arr.filter((x) => !valueSet.has(x));
+}
+
+/**
+ * This method is like pull except that it accepts an array of values to remove.
+ */
+export function pullAll<T>(arr: T[], values: T[]): T[] {
+  if (!arr || !Array.isArray(arr)) return [];
+  if (!values || !Array.isArray(values)) return [...arr];
+  const valueSet = new Set(values);
+  return arr.filter((x) => !valueSet.has(x));
+}
+
+/**
+ * Removes elements from array corresponding to indexes and returns an array of remaining elements.
+ */
+export function pullAt<T>(arr: T[], indexes: number[]): T[] {
+  if (!arr || !Array.isArray(arr)) return [];
+  if (!indexes || !Array.isArray(indexes)) return [];
+  const indexSet = new Set(indexes);
+  return arr.filter((_, i) => !indexSet.has(i));
+}

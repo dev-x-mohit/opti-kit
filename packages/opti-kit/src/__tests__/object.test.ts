@@ -3,6 +3,8 @@ import {
   pick,
   omit,
   get,
+  set,
+  unset,
   deepClone,
   deepMerge,
   has,
@@ -48,6 +50,24 @@ describe("object utilities", () => {
     expect(get(obj, "arr[0].val")).toBe(100);
     expect(get(obj, "a.b.d", "default")).toBe("default");
     expect(get(null, "a.b.c", "default")).toBe("default");
+  });
+
+  it("set", () => {
+    const obj = { a: [{ b: { c: 3 } }] };
+    set(obj, "a[0].b.c", 4);
+    expect(obj.a[0].b.c).toBe(4);
+    
+    set(obj, ["x", "0", "y", "z"], 5);
+    expect((obj as any).x[0].y.z).toBe(5);
+  });
+
+  it("unset", () => {
+    const obj = { a: [{ b: { c: 7 } }] };
+    unset(obj, "a[0].b.c");
+    expect(obj.a[0].b.c).toBeUndefined();
+
+    unset(obj, ["a", "0", "b"]);
+    expect(obj.a[0].b).toBeUndefined();
   });
 
   it("deepClone", () => {

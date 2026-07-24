@@ -82,8 +82,10 @@ export function Navbar() {
 
         <div className="flex items-center gap-4">
           <Link to="/docs" className="text-sm font-semibold text-black dark:text-muted hover:text-primary transition-colors">Docs</Link>
+          <a href="/api/index.html" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-black dark:text-muted hover:text-primary transition-colors">API</a>
           <Link to="/modules" className="text-sm font-semibold text-black dark:text-muted hover:text-primary transition-colors">Modules</Link>
           <Link to="/playground" className="text-sm font-semibold text-black dark:text-muted hover:text-primary transition-colors">Playground</Link>
+          <Link to="/benchmarks" className="text-sm font-semibold text-black dark:text-muted hover:text-primary transition-colors">Benchmarks</Link>
           
           <div className="w-px h-4 bg-border mx-2"></div>
           

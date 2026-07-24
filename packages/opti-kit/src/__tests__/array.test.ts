@@ -3,7 +3,14 @@ import {
   chunk,
   unique,
   difference,
+  differenceBy,
+  differenceWith,
   intersection,
+  intersectionBy,
+  intersectionWith,
+  xor,
+  xorBy,
+  xorWith,
   groupBy,
   shuffle,
   sample,
@@ -40,6 +47,14 @@ import {
   scan,
   pluck,
   flatDeep,
+  dropWhile,
+  takeWhile,
+  unionBy,
+  unionWith,
+  zipObject,
+  pull,
+  pullAll,
+  pullAt,
 } from "../array";
 
 describe("array utilities", () => {
@@ -298,5 +313,93 @@ describe("array utilities", () => {
   it("flatDeep", () => {
     expect(flatDeep([1, [2, [3, [4]]]])).toEqual([1, 2, 3, 4]);
     expect(flatDeep([1, [2, [3]]], 1)).toEqual([1, 2, [3]]);
+  });
+
+  it("differenceBy", () => {
+    expect(differenceBy([{ x: 2 }, { x: 1 }], [{ x: 1 }], "x")).toEqual([{ x: 2 }]);
+    expect(differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor)).toEqual([1.2]);
+  });
+
+  it("intersectionBy", () => {
+    expect(intersectionBy([{ x: 1 }], [{ x: 2 }, { x: 1 }], "x")).toEqual([{ x: 1 }]);
+    expect(intersectionBy([2.1, 1.2], [2.3, 3.4], Math.floor)).toEqual([2.1]);
+  });
+
+  it("xor", () => {
+    expect(xor([2, 1], [2, 3])).toEqual([1, 3]);
+    expect(xor([1, 2], [2, 3], [1, 4])).toEqual([3, 4]);
+  });
+
+  it("dropWhile", () => {
+    const users = [
+      { 'user': 'barney',  'active': false },
+      { 'user': 'fred',    'active': false },
+      { 'user': 'pebbles', 'active': true }
+    ];
+    expect(dropWhile(users, o => !o.active)).toEqual([{ 'user': 'pebbles', 'active': true }]);
+  });
+
+  it("takeWhile", () => {
+    const users = [
+      { 'user': 'barney',  'active': false },
+      { 'user': 'fred',    'active': false },
+      { 'user': 'pebbles', 'active': true }
+    ];
+    expect(takeWhile(users, o => !o.active)).toEqual([
+      { 'user': 'barney',  'active': false },
+      { 'user': 'fred',    'active': false }
+    ]);
+  });
+
+  it("unionBy", () => {
+    expect(unionBy(Math.floor, [2.1], [1.2, 2.3])).toEqual([2.1, 1.2]);
+    expect(unionBy('x', [{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }])).toEqual([{ 'x': 1 }, { 'x': 2 }]);
+  });
+
+  it("unionWith", () => {
+    const objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+    const others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+    expect(unionWith((a, b) => a.x === b.x && a.y === b.y, objects, others)).toEqual([{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]);
+  });
+
+  it("differenceWith", () => {
+    const objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+    expect(differenceWith(objects, [{ 'x': 1, 'y': 2 }], (a, b) => a.x === b.x && a.y === b.y)).toEqual([{ 'x': 2, 'y': 1 }]);
+  });
+
+  it("intersectionWith", () => {
+    const objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+    const others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+    expect(intersectionWith(objects, others, (a, b) => a.x === b.x && a.y === b.y)).toEqual([{ 'x': 1, 'y': 2 }]);
+  });
+
+  it("xorBy", () => {
+    expect(xorBy(Math.floor, [2.1, 1.2], [2.3, 3.4])).toEqual([1.2, 3.4]);
+    expect(xorBy('dir', [{ 'dir': 'left' }, { 'dir': 'right' }], [{ 'dir': 'left' }])).toEqual([{ 'dir': 'right' }]);
+  });
+
+  it("xorWith", () => {
+    const objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+    const others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+    expect(xorWith((a, b) => a.x === b.x && a.y === b.y, objects, others)).toEqual([{ 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]);
+  });
+
+  it("zipObject", () => {
+    expect(zipObject(['a', 'b'], [1, 2])).toEqual({ 'a': 1, 'b': 2 });
+  });
+
+  it("pull", () => {
+    const array = ['a', 'b', 'c', 'a', 'b', 'c'];
+    expect(pull(array, 'a', 'c')).toEqual(['b', 'b']);
+  });
+
+  it("pullAll", () => {
+    const array = ['a', 'b', 'c', 'a', 'b', 'c'];
+    expect(pullAll(array, ['a', 'c'])).toEqual(['b', 'b']);
+  });
+
+  it("pullAt", () => {
+    const array = ['a', 'b', 'c', 'd'];
+    expect(pullAt(array, [1, 3])).toEqual(['a', 'c']);
   });
 });

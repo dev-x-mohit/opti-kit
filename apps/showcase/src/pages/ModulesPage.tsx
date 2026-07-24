@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Search, Copy, Check, Play, ChevronRight, Menu, X, Code2 } from 'lucide-react';
+import { Search, Copy, Check, Play, ChevronRight, Menu, X, Code2, TrendingUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { utilitiesData, UtilityMeta } from '../data/utilitiesData';
 import { Card } from '../components/ui/Card';
@@ -27,11 +27,10 @@ export function ModulesPage() {
   const [expandedModules, setExpandedModules] = useState<Record<string, boolean>>({});
   
   // Smart dummy argument generator based on signature and function name
-  const generateDummyArgs = (signature: string, name: string): string => {
+  const generateDummyArgs = (signature: string, name: string) => {
     const defaults: Record<string, string> = {
       chunk: '[1, 2, 3, 4, 5], 2',
       slugify: '"Hello World!"',
-      delay: '1000',
       capitalize: '"hello world"',
       camelCase: '"hello-world"',
       kebabCase: '"helloWorld"',
@@ -43,8 +42,6 @@ export function ModulesPage() {
       intersection: '[1, 2, 3], [2, 3, 4]',
       unique: '[1, 1, 2, 3, 3]',
       groupBy: '[{ type: "a" }, { type: "b" }, { type: "a" }], item => item.type',
-      debounce: '() => console.log("debounce"), 1000',
-      throttle: '() => console.log("throttle"), 1000',
       isEmail: '"test@example.com"',
       isUrl: '"https://example.com"',
       hexToRgb: '"#ff0000"',
@@ -59,19 +56,52 @@ export function ModulesPage() {
 
     if (defaults[name]) return defaults[name];
 
-    if (signature.includes('(str: string') || signature.includes('(text: string')) return '"Hello World"';
-    if (signature.includes('(arr: T[]') || signature.includes('(arr: any[]')) {
-      if (signature.includes('size: number')) return '[1, 2, 3, 4], 2';
-      return '[1, 2, 3]';
-    }
-    if (signature.includes('(num: number') || signature.includes('value: number')) {
-      if (signature.includes('min: number, max: number')) return '5, 0, 10';
-      return '42';
-    }
-    if (signature.includes('(obj: Record') || signature.includes('(obj: any')) return '{ a: 1, b: 2 }';
-    if (signature.includes('Date')) return 'new Date()';
+    const match = signature.match(/\((.*?)\)/);
+    if (!match || !match[1].trim()) return '';
 
-    return '/* enter arguments here */';
+    let params: string[] = [];
+    let current = '';
+    let depth = 0;
+    for (const char of match[1]) {
+      if (char === '<' || char === '[' || char === '{' || char === '(') depth++;
+      else if (char === '>' || char === ']' || char === '}' || char === ')') depth--;
+      else if (char === ',' && depth === 0) {
+        params.push(current.trim());
+        current = '';
+        continue;
+      }
+      current += char;
+    }
+    if (current.trim()) params.push(current.trim());
+
+    const dummyArgs = params.map(param => {
+      const colonIdx = param.indexOf(':');
+      if (colonIdx === -1) {
+        if (param.includes('...')) return '[1, 2, 3]';
+        return 'null';
+      }
+      const pName = param.substring(0, colonIdx).replace('?', '').trim().toLowerCase();
+      const type = param.substring(colonIdx + 1).trim().toLowerCase();
+
+      if (pName.includes('url')) return '"https://example.com"';
+      if (pName.includes('email')) return '"test@example.com"';
+      if (pName.includes('color') || pName.includes('hex')) return '"#ff0000"';
+      if (pName.includes('date')) return 'new Date()';
+      if (pName.includes('regex') || pName.includes('pattern')) return '/test/i';
+
+      if (type.includes('string')) return '"Hello World"';
+      if (type.includes('number')) return '42';
+      if (type.includes('boolean')) return 'true';
+      if (type.includes('[]') || type.includes('array')) return '[1, 2, 3]';
+      if (type.includes('record') || type.includes('object') || type.startsWith('{')) return '{ key: "value" }';
+      if (type.includes('=>') || type.includes('function')) return '() => {}';
+      if (type.includes('date')) return 'new Date()';
+      if (type.includes('regexp')) return '/test/i';
+
+      return 'null';
+    });
+
+    return dummyArgs.join(', ');
   };
 
   // Group by module
@@ -113,6 +143,7 @@ export function ModulesPage() {
     Guard: 'Utilities',
     Format: 'Utilities',
     Schema: 'Utilities',
+    Date: 'Utilities',
     Browser: 'Web',
     Json: 'Data',
     Store: 'Data',
@@ -157,9 +188,22 @@ export function ModulesPage() {
   // Set default input when utility changes
   useEffect(() => {
     if (selectedUtility) {
-      const match = selectedUtility.example.match(/\((.*)\)$/);
-      let defaultArgs = match && match[1] && match[1] !== '...' ? match[1] : generateDummyArgs(selectedUtility.signature, selectedUtility.name);
-      setInputArgs(defaultArgs);
+      const val = (opti as any)[selectedUtility.name];
+      const isClass = typeof val === 'function' && /^[A-Z]/.test(selectedUtility.name);
+      const isObject = typeof val === 'object' && val !== null;
+      
+      let defaultCode = '';
+      if (isClass) {
+        defaultCode = `const instance = new opti.${selectedUtility.name}();\n// instance.method(...)\nreturn instance;`;
+      } else if (isObject) {
+        defaultCode = `return opti.${selectedUtility.name};`;
+      } else {
+        const match = selectedUtility.example.match(/\((.*)\)$/);
+        let defaultArgs = match && match[1] && match[1] !== '...' ? match[1] : generateDummyArgs(selectedUtility.signature, selectedUtility.name);
+        defaultCode = `opti.${selectedUtility.name}(${defaultArgs})`;
+      }
+
+      setInputArgs(defaultCode);
       setCopiedImport(false);
       setCopiedSignature(false);
       setCopiedOutput(false);
@@ -196,9 +240,16 @@ export function ModulesPage() {
   };
 
   const evaluateLive = () => {
-    if (!inputArgs.trim()) return 'Waiting for arguments...';
+    if (!inputArgs.trim()) return 'Waiting for code...';
     try {
-      const fn = new Function('opti', `return opti.${selectedUtility.name}(${inputArgs})`);
+      let codeToEval = inputArgs;
+      if (!codeToEval.includes('return ') && !codeToEval.includes(';')) {
+        codeToEval = `return ${codeToEval}`;
+      } else if (!codeToEval.includes('return ')) {
+        // If there are multiple statements but no return, append a return of the last line evaluated, or just evaluate
+        // To be safe, we might just evaluate it and let it return undefined if they didn't specify return.
+      }
+      const fn = new Function('opti', codeToEval);
       const result = fn(opti);
       
       if (typeof result === 'undefined') return 'undefined';
@@ -231,7 +282,7 @@ export function ModulesPage() {
             type="text" 
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search 430 utilities..." 
+            placeholder="Search utilities..." 
             className="w-full bg-surface border border-border rounded-lg py-2 pl-10 pr-4 text-sm text-text-main placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all shadow-sm"
           />
         </div>
@@ -436,6 +487,37 @@ export function ModulesPage() {
               </Card>
             </div>
 
+            {/* Benchmark Stats (if available) */}
+            {selectedUtility.benchmark && (
+              <Card className="flex flex-col border-primary/20 bg-gradient-to-br from-primary/5 to-surface shadow-md">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-semibold text-text-main uppercase tracking-wider flex items-center gap-2">
+                    <TrendingUp size={16} className="text-primary" /> Performance Benchmark vs Lodash
+                  </h3>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                  <div className="bg-surface/50 rounded-lg p-3 border border-border">
+                    <div className="text-xs text-muted mb-1 font-medium">OptiKit</div>
+                    <div className="text-lg font-bold text-primary">{selectedUtility.benchmark.opti}</div>
+                  </div>
+                  <div className="bg-surface/50 rounded-lg p-3 border border-border">
+                    <div className="text-xs text-muted mb-1 font-medium">Lodash</div>
+                    <div className="text-lg font-bold text-text-main">{selectedUtility.benchmark.lodash}</div>
+                  </div>
+                  <div className="bg-surface/50 rounded-lg p-3 border border-border">
+                    <div className="text-xs text-muted mb-1 font-medium">Speed Multiplier</div>
+                    <div className="text-lg font-bold text-success">{selectedUtility.benchmark.multiplier}</div>
+                  </div>
+                  <div className="bg-surface/50 rounded-lg p-3 border border-border">
+                    <div className="text-xs text-muted mb-1 font-medium">Winner</div>
+                    <div className={`text-lg font-bold ${selectedUtility.benchmark.winner === 'OptiKit' ? 'text-primary' : 'text-text-main'}`}>
+                      {selectedUtility.benchmark.winner}
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            )}
+
             {/* Live Playground */}
             <div className="pt-8 border-t border-border">
               <h2 className="text-2xl font-bold text-text-main mb-6 flex items-center gap-2">
@@ -446,9 +528,9 @@ export function ModulesPage() {
                 {/* Input Card */}
                 <Card className="flex flex-col border-primary/20 p-0 overflow-hidden shadow-lg group">
                   <div className="bg-surface/50 border-b border-border px-4 py-3 flex items-center justify-between transition-colors group-hover:bg-surface/80">
-                    <span className="text-sm font-medium text-text-main">Arguments Input</span>
+                    <span className="text-sm font-medium text-text-main">Executable Code</span>
                     <span className="text-xs font-mono text-muted bg-background px-2 py-1 rounded border border-border shadow-sm">
-                      opti.<span className="text-primary">{selectedUtility.name}</span>(...)
+                      <span className="text-primary">JS</span> (opti object is available)
                     </span>
                   </div>
                   <div className="p-4 flex-1 flex flex-col bg-background relative">
@@ -458,7 +540,7 @@ export function ModulesPage() {
                       rows={5}
                       spellCheck="false"
                       className="w-full flex-1 bg-code-bg border border-border rounded-md px-4 py-3 text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-mono text-sm shadow-inner resize-none leading-relaxed"
-                      placeholder="e.g. 'Hello World' or [1, 2, 3], 2"
+                      placeholder="e.g. opti.chunk([1, 2, 3], 2)"
                     />
                   </div>
                 </Card>

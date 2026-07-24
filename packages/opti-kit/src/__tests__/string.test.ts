@@ -9,6 +9,7 @@ import {
   escapeHtml,
   unescapeHtml,
   stripHtml,
+  escapeRegExp,
   wordCount,
   pascalCase,
   swapCase,
@@ -243,6 +244,16 @@ describe("string utilities", () => {
     expect(levenshteinDistance("", "")).toBe(0);
     expect(stringSimilarity("hello", "hello")).toBe(1);
     expect(stringSimilarity("hello", "world")).toBe(0.2);
+  });
+
+  it("stripHtml", () => {
+    expect(stripHtml("<p>Hello <b>World</b></p>")).toBe("Hello World");
+    expect(stripHtml("")).toBe("");
+  });
+
+  it("escapeRegExp", () => {
+    expect(escapeRegExp("Hello. World!")).toBe("Hello\\. World!");
+    expect(escapeRegExp("[]{}()*+?^$|\\")).toBe("\\[\\]\\{\\}\\(\\)\\*\\+\\?\\^\\$\\|\\\\");
   });
 });
 

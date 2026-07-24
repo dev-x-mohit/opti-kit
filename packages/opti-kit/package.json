@@ -2,7 +2,6 @@
   "name": "@dev_x_mohit/opti-kit",
   "version": "1.0.9",
   "description": "OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility monorepo library. It ships 37 hand-optimized isomorphic modules. Every function is side-effect free, individually importable, and ships with full TypeScript declarations, CJS/ESM dual output, 430 utilities, and 419 unit tests.",
-
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -11,6 +10,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.mjs",
+      "require": "./dist/*.js"
     }
   },
   "sideEffects": false,
@@ -20,7 +24,9 @@
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "bench": "vitest bench --run",
+    "docs": "typedoc src/index.ts --out ../../apps/showcase/public/api --name \"OptiKit API\" --tsconfig tsconfig.docs.json"
   },
   "keywords": [
     "utilities",
@@ -111,8 +117,11 @@
     "url": "https://github.com/dev-x-mohit/opti-kit/issues"
   },
   "devDependencies": {
-    "typescript": "^5.4.5",
+    "@types/lodash": "^4.17.24",
+    "lodash": "^4.18.1",
     "tsup": "^8.0.2",
+    "typedoc": "^0.28.20",
+    "typescript": "^5.4.5",
     "vitest": "^1.6.0"
   }
 }

@@ -143,15 +143,17 @@ export function flattenObject(
 }
 
 /**
- * Safely sets a nested value in an object using a dot-path string.
+ * Safely sets a nested value in an object using a dot-path string or array of keys.
  * Mutates and returns the object.
  */
-export function set(obj: any, path: string, value: any): any {
+export function set(obj: any, path: string | (string | number)[], value: any): any {
   if (obj == null) return obj;
-  const parts = path
-    .replace(/\[(\d+)\]/g, ".$1")
-    .split(".")
-    .filter(Boolean);
+  const parts = Array.isArray(path)
+    ? path
+    : path
+        .replace(/\[(\d+)\]/g, ".$1")
+        .split(".")
+        .filter(Boolean);
   let current = obj;
   for (let i = 0; i < parts.length - 1; i++) {
     const key = parts[i];
@@ -162,6 +164,28 @@ export function set(obj: any, path: string, value: any): any {
   }
   current[parts[parts.length - 1]] = value;
   return obj;
+}
+
+/**
+ * Removes the property at path of object.
+ */
+export function unset(obj: any, path: string | (string | number)[]): boolean {
+  if (obj == null) return true;
+  const parts = Array.isArray(path)
+    ? path
+    : path
+        .replace(/\[(\d+)\]/g, ".$1")
+        .split(".")
+        .filter(Boolean);
+        
+  let current = obj;
+  for (let i = 0; i < parts.length - 1; i++) {
+    current = current[parts[i]];
+    if (current == null) return true;
+  }
+  
+  const lastKey = parts[parts.length - 1];
+  return delete current[lastKey];
 }
 
 /**

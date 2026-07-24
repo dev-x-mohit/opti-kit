@@ -6,6 +6,8 @@ import { DocsPage } from './pages/DocsPage';
 import { ModulesPage } from './pages/ModulesPage';
 import { PlaygroundPage } from './pages/PlaygroundPage';
 
+import { BenchmarksPage } from './pages/BenchmarksPage';
+
 function App() {
   return (
     <div className="min-h-screen selection:bg-primary/30 flex flex-col bg-background text-text-main">
@@ -16,6 +18,7 @@ function App() {
           <Route path="/docs" element={<DocsPage />} />
           <Route path="/modules" element={<ModulesPage />} />
           <Route path="/playground" element={<PlaygroundPage />} />
+          <Route path="/benchmarks" element={<BenchmarksPage />} />
         </Routes>
       </main>
     </div>

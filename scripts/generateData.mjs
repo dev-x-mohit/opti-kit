@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const srcDir = './packages/opti-kit/src';
-const files = fs.readdirSync(srcDir).filter(f => f.endsWith('.ts') && f !== 'index.ts' && f !== 'types.ts');
+const files = fs.readdirSync(srcDir).filter(f => f.endsWith('.ts') && f !== 'index.ts');
 
 let data = [];
 
@@ -11,7 +11,7 @@ files.forEach(file => {
   const moduleName = file.replace('.ts', '');
   const moduleTitle = moduleName.charAt(0).toUpperCase() + moduleName.slice(1);
 
-  const regex = /\/\*\*([\s\S]*?)\*\/\s*export\s+(?:async\s+)?function\s+(\w+)([\s\S]*?)\s*\{/g;
+  const regex = /\/\*\*([\s\S]*?)\*\/\s*export\s+(?:async\s+)?(?:function|const|class)\s+(\w+)([\s\S]*?)(?:\s*\{|\s*=)/g;
   let match;
   while ((match = regex.exec(content)) !== null) {
     const doc = match[1];

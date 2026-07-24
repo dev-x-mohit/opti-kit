@@ -24,6 +24,17 @@ return {
   const [isExecuting, setIsExecuting] = useState(false);
 
   const generateSnippet = (name: string, signature: string) => {
+    const val = (opti as any)[name];
+    const isClass = typeof val === 'function' && /^[A-Z]/.test(name);
+    const isObject = typeof val === 'object' && val !== null;
+
+    if (isClass) {
+      return `// Testing class opti.${name}\nconst instance = new opti.${name}();\n\nconsole.log("Instance created:", instance);\nreturn instance;`;
+    }
+    if (isObject) {
+      return `// Testing object opti.${name}\nconsole.log("Object properties:", Object.keys(opti.${name}));\nreturn opti.${name};`;
+    }
+
     const defaults: Record<string, string> = {
       chunk: '[1, 2, 3, 4, 5], 2',
       slugify: '"Hello World!"',
@@ -53,18 +64,54 @@ return {
     let args = defaults[name];
 
     if (!args) {
-      if (signature.includes('(str: string') || signature.includes('(text: string')) args = '"Hello World"';
-      else if (signature.includes('(arr: T[]') || signature.includes('(arr: any[]')) {
-        if (signature.includes('size: number')) args = '[1, 2, 3, 4], 2';
-        else args = '[1, 2, 3]';
+      const match = signature.match(/\((.*?)\)/);
+      if (match && match[1].trim()) {
+        let params: string[] = [];
+        let current = '';
+        let depth = 0;
+        for (const char of match[1]) {
+          if (char === '<' || char === '[' || char === '{' || char === '(') depth++;
+          else if (char === '>' || char === ']' || char === '}' || char === ')') depth--;
+          else if (char === ',' && depth === 0) {
+            params.push(current.trim());
+            current = '';
+            continue;
+          }
+          current += char;
+        }
+        if (current.trim()) params.push(current.trim());
+
+        const dummyArgs = params.map(param => {
+          const colonIdx = param.indexOf(':');
+          if (colonIdx === -1) {
+            if (param.includes('...')) return '[1, 2, 3]';
+            return 'null';
+          }
+          const pName = param.substring(0, colonIdx).replace('?', '').trim().toLowerCase();
+          const type = param.substring(colonIdx + 1).trim().toLowerCase();
+
+          if (pName.includes('url')) return '"https://example.com"';
+          if (pName.includes('email')) return '"test@example.com"';
+          if (pName.includes('color') || pName.includes('hex')) return '"#ff0000"';
+          if (pName.includes('date')) return 'new Date()';
+          if (pName.includes('regex') || pName.includes('pattern')) return '/test/i';
+
+          if (type.includes('string')) return '"Hello World"';
+          if (type.includes('number')) return '42';
+          if (type.includes('boolean')) return 'true';
+          if (type.includes('[]') || type.includes('array')) return '[1, 2, 3]';
+          if (type.includes('record') || type.includes('object') || type.startsWith('{')) return '{ key: "value" }';
+          if (type.includes('=>') || type.includes('function')) return '() => {}';
+          if (type.includes('date')) return 'new Date()';
+          if (type.includes('regexp')) return '/test/i';
+
+          return 'null';
+        });
+
+        args = dummyArgs.join(', ');
+      } else {
+        args = '';
       }
-      else if (signature.includes('(num: number') || signature.includes('value: number')) {
-        if (signature.includes('min: number, max: number')) args = '5, 0, 10';
-        else args = '42';
-      }
-      else if (signature.includes('(obj: Record') || signature.includes('(obj: any')) args = '{ a: 1, b: 2 }';
-      else if (signature.includes('Date')) args = 'new Date()';
-      else args = '/* enter arguments here */';
     }
 
     if (name === 'delay') {
