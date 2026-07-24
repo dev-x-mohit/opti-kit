@@ -17,7 +17,7 @@
 <a href="https://bundlephobia.com/package/@dev_x_mohit/opti-kit"><img src="https://img.shields.io/badge/Minified%20%2B%20Gzip-16%20KB-blue?style=flat-square" alt="Bundlephobia Size"></a>
 <a href="https://www.npmjs.com/package/@dev_x_mohit/opti-kit"><img src="https://img.shields.io/badge/Dependencies-0-brightgreen?style=flat-square" alt="Dependencies"></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="License: MIT"></a></p>
-<p>OptiKit is a modern, zero-dependency utility engine designed as a drop-in replacement for legacy, monolithic libraries like Lodash, Rambda, and Moment. Natively built in TypeScript, it packages <strong>37 hand-optimized modules</strong> containing <strong>430 utility functions</strong>.</p>
+<p>OptiKit is a modern, zero-dependency utility engine designed as a drop-in replacement for legacy, monolithic libraries like Lodash, Rambda, and Moment. Natively built in TypeScript, it packages <strong>38 hand-optimized modules</strong> containing <strong>740+ utility functions</strong>.</p>
 <p>Every export is designed with standard ESM + CJS compatibility, full TypeScript declarations, side-effects-free tree-shaking, and 100% passing test coverage.</p>
 <hr>
 <h2 id="⚡-key-highlights" class="tsd-anchor-link">⚡ Key Highlights<a href="#⚡-key-highlights" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
@@ -25,8 +25,8 @@
 <li>🌳 <strong>100% Tree-Shakeable:</strong> Structured with <code>&quot;sideEffects&quot;: false</code> so your bundle only includes the functions you actually import.</li>
 <li>🛡️ <strong>Supply-Chain Immune:</strong> 0 external dependencies, 0 network access, and 0 environment variable access. Safe for security-critical applications.</li>
 <li>🌐 <strong>Isomorphic &amp; Universal:</strong> Fully compatible with Node.js (&gt;=18), modern browsers, Cloudflare Workers, Vercel Serverless, Bun, and Deno.</li>
-<li>⚡ <strong>Ultra-Lightweight:</strong> The entire engine of 37 modules and 430 utilities takes only <strong>16.0 KB minified + gzipped</strong>.</li>
-<li>🧪 <strong>Production-Grade Reliability:</strong> Covered by 419 unit tests with 100% test coverage.</li>
+<li>⚡ <strong>Ultra-Lightweight:</strong> The entire engine of 38 modules and 740+ utilities takes only <strong>~20 KB minified + gzipped</strong>.</li>
+<li>🧪 <strong>Production-Grade Reliability:</strong> Covered by 470+ unit tests with 100% test coverage.</li>
 </ul>
 <hr>
 <h2 id="📦-installation" class="tsd-anchor-link">📦 Installation<a href="#📦-installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
@@ -35,18 +35,20 @@
 </code><button type="button">Copy</button></pre>
 
 <hr>
-<h2 id="📂-categorized-modules-37-modules" class="tsd-anchor-link">📂 Categorized Modules (37 Modules)<a href="#📂-categorized-modules-37-modules" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<p>Rather than dumping a monolithic API, OptiKit organizes its 430 utilities into dedicated, clean domains:</p>
+<h2 id="📂-categorized-modules-38-modules" class="tsd-anchor-link">📂 Categorized Modules (38 Modules)<a href="#📂-categorized-modules-38-modules" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Rather than dumping a monolithic API, OptiKit organizes its 740+ utilities into dedicated, clean domains:</p>
 <h3 id="🗃️-data-collections" class="tsd-anchor-link">🗃️ Data &amp; Collections<a href="#🗃️-data-collections" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul>
 <li><strong><code>string</code></strong> (45 utils) — Modern string manipulations: <code>slugify</code>, <code>truncate</code>, <code>escapeHtml</code>, <code>titleCase</code>.</li>
 <li><strong><code>array</code></strong> (40 utils) — Safe list processing: <code>chunk</code>, <code>unique</code>, <code>groupBy</code>, <code>partition</code>, <code>intersection</code>.</li>
 <li><strong><code>object</code></strong> (31 utils) — Deep manipulations: <code>deepClone</code>, <code>deepMerge</code>, <code>flattenObject</code>, <code>pick</code>, <code>omit</code>.</li>
 <li><strong><code>collection</code></strong> (12 utils) — Aggregations: <code>countBy</code>, <code>keyBy</code>, <code>sortBy</code>, <code>symmetricDifference</code>.</li>
-<li><strong><code>tree</code></strong> (2 utils) — Hierarchical traversals: <code>arrayToTree</code>, <code>treeToArray</code>.</li>
+<li><strong><code>set</code></strong> &amp; <strong><code>map</code></strong> (15 utils) — Advanced Set operations and Map utilities.</li>
+<li><strong><code>tree</code></strong> (10 utils) — Hierarchical traversals: <code>arrayToTree</code>, <code>treeToArray</code>, search, mapping.</li>
 <li><strong><code>json</code></strong> (6 utils) — Deep JSON operations: <code>jsonClone</code>, <code>jsonFlatten</code>, <code>jsonUnflatten</code>, <code>jsonPath</code>, <code>jsonMerge</code>, <code>jsonDiff</code>.</li>
-<li><strong><code>csv</code></strong> (2 utils) — Micro CSV parsers: <code>csvParse</code>, <code>csvStringify</code>.</li>
+<li><strong><code>csv</code></strong> (5 utils) — Micro CSV parsers: <code>csvParse</code>, <code>csvToJson</code>, <code>jsonToCsv</code>.</li>
 <li><strong><code>ds</code></strong> (4 classes) — Optimized structures: <code>Stack</code>, <code>Queue</code>, <code>PriorityQueue</code>, <code>BiMap</code>.</li>
+<li><strong><code>deep</code></strong> (8 utils) — Deep freezing, mapping keys, flattening, omission.</li>
 </ul>
 <h3 id="⚙️-logic-control-flow" class="tsd-anchor-link">⚙️ Logic &amp; Control Flow<a href="#⚙️-logic-control-flow" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul>
@@ -61,6 +63,7 @@
 <ul>
 <li><strong><code>crypto</code></strong> (10 utils) — Cryptographic utilities: <code>uuid</code>, <code>sha256</code>, <code>sha512</code>, <code>hmacSha256</code>, <code>generateToken</code>.</li>
 <li><strong><code>encoding</code></strong> (8 utils) — Fast converters: <code>utf8Encode</code>, <code>utf8Decode</code>, <code>hexEncode</code>, <code>base64Encode</code>.</li>
+<li><strong><code>hash</code></strong> (10 utils) — Hashing algorithms (CRC32, DJB2, Base64 encode/decode).</li>
 <li><strong><code>validate</code></strong> (28 utils) — Robust format checks: <code>isEmail</code>, <code>isUrl</code>, <code>isUuid</code>, <code>isCreditCard</code>, <code>isJWT</code>.</li>
 <li><strong><code>semver</code></strong> (5 utils) — SemVer parser/validator: <code>semverCompare</code>, <code>semverSatisfies</code>.</li>
 <li><strong><code>regex</code></strong> (1 obj) — Pre-compiled patterns.</li>
@@ -73,13 +76,16 @@
 <li><strong><code>keyboard</code></strong> (2 utils) — Hotkey event handlers: <code>registerShortcut</code>, <code>isKeyPressed</code>.</li>
 <li><strong><code>url</code></strong> (8 utils) — Safe URL parser &amp; builder: <code>joinPaths</code>, <code>parseUrl</code>, <code>buildUrl</code>.</li>
 </ul>
-<h3 id="🧮-math-science" class="tsd-anchor-link">🧮 Math &amp; Science<a href="#🧮-math-science" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h3 id="🧮-math-ml-science" class="tsd-anchor-link">🧮 Math, ML, &amp; Science<a href="#🧮-math-ml-science" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul>
 <li><strong><code>math</code></strong> (32 utils) — Math operations: <code>clamp</code>, <code>lerp</code>, <code>mean</code>, <code>median</code>, <code>factorial</code>, <code>isPrime</code>, <code>gcd</code>.</li>
 <li><strong><code>statistics</code></strong> (12 utils) — Data science math: <code>variance</code>, <code>standardDeviation</code>, <code>covariance</code>, <code>correlation</code>.</li>
-<li><strong><code>geometry</code></strong> (9 utils) — Coord geometry: <code>distance2D</code>, <code>midpoint</code>, <code>rotatePoint</code>, <code>circleArea</code>.</li>
+<li><strong><code>ml</code></strong> (12 utils) — Machine Learning basics: <code>sigmoid</code>, <code>relu</code>, <code>minMaxScaler</code>, <code>cosineSimilarity</code>.</li>
+<li><strong><code>nlp</code></strong> (10 utils) — Natural Language Processing: <code>tokenizeWords</code>, <code>soundex</code>, <code>levenshteinDistance</code>.</li>
+<li><strong><code>finance</code></strong> (10 utils) — Financial logic: <code>calculatePMT</code>, <code>compoundInterest</code>, <code>NPV</code>, <code>ROI</code>.</li>
+<li><strong><code>geometry</code></strong> (15 utils) — Coord geometry: <code>distance2D</code>, <code>midpoint</code>, <code>rotatePoint</code>, <code>circleArea</code>.</li>
 <li><strong><code>units</code></strong> (8 utils) — Converter helper: <code>celsiusToFahrenheit</code>, <code>milesToKilometers</code>.</li>
-<li><strong><code>color</code></strong> (10 utils) — Color convert &amp; contrasts: <code>hexToRgb</code>, <code>rgbToHex</code>, <code>rgbToHsl</code>, <code>lighten</code>, <code>darken</code>.</li>
+<li><strong><code>color</code></strong> (18 utils) — Color convert &amp; contrasts: <code>hexToRgb</code>, <code>rgbToHex</code>, <code>generateHexComplementary</code>, A11y.</li>
 </ul>
 <h3 id="🛠️-common-utilities" class="tsd-anchor-link">🛠️ Common Utilities<a href="#🛠️-common-utilities" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul>
@@ -140,14 +146,14 @@
 <ul>
 <li><a href="#⚡-key-highlights"><span>⚡ <wbr/>Key <wbr/>Highlights</span></a></li>
 <li><a href="#📦-installation"><span>📦 <wbr/>Installation</span></a></li>
-<li><a href="#📂-categorized-modules-37-modules"><span>📂 <wbr/>Categorized <wbr/>Modules (37 <wbr/>Modules)</span></a></li>
+<li><a href="#📂-categorized-modules-38-modules"><span>📂 <wbr/>Categorized <wbr/>Modules (38 <wbr/>Modules)</span></a></li>
 <li>
 <ul>
 <li><a href="#🗃️-data-collections"><span>🗃️ <wbr/>Data &amp; <wbr/>Collections</span></a></li>
 <li><a href="#⚙️-logic-control-flow"><span>⚙️ <wbr/>Logic &amp; <wbr/>Control <wbr/>Flow</span></a></li>
 <li><a href="#🛡️-security-parsers"><span>🛡️ <wbr/>Security &amp; <wbr/>Parsers</span></a></li>
 <li><a href="#🌐-web-dom"><span>🌐 <wbr/>Web &amp; <wbr/>Dom</span></a></li>
-<li><a href="#🧮-math-science"><span>🧮 <wbr/>Math &amp; <wbr/>Science</span></a></li>
+<li><a href="#🧮-math-ml-science"><span>🧮 <wbr/>Math, <wbr/>ML, &amp; <wbr/>Science</span></a></li>
 <li><a href="#🛠️-common-utilities"><span>🛠️ <wbr/>Common <wbr/>Utilities</span></a></li></ul></li>
 <li><a href="#🚀-code-examples"><span>🚀 <wbr/>Code <wbr/>Examples</span></a></li>
 <li>

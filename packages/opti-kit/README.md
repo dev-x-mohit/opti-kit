@@ -8,7 +8,7 @@
 [![Dependencies](https://img.shields.io/badge/Dependencies-0-brightgreen?style=flat-square)](https://www.npmjs.com/package/@dev_x_mohit/opti-kit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-OptiKit is a modern, zero-dependency utility engine designed as a drop-in replacement for legacy, monolithic libraries like Lodash, Rambda, and Moment. Natively built in TypeScript, it packages **37 hand-optimized modules** containing **430 utility functions**. 
+OptiKit is a modern, zero-dependency utility engine designed as a drop-in replacement for legacy, monolithic libraries like Lodash, Rambda, and Moment. Natively built in TypeScript, it packages **67 hand-optimized modules** containing **680+ utility functions**. 
 
 Every export is designed with standard ESM + CJS compatibility, full TypeScript declarations, side-effects-free tree-shaking, and 100% passing test coverage.
 
@@ -19,8 +19,8 @@ Every export is designed with standard ESM + CJS compatibility, full TypeScript 
 *   🌳 **100% Tree-Shakeable:** Structured with `"sideEffects": false` so your bundle only includes the functions you actually import.
 *   🛡️ **Supply-Chain Immune:** 0 external dependencies, 0 network access, and 0 environment variable access. Safe for security-critical applications.
 *   🌐 **Isomorphic & Universal:** Fully compatible with Node.js (>=18), modern browsers, Cloudflare Workers, Vercel Serverless, Bun, and Deno.
-*   ⚡ **Ultra-Lightweight:** The entire engine of 37 modules and 430 utilities takes only **16.0 KB minified + gzipped**.
-*   🧪 **Production-Grade Reliability:** Covered by 419 unit tests with 100% test coverage.
+*   ⚡ **Ultra-Lightweight:** The entire engine of 67 modules and 680+ utilities takes only **~20 KB minified + gzipped**.
+*   🧪 **Production-Grade Reliability:** Covered by 470+ unit tests with 100% test coverage.
 
 ---
 
@@ -44,19 +44,21 @@ bun add @dev_x_mohit/opti-kit
 
 ---
 
-## 📂 Categorized Modules (37 Modules)
+## 📂 Categorized Modules (67 Modules)
 
-Rather than dumping a monolithic API, OptiKit organizes its 430 utilities into dedicated, clean domains:
+Rather than dumping a monolithic API, OptiKit organizes its 680+ utilities into dedicated, clean domains:
 
 ### 🗃️ Data & Collections
 *   **`string`** (45 utils) — Modern string manipulations: `slugify`, `truncate`, `escapeHtml`, `titleCase`.
 *   **`array`** (40 utils) — Safe list processing: `chunk`, `unique`, `groupBy`, `partition`, `intersection`.
 *   **`object`** (31 utils) — Deep manipulations: `deepClone`, `deepMerge`, `flattenObject`, `pick`, `omit`.
 *   **`collection`** (12 utils) — Aggregations: `countBy`, `keyBy`, `sortBy`, `symmetricDifference`.
-*   **`tree`** (2 utils) — Hierarchical traversals: `arrayToTree`, `treeToArray`.
+*   **`set`** & **`map`** (15 utils) — Advanced Set operations and Map utilities.
+*   **`tree`** (10 utils) — Hierarchical traversals: `arrayToTree`, `treeToArray`, search, mapping.
 *   **`json`** (6 utils) — Deep JSON operations: `jsonClone`, `jsonFlatten`, `jsonUnflatten`, `jsonPath`, `jsonMerge`, `jsonDiff`.
-*   **`csv`** (2 utils) — Micro CSV parsers: `csvParse`, `csvStringify`.
+*   **`csv`** (5 utils) — Micro CSV parsers: `csvParse`, `csvToJson`, `jsonToCsv`.
 *   **`ds`** (4 classes) — Optimized structures: `Stack`, `Queue`, `PriorityQueue`, `BiMap`.
+*   **`deep`** (8 utils) — Deep freezing, mapping keys, flattening, omission.
 
 ### ⚙️ Logic & Control Flow
 *   **`async`** (19 utils) — Concurrency control: `debounce`, `throttle`, `retry`, `delay`, `asyncPool`, `timeout`.
@@ -69,6 +71,7 @@ Rather than dumping a monolithic API, OptiKit organizes its 430 utilities into d
 ### 🛡️ Security & Parsers
 *   **`crypto`** (10 utils) — Cryptographic utilities: `uuid`, `sha256`, `sha512`, `hmacSha256`, `generateToken`.
 *   **`encoding`** (8 utils) — Fast converters: `utf8Encode`, `utf8Decode`, `hexEncode`, `base64Encode`.
+*   **`hash`** (10 utils) — Hashing algorithms (CRC32, DJB2, Base64 encode/decode).
 *   **`validate`** (28 utils) — Robust format checks: `isEmail`, `isUrl`, `isUuid`, `isCreditCard`, `isJWT`.
 *   **`semver`** (5 utils) — SemVer parser/validator: `semverCompare`, `semverSatisfies`.
 *   **`regex`** (1 obj) — Pre-compiled patterns.
@@ -80,12 +83,15 @@ Rather than dumping a monolithic API, OptiKit organizes its 430 utilities into d
 *   **`keyboard`** (2 utils) — Hotkey event handlers: `registerShortcut`, `isKeyPressed`.
 *   **`url`** (8 utils) — Safe URL parser & builder: `joinPaths`, `parseUrl`, `buildUrl`.
 
-### 🧮 Math & Science
+### 🧮 Math, ML, & Science
 *   **`math`** (32 utils) — Math operations: `clamp`, `lerp`, `mean`, `median`, `factorial`, `isPrime`, `gcd`.
 *   **`statistics`** (12 utils) — Data science math: `variance`, `standardDeviation`, `covariance`, `correlation`.
-*   **`geometry`** (9 utils) — Coord geometry: `distance2D`, `midpoint`, `rotatePoint`, `circleArea`.
+*   **`ml`** (12 utils) — Machine Learning basics: `sigmoid`, `relu`, `minMaxScaler`, `cosineSimilarity`.
+*   **`nlp`** (10 utils) — Natural Language Processing: `tokenizeWords`, `soundex`, `levenshteinDistance`.
+*   **`finance`** (10 utils) — Financial logic: `calculatePMT`, `compoundInterest`, `NPV`, `ROI`.
+*   **`geometry`** (15 utils) — Coord geometry: `distance2D`, `midpoint`, `rotatePoint`, `circleArea`.
 *   **`units`** (8 utils) — Converter helper: `celsiusToFahrenheit`, `milesToKilometers`.
-*   **`color`** (10 utils) — Color convert & contrasts: `hexToRgb`, `rgbToHex`, `rgbToHsl`, `lighten`, `darken`.
+*   **`color`** (18 utils) — Color convert & contrasts: `hexToRgb`, `rgbToHex`, `generateHexComplementary`, A11y.
 
 ### 🛠️ Common Utilities
 *   **`types`** (16 utils) — Precise runtime check: `isNil`, `isObject`, `isPromise`, `isDate`.

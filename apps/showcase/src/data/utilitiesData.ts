@@ -7,10 +7,12 @@ export interface UtilityMeta {
   example: string;
   output: string;
   benchmark?: {
-    opti: string;
-    lodash: string;
-    multiplier: string;
-    winner: 'OptiKit' | 'Lodash';
+    opti?: string;
+    lodash?: string;
+    multiplier: string | number;
+    winner?: 'OptiKit' | 'Lodash';
+    optikitOps?: number;
+    lodashOps?: number;
   };
 }
 
@@ -20,27 +22,25 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "chunk",
     "module": "Array",
     "description": "Splits an array into chunks of a specified size.",
-    "signature": "chunk<T>(arr: T[], size: number): T[][]",
+    "signature": "chunk(...): T[][]",
     "example": "chunk(...)",
-    "output": "...",
-    "benchmark": { "opti": "46,453 ops/sec", "lodash": "42,359 ops/sec", "multiplier": "1.10x faster", "winner": "OptiKit" }
+    "output": "..."
   },
   {
     "id": "unique",
     "name": "unique",
     "module": "Array",
     "description": "Returns a new array with unique values.",
-    "signature": "unique<T>(arr: T[]): T[]",
-    "example": "unique([1, 1, 2])",
-    "output": "[1, 2]",
-    "benchmark": { "opti": "2,762 ops/sec", "lodash": "2,545 ops/sec", "multiplier": "1.09x faster", "winner": "OptiKit" }
+    "signature": "unique(...): T[]",
+    "example": "unique(...)",
+    "output": "..."
   },
   {
     "id": "difference",
     "name": "difference",
     "module": "Array",
     "description": "Returns the elements in the first array that are not present in any of the other arrays.",
-    "signature": "difference<T>(arr: T[], ...others: T[][]): T[]",
+    "signature": "difference(...): T[]",
     "example": "difference(...)",
     "output": "..."
   },
@@ -49,17 +49,16 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "intersection",
     "module": "Array",
     "description": "Returns the intersection of multiple arrays.",
-    "signature": "intersection<T>(...arrays: T[][]): T[]",
-    "example": "intersection([1, 2], [2, 3])",
-    "output": "[2]",
-    "benchmark": { "opti": "779 ops/sec", "lodash": "375 ops/sec", "multiplier": "2.07x faster", "winner": "OptiKit" }
+    "signature": "intersection(...): T[]",
+    "example": "intersection(...)",
+    "output": "..."
   },
   {
     "id": "groupby",
     "name": "groupBy",
     "module": "Array",
     "description": "Groups array elements based on a key returned by the iterator function.",
-    "signature": "groupBy<T>( arr: T[], fn: (item: T)",
+    "signature": "groupBy(...): any",
     "example": "groupBy(...)",
     "output": "..."
   },
@@ -68,7 +67,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "shuffle",
     "module": "Array",
     "description": "Shuffles an array using the Fisher-Yates algorithm without modifying the original.",
-    "signature": "shuffle<T>(arr: T[]): T[]",
+    "signature": "shuffle(...): T[]",
     "example": "shuffle(...)",
     "output": "..."
   },
@@ -77,7 +76,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "sample",
     "module": "Array",
     "description": "Returns a random element from an array.",
-    "signature": "sample<T>(arr: T[]): T | undefined",
+    "signature": "sample(...): T | undefined",
     "example": "sample(...)",
     "output": "..."
   },
@@ -86,7 +85,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "uniqueBy",
     "module": "Array",
     "description": "Returns a duplicate-free version of an array, based on a custom key or mapping function.",
-    "signature": "uniqueBy<T>( arr: T[], iteratee: keyof T | ((item: T)",
+    "signature": "uniqueBy(...): any",
     "example": "uniqueBy(...)",
     "output": "..."
   },
@@ -95,7 +94,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "flatten",
     "module": "Array",
     "description": "Flattens an array of arrays by one level.",
-    "signature": "flatten<T>(arr: T[][]): T[]",
+    "signature": "flatten(...): T[]",
     "example": "flatten(...)",
     "output": "..."
   },
@@ -104,7 +103,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "countBy",
     "module": "Array",
     "description": "Creates an object composed of keys generated from the results of running each element of collection thru iteratee.",
-    "signature": "countBy<T>( arr: T[], iteratee: (item: T)",
+    "signature": "countBy(...): any",
     "example": "countBy(...)",
     "output": "..."
   },
@@ -113,7 +112,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "compact",
     "module": "Array",
     "description": "Creates an array with all falsy values removed.",
-    "signature": "compact<T>(arr: T[]): Exclude<T, false | null | 0 | \"\" | undefined>[]",
+    "signature": "compact(...): Exclude<T, false | null | 0 | \"\" | undefined>[]",
     "example": "compact(...)",
     "output": "..."
   },
@@ -122,7 +121,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "drop",
     "module": "Array",
     "description": "Creates a slice of array with n elements dropped from the beginning.",
-    "signature": "drop<T>(arr: T[], n: number",
+    "signature": "drop(...): T[]",
     "example": "drop(...)",
     "output": "..."
   },
@@ -131,7 +130,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "dropRight",
     "module": "Array",
     "description": "Creates a slice of array with n elements dropped from the end.",
-    "signature": "dropRight<T>(arr: T[], n: number",
+    "signature": "dropRight(...): T[]",
     "example": "dropRight(...)",
     "output": "..."
   },
@@ -140,7 +139,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "take",
     "module": "Array",
     "description": "Creates a slice of array with n elements taken from the beginning.",
-    "signature": "take<T>(arr: T[], n: number",
+    "signature": "take(...): T[]",
     "example": "take(...)",
     "output": "..."
   },
@@ -149,7 +148,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "takeRight",
     "module": "Array",
     "description": "Creates a slice of array with n elements taken from the end.",
-    "signature": "takeRight<T>(arr: T[], n: number",
+    "signature": "takeRight(...): T[]",
     "example": "takeRight(...)",
     "output": "..."
   },
@@ -158,7 +157,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "initial",
     "module": "Array",
     "description": "Gets all but the last element of array.",
-    "signature": "initial<T>(arr: T[]): T[]",
+    "signature": "initial(...): T[]",
     "example": "initial(...)",
     "output": "..."
   },
@@ -167,7 +166,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "last",
     "module": "Array",
     "description": "Gets the last element of array.",
-    "signature": "last<T>(arr: T[]): T | undefined",
+    "signature": "last(...): T | undefined",
     "example": "last(...)",
     "output": "..."
   },
@@ -176,7 +175,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "first",
     "module": "Array",
     "description": "Gets the first element of array.",
-    "signature": "first<T>(arr: T[]): T | undefined",
+    "signature": "first(...): T | undefined",
     "example": "first(...)",
     "output": "..."
   },
@@ -185,7 +184,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "zip",
     "module": "Array",
     "description": "Creates an array of grouped elements, the first of which contains the first elements of the given arrays.",
-    "signature": "zip<T1, T2>(arr1: T1[], arr2: T2[]): [T1 | undefined, T2 | undefined][]",
+    "signature": "zip(...): [T1 | undefined, T2 | undefined][]",
     "example": "zip(...)",
     "output": "..."
   },
@@ -194,7 +193,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "unzip",
     "module": "Array",
     "description": "Unzips an array of grouped elements into two arrays.",
-    "signature": "unzip<T1, T2>(arr: [T1, T2][]): [T1[], T2[]]",
+    "signature": "unzip(...): [T1[], T2[]]",
     "example": "unzip(...)",
     "output": "..."
   },
@@ -203,7 +202,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "union",
     "module": "Array",
     "description": "Creates an array of unique values, in order, from all given arrays.",
-    "signature": "union<T>(...arrs: T[][]): T[]",
+    "signature": "union(...): T[]",
     "example": "union(...)",
     "output": "..."
   },
@@ -212,7 +211,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "partition",
     "module": "Array",
     "description": "Splits an array into two groups: those that pass the predicate, and those that don't.",
-    "signature": "partition<T>(arr: T[], predicate: (item: T)",
+    "signature": "partition(...): [T[], T[]]",
     "example": "partition(...)",
     "output": "..."
   },
@@ -221,7 +220,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "without",
     "module": "Array",
     "description": "Creates an array excluding all given values.",
-    "signature": "without<T>(arr: T[], ...values: T[]): T[]",
+    "signature": "without(...): T[]",
     "example": "without(...)",
     "output": "..."
   },
@@ -230,7 +229,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "reject",
     "module": "Array",
     "description": "The opposite of filter; this method returns the elements of collection that predicate does not return truthy for.",
-    "signature": "reject<T>(arr: T[], predicate: (item: T)",
+    "signature": "reject(...): T[]",
     "example": "reject(...)",
     "output": "..."
   },
@@ -239,7 +238,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "keyBy",
     "module": "Array",
     "description": "Creates an object composed of keys generated from the results of running each element of array thru iteratee.",
-    "signature": "keyBy<T>(arr: T[], iteratee: keyof T | ((item: T)",
+    "signature": "keyBy(...): Record<string | number, T>",
     "example": "keyBy(...)",
     "output": "..."
   },
@@ -248,7 +247,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "nth",
     "module": "Array",
     "description": "Gets the element at index n of array. If n is negative, the nth element from the end is returned.",
-    "signature": "nth<T>(arr: T[], n: number): T | undefined",
+    "signature": "nth(...): T | undefined",
     "example": "nth(...)",
     "output": "..."
   },
@@ -257,7 +256,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "sampleSize",
     "module": "Array",
     "description": "Gets n random elements at unique keys from array up to the size of array.",
-    "signature": "sampleSize<T>(arr: T[], n: number",
+    "signature": "sampleSize(...): T[]",
     "example": "sampleSize(...)",
     "output": "..."
   },
@@ -266,7 +265,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "sortBy",
     "module": "Array",
     "description": "Sorts an array based on an iteratee. Returns a new sorted array.",
-    "signature": "sortBy<T>(arr: T[], iteratee: (item: T)",
+    "signature": "sortBy(...): T[]",
     "example": "sortBy(...)",
     "output": "..."
   },
@@ -275,7 +274,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "range",
     "module": "Array",
     "description": "Creates an array of numbers progressing from start up to, but not including, end.",
-    "signature": "range(start: number, end?: number, step",
+    "signature": "range(...): number[]",
     "example": "range(...)",
     "output": "..."
   },
@@ -284,7 +283,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "rotate",
     "module": "Array",
     "description": "Rotates array elements by an offset position. Positive rotates right, negative rotates left.",
-    "signature": "rotate<T>(arr: T[], offset: number): T[]",
+    "signature": "rotate(...): T[]",
     "example": "rotate(...)",
     "output": "..."
   },
@@ -293,7 +292,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "minBy",
     "module": "Array",
     "description": "Finds the element in an array that produces the minimum value when passed to iteratee.",
-    "signature": "minBy<T>(arr: T[], iteratee: (item: T)",
+    "signature": "minBy(...): T | undefined",
     "example": "minBy(...)",
     "output": "..."
   },
@@ -302,7 +301,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "maxBy",
     "module": "Array",
     "description": "Finds the element in an array that produces the maximum value when passed to iteratee.",
-    "signature": "maxBy<T>(arr: T[], iteratee: (item: T)",
+    "signature": "maxBy(...): T | undefined",
     "example": "maxBy(...)",
     "output": "..."
   },
@@ -311,7 +310,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "sumBy",
     "module": "Array",
     "description": "Computes the sum of values produced by iteratee for each element in the array.",
-    "signature": "sumBy<T>(arr: T[], iteratee: (item: T)",
+    "signature": "sumBy(...): number",
     "example": "sumBy(...)",
     "output": "..."
   },
@@ -320,7 +319,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "meanBy",
     "module": "Array",
     "description": "Computes the mean (average) of values produced by iteratee for each element in the array.",
-    "signature": "meanBy<T>(arr: T[], iteratee: (item: T)",
+    "signature": "meanBy(...): number",
     "example": "meanBy(...)",
     "output": "..."
   },
@@ -329,7 +328,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "move",
     "module": "Array",
     "description": "Moves an element from one index to another in a new array.",
-    "signature": "move<T>(arr: T[], fromIndex: number, toIndex: number): T[]",
+    "signature": "move(...): T[]",
     "example": "move(...)",
     "output": "..."
   },
@@ -338,7 +337,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "swap",
     "module": "Array",
     "description": "Swaps two elements in an array at specified indices in a new array.",
-    "signature": "swap<T>(arr: T[], index1: number, index2: number): T[]",
+    "signature": "swap(...): T[]",
     "example": "swap(...)",
     "output": "..."
   },
@@ -347,7 +346,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "intersperse",
     "module": "Array",
     "description": "Places a separator element between each element of an array.",
-    "signature": "intersperse<T>(arr: T[], separator: T): T[]",
+    "signature": "intersperse(...): T[]",
     "example": "intersperse(...)",
     "output": "..."
   },
@@ -356,7 +355,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "scan",
     "module": "Array",
     "description": "Returns cumulative accumulation values (running reduce history) for an array.",
-    "signature": "scan<T, R>( arr: T[], fn: (acc: R, val: T, index: number)",
+    "signature": "scan(...): any",
     "example": "scan(...)",
     "output": "..."
   },
@@ -365,7 +364,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "pluck",
     "module": "Array",
     "description": "Extracts a property value from each object in an array.",
-    "signature": "pluck<T, K extends keyof T>(arr: T[], key: K): T[K][]",
+    "signature": "pluck(...): T[K][]",
     "example": "pluck(...)",
     "output": "..."
   },
@@ -374,8 +373,143 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "flatDeep",
     "module": "Array",
     "description": "Recursively flattens an array up to the specified depth (default: Infinity).",
-    "signature": "flatDeep<T>(arr: any[], depth",
+    "signature": "flatDeep(...): T[]",
     "example": "flatDeep(...)",
+    "output": "..."
+  },
+  {
+    "id": "differenceby",
+    "name": "differenceBy",
+    "module": "Array",
+    "description": "Creates an array of array values not included in the other given array using an iteratee.",
+    "signature": "differenceBy(...): any",
+    "example": "differenceBy(...)",
+    "output": "..."
+  },
+  {
+    "id": "intersectionby",
+    "name": "intersectionBy",
+    "module": "Array",
+    "description": "Creates an array of unique values that are included in all given arrays using an iteratee.",
+    "signature": "intersectionBy(...): any",
+    "example": "intersectionBy(...)",
+    "output": "..."
+  },
+  {
+    "id": "xor",
+    "name": "xor",
+    "module": "Array",
+    "description": "Creates an array of unique values that is the symmetric difference of the given arrays.",
+    "signature": "xor(...): T[]",
+    "example": "xor(...)",
+    "output": "..."
+  },
+  {
+    "id": "dropwhile",
+    "name": "dropWhile",
+    "module": "Array",
+    "description": "Creates a slice of array excluding elements dropped from the beginning until predicate returns falsy.",
+    "signature": "dropWhile(...): T[]",
+    "example": "dropWhile(...)",
+    "output": "..."
+  },
+  {
+    "id": "takewhile",
+    "name": "takeWhile",
+    "module": "Array",
+    "description": "Creates a slice of array with elements taken from the beginning until predicate returns falsy.",
+    "signature": "takeWhile(...): T[]",
+    "example": "takeWhile(...)",
+    "output": "..."
+  },
+  {
+    "id": "unionby",
+    "name": "unionBy",
+    "module": "Array",
+    "description": "Creates an array of unique values, in order, from all given arrays using an iteratee.",
+    "signature": "unionBy(...): T[]",
+    "example": "unionBy(...)",
+    "output": "..."
+  },
+  {
+    "id": "unionwith",
+    "name": "unionWith",
+    "module": "Array",
+    "description": "Creates an array of unique values, in order, from all given arrays using a comparator.",
+    "signature": "unionWith(...): T[]",
+    "example": "unionWith(...)",
+    "output": "..."
+  },
+  {
+    "id": "differencewith",
+    "name": "differenceWith",
+    "module": "Array",
+    "description": "Creates an array of array values not included in the other given arrays using a comparator.",
+    "signature": "differenceWith(...): T[]",
+    "example": "differenceWith(...)",
+    "output": "..."
+  },
+  {
+    "id": "intersectionwith",
+    "name": "intersectionWith",
+    "module": "Array",
+    "description": "Creates an array of unique values that are included in all given arrays using a comparator.",
+    "signature": "intersectionWith(...): T[]",
+    "example": "intersectionWith(...)",
+    "output": "..."
+  },
+  {
+    "id": "xorby",
+    "name": "xorBy",
+    "module": "Array",
+    "description": "Creates an array of unique values that is the symmetric difference of the given arrays using an iteratee.",
+    "signature": "xorBy(...): T[]",
+    "example": "xorBy(...)",
+    "output": "..."
+  },
+  {
+    "id": "xorwith",
+    "name": "xorWith",
+    "module": "Array",
+    "description": "Creates an array of unique values that is the symmetric difference of the given arrays using a comparator.",
+    "signature": "xorWith(...): T[]",
+    "example": "xorWith(...)",
+    "output": "..."
+  },
+  {
+    "id": "zipobject",
+    "name": "zipObject",
+    "module": "Array",
+    "description": "This method is like Object.fromEntries except that it accepts two arrays, one of property identifiers and one of corresponding values.",
+    "signature": "zipObject(...): Record<K, V>",
+    "example": "zipObject(...)",
+    "output": "..."
+  },
+  {
+    "id": "pull",
+    "name": "pull",
+    "module": "Array",
+    "description": "Removes all given values from array using strict equality.",
+    "signature": "pull(...): T[]",
+    "example": "pull(...)",
+    "output": "..."
+  },
+  {
+    "id": "pullall",
+    "name": "pullAll",
+    "module": "Array",
+    "description": "This method is like pull except that it accepts an array of values to remove.",
+    "signature": "pullAll(...): T[]",
+    "example": "pullAll(...)",
+    "output": "..."
+  },
+  {
+    "id": "pullat",
+    "name": "pullAt",
+    "module": "Array",
+    "description": "Removes elements from array corresponding to indexes and returns an array of remaining elements.",
+    "signature": "pullAt(...): T[]",
+    "example": "pullAt(...)",
     "output": "..."
   },
   {
@@ -383,7 +517,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "delay",
     "module": "Async",
     "description": "Returns a promise that resolves after a specified duration in milliseconds.",
-    "signature": "delay(ms: number): Promise<void>",
+    "signature": "delay(...): Promise<void>",
     "example": "delay(...)",
     "output": "..."
   },
@@ -392,7 +526,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "debounce",
     "module": "Async",
     "description": "Creates a debounced function that delays invoking the passed function until after `ms`",
-    "signature": "debounce<T extends (...args: any[])",
+    "signature": "debounce(...): any",
     "example": "debounce(...)",
     "output": "..."
   },
@@ -401,7 +535,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "throttle",
     "module": "Async",
     "description": "Creates a throttled function that only invokes the passed function at most once per every",
-    "signature": "throttle<T extends (...args: any[])",
+    "signature": "throttle(...): any",
     "example": "throttle(...)",
     "output": "..."
   },
@@ -410,7 +544,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "once",
     "module": "Async",
     "description": "Restricts a function call to only execute once. Subsequent calls return the first result.",
-    "signature": "once<T extends (...args: any[])",
+    "signature": "once(...): T",
     "example": "once(...)",
     "output": "..."
   },
@@ -419,7 +553,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "retry",
     "module": "Async",
     "description": "Retries a promise-returning function a specified number of times with a delay between failures.",
-    "signature": "retry<T>( fn: ()",
+    "signature": "retry(...): any",
     "example": "retry(...)",
     "output": "..."
   },
@@ -428,7 +562,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "timeout",
     "module": "Async",
     "description": "Returns a promise that rejects if the provided promise does not resolve within the specified timeout.",
-    "signature": "timeout<T>(promise: Promise<T>, ms: number, fallbackError",
+    "signature": "timeout(...): Promise<T>",
     "example": "timeout(...)",
     "output": "..."
   },
@@ -437,7 +571,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "defer",
     "module": "Async",
     "description": "Creates a deferred object containing a promise and its resolve/reject methods.",
-    "signature": "defer<T>()",
+    "signature": "defer(...): any",
     "example": "defer(...)",
     "output": "..."
   },
@@ -446,7 +580,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "sequence",
     "module": "Async",
     "description": "Executes an array of async functions in sequence.",
-    "signature": "sequence<T>(tasks: (()",
+    "signature": "sequence(...): Promise<T[]>",
     "example": "sequence(...)",
     "output": "..."
   },
@@ -455,7 +589,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "tryCatchAsync",
     "module": "Async",
     "description": "Wraps an async function and returns a tuple [error, result], safely catching errors.",
-    "signature": "tryCatchAsync<T, E",
+    "signature": "tryCatchAsync(...): any",
     "example": "tryCatchAsync(...)",
     "output": "..."
   },
@@ -464,7 +598,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "pMap",
     "module": "Async",
     "description": "Maps over an array concurrently.",
-    "signature": "pMap<T, R>( iterable: Iterable<T>, mapper: (item: T, index: number)",
+    "signature": "pMap(...): any",
     "example": "pMap(...)",
     "output": "..."
   },
@@ -473,7 +607,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "pFilter",
     "module": "Async",
     "description": "Filters an array concurrently.",
-    "signature": "pFilter<T>( iterable: Iterable<T>, filterer: (item: T, index: number)",
+    "signature": "pFilter(...): any",
     "example": "pFilter(...)",
     "output": "..."
   },
@@ -482,7 +616,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "everyAsync",
     "module": "Async",
     "description": "Asynchronously checks if every element satisfies the condition (sequential execution).",
-    "signature": "everyAsync<T>( iterable: Iterable<T>, predicate: (item: T, index: number)",
+    "signature": "everyAsync(...): any",
     "example": "everyAsync(...)",
     "output": "..."
   },
@@ -491,7 +625,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "someAsync",
     "module": "Async",
     "description": "Asynchronously checks if some element satisfies the condition (sequential execution).",
-    "signature": "someAsync<T>( iterable: Iterable<T>, predicate: (item: T, index: number)",
+    "signature": "someAsync(...): any",
     "example": "someAsync(...)",
     "output": "..."
   },
@@ -500,7 +634,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "pReduce",
     "module": "Async",
     "description": "Asynchronously reduces an iterable in order.",
-    "signature": "pReduce<T, R>( iterable: Iterable<T>, reducer: (acc: R, item: T, index: number)",
+    "signature": "pReduce(...): any",
     "example": "pReduce(...)",
     "output": "..."
   },
@@ -509,7 +643,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "pProps",
     "module": "Async",
     "description": "Resolves an object whose values are promises into an object with resolved values.",
-    "signature": "pProps<T extends Record<string, Promise<any>>>( obj: T ): Promise<",
+    "signature": "pProps(...): any",
     "example": "pProps(...)",
     "output": "..."
   },
@@ -518,7 +652,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "waitUntil",
     "module": "Async",
     "description": "Waits until a predicate function evaluates to true or times out.",
-    "signature": "waitUntil( predicate: ()",
+    "signature": "waitUntil(...): any",
     "example": "waitUntil(...)",
     "output": "..."
   },
@@ -527,7 +661,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "sleep",
     "module": "Async",
     "description": "Alias for delay - returns a promise that resolves after `ms` milliseconds.",
-    "signature": "sleep(ms: number): Promise<void>",
+    "signature": "sleep(...): Promise<void>",
     "example": "sleep(...)",
     "output": "..."
   },
@@ -536,7 +670,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "asyncPool",
     "module": "Async",
     "description": "Runs an array of promise-returning functions with a specified concurrency limit.",
-    "signature": "asyncPool<T, R>( concurrency: number, iterable: Iterable<T>, iteratorFn: (item: T)",
+    "signature": "asyncPool(...): any",
     "example": "asyncPool(...)",
     "output": "..."
   },
@@ -545,16 +679,187 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "retryWithBackoff",
     "module": "Async",
     "description": "Retries an async function with exponential backoff on failure.",
-    "signature": "retryWithBackoff<T>( fn: ()",
+    "signature": "retryWithBackoff(...): any",
     "example": "retryWithBackoff(...)",
+    "output": "..."
+  },
+  {
+    "id": "stringtouint8array",
+    "name": "stringToUint8Array",
+    "module": "Binary",
+    "description": "Converts a string to a Uint8Array.",
+    "signature": "stringToUint8Array(...): Uint8Array",
+    "example": "stringToUint8Array(...)",
+    "output": "..."
+  },
+  {
+    "id": "uint8arraytostring",
+    "name": "uint8ArrayToString",
+    "module": "Binary",
+    "description": "Converts a Uint8Array back to a string.",
+    "signature": "uint8ArrayToString(...): string",
+    "example": "uint8ArrayToString(...)",
+    "output": "..."
+  },
+  {
+    "id": "buffertohex",
+    "name": "bufferToHex",
+    "module": "Binary",
+    "description": "Converts an ArrayBuffer to a Hex string.",
+    "signature": "bufferToHex(...): string",
+    "example": "bufferToHex(...)",
+    "output": "..."
+  },
+  {
+    "id": "hextobuffer",
+    "name": "hexToBuffer",
+    "module": "Binary",
+    "description": "Converts a Hex string to a Uint8Array.",
+    "signature": "hexToBuffer(...): Uint8Array",
+    "example": "hexToBuffer(...)",
+    "output": "..."
+  },
+  {
+    "id": "concatuint8arrays",
+    "name": "concatUint8Arrays",
+    "module": "Binary",
+    "description": "Concatenates multiple Uint8Arrays into one.",
+    "signature": "concatUint8Arrays(...): Uint8Array",
+    "example": "concatUint8Arrays(...)",
+    "output": "..."
+  },
+  {
+    "id": "areuint8arraysequal",
+    "name": "areUint8ArraysEqual",
+    "module": "Binary",
+    "description": "Compares two Uint8Arrays for equality.",
+    "signature": "areUint8ArraysEqual(...): boolean",
+    "example": "areUint8ArraysEqual(...)",
+    "output": "..."
+  },
+  {
+    "id": "base64tobuffer",
+    "name": "base64ToBuffer",
+    "module": "Binary",
+    "description": "Converts a base64 string to a Uint8Array.",
+    "signature": "base64ToBuffer(...): Uint8Array",
+    "example": "base64ToBuffer(...)",
+    "output": "..."
+  },
+  {
+    "id": "buffertobase64",
+    "name": "bufferToBase64",
+    "module": "Binary",
+    "description": "Converts a Uint8Array to a base64 string.",
+    "signature": "bufferToBase64(...): string",
+    "example": "bufferToBase64(...)",
+    "output": "..."
+  },
+  {
+    "id": "setbit",
+    "name": "setBit",
+    "module": "Bit",
+    "description": "Sets the bit at the given position.",
+    "signature": "setBit(...): number",
+    "example": "setBit(...)",
+    "output": "..."
+  },
+  {
+    "id": "clearbit",
+    "name": "clearBit",
+    "module": "Bit",
+    "description": "Clears the bit at the given position.",
+    "signature": "clearBit(...): number",
+    "example": "clearBit(...)",
+    "output": "..."
+  },
+  {
+    "id": "togglebit",
+    "name": "toggleBit",
+    "module": "Bit",
+    "description": "Toggles the bit at the given position.",
+    "signature": "toggleBit(...): number",
+    "example": "toggleBit(...)",
+    "output": "..."
+  },
+  {
+    "id": "checkbit",
+    "name": "checkBit",
+    "module": "Bit",
+    "description": "Checks if the bit at the given position is set (1).",
+    "signature": "checkBit(...): boolean",
+    "example": "checkBit(...)",
+    "output": "..."
+  },
+  {
+    "id": "updatebit",
+    "name": "updateBit",
+    "module": "Bit",
+    "description": "Updates the bit at the given position with the specified value (0 or 1).",
+    "signature": "updateBit(...): number",
+    "example": "updateBit(...)",
+    "output": "..."
+  },
+  {
+    "id": "countsetbits",
+    "name": "countSetBits",
+    "module": "Bit",
+    "description": "Counts the number of set bits (1s) in a number (Brian Kernighan’s Algorithm).",
+    "signature": "countSetBits(...): number",
+    "example": "countSetBits(...)",
+    "output": "..."
+  },
+  {
+    "id": "ispoweroftwo",
+    "name": "isPowerOfTwo",
+    "module": "Bit",
+    "description": "Checks if a number is a power of 2.",
+    "signature": "isPowerOfTwo(...): boolean",
+    "example": "isPowerOfTwo(...)",
+    "output": "..."
+  },
+  {
+    "id": "isolaterightmostbit",
+    "name": "isolateRightmostBit",
+    "module": "Bit",
+    "description": "Isolates the rightmost 1-bit.",
+    "signature": "isolateRightmostBit(...): number",
+    "example": "isolateRightmostBit(...)",
+    "output": "..."
+  },
+  {
+    "id": "isolaterightmostzerobit",
+    "name": "isolateRightmostZeroBit",
+    "module": "Bit",
+    "description": "Gets the rightmost 0-bit.",
+    "signature": "isolateRightmostZeroBit(...): number",
+    "example": "isolateRightmostZeroBit(...)",
+    "output": "..."
+  },
+  {
+    "id": "clearrightmostbit",
+    "name": "clearRightmostBit",
+    "module": "Bit",
+    "description": "Clears the rightmost 1-bit.",
+    "signature": "clearRightmostBit(...): number",
+    "example": "clearRightmostBit(...)",
+    "output": "..."
+  },
+  {
+    "id": "flipbits",
+    "name": "flipBits",
+    "module": "Bit",
+    "description": "Flips all bits.",
+    "signature": "flipBits(...): number",
+    "example": "flipBits(...)",
     "output": "..."
   },
   {
     "id": "isbrowser",
     "name": "isBrowser",
     "module": "Browser",
-    "description": "Safe client-side environment and browser feature detection utilities.",
-    "signature": "isBrowser(): boolean",
+    "description": "Checks if the code is running in a browser environment.",
+    "signature": "isBrowser(...): boolean",
     "example": "isBrowser(...)",
     "output": "..."
   },
@@ -563,7 +868,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isServer",
     "module": "Browser",
     "description": "Checks if the code is running in a server environment (e.g. Node.js, SSR).",
-    "signature": "isServer(): boolean",
+    "signature": "isServer(...): boolean",
     "example": "isServer(...)",
     "output": "..."
   },
@@ -572,7 +877,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isChrome",
     "module": "Browser",
     "description": "Checks if the current browser is Google Chrome.",
-    "signature": "isChrome(): boolean",
+    "signature": "isChrome(...): boolean",
     "example": "isChrome(...)",
     "output": "..."
   },
@@ -581,7 +886,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isFirefox",
     "module": "Browser",
     "description": "Checks if the current browser is Mozilla Firefox.",
-    "signature": "isFirefox(): boolean",
+    "signature": "isFirefox(...): boolean",
     "example": "isFirefox(...)",
     "output": "..."
   },
@@ -590,7 +895,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isSafari",
     "module": "Browser",
     "description": "Checks if the current browser is Apple Safari.",
-    "signature": "isSafari(): boolean",
+    "signature": "isSafari(...): boolean",
     "example": "isSafari(...)",
     "output": "..."
   },
@@ -599,7 +904,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isEdge",
     "module": "Browser",
     "description": "Checks if the current browser is Microsoft Edge.",
-    "signature": "isEdge(): boolean",
+    "signature": "isEdge(...): boolean",
     "example": "isEdge(...)",
     "output": "..."
   },
@@ -608,7 +913,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isIOS",
     "module": "Browser",
     "description": "Checks if the current operating system is iOS.",
-    "signature": "isIOS(): boolean",
+    "signature": "isIOS(...): boolean",
     "example": "isIOS(...)",
     "output": "..."
   },
@@ -617,7 +922,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isAndroid",
     "module": "Browser",
     "description": "Checks if the current operating system is Android.",
-    "signature": "isAndroid(): boolean",
+    "signature": "isAndroid(...): boolean",
     "example": "isAndroid(...)",
     "output": "..."
   },
@@ -626,7 +931,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isMobile",
     "module": "Browser",
     "description": "Checks if the device is a mobile device (phone or tablet).",
-    "signature": "isMobile(): boolean",
+    "signature": "isMobile(...): boolean",
     "example": "isMobile(...)",
     "output": "..."
   },
@@ -635,7 +940,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isDesktop",
     "module": "Browser",
     "description": "Checks if the device is a desktop.",
-    "signature": "isDesktop(): boolean",
+    "signature": "isDesktop(...): boolean",
     "example": "isDesktop(...)",
     "output": "..."
   },
@@ -644,7 +949,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isTouchDevice",
     "module": "Browser",
     "description": "Checks if the device supports touch interaction.",
-    "signature": "isTouchDevice(): boolean",
+    "signature": "isTouchDevice(...): boolean",
     "example": "isTouchDevice(...)",
     "output": "..."
   },
@@ -653,7 +958,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "supportsWebGL",
     "module": "Browser",
     "description": "Checks if the browser supports WebGL.",
-    "signature": "supportsWebGL(): boolean",
+    "signature": "supportsWebGL(...): boolean",
     "example": "supportsWebGL(...)",
     "output": "..."
   },
@@ -662,7 +967,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "supportsServiceWorker",
     "module": "Browser",
     "description": "Checks if the browser supports Service Workers.",
-    "signature": "supportsServiceWorker(): boolean",
+    "signature": "supportsServiceWorker(...): boolean",
     "example": "supportsServiceWorker(...)",
     "output": "..."
   },
@@ -671,7 +976,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "getDevicePixelRatio",
     "module": "Browser",
     "description": "Returns the device pixel ratio (DPR). Falls back to 1 on the server.",
-    "signature": "getDevicePixelRatio(): number",
+    "signature": "getDevicePixelRatio(...): number",
     "example": "getDevicePixelRatio(...)",
     "output": "..."
   },
@@ -680,7 +985,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "getPreferredLanguage",
     "module": "Browser",
     "description": "Returns the preferred language code of the client. Falls back to \"en\" on the server.",
-    "signature": "getPreferredLanguage(): string",
+    "signature": "getPreferredLanguage(...): string",
     "example": "getPreferredLanguage(...)",
     "output": "..."
   },
@@ -689,8 +994,53 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isOnline",
     "module": "Browser",
     "description": "Checks if the client has an active internet connection. Falls back to true on the server.",
-    "signature": "isOnline(): boolean",
+    "signature": "isOnline(...): boolean",
     "example": "isOnline(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatbytesize",
+    "name": "formatByteSize",
+    "module": "Byte Size",
+    "description": "Byte Size Utilities",
+    "signature": "formatByteSize(...): string",
+    "example": "formatByteSize(...)",
+    "output": "..."
+  },
+  {
+    "id": "parsebytes",
+    "name": "parseBytes",
+    "module": "Byte Size",
+    "description": "Utility function",
+    "signature": "parseBytes(...): number",
+    "example": "parseBytes(...)",
+    "output": "..."
+  },
+  {
+    "id": "bytestokb",
+    "name": "bytesToKb",
+    "module": "Byte Size",
+    "description": "Utility function",
+    "signature": "bytesToKb(...): number",
+    "example": "bytesToKb(...)",
+    "output": "..."
+  },
+  {
+    "id": "bytestomb",
+    "name": "bytesToMb",
+    "module": "Byte Size",
+    "description": "Utility function",
+    "signature": "bytesToMb(...): number",
+    "example": "bytesToMb(...)",
+    "output": "..."
+  },
+  {
+    "id": "bytestogb",
+    "name": "bytesToGb",
+    "module": "Byte Size",
+    "description": "Utility function",
+    "signature": "bytesToGb(...): number",
+    "example": "bytesToGb(...)",
     "output": "..."
   },
   {
@@ -698,7 +1048,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "memoizeWithTTL",
     "module": "Cache",
     "description": "Memoizes a function, but invalidates the cache after TTL (time-to-live) milliseconds.",
-    "signature": "memoizeWithTTL<T extends (...args: any[])",
+    "signature": "memoizeWithTTL(...): any",
     "example": "memoizeWithTTL(...)",
     "output": "..."
   },
@@ -707,8 +1057,8 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "LRUCache",
     "module": "Cache",
     "description": "A lightweight Least-Recently-Used (LRU) cache class.",
-    "signature": "LRUCache<K, V>",
-    "example": "LRUCache(...)",
+    "signature": "class LRUCache",
+    "example": "new LRUCache()",
     "output": "..."
   },
   {
@@ -716,7 +1066,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "invertMap",
     "module": "Collection",
     "description": "Creates a new object composed of the inverted keys and values of the given object.",
-    "signature": "invertMap(obj: Record<string, string | number>): Record<string, string>",
+    "signature": "invertMap(...): Record<string, string>",
     "example": "invertMap(...)",
     "output": "..."
   },
@@ -725,7 +1075,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "setUnion",
     "module": "Collection",
     "description": "Returns a new Set containing all elements present in either Set A or Set B.",
-    "signature": "setUnion<T>(setA: Set<T>, setB: Set<T>): Set<T>",
+    "signature": "setUnion(...): Set<T>",
     "example": "setUnion(...)",
     "output": "..."
   },
@@ -734,7 +1084,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "setIntersection",
     "module": "Collection",
     "description": "Returns a new Set containing all elements present in both Set A and Set B.",
-    "signature": "setIntersection<T>(setA: Set<T>, setB: Set<T>): Set<T>",
+    "signature": "setIntersection(...): Set<T>",
     "example": "setIntersection(...)",
     "output": "..."
   },
@@ -743,7 +1093,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "setDifference",
     "module": "Collection",
     "description": "Returns a new Set containing all elements present in Set A but not in Set B.",
-    "signature": "setDifference<T>(setA: Set<T>, setB: Set<T>): Set<T>",
+    "signature": "setDifference(...): Set<T>",
     "example": "setDifference(...)",
     "output": "..."
   },
@@ -752,7 +1102,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "symmetricDifference",
     "module": "Collection",
     "description": "Returns a new Set containing elements present in either set but not both.",
-    "signature": "symmetricDifference<T>(setA: Set<T>, setB: Set<T>): Set<T>",
+    "signature": "symmetricDifference(...): Set<T>",
     "example": "symmetricDifference(...)",
     "output": "..."
   },
@@ -761,7 +1111,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "mergeMaps",
     "module": "Collection",
     "description": "Merges two Maps into a new Map. Values from the second map overwrite the first.",
-    "signature": "mergeMaps<K, V>(mapA: Map<K, V>, mapB: Map<K, V>): Map<K, V>",
+    "signature": "mergeMaps(...): Map<K, V>",
     "example": "mergeMaps(...)",
     "output": "..."
   },
@@ -770,7 +1120,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "frequencies",
     "module": "Collection",
     "description": "Counts the frequency of each element in an array.",
-    "signature": "frequencies<T>(arr: T[]): Map<T, number>",
+    "signature": "frequencies(...): Map<T, number>",
     "example": "frequencies(...)",
     "output": "..."
   },
@@ -779,7 +1129,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "filterMap",
     "module": "Collection",
     "description": "Maps and filters in a single pass. Returns only items where the callback does not return undefined.",
-    "signature": "filterMap<T, R>(arr: T[], fn: (item: T, index: number)",
+    "signature": "filterMap(...): R[]",
     "example": "filterMap(...)",
     "output": "..."
   },
@@ -788,7 +1138,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "mapRecordValues",
     "module": "Collection",
     "description": "Creates a new object with the same keys but with values transformed by the callback.",
-    "signature": "mapRecordValues<V, R>( obj: Record<string, V>, fn: (value: V, key: string)",
+    "signature": "mapRecordValues(...): any",
     "example": "mapRecordValues(...)",
     "output": "..."
   },
@@ -797,7 +1147,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "filterRecord",
     "module": "Collection",
     "description": "Creates a new object containing only the entries where the predicate returns true.",
-    "signature": "filterRecord<V>( obj: Record<string, V>, fn: (value: V, key: string)",
+    "signature": "filterRecord(...): any",
     "example": "filterRecord(...)",
     "output": "..."
   },
@@ -806,7 +1156,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isSubset",
     "module": "Collection",
     "description": "Checks if a Set is a subset of another Set.",
-    "signature": "isSubset<T>(subset: Set<T>, superset: Set<T>): boolean",
+    "signature": "isSubset(...): boolean",
     "example": "isSubset(...)",
     "output": "..."
   },
@@ -815,8 +1165,89 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isSuperset",
     "module": "Collection",
     "description": "Checks if a Set is a superset of another Set.",
-    "signature": "isSuperset<T>(superset: Set<T>, subset: Set<T>): boolean",
+    "signature": "isSuperset(...): boolean",
     "example": "isSuperset(...)",
+    "output": "..."
+  },
+  {
+    "id": "hextorgb",
+    "name": "hexToRgb",
+    "module": "Color Space",
+    "description": "Converts Hex string to RGB object.",
+    "signature": "hexToRgb(...): RGB | null",
+    "example": "hexToRgb(...)",
+    "output": "..."
+  },
+  {
+    "id": "rgbtohex",
+    "name": "rgbToHex",
+    "module": "Color Space",
+    "description": "Converts RGB object to Hex string.",
+    "signature": "rgbToHex(...): string",
+    "example": "rgbToHex(...)",
+    "output": "..."
+  },
+  {
+    "id": "rgbtohsl",
+    "name": "rgbToHsl",
+    "module": "Color Space",
+    "description": "Converts RGB object to HSL object.",
+    "signature": "rgbToHsl(...): HSL",
+    "example": "rgbToHsl(...)",
+    "output": "..."
+  },
+  {
+    "id": "hsltorgb",
+    "name": "hslToRgb",
+    "module": "Color Space",
+    "description": "Converts HSL object to RGB object.",
+    "signature": "hslToRgb(...): RGB",
+    "example": "hslToRgb(...)",
+    "output": "..."
+  },
+  {
+    "id": "rgbtohsv",
+    "name": "rgbToHsv",
+    "module": "Color Space",
+    "description": "Converts RGB object to HSV object.",
+    "signature": "rgbToHsv(...): HSV",
+    "example": "rgbToHsv(...)",
+    "output": "..."
+  },
+  {
+    "id": "hsvtorgb",
+    "name": "hsvToRgb",
+    "module": "Color Space",
+    "description": "Converts HSV object to RGB object.",
+    "signature": "hsvToRgb(...): RGB",
+    "example": "hsvToRgb(...)",
+    "output": "..."
+  },
+  {
+    "id": "luminance",
+    "name": "luminance",
+    "module": "Color Space",
+    "description": "Calculates the relative luminance of a color.",
+    "signature": "luminance(...): number",
+    "example": "luminance(...)",
+    "output": "..."
+  },
+  {
+    "id": "contrast",
+    "name": "contrast",
+    "module": "Color Space",
+    "description": "Calculates the contrast ratio between two colors.",
+    "signature": "contrast(...): number",
+    "example": "contrast(...)",
+    "output": "..."
+  },
+  {
+    "id": "isdark",
+    "name": "isDark",
+    "module": "Color Space",
+    "description": "Checks if a color is perceived as dark.",
+    "signature": "isDark(...): boolean",
+    "example": "isDark(...)",
     "output": "..."
   },
   {
@@ -824,7 +1255,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "hexToRgb",
     "module": "Color",
     "description": "Converts a hex color string to an RGB object. Returns null if invalid.",
-    "signature": "hexToRgb( hex: string )",
+    "signature": "hexToRgb(...): any",
     "example": "hexToRgb(...)",
     "output": "..."
   },
@@ -833,7 +1264,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "rgbToHex",
     "module": "Color",
     "description": "Converts RGB integer components (0-255) to a Hex color string.",
-    "signature": "rgbToHex(r: number, g: number, b: number): string",
+    "signature": "rgbToHex(...): string",
     "example": "rgbToHex(...)",
     "output": "..."
   },
@@ -842,7 +1273,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "hslToRgb",
     "module": "Color",
     "description": "Converts HSL values (h: 0-360, s: 0-100, l: 0-100) to an RGB object.",
-    "signature": "hslToRgb( h: number, s: number, l: number )",
+    "signature": "hslToRgb(...): any",
     "example": "hslToRgb(...)",
     "output": "..."
   },
@@ -851,7 +1282,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "rgbToHsl",
     "module": "Color",
     "description": "Converts RGB components (0-255) to HSL values (h: 0-360, s: 0-100, l: 0-100).",
-    "signature": "rgbToHsl( r: number, g: number, b: number )",
+    "signature": "rgbToHsl(...): any",
     "example": "rgbToHsl(...)",
     "output": "..."
   },
@@ -860,7 +1291,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "hexToHsl",
     "module": "Color",
     "description": "Converts a hex color string to HSL values.",
-    "signature": "hexToHsl(hex: string)",
+    "signature": "hexToHsl(...): ",
     "example": "hexToHsl(...)",
     "output": "..."
   },
@@ -869,7 +1300,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "hslToHex",
     "module": "Color",
     "description": "Converts HSL values to a hex color string.",
-    "signature": "hslToHex(h: number, s: number, l: number): string",
+    "signature": "hslToHex(...): string",
     "example": "hslToHex(...)",
     "output": "..."
   },
@@ -878,7 +1309,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "lighten",
     "module": "Color",
     "description": "Lightens a hex color by a given amount (0 to 1).",
-    "signature": "lighten(hex: string, amount: number): string",
+    "signature": "lighten(...): string",
     "example": "lighten(...)",
     "output": "..."
   },
@@ -887,7 +1318,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "darken",
     "module": "Color",
     "description": "Darkens a hex color by a given amount (0 to 1).",
-    "signature": "darken(hex: string, amount: number): string",
+    "signature": "darken(...): string",
     "example": "darken(...)",
     "output": "..."
   },
@@ -896,7 +1327,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isValidHex",
     "module": "Color",
     "description": "Validates whether a string is a valid hex color (3 or 6 characters, with or without #).",
-    "signature": "isValidHex(hex: string): boolean",
+    "signature": "isValidHex(...): boolean",
     "example": "isValidHex(...)",
     "output": "..."
   },
@@ -905,8 +1336,71 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "getContrastRatio",
     "module": "Color",
     "description": "Calculates the WCAG contrast ratio between two hex colors.",
-    "signature": "getContrastRatio(hex1: string, hex2: string): number",
+    "signature": "getContrastRatio(...): number",
     "example": "getContrastRatio(...)",
+    "output": "..."
+  },
+  {
+    "id": "pmapseries",
+    "name": "pMapSeries",
+    "module": "Concurrency",
+    "description": "Resolves promises sequentially.",
+    "signature": "pMapSeries(...): any",
+    "example": "pMapSeries(...)",
+    "output": "..."
+  },
+  {
+    "id": "pwaterfall",
+    "name": "pWaterfall",
+    "module": "Concurrency",
+    "description": "Passes the result of each promise sequentially to the next.",
+    "signature": "pWaterfall(...): any",
+    "example": "pWaterfall(...)",
+    "output": "..."
+  },
+  {
+    "id": "mutex",
+    "name": "Mutex",
+    "module": "Concurrency",
+    "description": "Promise-based mutex lock.",
+    "signature": "class Mutex",
+    "example": "new Mutex()",
+    "output": "..."
+  },
+  {
+    "id": "asyncqueue",
+    "name": "AsyncQueue",
+    "module": "Concurrency",
+    "description": "Concurrency limited queue.",
+    "signature": "class AsyncQueue",
+    "example": "new AsyncQueue()",
+    "output": "..."
+  },
+  {
+    "id": "pwaitfor",
+    "name": "pWaitFor",
+    "module": "Concurrency",
+    "description": "Returns a promise that resolves when a condition is met.",
+    "signature": "pWaitFor(...): any",
+    "example": "pWaitFor(...)",
+    "output": "..."
+  },
+  {
+    "id": "ptap",
+    "name": "pTap",
+    "module": "Concurrency",
+    "description": "Taps into a promise chain without affecting its value.",
+    "signature": "pTap(...): any",
+    "example": "pTap(...)",
+    "output": "..."
+  },
+  {
+    "id": "presolveprops",
+    "name": "pResolveProps",
+    "module": "Concurrency",
+    "description": "Resolves an object of promises.",
+    "signature": "pResolveProps(...): any",
+    "example": "pResolveProps(...)",
     "output": "..."
   },
   {
@@ -914,7 +1408,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "uuid",
     "module": "Crypto",
     "description": "Generates an RFC4122 v4 compliant UUID.",
-    "signature": "uuid(): string",
+    "signature": "uuid(...): string",
     "example": "uuid(...)",
     "output": "..."
   },
@@ -923,7 +1417,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "fnv1a",
     "module": "Crypto",
     "description": "Calculates a fast FNV-1a 32-bit non-cryptographic hash of a string.",
-    "signature": "fnv1a(str: string): number",
+    "signature": "fnv1a(...): number",
     "example": "fnv1a(...)",
     "output": "..."
   },
@@ -932,7 +1426,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "generateToken",
     "module": "Crypto",
     "description": "Generates a cryptographically secure random token of a specified length (hexadecimal).",
-    "signature": "generateToken(length",
+    "signature": "generateToken(...): string",
     "example": "generateToken(...)",
     "output": "..."
   },
@@ -941,7 +1435,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "sha256",
     "module": "Crypto",
     "description": "Generates a SHA-256 hash of a string using Web Crypto API.",
-    "signature": "sha256(message: string): Promise<string>",
+    "signature": "sha256(...): Promise<string>",
     "example": "sha256(...)",
     "output": "..."
   },
@@ -950,7 +1444,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "sha1",
     "module": "Crypto",
     "description": "Generates a SHA-1 hash of a string using Web Crypto API.",
-    "signature": "sha1(message: string): Promise<string>",
+    "signature": "sha1(...): Promise<string>",
     "example": "sha1(...)",
     "output": "..."
   },
@@ -959,7 +1453,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "sha384",
     "module": "Crypto",
     "description": "Generates a SHA-384 hash of a string using Web Crypto API.",
-    "signature": "sha384(message: string): Promise<string>",
+    "signature": "sha384(...): Promise<string>",
     "example": "sha384(...)",
     "output": "..."
   },
@@ -968,7 +1462,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "sha512",
     "module": "Crypto",
     "description": "Generates a SHA-512 hash of a string using Web Crypto API.",
-    "signature": "sha512(message: string): Promise<string>",
+    "signature": "sha512(...): Promise<string>",
     "example": "sha512(...)",
     "output": "..."
   },
@@ -977,7 +1471,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "hmacSha256",
     "module": "Crypto",
     "description": "Generates an HMAC-SHA-256 signature for a message and a secret key using Web Crypto API.",
-    "signature": "hmacSha256(message: string, secret: string): Promise<string>",
+    "signature": "hmacSha256(...): Promise<string>",
     "example": "hmacSha256(...)",
     "output": "..."
   },
@@ -986,7 +1480,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "randomInt",
     "module": "Crypto",
     "description": "Generates a cryptographically secure random integer between min and max (inclusive).",
-    "signature": "randomInt(min: number, max: number): number",
+    "signature": "randomInt(...): number",
     "example": "randomInt(...)",
     "output": "..."
   },
@@ -995,7 +1489,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "cyrb53",
     "module": "Crypto",
     "description": "Calculates a fast, 53-bit non-cryptographic string hash using the cyrb53 algorithm.",
-    "signature": "cyrb53(str: string, seed",
+    "signature": "cyrb53(...): number",
     "example": "cyrb53(...)",
     "output": "..."
   },
@@ -1004,7 +1498,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "csvParse",
     "module": "Csv",
     "description": "Parses a CSV/TSV string into an array of objects (if headers are present) or raw string arrays.",
-    "signature": "csvParse( csv: string, options: CsvParseOptions",
+    "signature": "csvParse(...): any",
     "example": "csvParse(...)",
     "output": "..."
   },
@@ -1013,7 +1507,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "csvStringify",
     "module": "Csv",
     "description": "Stringifies an array of objects or an array of arrays into a CSV/TSV table.",
-    "signature": "csvStringify( data: any[], options: CsvStringifyOptions",
+    "signature": "csvStringify(...): any",
     "example": "csvStringify(...)",
     "output": "..."
   },
@@ -1022,7 +1516,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isLeapYear",
     "module": "Date",
     "description": "Checks if a given year is a leap year.",
-    "signature": "isLeapYear(year: number): boolean",
+    "signature": "isLeapYear(...): boolean",
     "example": "isLeapYear(...)",
     "output": "..."
   },
@@ -1031,7 +1525,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "daysInMonth",
     "module": "Date",
     "description": "Returns the number of days in a given month (0-indexed: 0 = January, 11 = December).",
-    "signature": "daysInMonth(year: number, month: number): number",
+    "signature": "daysInMonth(...): number",
     "example": "daysInMonth(...)",
     "output": "..."
   },
@@ -1040,7 +1534,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "diffInDays",
     "module": "Date",
     "description": "Calculates the difference in days between two Date instances.",
-    "signature": "diffInDays(date1: Date, date2: Date): number",
+    "signature": "diffInDays(...): number",
     "example": "diffInDays(...)",
     "output": "..."
   },
@@ -1049,7 +1543,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "relativeTime",
     "module": "Date",
     "description": "Formats a date relative to a base date (defaults to now) into a human-readable string.",
-    "signature": "relativeTime(date: Date, baseDate",
+    "signature": "relativeTime(...): string",
     "example": "relativeTime(...)",
     "output": "..."
   },
@@ -1058,7 +1552,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isValidDate",
     "module": "Date",
     "description": "Checks if a value is a valid Date object.",
-    "signature": "isValidDate(date: any): boolean",
+    "signature": "isValidDate(...): boolean",
     "example": "isValidDate(...)",
     "output": "..."
   },
@@ -1067,7 +1561,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "addDays",
     "module": "Date",
     "description": "Adds a specified number of days to a date.",
-    "signature": "addDays(date: Date, days: number): Date",
+    "signature": "addDays(...): Date",
     "example": "addDays(...)",
     "output": "..."
   },
@@ -1076,7 +1570,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "subDays",
     "module": "Date",
     "description": "Subtracts a specified number of days from a date.",
-    "signature": "subDays(date: Date, days: number): Date",
+    "signature": "subDays(...): Date",
     "example": "subDays(...)",
     "output": "..."
   },
@@ -1085,7 +1579,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "addMonths",
     "module": "Date",
     "description": "Adds a specified number of months to a date.",
-    "signature": "addMonths(date: Date, months: number): Date",
+    "signature": "addMonths(...): Date",
     "example": "addMonths(...)",
     "output": "..."
   },
@@ -1094,7 +1588,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "subMonths",
     "module": "Date",
     "description": "Subtracts a specified number of months from a date.",
-    "signature": "subMonths(date: Date, months: number): Date",
+    "signature": "subMonths(...): Date",
     "example": "subMonths(...)",
     "output": "..."
   },
@@ -1103,7 +1597,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "addYears",
     "module": "Date",
     "description": "Adds a specified number of years to a date.",
-    "signature": "addYears(date: Date, years: number): Date",
+    "signature": "addYears(...): Date",
     "example": "addYears(...)",
     "output": "..."
   },
@@ -1112,7 +1606,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "subYears",
     "module": "Date",
     "description": "Subtracts a specified number of years from a date.",
-    "signature": "subYears(date: Date, years: number): Date",
+    "signature": "subYears(...): Date",
     "example": "subYears(...)",
     "output": "..."
   },
@@ -1121,7 +1615,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isBefore",
     "module": "Date",
     "description": "Checks if the first date is before the second date.",
-    "signature": "isBefore(date1: Date, date2: Date): boolean",
+    "signature": "isBefore(...): boolean",
     "example": "isBefore(...)",
     "output": "..."
   },
@@ -1130,7 +1624,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isAfter",
     "module": "Date",
     "description": "Checks if the first date is after the second date.",
-    "signature": "isAfter(date1: Date, date2: Date): boolean",
+    "signature": "isAfter(...): boolean",
     "example": "isAfter(...)",
     "output": "..."
   },
@@ -1139,7 +1633,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isSameDay",
     "module": "Date",
     "description": "Checks if two dates are on the same calendar day.",
-    "signature": "isSameDay(date1: Date, date2: Date): boolean",
+    "signature": "isSameDay(...): boolean",
     "example": "isSameDay(...)",
     "output": "..."
   },
@@ -1148,7 +1642,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isWeekend",
     "module": "Date",
     "description": "Checks if a date falls on a weekend (Saturday or Sunday).",
-    "signature": "isWeekend(date: Date): boolean",
+    "signature": "isWeekend(...): boolean",
     "example": "isWeekend(...)",
     "output": "..."
   },
@@ -1157,7 +1651,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "startOfDay",
     "module": "Date",
     "description": "Returns a new date at the start of the given date's day (00:00:00.000).",
-    "signature": "startOfDay(date: Date): Date",
+    "signature": "startOfDay(...): Date",
     "example": "startOfDay(...)",
     "output": "..."
   },
@@ -1166,7 +1660,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "endOfDay",
     "module": "Date",
     "description": "Returns a new date at the end of the given date's day (23:59:59.999).",
-    "signature": "endOfDay(date: Date): Date",
+    "signature": "endOfDay(...): Date",
     "example": "endOfDay(...)",
     "output": "..."
   },
@@ -1175,7 +1669,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "startOfMonth",
     "module": "Date",
     "description": "Returns a new date at the start of the given date's month.",
-    "signature": "startOfMonth(date: Date): Date",
+    "signature": "startOfMonth(...): Date",
     "example": "startOfMonth(...)",
     "output": "..."
   },
@@ -1184,7 +1678,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "endOfMonth",
     "module": "Date",
     "description": "Returns a new date at the end of the given date's month.",
-    "signature": "endOfMonth(date: Date): Date",
+    "signature": "endOfMonth(...): Date",
     "example": "endOfMonth(...)",
     "output": "..."
   },
@@ -1193,8 +1687,80 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "formatDate",
     "module": "Date",
     "description": "Simple wrapper for Intl.DateTimeFormat to format dates easily.",
-    "signature": "formatDate( date: Date, options?",
+    "signature": "formatDate(...): any",
     "example": "formatDate(...)",
+    "output": "..."
+  },
+  {
+    "id": "deepfreeze",
+    "name": "deepFreeze",
+    "module": "Deep",
+    "description": "Deep Object Operations",
+    "signature": "deepFreeze(...): Readonly<T>",
+    "example": "deepFreeze(...)",
+    "output": "..."
+  },
+  {
+    "id": "deepseal",
+    "name": "deepSeal",
+    "module": "Deep",
+    "description": "Utility function",
+    "signature": "deepSeal(...): T",
+    "example": "deepSeal(...)",
+    "output": "..."
+  },
+  {
+    "id": "flattendeepobject",
+    "name": "flattenDeepObject",
+    "module": "Deep",
+    "description": "Utility function",
+    "signature": "flattenDeepObject(...): Record<string, any>",
+    "example": "flattenDeepObject(...)",
+    "output": "..."
+  },
+  {
+    "id": "unflattenobject",
+    "name": "unflattenObject",
+    "module": "Deep",
+    "description": "Utility function",
+    "signature": "unflattenObject(...): Record<string, any>",
+    "example": "unflattenObject(...)",
+    "output": "..."
+  },
+  {
+    "id": "deepmapkeys",
+    "name": "deepMapKeys",
+    "module": "Deep",
+    "description": "Utility function",
+    "signature": "deepMapKeys(...): any",
+    "example": "deepMapKeys(...)",
+    "output": "..."
+  },
+  {
+    "id": "deepmapvalues",
+    "name": "deepMapValues",
+    "module": "Deep",
+    "description": "Utility function",
+    "signature": "deepMapValues(...): any",
+    "example": "deepMapValues(...)",
+    "output": "..."
+  },
+  {
+    "id": "deepdiff",
+    "name": "deepDiff",
+    "module": "Deep",
+    "description": "Utility function",
+    "signature": "deepDiff(...): Record<string, any>",
+    "example": "deepDiff(...)",
+    "output": "..."
+  },
+  {
+    "id": "deepomit",
+    "name": "deepOmit",
+    "module": "Deep",
+    "description": "Utility function",
+    "signature": "deepOmit(...): any",
+    "example": "deepOmit(...)",
     "output": "..."
   },
   {
@@ -1202,7 +1768,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "copyToClipboard",
     "module": "Dom",
     "description": "Safe client-side clipboard writer. Returns true if successful, false otherwise.",
-    "signature": "copyToClipboard(text: string): Promise<boolean>",
+    "signature": "copyToClipboard(...): Promise<boolean>",
     "example": "copyToClipboard(...)",
     "output": "..."
   },
@@ -1211,7 +1777,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "getQueryParams",
     "module": "Dom",
     "description": "Returns a key-value record of query parameters from a URL or window.location.",
-    "signature": "getQueryParams(url?: string): Record<string, string>",
+    "signature": "getQueryParams(...): Record<string, string>",
     "example": "getQueryParams(...)",
     "output": "..."
   },
@@ -1220,7 +1786,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "scrollToTop",
     "module": "Dom",
     "description": "Smoothly scrolls the window to the top.",
-    "signature": "scrollToTop(): void",
+    "signature": "scrollToTop(...): void",
     "example": "scrollToTop(...)",
     "output": "..."
   },
@@ -1229,7 +1795,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "getScrollPosition",
     "module": "Dom",
     "description": "Gets the current scroll position of the window.",
-    "signature": "getScrollPosition()",
+    "signature": "getScrollPosition(...): ",
     "example": "getScrollPosition(...)",
     "output": "..."
   },
@@ -1238,7 +1804,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isElementVisible",
     "module": "Dom",
     "description": "Checks if a given HTML element is currently visible within the viewport.",
-    "signature": "isElementVisible(el: HTMLElement | null): boolean",
+    "signature": "isElementVisible(...): boolean",
     "example": "isElementVisible(...)",
     "output": "..."
   },
@@ -1247,7 +1813,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "addClass",
     "module": "Dom",
     "description": "Safely adds a CSS class to an element.",
-    "signature": "addClass(el: HTMLElement | null, className: string): void",
+    "signature": "addClass(...): void",
     "example": "addClass(...)",
     "output": "..."
   },
@@ -1256,7 +1822,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "removeClass",
     "module": "Dom",
     "description": "Safely removes a CSS class from an element.",
-    "signature": "removeClass(el: HTMLElement | null, className: string): void",
+    "signature": "removeClass(...): void",
     "example": "removeClass(...)",
     "output": "..."
   },
@@ -1265,7 +1831,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "toggleClass",
     "module": "Dom",
     "description": "Safely toggles a CSS class on an element.",
-    "signature": "toggleClass(el: HTMLElement | null, className: string): void",
+    "signature": "toggleClass(...): void",
     "example": "toggleClass(...)",
     "output": "..."
   },
@@ -1274,7 +1840,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "hasClass",
     "module": "Dom",
     "description": "Checks if an element has a specific CSS class.",
-    "signature": "hasClass(el: HTMLElement | null, className: string): boolean",
+    "signature": "hasClass(...): boolean",
     "example": "hasClass(...)",
     "output": "..."
   },
@@ -1283,7 +1849,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "createElement",
     "module": "Dom",
     "description": "Creates a DOM element with optional attributes and text content.",
-    "signature": "createElement<K extends keyof HTMLElementTagNameMap>( tag: K, attributes?: Record<string, string>, text?: string ): HTMLElementTagNameMap[K] | null",
+    "signature": "createElement(...): any",
     "example": "createElement(...)",
     "output": "..."
   },
@@ -1292,7 +1858,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "removeElement",
     "module": "Dom",
     "description": "Safely removes an element from the DOM.",
-    "signature": "removeElement(el: HTMLElement | null): void",
+    "signature": "removeElement(...): void",
     "example": "removeElement(...)",
     "output": "..."
   },
@@ -1301,7 +1867,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "setCookie",
     "module": "Dom",
     "description": "Sets a cookie in the browser environment.",
-    "signature": "setCookie(name: string, value: string, days?: number): void",
+    "signature": "setCookie(...): void",
     "example": "setCookie(...)",
     "output": "..."
   },
@@ -1310,7 +1876,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "getCookie",
     "module": "Dom",
     "description": "Gets a cookie value by name in the browser environment.",
-    "signature": "getCookie(name: string): string | null",
+    "signature": "getCookie(...): string | null",
     "example": "getCookie(...)",
     "output": "..."
   },
@@ -1319,7 +1885,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "deleteCookie",
     "module": "Dom",
     "description": "Deletes a cookie by name in the browser environment.",
-    "signature": "deleteCookie(name: string): void",
+    "signature": "deleteCookie(...): void",
     "example": "deleteCookie(...)",
     "output": "..."
   },
@@ -1327,9 +1893,9 @@ export const utilitiesData: UtilityMeta[] = [
     "id": "stack",
     "name": "Stack",
     "module": "Ds",
-    "description": "Isomorphic collection of standard data structures missing in native JavaScript.",
-    "signature": "Stack<T>",
-    "example": "Stack(...)",
+    "description": "Standard LIFO (Last-In-First-Out) Stack.",
+    "signature": "class Stack",
+    "example": "new Stack()",
     "output": "..."
   },
   {
@@ -1337,8 +1903,8 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "Queue",
     "module": "Ds",
     "description": "Standard FIFO (First-In-First-Out) Queue.",
-    "signature": "Queue<T>",
-    "example": "Queue(...)",
+    "signature": "class Queue",
+    "example": "new Queue()",
     "output": "..."
   },
   {
@@ -1346,8 +1912,8 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "PriorityQueue",
     "module": "Ds",
     "description": "Highly performant binary-heap-based Priority Queue.",
-    "signature": "PriorityQueue<T>",
-    "example": "PriorityQueue(...)",
+    "signature": "class PriorityQueue",
+    "example": "new PriorityQueue()",
     "output": "..."
   },
   {
@@ -1355,8 +1921,251 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "BiMap",
     "module": "Ds",
     "description": "Bidirectional 1-to-1 Map mapping unique keys to unique values.",
-    "signature": "BiMap<K, V>",
-    "example": "BiMap(...)",
+    "signature": "class BiMap",
+    "example": "new BiMap()",
+    "output": "..."
+  },
+  {
+    "id": "parseduration",
+    "name": "parseDuration",
+    "module": "Duration",
+    "description": "Duration Utilities",
+    "signature": "parseDuration(...): number",
+    "example": "parseDuration(...)",
+    "output": "..."
+  },
+  {
+    "id": "formattimeduration",
+    "name": "formatTimeDuration",
+    "module": "Duration",
+    "description": "Utility function",
+    "signature": "formatTimeDuration(...): string",
+    "example": "formatTimeDuration(...)",
+    "output": "..."
+  },
+  {
+    "id": "adddurations",
+    "name": "addDurations",
+    "module": "Duration",
+    "description": "Utility function",
+    "signature": "addDurations(...): string",
+    "example": "addDurations(...)",
+    "output": "..."
+  },
+  {
+    "id": "subdurations",
+    "name": "subDurations",
+    "module": "Duration",
+    "description": "Utility function",
+    "signature": "subDurations(...): string",
+    "example": "subDurations(...)",
+    "output": "..."
+  },
+  {
+    "id": "isdurationlonger",
+    "name": "isDurationLonger",
+    "module": "Duration",
+    "description": "Utility function",
+    "signature": "isDurationLonger(...): boolean",
+    "example": "isDurationLonger(...)",
+    "output": "..."
+  },
+  {
+    "id": "isdurationshorter",
+    "name": "isDurationShorter",
+    "module": "Duration",
+    "description": "Utility function",
+    "signature": "isDurationShorter(...): boolean",
+    "example": "isDurationShorter(...)",
+    "output": "..."
+  },
+  {
+    "id": "mstoticks",
+    "name": "msToTicks",
+    "module": "Duration",
+    "description": "Utility function",
+    "signature": "msToTicks(...): number",
+    "example": "msToTicks(...)",
+    "output": "..."
+  },
+  {
+    "id": "tickstoms",
+    "name": "ticksToMs",
+    "module": "Duration",
+    "description": "Utility function",
+    "signature": "ticksToMs(...): number",
+    "example": "ticksToMs(...)",
+    "output": "..."
+  },
+  {
+    "id": "linear",
+    "name": "linear",
+    "module": "Easing",
+    "description": "Standard animation easing functions.",
+    "signature": "linear(...): number",
+    "example": "linear(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeinquad",
+    "name": "easeInQuad",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeInQuad(...): number",
+    "example": "easeInQuad(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeoutquad",
+    "name": "easeOutQuad",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeOutQuad(...): number",
+    "example": "easeOutQuad(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeinoutquad",
+    "name": "easeInOutQuad",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeInOutQuad(...): number",
+    "example": "easeInOutQuad(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeincubic",
+    "name": "easeInCubic",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeInCubic(...): number",
+    "example": "easeInCubic(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeoutcubic",
+    "name": "easeOutCubic",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeOutCubic(...): number",
+    "example": "easeOutCubic(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeinoutcubic",
+    "name": "easeInOutCubic",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeInOutCubic(...): number",
+    "example": "easeInOutCubic(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeinquart",
+    "name": "easeInQuart",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeInQuart(...): number",
+    "example": "easeInQuart(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeoutquart",
+    "name": "easeOutQuart",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeOutQuart(...): number",
+    "example": "easeOutQuart(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeinoutquart",
+    "name": "easeInOutQuart",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeInOutQuart(...): number",
+    "example": "easeInOutQuart(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeinquint",
+    "name": "easeInQuint",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeInQuint(...): number",
+    "example": "easeInQuint(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeoutquint",
+    "name": "easeOutQuint",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeOutQuint(...): number",
+    "example": "easeOutQuint(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeinoutquint",
+    "name": "easeInOutQuint",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeInOutQuint(...): number",
+    "example": "easeInOutQuint(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeinsine",
+    "name": "easeInSine",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeInSine(...): number",
+    "example": "easeInSine(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeoutsine",
+    "name": "easeOutSine",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeOutSine(...): number",
+    "example": "easeOutSine(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeinoutsine",
+    "name": "easeInOutSine",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeInOutSine(...): number",
+    "example": "easeInOutSine(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeinexpo",
+    "name": "easeInExpo",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeInExpo(...): number",
+    "example": "easeInExpo(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeoutexpo",
+    "name": "easeOutExpo",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeOutExpo(...): number",
+    "example": "easeOutExpo(...)",
+    "output": "..."
+  },
+  {
+    "id": "easeinoutexpo",
+    "name": "easeInOutExpo",
+    "module": "Easing",
+    "description": "Utility function",
+    "signature": "easeInOutExpo(...): number",
+    "example": "easeInOutExpo(...)",
     "output": "..."
   },
   {
@@ -1364,7 +2173,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "base64Encode",
     "module": "Encoding",
     "description": "Encodes a string to Base64 format.",
-    "signature": "base64Encode(str: string): string",
+    "signature": "base64Encode(...): string",
     "example": "base64Encode(...)",
     "output": "..."
   },
@@ -1373,7 +2182,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "base64Decode",
     "module": "Encoding",
     "description": "Decodes a Base64 string back to its original string format.",
-    "signature": "base64Decode(str: string): string",
+    "signature": "base64Decode(...): string",
     "example": "base64Decode(...)",
     "output": "..."
   },
@@ -1382,7 +2191,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "utf8Encode",
     "module": "Encoding",
     "description": "Encodes a string into a Uint8Array using UTF-8 encoding.",
-    "signature": "utf8Encode(str: string): Uint8Array",
+    "signature": "utf8Encode(...): Uint8Array",
     "example": "utf8Encode(...)",
     "output": "..."
   },
@@ -1391,7 +2200,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "utf8Decode",
     "module": "Encoding",
     "description": "Decodes a Uint8Array back into a string using UTF-8 decoding.",
-    "signature": "utf8Decode(bytes: Uint8Array): string",
+    "signature": "utf8Decode(...): string",
     "example": "utf8Decode(...)",
     "output": "..."
   },
@@ -1400,7 +2209,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "hexEncode",
     "module": "Encoding",
     "description": "Encodes a string into a Hexadecimal format.",
-    "signature": "hexEncode(str: string): string",
+    "signature": "hexEncode(...): string",
     "example": "hexEncode(...)",
     "output": "..."
   },
@@ -1409,7 +2218,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "hexDecode",
     "module": "Encoding",
     "description": "Decodes a Hexadecimal string back into its original string format.",
-    "signature": "hexDecode(hexStr: string): string",
+    "signature": "hexDecode(...): string",
     "example": "hexDecode(...)",
     "output": "..."
   },
@@ -1418,7 +2227,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "urlEncode",
     "module": "Encoding",
     "description": "Safely encodes a URI component.",
-    "signature": "urlEncode(str: string): string",
+    "signature": "urlEncode(...): string",
     "example": "urlEncode(...)",
     "output": "..."
   },
@@ -1427,7 +2236,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "urlDecode",
     "module": "Encoding",
     "description": "Safely decodes a URI component.",
-    "signature": "urlDecode(str: string): string",
+    "signature": "urlDecode(...): string",
     "example": "urlDecode(...)",
     "output": "..."
   },
@@ -1436,7 +2245,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "bufferToHex",
     "module": "Encoding",
     "description": "Converts a Uint8Array buffer into a hexadecimal string.",
-    "signature": "bufferToHex(bytes: Uint8Array): string",
+    "signature": "bufferToHex(...): string",
     "example": "bufferToHex(...)",
     "output": "..."
   },
@@ -1445,8 +2254,62 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "hexToBuffer",
     "module": "Encoding",
     "description": "Converts a hexadecimal string into a Uint8Array buffer.",
-    "signature": "hexToBuffer(hexStr: string): Uint8Array",
+    "signature": "hexToBuffer(...): Uint8Array",
     "example": "hexToBuffer(...)",
+    "output": "..."
+  },
+  {
+    "id": "codeerror",
+    "name": "CodeError",
+    "module": "Error",
+    "description": "Custom Error class with a code property.",
+    "signature": "class CodeError",
+    "example": "new CodeError()",
+    "output": "..."
+  },
+  {
+    "id": "httperror",
+    "name": "HttpError",
+    "module": "Error",
+    "description": "Custom Error class for HTTP errors.",
+    "signature": "class HttpError",
+    "example": "new HttpError()",
+    "output": "..."
+  },
+  {
+    "id": "normalizeerror",
+    "name": "normalizeError",
+    "module": "Error",
+    "description": "Safely parses an unknown error into a standard Error object.",
+    "signature": "normalizeError(...): Error",
+    "example": "normalizeError(...)",
+    "output": "..."
+  },
+  {
+    "id": "geterrormessage",
+    "name": "getErrorMessage",
+    "module": "Error",
+    "description": "Attempts to extract a user-friendly error message from an unknown error.",
+    "signature": "getErrorMessage(...): string",
+    "example": "getErrorMessage(...)",
+    "output": "..."
+  },
+  {
+    "id": "parsestacktrace",
+    "name": "parseStackTrace",
+    "module": "Error",
+    "description": "Parses a stack trace string into an array of call site strings.",
+    "signature": "parseStackTrace(...): string[]",
+    "example": "parseStackTrace(...)",
+    "output": "..."
+  },
+  {
+    "id": "trycatch",
+    "name": "tryCatch",
+    "module": "Error",
+    "description": "Wraps a function to catch synchronous exceptions and return them as a result tuple [error, result].",
+    "signature": "tryCatch(...): [E | null, T | null]",
+    "example": "tryCatch(...)",
     "output": "..."
   },
   {
@@ -1454,16 +2317,16 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "EventEmitter",
     "module": "Events",
     "description": "A lightweight, high-performance event emitter class for managing pub-sub events.",
-    "signature": "EventEmitter",
-    "example": "EventEmitter(...)",
+    "signature": "class EventEmitter",
+    "example": "new EventEmitter()",
     "output": "..."
   },
   {
     "id": "listen",
     "name": "listen",
     "module": "Events",
-    "description": "Registers a listener function for a specific event name.",
-    "signature": "listen( target: EventTarget, event: string, handler: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions ): ()",
+    "description": "Attaches an event listener to a target and returns a function to remove it.",
+    "signature": "listen(...): any",
     "example": "listen(...)",
     "output": "..."
   },
@@ -1472,7 +2335,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "listenOnce",
     "module": "Events",
     "description": "Attaches a one-time event listener to a target. Returns a function to remove it early.",
-    "signature": "listenOnce( target: EventTarget, event: string, handler: EventListener, options?: boolean | AddEventListenerOptions ): ()",
+    "signature": "listenOnce(...): any",
     "example": "listenOnce(...)",
     "output": "..."
   },
@@ -1481,7 +2344,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "triggerEvent",
     "module": "Events",
     "description": "Triggers a custom event on a target with optional detail payload.",
-    "signature": "triggerEvent( target: EventTarget, eventName: string, detail?: any ): boolean",
+    "signature": "triggerEvent(...): any",
     "example": "triggerEvent(...)",
     "output": "..."
   },
@@ -1490,7 +2353,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "delegateEvent",
     "module": "Events",
     "description": "Attaches an event listener that delegates to a specific child selector.",
-    "signature": "delegateEvent( target: HTMLElement | Document, event: string, selector: string, handler: (e: Event, matchedTarget: HTMLElement)",
+    "signature": "delegateEvent(...): any",
     "example": "delegateEvent(...)",
     "output": "..."
   },
@@ -1499,7 +2362,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "waitForEvent",
     "module": "Events",
     "description": "Returns a promise that resolves when the specified event is fired on the target.",
-    "signature": "waitForEvent( target: EventTarget, event: string, timeoutMs?: number ): Promise<Event>",
+    "signature": "waitForEvent(...): any",
     "example": "waitForEvent(...)",
     "output": "..."
   },
@@ -1508,8 +2371,188 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "stopEvent",
     "module": "Events",
     "description": "Prevents the default action and stops event propagation.",
-    "signature": "stopEvent(e: Event): void",
+    "signature": "stopEvent(...): void",
     "example": "stopEvent(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatbytes",
+    "name": "formatBytes",
+    "module": "File",
+    "description": "Formats a file size in bytes to a human-readable string.",
+    "signature": "formatBytes(...): string",
+    "example": "formatBytes(...)",
+    "output": "..."
+  },
+  {
+    "id": "getfileextension",
+    "name": "getFileExtension",
+    "module": "File",
+    "description": "Extracts the extension from a file name.",
+    "signature": "getFileExtension(...): string",
+    "example": "getFileExtension(...)",
+    "output": "..."
+  },
+  {
+    "id": "getbasename",
+    "name": "getBaseName",
+    "module": "File",
+    "description": "Gets the base name of a file (name without extension).",
+    "signature": "getBaseName(...): string",
+    "example": "getBaseName(...)",
+    "output": "..."
+  },
+  {
+    "id": "getmimetype",
+    "name": "getMimeType",
+    "module": "File",
+    "description": "Attempts to guess the MIME type based on file extension.",
+    "signature": "getMimeType(...): string | undefined",
+    "example": "getMimeType(...)",
+    "output": "..."
+  },
+  {
+    "id": "isimage",
+    "name": "isImage",
+    "module": "File",
+    "description": "Checks if a file name represents an image.",
+    "signature": "isImage(...): boolean",
+    "example": "isImage(...)",
+    "output": "..."
+  },
+  {
+    "id": "isvideo",
+    "name": "isVideo",
+    "module": "File",
+    "description": "Checks if a file name represents a video.",
+    "signature": "isVideo(...): boolean",
+    "example": "isVideo(...)",
+    "output": "..."
+  },
+  {
+    "id": "isaudio",
+    "name": "isAudio",
+    "module": "File",
+    "description": "Checks if a file name represents audio.",
+    "signature": "isAudio(...): boolean",
+    "example": "isAudio(...)",
+    "output": "..."
+  },
+  {
+    "id": "isdocument",
+    "name": "isDocument",
+    "module": "File",
+    "description": "Checks if a file name represents a document.",
+    "signature": "isDocument(...): boolean",
+    "example": "isDocument(...)",
+    "output": "..."
+  },
+  {
+    "id": "readasdataurl",
+    "name": "readAsDataURL",
+    "module": "File",
+    "description": "Reads a File or Blob as a Data URL. (Browser only)",
+    "signature": "readAsDataURL(...): Promise<string>",
+    "example": "readAsDataURL(...)",
+    "output": "..."
+  },
+  {
+    "id": "readastext",
+    "name": "readAsText",
+    "module": "File",
+    "description": "Reads a File or Blob as Text. (Browser only)",
+    "signature": "readAsText(...): Promise<string>",
+    "example": "readAsText(...)",
+    "output": "..."
+  },
+  {
+    "id": "calculatesimpleinterest",
+    "name": "calculateSimpleInterest",
+    "module": "Finance",
+    "description": "Financial Math Utilities",
+    "signature": "calculateSimpleInterest(...): number",
+    "example": "calculateSimpleInterest(...)",
+    "output": "..."
+  },
+  {
+    "id": "calculatecompoundinterest",
+    "name": "calculateCompoundInterest",
+    "module": "Finance",
+    "description": "Utility function",
+    "signature": "calculateCompoundInterest(...): number",
+    "example": "calculateCompoundInterest(...)",
+    "output": "..."
+  },
+  {
+    "id": "calculatepmt",
+    "name": "calculatePMT",
+    "module": "Finance",
+    "description": "Utility function",
+    "signature": "calculatePMT(...): number",
+    "example": "calculatePMT(...)",
+    "output": "..."
+  },
+  {
+    "id": "calculateroi",
+    "name": "calculateROI",
+    "module": "Finance",
+    "description": "Utility function",
+    "signature": "calculateROI(...): number",
+    "example": "calculateROI(...)",
+    "output": "..."
+  },
+  {
+    "id": "calculatenpv",
+    "name": "calculateNPV",
+    "module": "Finance",
+    "description": "Utility function",
+    "signature": "calculateNPV(...): number",
+    "example": "calculateNPV(...)",
+    "output": "..."
+  },
+  {
+    "id": "calculatecagr",
+    "name": "calculateCAGR",
+    "module": "Finance",
+    "description": "Utility function",
+    "signature": "calculateCAGR(...): number",
+    "example": "calculateCAGR(...)",
+    "output": "..."
+  },
+  {
+    "id": "calculatemarkup",
+    "name": "calculateMarkup",
+    "module": "Finance",
+    "description": "Utility function",
+    "signature": "calculateMarkup(...): number",
+    "example": "calculateMarkup(...)",
+    "output": "..."
+  },
+  {
+    "id": "calculatemargin",
+    "name": "calculateMargin",
+    "module": "Finance",
+    "description": "Utility function",
+    "signature": "calculateMargin(...): number",
+    "example": "calculateMargin(...)",
+    "output": "..."
+  },
+  {
+    "id": "calculateamortization",
+    "name": "calculateAmortization",
+    "module": "Finance",
+    "description": "Utility function",
+    "signature": "calculateAmortization(...): ",
+    "example": "calculateAmortization(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatfinancecurrency",
+    "name": "formatFinanceCurrency",
+    "module": "Finance",
+    "description": "Utility function",
+    "signature": "formatFinanceCurrency(...): string",
+    "example": "formatFinanceCurrency(...)",
     "output": "..."
   },
   {
@@ -1517,7 +2560,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "formatDuration",
     "module": "Format",
     "description": "Formats a duration in milliseconds to a human-readable string.",
-    "signature": "formatDuration(ms: number): string",
+    "signature": "formatDuration(...): string",
     "example": "formatDuration(...)",
     "output": "..."
   },
@@ -1526,7 +2569,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "formatPhoneNumber",
     "module": "Format",
     "description": "Formats a US phone number string.",
-    "signature": "formatPhoneNumber(phone: string): string",
+    "signature": "formatPhoneNumber(...): string",
     "example": "formatPhoneNumber(...)",
     "output": "..."
   },
@@ -1535,7 +2578,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "formatCreditCardNumber",
     "module": "Format",
     "description": "Formats a credit card number with spaces every 4 digits.",
-    "signature": "formatCreditCardNumber(num: string): string",
+    "signature": "formatCreditCardNumber(...): string",
     "example": "formatCreditCardNumber(...)",
     "output": "..."
   },
@@ -1544,7 +2587,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "formatPercentage",
     "module": "Format",
     "description": "Formats a number as a percentage string.",
-    "signature": "formatPercentage(value: number, decimals: number",
+    "signature": "formatPercentage(...): string",
     "example": "formatPercentage(...)",
     "output": "..."
   },
@@ -1553,7 +2596,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "formatListJoin",
     "module": "Format",
     "description": "Joins an array of strings with a conjunction before the last item.",
-    "signature": "formatListJoin(items: string[], conjunction: string",
+    "signature": "formatListJoin(...): string",
     "example": "formatListJoin(...)",
     "output": "..."
   },
@@ -1562,7 +2605,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "pluralize",
     "module": "Format",
     "description": "Returns a count with a properly pluralized noun.",
-    "signature": "pluralize(count: number, singular: string, plural?: string): string",
+    "signature": "pluralize(...): string",
     "example": "pluralize(...)",
     "output": "..."
   },
@@ -1571,7 +2614,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "maskString",
     "module": "Format",
     "description": "Masks a string, showing only the last N characters.",
-    "signature": "maskString(str: string, visibleChars: number",
+    "signature": "maskString(...): string",
     "example": "maskString(...)",
     "output": "..."
   },
@@ -1580,7 +2623,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "truncateMiddle",
     "module": "Format",
     "description": "Truncates a string in the middle, preserving the beginning and end.",
-    "signature": "truncateMiddle(str: string, maxLen: number, separator: string",
+    "signature": "truncateMiddle(...): string",
     "example": "truncateMiddle(...)",
     "output": "..."
   },
@@ -1589,8 +2632,62 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "formatWithSeparator",
     "module": "Format",
     "description": "Formats a number with a thousands separator.",
-    "signature": "formatWithSeparator(num: number, separator: string",
+    "signature": "formatWithSeparator(...): string",
     "example": "formatWithSeparator(...)",
+    "output": "..."
+  },
+  {
+    "id": "statemachine",
+    "name": "StateMachine",
+    "module": "Fsm",
+    "description": "Finite State Machine Utilities",
+    "signature": "class StateMachine",
+    "example": "new StateMachine()",
+    "output": "..."
+  },
+  {
+    "id": "createmachine",
+    "name": "createMachine",
+    "module": "Fsm",
+    "description": "Utility function",
+    "signature": "createMachine(...): StateMachine",
+    "example": "createMachine(...)",
+    "output": "..."
+  },
+  {
+    "id": "transitionstate",
+    "name": "transitionState",
+    "module": "Fsm",
+    "description": "Utility function",
+    "signature": "transitionState(...): boolean",
+    "example": "transitionState(...)",
+    "output": "..."
+  },
+  {
+    "id": "cantransition",
+    "name": "canTransition",
+    "module": "Fsm",
+    "description": "Utility function",
+    "signature": "canTransition(...): boolean",
+    "example": "canTransition(...)",
+    "output": "..."
+  },
+  {
+    "id": "getmachinestate",
+    "name": "getMachineState",
+    "module": "Fsm",
+    "description": "Utility function",
+    "signature": "getMachineState(...): string",
+    "example": "getMachineState(...)",
+    "output": "..."
+  },
+  {
+    "id": "getmachinehistory",
+    "name": "getMachineHistory",
+    "module": "Fsm",
+    "description": "Utility function",
+    "signature": "getMachineHistory(...): string[]",
+    "example": "getMachineHistory(...)",
     "output": "..."
   },
   {
@@ -1598,7 +2695,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "identity",
     "module": "Functional",
     "description": "Creates a function that returns its first argument.",
-    "signature": "identity<T>(val: T): T",
+    "signature": "identity(...): T",
     "example": "identity(...)",
     "output": "..."
   },
@@ -1607,7 +2704,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "flip",
     "module": "Functional",
     "description": "Creates a function that invokes the provided function with its arguments reversed.",
-    "signature": "flip<T extends (...args: any[])",
+    "signature": "flip(...): any",
     "example": "flip(...)",
     "output": "..."
   },
@@ -1616,7 +2713,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "tap",
     "module": "Functional",
     "description": "Invokes an interceptor function with a value, and then returns the value.",
-    "signature": "tap<T>(val: T, interceptor: (val: T)",
+    "signature": "tap(...): T",
     "example": "tap(...)",
     "output": "..."
   },
@@ -1625,7 +2722,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "memoize",
     "module": "Functional",
     "description": "Creates a function that memoizes the result of a given function.",
-    "signature": "memoize<T extends (...args: any[])",
+    "signature": "memoize(...): any",
     "example": "memoize(...)",
     "output": "..."
   },
@@ -1634,7 +2731,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "pipe",
     "module": "Functional",
     "description": "Performs left-to-right function composition.",
-    "signature": "pipe(...fns: Array<(...args: any[])",
+    "signature": "pipe(...): any",
     "example": "pipe(...)",
     "output": "..."
   },
@@ -1643,7 +2740,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "compose",
     "module": "Functional",
     "description": "Performs right-to-left function composition.",
-    "signature": "compose(...fns: Array<(...args: any[])",
+    "signature": "compose(...): any",
     "example": "compose(...)",
     "output": "..."
   },
@@ -1652,7 +2749,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "curry",
     "module": "Functional",
     "description": "Creates a curried function.",
-    "signature": "curry(fn: (...args: any[])",
+    "signature": "curry(...): any",
     "example": "curry(...)",
     "output": "..."
   },
@@ -1661,7 +2758,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "partial",
     "module": "Functional",
     "description": "Creates a function that invokes fn with partials prepended to the arguments it receives.",
-    "signature": "partial(fn: (...args: any[])",
+    "signature": "partial(...): any",
     "example": "partial(...)",
     "output": "..."
   },
@@ -1670,7 +2767,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "noop",
     "module": "Functional",
     "description": "A no-operation function that does nothing.",
-    "signature": "noop(): void",
+    "signature": "noop(...): void",
     "example": "noop(...)",
     "output": "..."
   },
@@ -1679,7 +2776,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "constant",
     "module": "Functional",
     "description": "Creates a function that always returns the same value.",
-    "signature": "constant<T>(val: T): ()",
+    "signature": "constant(...): () => T",
     "example": "constant(...)",
     "output": "..."
   },
@@ -1688,7 +2785,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "not",
     "module": "Functional",
     "description": "Creates a function that negates the result of a predicate.",
-    "signature": "not<T extends (...args: any[])",
+    "signature": "not(...): any",
     "example": "not(...)",
     "output": "..."
   },
@@ -1697,7 +2794,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "trampoline",
     "module": "Functional",
     "description": "Trampoline for stack-safe recursion.",
-    "signature": "trampoline<T>(fn: (...args: any[])",
+    "signature": "trampoline(...): (...args: any[]) => T",
     "example": "trampoline(...)",
     "output": "..."
   },
@@ -1706,7 +2803,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "juxt",
     "module": "Functional",
     "description": "Applies multiple functions to the same arguments and returns an array of results.",
-    "signature": "juxt<T extends any[]>( ...fns: Array<(...args: T)",
+    "signature": "juxt(...): any",
     "example": "juxt(...)",
     "output": "..."
   },
@@ -1715,7 +2812,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "onceFn",
     "module": "Functional",
     "description": "Creates a function that is restricted to being called only once.",
-    "signature": "onceFn<T extends (...args: any[])",
+    "signature": "onceFn(...): T",
     "example": "onceFn(...)",
     "output": "..."
   },
@@ -1724,7 +2821,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "distance2D",
     "module": "Geometry",
     "description": "Calculates the Euclidean distance between two 2D points.",
-    "signature": "distance2D(x1: number, y1: number, x2: number, y2: number): number",
+    "signature": "distance2D(...): number",
     "example": "distance2D(...)",
     "output": "..."
   },
@@ -1733,7 +2830,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "distance3D",
     "module": "Geometry",
     "description": "Calculates the Euclidean distance between two 3D points.",
-    "signature": "distance3D(x1: number, y1: number, z1: number, x2: number, y2: number, z2: number): number",
+    "signature": "distance3D(...): number",
     "example": "distance3D(...)",
     "output": "..."
   },
@@ -1742,7 +2839,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "midpoint",
     "module": "Geometry",
     "description": "Calculates the midpoint between two 2D points.",
-    "signature": "midpoint(x1: number, y1: number, x2: number, y2: number)",
+    "signature": "midpoint(...): ",
     "example": "midpoint(...)",
     "output": "..."
   },
@@ -1751,7 +2848,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "angleBetween",
     "module": "Geometry",
     "description": "Calculates the angle in radians between two 2D points.",
-    "signature": "angleBetween(x1: number, y1: number, x2: number, y2: number): number",
+    "signature": "angleBetween(...): number",
     "example": "angleBetween(...)",
     "output": "..."
   },
@@ -1760,7 +2857,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "rotatePoint",
     "module": "Geometry",
     "description": "Rotates a 2D point around an origin point by a given angle in radians.",
-    "signature": "rotatePoint( px: number, py: number, cx: number, cy: number, angleRadians: number )",
+    "signature": "rotatePoint(...): any",
     "example": "rotatePoint(...)",
     "output": "..."
   },
@@ -1769,7 +2866,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "circleArea",
     "module": "Geometry",
     "description": "Calculates the area of a circle given its radius.",
-    "signature": "circleArea(radius: number): number",
+    "signature": "circleArea(...): number",
     "example": "circleArea(...)",
     "output": "..."
   },
@@ -1778,7 +2875,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "circleCircumference",
     "module": "Geometry",
     "description": "Calculates the circumference of a circle given its radius.",
-    "signature": "circleCircumference(radius: number): number",
+    "signature": "circleCircumference(...): number",
     "example": "circleCircumference(...)",
     "output": "..."
   },
@@ -1787,7 +2884,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "rectangleArea",
     "module": "Geometry",
     "description": "Calculates the area of a rectangle.",
-    "signature": "rectangleArea(width: number, height: number): number",
+    "signature": "rectangleArea(...): number",
     "example": "rectangleArea(...)",
     "output": "..."
   },
@@ -1796,8 +2893,62 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "triangleArea",
     "module": "Geometry",
     "description": "Calculates the area of a triangle given its base and height.",
-    "signature": "triangleArea(base: number, height: number): number",
+    "signature": "triangleArea(...): number",
     "example": "triangleArea(...)",
+    "output": "..."
+  },
+  {
+    "id": "bfs",
+    "name": "bfs",
+    "module": "Graph",
+    "description": "Performs Breadth-First Search (BFS) on a graph.",
+    "signature": "bfs(...): string[]",
+    "example": "bfs(...)",
+    "output": "..."
+  },
+  {
+    "id": "dfs",
+    "name": "dfs",
+    "module": "Graph",
+    "description": "Performs Depth-First Search (DFS) on a graph.",
+    "signature": "dfs(...): string[]",
+    "example": "dfs(...)",
+    "output": "..."
+  },
+  {
+    "id": "shortestpathbfs",
+    "name": "shortestPathBFS",
+    "module": "Graph",
+    "description": "Finds the shortest path between two nodes using BFS (unweighted).",
+    "signature": "shortestPathBFS(...): string[] | null",
+    "example": "shortestPathBFS(...)",
+    "output": "..."
+  },
+  {
+    "id": "topologicalsort",
+    "name": "topologicalSort",
+    "module": "Graph",
+    "description": "Performs a topological sort of a Directed Acyclic Graph (DAG).",
+    "signature": "topologicalSort(...): string[]",
+    "example": "topologicalSort(...)",
+    "output": "..."
+  },
+  {
+    "id": "addedge",
+    "name": "addEdge",
+    "module": "Graph",
+    "description": "Adds an edge to an adjacency list.",
+    "signature": "addEdge(...): any",
+    "example": "addEdge(...)",
+    "output": "..."
+  },
+  {
+    "id": "hascycle",
+    "name": "hasCycle",
+    "module": "Graph",
+    "description": "Detects if a directed graph contains a cycle.",
+    "signature": "hasCycle(...): boolean",
+    "example": "hasCycle(...)",
     "output": "..."
   },
   {
@@ -1805,7 +2956,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "safeJsonParse",
     "module": "Guard",
     "description": "Safely parses a JSON string. Returns the parsed value or the fallback on failure.",
-    "signature": "safeJsonParse<T",
+    "signature": "safeJsonParse(...): T | null",
     "example": "safeJsonParse(...)",
     "output": "..."
   },
@@ -1814,7 +2965,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "safeJsonStringify",
     "module": "Guard",
     "description": "Safely stringifies a value to JSON. Handles circular references gracefully.",
-    "signature": "safeJsonStringify(val: any, fallback?: string): string",
+    "signature": "safeJsonStringify(...): string",
     "example": "safeJsonStringify(...)",
     "output": "..."
   },
@@ -1823,7 +2974,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "safeParseInt",
     "module": "Guard",
     "description": "Safely parses an integer. Returns the fallback (default 0) if parsing fails or produces NaN.",
-    "signature": "safeParseInt(val: string, fallback: number",
+    "signature": "safeParseInt(...): number",
     "example": "safeParseInt(...)",
     "output": "..."
   },
@@ -1832,7 +2983,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "safeParseFloat",
     "module": "Guard",
     "description": "Safely parses a float. Returns the fallback (default 0) if parsing fails or produces NaN.",
-    "signature": "safeParseFloat(val: string, fallback: number",
+    "signature": "safeParseFloat(...): number",
     "example": "safeParseFloat(...)",
     "output": "..."
   },
@@ -1841,7 +2992,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "safeParseDate",
     "module": "Guard",
     "description": "Safely parses a date string. Returns the fallback or null if parsing fails.",
-    "signature": "safeParseDate(val: string, fallback?: Date): Date | null",
+    "signature": "safeParseDate(...): Date | null",
     "example": "safeParseDate(...)",
     "output": "..."
   },
@@ -1850,7 +3001,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "coalesce",
     "module": "Guard",
     "description": "Returns the first non-null and non-undefined value from the arguments.",
-    "signature": "coalesce<T>(...values: (T | null | undefined)[]): T | undefined",
+    "signature": "coalesce(...): T | undefined",
     "example": "coalesce(...)",
     "output": "..."
   },
@@ -1859,7 +3010,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "attempt",
     "module": "Guard",
     "description": "Wraps a synchronous function call in a try/catch. Returns the fallback on failure.",
-    "signature": "attempt<T>(fn: ()",
+    "signature": "attempt(...): T | undefined",
     "example": "attempt(...)",
     "output": "..."
   },
@@ -1868,7 +3019,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "attemptAsync",
     "module": "Guard",
     "description": "Wraps an asynchronous function call in a try/catch. Returns the fallback on failure.",
-    "signature": "attemptAsync<T>(fn: ()",
+    "signature": "attemptAsync(...): Promise<T | undefined>",
     "example": "attemptAsync(...)",
     "output": "..."
   },
@@ -1877,7 +3028,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "invariant",
     "module": "Guard",
     "description": "Asserts that a condition is true. Throws an error with the given message if not.",
-    "signature": "invariant(condition: boolean, message: string): asserts condition",
+    "signature": "invariant(...): asserts condition",
     "example": "invariant(...)",
     "output": "..."
   },
@@ -1886,7 +3037,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "assertDefined",
     "module": "Guard",
     "description": "Asserts that a value is not null or undefined. Throws if it is.",
-    "signature": "assertDefined<T>(val: T | null | undefined, name?: string): T",
+    "signature": "assertDefined(...): T",
     "example": "assertDefined(...)",
     "output": "..."
   },
@@ -1895,7 +3046,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "assertNever",
     "module": "Guard",
     "description": "Used for exhaustive checks in switch statements. Throws if called.",
-    "signature": "assertNever(val: never): never",
+    "signature": "assertNever(...): never",
     "example": "assertNever(...)",
     "output": "..."
   },
@@ -1904,8 +3055,386 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "withDefault",
     "module": "Guard",
     "description": "Returns the value if it is not null/undefined, otherwise returns the default value.",
-    "signature": "withDefault<T>(val: T | null | undefined, defaultVal: T): T",
+    "signature": "withDefault(...): T",
     "example": "withDefault(...)",
+    "output": "..."
+  },
+  {
+    "id": "crc32",
+    "name": "crc32",
+    "module": "Hash",
+    "description": "Hashing and Encoding Utilities",
+    "signature": "crc32(...): number",
+    "example": "crc32(...)",
+    "output": "..."
+  },
+  {
+    "id": "djb2",
+    "name": "djb2",
+    "module": "Hash",
+    "description": "Utility function",
+    "signature": "djb2(...): number",
+    "example": "djb2(...)",
+    "output": "..."
+  },
+  {
+    "id": "sdbm",
+    "name": "sdbm",
+    "module": "Hash",
+    "description": "Utility function",
+    "signature": "sdbm(...): number",
+    "example": "sdbm(...)",
+    "output": "..."
+  },
+  {
+    "id": "encodebase64",
+    "name": "encodeBase64",
+    "module": "Hash",
+    "description": "Utility function",
+    "signature": "encodeBase64(...): string",
+    "example": "encodeBase64(...)",
+    "output": "..."
+  },
+  {
+    "id": "decodebase64",
+    "name": "decodeBase64",
+    "module": "Hash",
+    "description": "Utility function",
+    "signature": "decodeBase64(...): string",
+    "example": "decodeBase64(...)",
+    "output": "..."
+  },
+  {
+    "id": "encodehex",
+    "name": "encodeHex",
+    "module": "Hash",
+    "description": "Utility function",
+    "signature": "encodeHex(...): string",
+    "example": "encodeHex(...)",
+    "output": "..."
+  },
+  {
+    "id": "decodehex",
+    "name": "decodeHex",
+    "module": "Hash",
+    "description": "Utility function",
+    "signature": "decodeHex(...): string",
+    "example": "decodeHex(...)",
+    "output": "..."
+  },
+  {
+    "id": "uuidv4",
+    "name": "uuidV4",
+    "module": "Hash",
+    "description": "Utility function",
+    "signature": "uuidV4(...): string",
+    "example": "uuidV4(...)",
+    "output": "..."
+  },
+  {
+    "id": "generatenanoid",
+    "name": "generateNanoId",
+    "module": "Hash",
+    "description": "Utility function",
+    "signature": "generateNanoId(...): string",
+    "example": "generateNanoId(...)",
+    "output": "..."
+  },
+  {
+    "id": "checksum",
+    "name": "checksum",
+    "module": "Hash",
+    "description": "Utility function",
+    "signature": "checksum(...): number",
+    "example": "checksum(...)",
+    "output": "..."
+  },
+  {
+    "id": "encodehtmlentities",
+    "name": "encodeHtmlEntities",
+    "module": "Html Entities",
+    "description": "Encodes special characters in a string to HTML entities.",
+    "signature": "encodeHtmlEntities(...): string",
+    "example": "encodeHtmlEntities(...)",
+    "output": "..."
+  },
+  {
+    "id": "decodehtmlentities",
+    "name": "decodeHtmlEntities",
+    "module": "Html Entities",
+    "description": "Decodes HTML entities in a string back to characters.",
+    "signature": "decodeHtmlEntities(...): string",
+    "example": "decodeHtmlEntities(...)",
+    "output": "..."
+  },
+  {
+    "id": "striphtmltags",
+    "name": "stripHtmlTags",
+    "module": "Html Entities",
+    "description": "Strips HTML tags from a string.",
+    "signature": "stripHtmlTags(...): string",
+    "example": "stripHtmlTags(...)",
+    "output": "..."
+  },
+  {
+    "id": "hashtmltags",
+    "name": "hasHtmlTags",
+    "module": "Html Entities",
+    "description": "Checks if a string contains any HTML tags.",
+    "signature": "hasHtmlTags(...): boolean",
+    "example": "hasHtmlTags(...)",
+    "output": "..."
+  },
+  {
+    "id": "truncatehtml",
+    "name": "truncateHtml",
+    "module": "Html Entities",
+    "description": "Truncates a string by character count while attempting to preserve whole HTML tags.",
+    "signature": "truncateHtml(...): string",
+    "example": "truncateHtml(...)",
+    "output": "..."
+  },
+  {
+    "id": "buildquerystring",
+    "name": "buildQueryString",
+    "module": "Http",
+    "description": "Builds a query string from an object.",
+    "signature": "buildQueryString(...): string",
+    "example": "buildQueryString(...)",
+    "output": "..."
+  },
+  {
+    "id": "parsequerystring",
+    "name": "parseQueryString",
+    "module": "Http",
+    "description": "Parses a query string into an object.",
+    "signature": "parseQueryString(...): Record<string, string>",
+    "example": "parseQueryString(...)",
+    "output": "..."
+  },
+  {
+    "id": "issuccessstatus",
+    "name": "isSuccessStatus",
+    "module": "Http",
+    "description": "Checks if a HTTP status code represents a success (200-299).",
+    "signature": "isSuccessStatus(...): boolean",
+    "example": "isSuccessStatus(...)",
+    "output": "..."
+  },
+  {
+    "id": "iserrorstatus",
+    "name": "isErrorStatus",
+    "module": "Http",
+    "description": "Checks if a HTTP status code represents a client or server error (400-599).",
+    "signature": "isErrorStatus(...): boolean",
+    "example": "isErrorStatus(...)",
+    "output": "..."
+  },
+  {
+    "id": "fetchwithtimeout",
+    "name": "fetchWithTimeout",
+    "module": "Http",
+    "description": "Wrapper around fetch that adds timeout and query params support.",
+    "signature": "fetchWithTimeout(...): Promise<Response>",
+    "example": "fetchWithTimeout(...)",
+    "output": "..."
+  },
+  {
+    "id": "get",
+    "name": "get",
+    "module": "Http",
+    "description": "Perform a GET request.",
+    "signature": "get(...): Promise<Response>",
+    "example": "get(...)",
+    "output": "..."
+  },
+  {
+    "id": "post",
+    "name": "post",
+    "module": "Http",
+    "description": "Perform a POST request.",
+    "signature": "post(...): Promise<Response>",
+    "example": "post(...)",
+    "output": "..."
+  },
+  {
+    "id": "put",
+    "name": "put",
+    "module": "Http",
+    "description": "Perform a PUT request.",
+    "signature": "put(...): Promise<Response>",
+    "example": "put(...)",
+    "output": "..."
+  },
+  {
+    "id": "patch",
+    "name": "patch",
+    "module": "Http",
+    "description": "Perform a PATCH request.",
+    "signature": "patch(...): Promise<Response>",
+    "example": "patch(...)",
+    "output": "..."
+  },
+  {
+    "id": "del",
+    "name": "del",
+    "module": "Http",
+    "description": "Perform a DELETE request.",
+    "signature": "del(...): Promise<Response>",
+    "example": "del(...)",
+    "output": "..."
+  },
+  {
+    "id": "applybrightness",
+    "name": "applyBrightness",
+    "module": "Image",
+    "description": "Image Processing Primitives (for pixel arrays [r,g,b,a,...])",
+    "signature": "applyBrightness(...): number[]",
+    "example": "applyBrightness(...)",
+    "output": "..."
+  },
+  {
+    "id": "applycontrast",
+    "name": "applyContrast",
+    "module": "Image",
+    "description": "Utility function",
+    "signature": "applyContrast(...): number[]",
+    "example": "applyContrast(...)",
+    "output": "..."
+  },
+  {
+    "id": "applygrayscale",
+    "name": "applyGrayscale",
+    "module": "Image",
+    "description": "Utility function",
+    "signature": "applyGrayscale(...): number[]",
+    "example": "applyGrayscale(...)",
+    "output": "..."
+  },
+  {
+    "id": "applyinvert",
+    "name": "applyInvert",
+    "module": "Image",
+    "description": "Utility function",
+    "signature": "applyInvert(...): number[]",
+    "example": "applyInvert(...)",
+    "output": "..."
+  },
+  {
+    "id": "applysepia",
+    "name": "applySepia",
+    "module": "Image",
+    "description": "Utility function",
+    "signature": "applySepia(...): number[]",
+    "example": "applySepia(...)",
+    "output": "..."
+  },
+  {
+    "id": "applythreshold",
+    "name": "applyThreshold",
+    "module": "Image",
+    "description": "Utility function",
+    "signature": "applyThreshold(...): number[]",
+    "example": "applyThreshold(...)",
+    "output": "..."
+  },
+  {
+    "id": "convolve2d",
+    "name": "convolve2D",
+    "module": "Image",
+    "description": "Utility function",
+    "signature": "convolve2D(...): number[][]",
+    "example": "convolve2D(...)",
+    "output": "..."
+  },
+  {
+    "id": "rgbtohexarray",
+    "name": "rgbToHexArray",
+    "module": "Image",
+    "description": "Utility function",
+    "signature": "rgbToHexArray(...): string[]",
+    "example": "rgbToHexArray(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatcurrency",
+    "name": "formatCurrency",
+    "module": "Intl",
+    "description": "Formats a number as a currency string.",
+    "signature": "formatCurrency(...): any",
+    "example": "formatCurrency(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatnumber",
+    "name": "formatNumber",
+    "module": "Intl",
+    "description": "Formats a number with locale-specific separators.",
+    "signature": "formatNumber(...): any",
+    "example": "formatNumber(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatdatetime",
+    "name": "formatDateTime",
+    "module": "Intl",
+    "description": "Formats a date using Intl.DateTimeFormat.",
+    "signature": "formatDateTime(...): any",
+    "example": "formatDateTime(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatpercentage",
+    "name": "formatPercentage",
+    "module": "Intl",
+    "description": "Formats a number as a percentage.",
+    "signature": "formatPercentage(...): any",
+    "example": "formatPercentage(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatcompactnumber",
+    "name": "formatCompactNumber",
+    "module": "Intl",
+    "description": "Formats a number as a compact unit (e.g., 1.2K, 3M).",
+    "signature": "formatCompactNumber(...): any",
+    "example": "formatCompactNumber(...)",
+    "output": "..."
+  },
+  {
+    "id": "getpluralrule",
+    "name": "getPluralRule",
+    "module": "Intl",
+    "description": "Returns the plural rules for a specific number.",
+    "signature": "getPluralRule(...): any",
+    "example": "getPluralRule(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatlist",
+    "name": "formatList",
+    "module": "Intl",
+    "description": "Formats a list of strings with conjunctions (e.g., \"A, B, and C\").",
+    "signature": "formatList(...): any",
+    "example": "formatList(...)",
+    "output": "..."
+  },
+  {
+    "id": "formatrelativetime",
+    "name": "formatRelativeTime",
+    "module": "Intl",
+    "description": "Formats a relative time (e.g., \"3 days ago\").",
+    "signature": "formatRelativeTime(...): any",
+    "example": "formatRelativeTime(...)",
+    "output": "..."
+  },
+  {
+    "id": "reduce",
+    "name": "reduce",
+    "module": "Iter",
+    "description": "Reduces an iterable.",
+    "signature": "reduce(...): U",
+    "example": "reduce(...)",
     "output": "..."
   },
   {
@@ -1913,7 +3442,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "jsonClone",
     "module": "Json",
     "description": "Creates a fast JSON-based deep clone of a value.",
-    "signature": "jsonClone<T>(obj: T): T",
+    "signature": "jsonClone(...): T",
     "example": "jsonClone(...)",
     "output": "..."
   },
@@ -1922,7 +3451,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "jsonFlatten",
     "module": "Json",
     "description": "Flattens a nested object or array into a single-level object with dot-notation and bracket-notation paths.",
-    "signature": "jsonFlatten(obj: any, prefix",
+    "signature": "jsonFlatten(...): Record<string, any>",
     "example": "jsonFlatten(...)",
     "output": "..."
   },
@@ -1931,7 +3460,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "jsonUnflatten",
     "module": "Json",
     "description": "Reconstructs a flattened object (created by jsonFlatten) back into its nested structure.",
-    "signature": "jsonUnflatten(flat: Record<string, any>): any",
+    "signature": "jsonUnflatten(...): any",
     "example": "jsonUnflatten(...)",
     "output": "..."
   },
@@ -1940,7 +3469,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "jsonPath",
     "module": "Json",
     "description": "Queries nested values in an object using path strings (e.g. \"users[0].address.city\").",
-    "signature": "jsonPath(obj: any, pathStr: string, fallback?: any): any",
+    "signature": "jsonPath(...): any",
     "example": "jsonPath(...)",
     "output": "..."
   },
@@ -1949,7 +3478,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "jsonMerge",
     "module": "Json",
     "description": "Performs a deep merge of two JSON-serializable structures.",
-    "signature": "jsonMerge(target: any, source: any): any",
+    "signature": "jsonMerge(...): any",
     "example": "jsonMerge(...)",
     "output": "..."
   },
@@ -1958,7 +3487,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "jsonDiff",
     "module": "Json",
     "description": "Computes structured differences between two JSON-serializable structures.",
-    "signature": "jsonDiff(obj1: any, obj2: any): Record<string, JsonDiffEntry>",
+    "signature": "jsonDiff(...): Record<string, JsonDiffEntry>",
     "example": "jsonDiff(...)",
     "output": "..."
   },
@@ -1967,7 +3496,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "registerShortcut",
     "module": "Keyboard",
     "description": "Registers a global or target-specific keyboard shortcut listener.",
-    "signature": "registerShortcut( shortcut: string, callback: (e: KeyboardEvent)",
+    "signature": "registerShortcut(...): any",
     "example": "registerShortcut(...)",
     "output": "..."
   },
@@ -1976,8 +3505,26 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isKeyPressed",
     "module": "Keyboard",
     "description": "Checks if a specific keyboard key is currently pressed down.",
-    "signature": "isKeyPressed(key: string): boolean",
+    "signature": "isKeyPressed(...): boolean",
     "example": "isKeyPressed(...)",
+    "output": "..."
+  },
+  {
+    "id": "ansi",
+    "name": "ansi",
+    "module": "Log",
+    "description": "Utility function",
+    "signature": "ansi(...)",
+    "example": "ansi(...)",
+    "output": "..."
+  },
+  {
+    "id": "nocoloransi",
+    "name": "noColorAnsi",
+    "module": "Log",
+    "description": "Utility function",
+    "signature": "noColorAnsi(...)",
+    "example": "noColorAnsi(...)",
     "output": "..."
   },
   {
@@ -1985,8 +3532,107 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "createLogger",
     "module": "Log",
     "description": "Creates a customizable console logger with level-based filtering and optional color styling.",
-    "signature": "createLogger(options: LoggerOptions",
+    "signature": "createLogger(...): Logger",
     "example": "createLogger(...)",
+    "output": "..."
+  },
+  {
+    "id": "mapmapvalues",
+    "name": "mapMapValues",
+    "module": "Map",
+    "description": "Maps over the values of a Map to produce a new Map with the same keys.",
+    "signature": "mapMapValues(...): Map<K, R>",
+    "example": "mapMapValues(...)",
+    "output": "..."
+  },
+  {
+    "id": "mapmapkeys",
+    "name": "mapMapKeys",
+    "module": "Map",
+    "description": "Maps over the keys of a Map to produce a new Map with the same values.",
+    "signature": "mapMapKeys(...): Map<R, V>",
+    "example": "mapMapKeys(...)",
+    "output": "..."
+  },
+  {
+    "id": "filtermapentries",
+    "name": "filterMapEntries",
+    "module": "Map",
+    "description": "Filters a Map to produce a new Map containing only entries that satisfy the predicate.",
+    "signature": "filterMapEntries(...): Map<K, V>",
+    "example": "filterMapEntries(...)",
+    "output": "..."
+  },
+  {
+    "id": "mergemultiplemaps",
+    "name": "mergeMultipleMaps",
+    "module": "Map",
+    "description": "Merges multiple Maps into a single new Map. Later maps overwrite earlier ones for duplicate keys.",
+    "signature": "mergeMultipleMaps(...): Map<K, V>",
+    "example": "mergeMultipleMaps(...)",
+    "output": "..."
+  },
+  {
+    "id": "invertmapentries",
+    "name": "invertMapEntries",
+    "module": "Map",
+    "description": "Inverts a Map by swapping its keys and values.",
+    "signature": "invertMapEntries(...): Map<V, K>",
+    "example": "invertMapEntries(...)",
+    "output": "..."
+  },
+  {
+    "id": "groupbytomap",
+    "name": "groupByToMap",
+    "module": "Map",
+    "description": "Groups elements of an iterable into a Map based on a grouping function.",
+    "signature": "groupByToMap(...): Map<K, T[]>",
+    "example": "groupByToMap(...)",
+    "output": "..."
+  },
+  {
+    "id": "findinmap",
+    "name": "findInMap",
+    "module": "Map",
+    "description": "Finds the first entry in a Map that satisfies the predicate.",
+    "signature": "findInMap(...): [K, V] | undefined",
+    "example": "findInMap(...)",
+    "output": "..."
+  },
+  {
+    "id": "everyinmap",
+    "name": "everyInMap",
+    "module": "Map",
+    "description": "Checks if every entry in a Map satisfies the predicate.",
+    "signature": "everyInMap(...): boolean",
+    "example": "everyInMap(...)",
+    "output": "..."
+  },
+  {
+    "id": "someinmap",
+    "name": "someInMap",
+    "module": "Map",
+    "description": "Checks if some entry in a Map satisfies the predicate.",
+    "signature": "someInMap(...): boolean",
+    "example": "someInMap(...)",
+    "output": "..."
+  },
+  {
+    "id": "objecttomap",
+    "name": "objectToMap",
+    "module": "Map",
+    "description": "Converts an object to a Map.",
+    "signature": "objectToMap(...): Map<string, V>",
+    "example": "objectToMap(...)",
+    "output": "..."
+  },
+  {
+    "id": "maptoobject",
+    "name": "mapToObject",
+    "module": "Map",
+    "description": "Converts a Map to an object.",
+    "signature": "mapToObject(...): Record<string, V>",
+    "example": "mapToObject(...)",
     "output": "..."
   },
   {
@@ -1994,21 +3640,16 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "clamp",
     "module": "Math",
     "description": "Clamps a number between a minimum and maximum value.",
-    "signature": "clamp(val: number, min: number, max: number): number",
-    "example": "clamp(150, 0, 100) // -> 100",
-    "output": "100",
-    "benchmark": {
-      "optikitOps": 9485000,
-      "lodashOps": 2188000,
-      "multiplier": 4.33
-    }
+    "signature": "clamp(...): number",
+    "example": "clamp(...)",
+    "output": "..."
   },
   {
     "id": "lerp",
     "name": "lerp",
     "module": "Math",
     "description": "Linearly interpolates between two numbers.",
-    "signature": "lerp(start: number, end: number, amt: number): number",
+    "signature": "lerp(...): number",
     "example": "lerp(...)",
     "output": "..."
   },
@@ -2017,7 +3658,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "random",
     "module": "Math",
     "description": "Generates a random number in a given range.",
-    "signature": "random(min: number, max: number, float",
+    "signature": "random(...): number",
     "example": "random(...)",
     "output": "..."
   },
@@ -2026,7 +3667,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "round",
     "module": "Math",
     "description": "Rounds a number to a specified decimal precision.",
-    "signature": "round(val: number, precision",
+    "signature": "round(...): number",
     "example": "round(...)",
     "output": "..."
   },
@@ -2035,21 +3676,16 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "sum",
     "module": "Math",
     "description": "Returns the sum of an array of numbers.",
-    "signature": "sum(nums: number[]): number",
-    "example": "sum([1, 2, 3]) // -> 6",
-    "output": "6",
-    "benchmark": {
-      "optikitOps": 1063000,
-      "lodashOps": 104000,
-      "multiplier": 10.2
-    }
+    "signature": "sum(...): number",
+    "example": "sum(...)",
+    "output": "..."
   },
   {
     "id": "mean",
     "name": "mean",
     "module": "Math",
     "description": "Returns the average (mean) of an array of numbers.",
-    "signature": "mean(nums: number[]): number",
+    "signature": "mean(...): number",
     "example": "mean(...)",
     "output": "..."
   },
@@ -2058,7 +3694,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "median",
     "module": "Math",
     "description": "Returns the median value of an array of numbers.",
-    "signature": "median(nums: number[]): number",
+    "signature": "median(...): number",
     "example": "median(...)",
     "output": "..."
   },
@@ -2067,7 +3703,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "standardDeviation",
     "module": "Math",
     "description": "Returns the standard deviation of an array of numbers.",
-    "signature": "standardDeviation(nums: number[], population",
+    "signature": "standardDeviation(...): number",
     "example": "standardDeviation(...)",
     "output": "..."
   },
@@ -2076,7 +3712,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "percentage",
     "module": "Math",
     "description": "Calculates the percentage of a value relative to a total.",
-    "signature": "percentage( value: number, total: number, options?",
+    "signature": "percentage(...): any",
     "example": "percentage(...)",
     "output": "..."
   },
@@ -2085,7 +3721,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "inRange",
     "module": "Math",
     "description": "Checks whether a number falls within a range [min, max].",
-    "signature": "inRange( val: number, min: number, max: number, exclusive",
+    "signature": "inRange(...): any",
     "example": "inRange(...)",
     "output": "..."
   },
@@ -2094,7 +3730,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "max",
     "module": "Math",
     "description": "Computes the maximum value of array. If array is empty or falsey, undefined is returned.",
-    "signature": "max(nums: number[]): number | undefined",
+    "signature": "max(...): number | undefined",
     "example": "max(...)",
     "output": "..."
   },
@@ -2103,7 +3739,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "min",
     "module": "Math",
     "description": "Computes the minimum value of array. If array is empty or falsey, undefined is returned.",
-    "signature": "min(nums: number[]): number | undefined",
+    "signature": "min(...): number | undefined",
     "example": "min(...)",
     "output": "..."
   },
@@ -2112,7 +3748,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "add",
     "module": "Math",
     "description": "Adds two numbers.",
-    "signature": "add(augend: number, addend: number): number",
+    "signature": "add(...): number",
     "example": "add(...)",
     "output": "..."
   },
@@ -2121,7 +3757,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "subtract",
     "module": "Math",
     "description": "Subtracts subtrahend from minuend.",
-    "signature": "subtract(minuend: number, subtrahend: number): number",
+    "signature": "subtract(...): number",
     "example": "subtract(...)",
     "output": "..."
   },
@@ -2130,7 +3766,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "multiply",
     "module": "Math",
     "description": "Multiplies two numbers.",
-    "signature": "multiply(multiplier: number, multiplicand: number): number",
+    "signature": "multiply(...): number",
     "example": "multiply(...)",
     "output": "..."
   },
@@ -2139,7 +3775,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "divide",
     "module": "Math",
     "description": "Divides two numbers.",
-    "signature": "divide(dividend: number, divisor: number): number",
+    "signature": "divide(...): number",
     "example": "divide(...)",
     "output": "..."
   },
@@ -2148,7 +3784,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "ceil",
     "module": "Math",
     "description": "Computes number rounded up to precision.",
-    "signature": "ceil(val: number, precision",
+    "signature": "ceil(...): number",
     "example": "ceil(...)",
     "output": "..."
   },
@@ -2157,7 +3793,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "floor",
     "module": "Math",
     "description": "Computes number rounded down to precision.",
-    "signature": "floor(val: number, precision",
+    "signature": "floor(...): number",
     "example": "floor(...)",
     "output": "..."
   },
@@ -2166,7 +3802,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "factorial",
     "module": "Math",
     "description": "Calculates the factorial of a non-negative integer n.",
-    "signature": "factorial(n: number): number",
+    "signature": "factorial(...): number",
     "example": "factorial(...)",
     "output": "..."
   },
@@ -2175,7 +3811,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "fibonacci",
     "module": "Math",
     "description": "Returns the nth Fibonacci number.",
-    "signature": "fibonacci(n: number): number",
+    "signature": "fibonacci(...): number",
     "example": "fibonacci(...)",
     "output": "..."
   },
@@ -2184,7 +3820,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isPrime",
     "module": "Math",
     "description": "Checks if a number is a prime number.",
-    "signature": "isPrime(n: number): boolean",
+    "signature": "isPrime(...): boolean",
     "example": "isPrime(...)",
     "output": "..."
   },
@@ -2193,7 +3829,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "mapRange",
     "module": "Math",
     "description": "Re-maps a number from one range to another.",
-    "signature": "mapRange( val: number, inMin: number, inMax: number, outMin: number, outMax: number ): number",
+    "signature": "mapRange(...): any",
     "example": "mapRange(...)",
     "output": "..."
   },
@@ -2202,7 +3838,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "distance",
     "module": "Math",
     "description": "Calculates the Euclidean distance between two points in 2D or 3D space.",
-    "signature": "distance( p1",
+    "signature": "distance(...): any",
     "example": "distance(...)",
     "output": "..."
   },
@@ -2211,7 +3847,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "dotProduct",
     "module": "Math",
     "description": "Calculates the dot product of two vectors of equal length.",
-    "signature": "dotProduct(vecA: number[], vecB: number[]): number",
+    "signature": "dotProduct(...): number",
     "example": "dotProduct(...)",
     "output": "..."
   },
@@ -2220,7 +3856,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "euclideanDistance",
     "module": "Math",
     "description": "Calculates the Euclidean distance between two numeric vectors.",
-    "signature": "euclideanDistance(vecA: number[], vecB: number[]): number",
+    "signature": "euclideanDistance(...): number",
     "example": "euclideanDistance(...)",
     "output": "..."
   },
@@ -2229,7 +3865,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "cosineSimilarity",
     "module": "Math",
     "description": "Calculates the cosine similarity between two numeric vectors.",
-    "signature": "cosineSimilarity(vecA: number[], vecB: number[]): number",
+    "signature": "cosineSimilarity(...): number",
     "example": "cosineSimilarity(...)",
     "output": "..."
   },
@@ -2238,7 +3874,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "gcd",
     "module": "Math",
     "description": "Calculates the Greatest Common Divisor (GCD) of two integers using Euclid's algorithm.",
-    "signature": "gcd(a: number, b: number): number",
+    "signature": "gcd(...): number",
     "example": "gcd(...)",
     "output": "..."
   },
@@ -2247,7 +3883,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "lcm",
     "module": "Math",
     "description": "Calculates the Least Common Multiple (LCM) of two integers.",
-    "signature": "lcm(a: number, b: number): number",
+    "signature": "lcm(...): number",
     "example": "lcm(...)",
     "output": "..."
   },
@@ -2256,7 +3892,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "power",
     "module": "Math",
     "description": "Returns base raised to exponent power.",
-    "signature": "power(base: number, exponent: number): number",
+    "signature": "power(...): number",
     "example": "power(...)",
     "output": "..."
   },
@@ -2265,7 +3901,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "abs",
     "module": "Math",
     "description": "Returns absolute value of a number.",
-    "signature": "abs(val: number): number",
+    "signature": "abs(...): number",
     "example": "abs(...)",
     "output": "..."
   },
@@ -2274,7 +3910,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "sign",
     "module": "Math",
     "description": "Returns 1 for positive, -1 for negative, 0 for zero.",
-    "signature": "sign(val: number): number",
+    "signature": "sign(...): number",
     "example": "sign(...)",
     "output": "..."
   },
@@ -2283,8 +3919,314 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "hypot",
     "module": "Math",
     "description": "Calculates square root of sum of squares of arguments.",
-    "signature": "hypot(...values: number[]): number",
+    "signature": "hypot(...): number",
     "example": "hypot(...)",
+    "output": "..."
+  },
+  {
+    "id": "mat3identity",
+    "name": "mat3Identity",
+    "module": "Matrix",
+    "description": "Creates an identity 3x3 matrix.",
+    "signature": "mat3Identity(...): Mat3",
+    "example": "mat3Identity(...)",
+    "output": "..."
+  },
+  {
+    "id": "mat4identity",
+    "name": "mat4Identity",
+    "module": "Matrix",
+    "description": "Creates an identity 4x4 matrix.",
+    "signature": "mat4Identity(...): Mat4",
+    "example": "mat4Identity(...)",
+    "output": "..."
+  },
+  {
+    "id": "mat3mul",
+    "name": "mat3Mul",
+    "module": "Matrix",
+    "description": "Multiplies two 3x3 matrices.",
+    "signature": "mat3Mul(...): Mat3",
+    "example": "mat3Mul(...)",
+    "output": "..."
+  },
+  {
+    "id": "mat4mul",
+    "name": "mat4Mul",
+    "module": "Matrix",
+    "description": "Multiplies two 4x4 matrices.",
+    "signature": "mat4Mul(...): Mat4",
+    "example": "mat4Mul(...)",
+    "output": "..."
+  },
+  {
+    "id": "mat3transpose",
+    "name": "mat3Transpose",
+    "module": "Matrix",
+    "description": "Transposes a 3x3 matrix.",
+    "signature": "mat3Transpose(...): Mat3",
+    "example": "mat3Transpose(...)",
+    "output": "..."
+  },
+  {
+    "id": "mat4transpose",
+    "name": "mat4Transpose",
+    "module": "Matrix",
+    "description": "Transposes a 4x4 matrix.",
+    "signature": "mat4Transpose(...): Mat4",
+    "example": "mat4Transpose(...)",
+    "output": "..."
+  },
+  {
+    "id": "memoizesimple",
+    "name": "memoizeSimple",
+    "module": "Memoize",
+    "description": "Memoizes a function that takes a single string or number argument.",
+    "signature": "memoizeSimple(...): (arg: T) => R",
+    "example": "memoizeSimple(...)",
+    "output": "..."
+  },
+  {
+    "id": "memoizewithresolver",
+    "name": "memoizeWithResolver",
+    "module": "Memoize",
+    "description": "Memoizes a function taking any arguments using a custom resolver to generate the cache key.",
+    "signature": "memoizeWithResolver(...): any",
+    "example": "memoizeWithResolver(...)",
+    "output": "..."
+  },
+  {
+    "id": "memoizeasync",
+    "name": "memoizeAsync",
+    "module": "Memoize",
+    "description": "Memoizes an asynchronous function.",
+    "signature": "memoizeAsync(...): any",
+    "example": "memoizeAsync(...)",
+    "output": "..."
+  },
+  {
+    "id": "memoizettl",
+    "name": "memoizeTTL",
+    "module": "Memoize",
+    "description": "Creates a memoized function that clears its cache after a TTL (time to live).",
+    "signature": "memoizeTTL(...): any",
+    "example": "memoizeTTL(...)",
+    "output": "..."
+  },
+  {
+    "id": "memoizemax",
+    "name": "memoizeMax",
+    "module": "Memoize",
+    "description": "Memoizes a function with a maximum cache size (LRU-like cache clearing).",
+    "signature": "memoizeMax(...): any",
+    "example": "memoizeMax(...)",
+    "output": "..."
+  },
+  {
+    "id": "withclearcache",
+    "name": "withClearCache",
+    "module": "Memoize",
+    "description": "Extends a memoized function with a method to clear the cache manually.",
+    "signature": "withClearCache(...): any",
+    "example": "withClearCache(...)",
+    "output": "..."
+  },
+  {
+    "id": "sigmoid",
+    "name": "sigmoid",
+    "module": "Ml",
+    "description": "Machine Learning and Statistics Utilities",
+    "signature": "sigmoid(...): number",
+    "example": "sigmoid(...)",
+    "output": "..."
+  },
+  {
+    "id": "relu",
+    "name": "relu",
+    "module": "Ml",
+    "description": "Utility function",
+    "signature": "relu(...): number",
+    "example": "relu(...)",
+    "output": "..."
+  },
+  {
+    "id": "leakyrelu",
+    "name": "leakyRelu",
+    "module": "Ml",
+    "description": "Utility function",
+    "signature": "leakyRelu(...): number",
+    "example": "leakyRelu(...)",
+    "output": "..."
+  },
+  {
+    "id": "tanh",
+    "name": "tanh",
+    "module": "Ml",
+    "description": "Utility function",
+    "signature": "tanh(...): number",
+    "example": "tanh(...)",
+    "output": "..."
+  },
+  {
+    "id": "softmax",
+    "name": "softmax",
+    "module": "Ml",
+    "description": "Utility function",
+    "signature": "softmax(...): number[]",
+    "example": "softmax(...)",
+    "output": "..."
+  },
+  {
+    "id": "minmaxscaler",
+    "name": "minMaxScaler",
+    "module": "Ml",
+    "description": "Utility function",
+    "signature": "minMaxScaler(...): number[]",
+    "example": "minMaxScaler(...)",
+    "output": "..."
+  },
+  {
+    "id": "zscorenormalize",
+    "name": "zScoreNormalize",
+    "module": "Ml",
+    "description": "Utility function",
+    "signature": "zScoreNormalize(...): number[]",
+    "example": "zScoreNormalize(...)",
+    "output": "..."
+  },
+  {
+    "id": "meansquarederror",
+    "name": "meanSquaredError",
+    "module": "Ml",
+    "description": "Utility function",
+    "signature": "meanSquaredError(...): number",
+    "example": "meanSquaredError(...)",
+    "output": "..."
+  },
+  {
+    "id": "rootmeansquarederror",
+    "name": "rootMeanSquaredError",
+    "module": "Ml",
+    "description": "Utility function",
+    "signature": "rootMeanSquaredError(...): number",
+    "example": "rootMeanSquaredError(...)",
+    "output": "..."
+  },
+  {
+    "id": "meanabsoluteerror",
+    "name": "meanAbsoluteError",
+    "module": "Ml",
+    "description": "Utility function",
+    "signature": "meanAbsoluteError(...): number",
+    "example": "meanAbsoluteError(...)",
+    "output": "..."
+  },
+  {
+    "id": "mlcosinesimilarity",
+    "name": "mlCosineSimilarity",
+    "module": "Ml",
+    "description": "Utility function",
+    "signature": "mlCosineSimilarity(...): number",
+    "example": "mlCosineSimilarity(...)",
+    "output": "..."
+  },
+  {
+    "id": "mleuclideandistance",
+    "name": "mlEuclideanDistance",
+    "module": "Ml",
+    "description": "Utility function",
+    "signature": "mlEuclideanDistance(...): number",
+    "example": "mlEuclideanDistance(...)",
+    "output": "..."
+  },
+  {
+    "id": "tokenizewords",
+    "name": "tokenizeWords",
+    "module": "Nlp",
+    "description": "Natural Language Processing Utilities",
+    "signature": "tokenizeWords(...): string[]",
+    "example": "tokenizeWords(...)",
+    "output": "..."
+  },
+  {
+    "id": "tokenizesentences",
+    "name": "tokenizeSentences",
+    "module": "Nlp",
+    "description": "Utility function",
+    "signature": "tokenizeSentences(...): string[]",
+    "example": "tokenizeSentences(...)",
+    "output": "..."
+  },
+  {
+    "id": "removestopwords",
+    "name": "removeStopWords",
+    "module": "Nlp",
+    "description": "Utility function",
+    "signature": "removeStopWords(...): string[]",
+    "example": "removeStopWords(...)",
+    "output": "..."
+  },
+  {
+    "id": "generatengrams",
+    "name": "generateNGrams",
+    "module": "Nlp",
+    "description": "Utility function",
+    "signature": "generateNGrams(...): string[][]",
+    "example": "generateNGrams(...)",
+    "output": "..."
+  },
+  {
+    "id": "nlplevenshteindistance",
+    "name": "nlpLevenshteinDistance",
+    "module": "Nlp",
+    "description": "Utility function",
+    "signature": "nlpLevenshteinDistance(...): number",
+    "example": "nlpLevenshteinDistance(...)",
+    "output": "..."
+  },
+  {
+    "id": "hammingdistance",
+    "name": "hammingDistance",
+    "module": "Nlp",
+    "description": "Utility function",
+    "signature": "hammingDistance(...): number",
+    "example": "hammingDistance(...)",
+    "output": "..."
+  },
+  {
+    "id": "jaccardsimilarity",
+    "name": "jaccardSimilarity",
+    "module": "Nlp",
+    "description": "Utility function",
+    "signature": "jaccardSimilarity(...): number",
+    "example": "jaccardSimilarity(...)",
+    "output": "..."
+  },
+  {
+    "id": "soundex",
+    "name": "soundex",
+    "module": "Nlp",
+    "description": "Utility function",
+    "signature": "soundex(...): string",
+    "example": "soundex(...)",
+    "output": "..."
+  },
+  {
+    "id": "extracthashtags",
+    "name": "extractHashtags",
+    "module": "Nlp",
+    "description": "Utility function",
+    "signature": "extractHashtags(...): string[]",
+    "example": "extractHashtags(...)",
+    "output": "..."
+  },
+  {
+    "id": "extractmentions",
+    "name": "extractMentions",
+    "module": "Nlp",
+    "description": "Utility function",
+    "signature": "extractMentions(...): string[]",
+    "example": "extractMentions(...)",
     "output": "..."
   },
   {
@@ -2292,7 +4234,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "formatCurrency",
     "module": "Number",
     "description": "Formats a number as a currency string.",
-    "signature": "formatCurrency( val: number, currency",
+    "signature": "formatCurrency(...): any",
     "example": "formatCurrency(...)",
     "output": "..."
   },
@@ -2301,7 +4243,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "formatBytes",
     "module": "Number",
     "description": "Formats bytes into a human-readable size string (e.g., \"10.5 KB\", \"2.4 MB\").",
-    "signature": "formatBytes(bytes: number, decimals",
+    "signature": "formatBytes(...): string",
     "example": "formatBytes(...)",
     "output": "..."
   },
@@ -2310,7 +4252,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "formatNumber",
     "module": "Number",
     "description": "Formats a number with locale-aware thousands separators and optional decimal places.",
-    "signature": "formatNumber( val: number, options?",
+    "signature": "formatNumber(...): any",
     "example": "formatNumber(...)",
     "output": "..."
   },
@@ -2319,7 +4261,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "formatCompact",
     "module": "Number",
     "description": "Formats a number in compact notation (e.g. 1000 → \"1K\", 1_500_000 → \"1.5M\").",
-    "signature": "formatCompact( val: number, options?",
+    "signature": "formatCompact(...): any",
     "example": "formatCompact(...)",
     "output": "..."
   },
@@ -2328,7 +4270,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "toOrdinal",
     "module": "Number",
     "description": "Converts an integer to its ordinal string representation.",
-    "signature": "toOrdinal(n: number): string",
+    "signature": "toOrdinal(...): string",
     "example": "toOrdinal(...)",
     "output": "..."
   },
@@ -2337,7 +4279,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isEven",
     "module": "Number",
     "description": "Checks if a number is even.",
-    "signature": "isEven(n: number): boolean",
+    "signature": "isEven(...): boolean",
     "example": "isEven(...)",
     "output": "..."
   },
@@ -2346,7 +4288,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isOdd",
     "module": "Number",
     "description": "Checks if a number is odd.",
-    "signature": "isOdd(n: number): boolean",
+    "signature": "isOdd(...): boolean",
     "example": "isOdd(...)",
     "output": "..."
   },
@@ -2355,7 +4297,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isPositive",
     "module": "Number",
     "description": "Checks if a number is positive (greater than zero).",
-    "signature": "isPositive(n: number): boolean",
+    "signature": "isPositive(...): boolean",
     "example": "isPositive(...)",
     "output": "..."
   },
@@ -2364,7 +4306,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isNegative",
     "module": "Number",
     "description": "Checks if a number is negative (less than zero).",
-    "signature": "isNegative(n: number): boolean",
+    "signature": "isNegative(...): boolean",
     "example": "isNegative(...)",
     "output": "..."
   },
@@ -2373,7 +4315,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isFloat",
     "module": "Number",
     "description": "Checks if a value is a float (a number with a decimal part).",
-    "signature": "isFloat(n: number): boolean",
+    "signature": "isFloat(...): boolean",
     "example": "isFloat(...)",
     "output": "..."
   },
@@ -2382,7 +4324,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isInteger",
     "module": "Number",
     "description": "Checks if a value is an integer.",
-    "signature": "isInteger(n: number): boolean",
+    "signature": "isInteger(...): boolean",
     "example": "isInteger(...)",
     "output": "..."
   },
@@ -2391,7 +4333,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "parseNumber",
     "module": "Number",
     "description": "Parses a string to a number, returning a default value if NaN.",
-    "signature": "parseNumber(val: any, fallback",
+    "signature": "parseNumber(...): number",
     "example": "parseNumber(...)",
     "output": "..."
   },
@@ -2400,7 +4342,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "toSafeInteger",
     "module": "Number",
     "description": "Converts a value to a safe integer.",
-    "signature": "toSafeInteger(val: any): number",
+    "signature": "toSafeInteger(...): number",
     "example": "toSafeInteger(...)",
     "output": "..."
   },
@@ -2409,7 +4351,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "roundToNearest",
     "module": "Number",
     "description": "Rounds a number to the nearest multiple of a given step.",
-    "signature": "roundToNearest(val: number, step: number): number",
+    "signature": "roundToNearest(...): number",
     "example": "roundToNearest(...)",
     "output": "..."
   },
@@ -2418,7 +4360,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "toPercentage",
     "module": "Number",
     "description": "Converts a number to a percentage string.",
-    "signature": "toPercentage(val: number, decimals",
+    "signature": "toPercentage(...): string",
     "example": "toPercentage(...)",
     "output": "..."
   },
@@ -2427,7 +4369,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "clampNumber",
     "module": "Number",
     "description": "Restricts a number between a minimum and maximum value.",
-    "signature": "clampNumber(val: number, min: number, max: number): number",
+    "signature": "clampNumber(...): number",
     "example": "clampNumber(...)",
     "output": "..."
   },
@@ -2436,7 +4378,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isPerfectSquare",
     "module": "Number",
     "description": "Checks if a given number is a perfect square.",
-    "signature": "isPerfectSquare(n: number): boolean",
+    "signature": "isPerfectSquare(...): boolean",
     "example": "isPerfectSquare(...)",
     "output": "..."
   },
@@ -2445,7 +4387,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "formatFileSize",
     "module": "Number",
     "description": "Alias for formatBytes - Formats bytes into a human-readable size string.",
-    "signature": "formatFileSize(bytes: number, decimals",
+    "signature": "formatFileSize(...): string",
     "example": "formatFileSize(...)",
     "output": "..."
   },
@@ -2454,7 +4396,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "pick",
     "module": "Object",
     "description": "Creates a new object composed of the picked object properties.",
-    "signature": "pick<T extends object, K extends keyof T>( obj: T, keys: K[] ): Pick<T, K>",
+    "signature": "pick(...): any",
     "example": "pick(...)",
     "output": "..."
   },
@@ -2463,7 +4405,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "omit",
     "module": "Object",
     "description": "Creates a new object omitting specified keys.",
-    "signature": "omit<T extends object, K extends keyof T>( obj: T, keys: K[] ): Omit<T, K>",
+    "signature": "omit(...): any",
     "example": "omit(...)",
     "output": "..."
   },
@@ -2472,27 +4414,25 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "get",
     "module": "Object",
     "description": "Safely gets a nested property value from an object using a dot-path string or array of keys.",
-    "signature": "get(obj: any, path: string | string[], defaultValue?: any): any",
-    "example": "get({ a: { b: 2 } }, 'a.b')",
-    "output": "2",
-    "benchmark": { "opti": "1,240,052 ops/sec", "lodash": "1,298,015 ops/sec", "multiplier": "1.05x faster", "winner": "Lodash" }
+    "signature": "get(...): any",
+    "example": "get(...)",
+    "output": "..."
   },
   {
     "id": "deepclone",
     "name": "deepClone",
     "module": "Object",
     "description": "Creates a deep copy of a value (handles Dates, RegExps, Arrays, and Plain Objects).",
-    "signature": "deepClone<T>(obj: T): T",
-    "example": "deepClone({ a: 1 })",
-    "output": "{ a: 1 }",
-    "benchmark": { "opti": "658,225 ops/sec", "lodash": "103,509 ops/sec", "multiplier": "6.36x faster", "winner": "OptiKit" }
+    "signature": "deepClone(...): T",
+    "example": "deepClone(...)",
+    "output": "..."
   },
   {
     "id": "deepmerge",
     "name": "deepMerge",
     "module": "Object",
     "description": "Deeply merges multiple source objects into a target object.",
-    "signature": "deepMerge(target: any, ...sources: any[]): any",
+    "signature": "deepMerge(...): any",
     "example": "deepMerge(...)",
     "output": "..."
   },
@@ -2501,7 +4441,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "flattenObject",
     "module": "Object",
     "description": "Flattens a nested object into a single-level object with dot-path keys.",
-    "signature": "flattenObject( obj: Record<string, any>, options?",
+    "signature": "flattenObject(...): any",
     "example": "flattenObject(...)",
     "output": "..."
   },
@@ -2509,9 +4449,18 @@ export const utilitiesData: UtilityMeta[] = [
     "id": "set",
     "name": "set",
     "module": "Object",
-    "description": "Safely sets a nested value in an object using a dot-path string.",
-    "signature": "set(obj: any, path: string, value: any): any",
+    "description": "Safely sets a nested value in an object using a dot-path string or array of keys.",
+    "signature": "set(...): any",
     "example": "set(...)",
+    "output": "..."
+  },
+  {
+    "id": "unset",
+    "name": "unset",
+    "module": "Object",
+    "description": "Removes the property at path of object.",
+    "signature": "unset(...): boolean",
+    "example": "unset(...)",
     "output": "..."
   },
   {
@@ -2519,7 +4468,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "mapKeys",
     "module": "Object",
     "description": "Creates a new object by mapping keys through a transform function.",
-    "signature": "mapKeys<T>( obj: Record<string, T>, iteratee: (key: string, val: T)",
+    "signature": "mapKeys(...): any",
     "example": "mapKeys(...)",
     "output": "..."
   },
@@ -2528,7 +4477,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "mapValues",
     "module": "Object",
     "description": "Creates a new object by mapping values through a transform function.",
-    "signature": "mapValues<T, U>( obj: Record<string, T>, iteratee: (val: T, key: string)",
+    "signature": "mapValues(...): any",
     "example": "mapValues(...)",
     "output": "..."
   },
@@ -2537,7 +4486,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "has",
     "module": "Object",
     "description": "Checks if a path exists in an object.",
-    "signature": "has(obj: any, path: string | string[]): boolean",
+    "signature": "has(...): boolean",
     "example": "has(...)",
     "output": "..."
   },
@@ -2546,7 +4495,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isEqual",
     "module": "Object",
     "description": "Performs a deep comparison between two values to determine if they are equivalent.",
-    "signature": "isEqual(value: any, other: any): boolean",
+    "signature": "isEqual(...): boolean",
     "example": "isEqual(...)",
     "output": "..."
   },
@@ -2555,7 +4504,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "size",
     "module": "Object",
     "description": "Gets the size of a collection (array, string, object).",
-    "signature": "size(collection: any): number",
+    "signature": "size(...): number",
     "example": "size(...)",
     "output": "..."
   },
@@ -2564,7 +4513,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "invert",
     "module": "Object",
     "description": "Creates an object composed of the inverted keys and values of object.",
-    "signature": "invert(obj: Record<string, string | number>): Record<string, string>",
+    "signature": "invert(...): Record<string, string>",
     "example": "invert(...)",
     "output": "..."
   },
@@ -2573,7 +4522,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "toPairs",
     "module": "Object",
     "description": "Creates an array of the own enumerable string keyed property key-value pairs of object.",
-    "signature": "toPairs<T>(obj: Record<string, T>): [string, T][]",
+    "signature": "toPairs(...): [string, T][]",
     "example": "toPairs(...)",
     "output": "..."
   },
@@ -2582,7 +4531,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "fromPairs",
     "module": "Object",
     "description": "Creates an object from an array of key-value pairs.",
-    "signature": "fromPairs<T>(pairs: [string, T][]): Record<string, T>",
+    "signature": "fromPairs(...): Record<string, T>",
     "example": "fromPairs(...)",
     "output": "..."
   },
@@ -2591,7 +4540,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "clone",
     "module": "Object",
     "description": "Creates a shallow clone of value.",
-    "signature": "clone<T>(val: T): T",
+    "signature": "clone(...): T",
     "example": "clone(...)",
     "output": "..."
   },
@@ -2600,7 +4549,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "pickBy",
     "module": "Object",
     "description": "Creates an object composed of the object properties predicate returns truthy for.",
-    "signature": "pickBy<T extends object>( obj: T, predicate: (value: T[keyof T], key: keyof T)",
+    "signature": "pickBy(...): any",
     "example": "pickBy(...)",
     "output": "..."
   },
@@ -2609,7 +4558,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "omitBy",
     "module": "Object",
     "description": "Creates an object composed of the object properties predicate does not return truthy for.",
-    "signature": "omitBy<T extends object>( obj: T, predicate: (value: T[keyof T], key: keyof T)",
+    "signature": "omitBy(...): any",
     "example": "omitBy(...)",
     "output": "..."
   },
@@ -2618,7 +4567,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "findKey",
     "module": "Object",
     "description": "Returns the key of the first element predicate returns truthy for.",
-    "signature": "findKey<T extends object>( obj: T, predicate: (value: T[keyof T], key: keyof T)",
+    "signature": "findKey(...): any",
     "example": "findKey(...)",
     "output": "..."
   },
@@ -2627,7 +4576,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "findLastKey",
     "module": "Object",
     "description": "Returns the key of the last element predicate returns truthy for.",
-    "signature": "findLastKey<T extends object>( obj: T, predicate: (value: T[keyof T], key: keyof T)",
+    "signature": "findLastKey(...): any",
     "example": "findLastKey(...)",
     "output": "..."
   },
@@ -2636,7 +4585,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "forOwn",
     "module": "Object",
     "description": "Iterates over own enumerable string keyed properties of an object and invokes iteratee for each property.",
-    "signature": "forOwn<T extends object>( obj: T, iteratee: (value: T[keyof T], key: keyof T)",
+    "signature": "forOwn(...): any",
     "example": "forOwn(...)",
     "output": "..."
   },
@@ -2645,7 +4594,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "invoke",
     "module": "Object",
     "description": "Invokes the method at path of object.",
-    "signature": "invoke(obj: any, path: string | string[], ...args: any[]): any",
+    "signature": "invoke(...): any",
     "example": "invoke(...)",
     "output": "..."
   },
@@ -2654,7 +4603,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "keys",
     "module": "Object",
     "description": "Wrapper for Object.keys",
-    "signature": "keys(obj: any): string[]",
+    "signature": "keys(...): string[]",
     "example": "keys(...)",
     "output": "..."
   },
@@ -2663,7 +4612,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "values",
     "module": "Object",
     "description": "Wrapper for Object.values",
-    "signature": "values<T>(obj: Record<string, T>): T[]",
+    "signature": "values(...): T[]",
     "example": "values(...)",
     "output": "..."
   },
@@ -2672,7 +4621,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "entries",
     "module": "Object",
     "description": "Wrapper for Object.entries",
-    "signature": "entries<T>(obj: Record<string, T>): [string, T][]",
+    "signature": "entries(...): [string, T][]",
     "example": "entries(...)",
     "output": "..."
   },
@@ -2681,7 +4630,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "fromEntries",
     "module": "Object",
     "description": "Creates an object from an array of key-value pairs.",
-    "signature": "fromEntries<K extends PropertyKey, V>( entriesList: [K, V][] ): Record<K, V>",
+    "signature": "fromEntries(...): any",
     "example": "fromEntries(...)",
     "output": "..."
   },
@@ -2690,7 +4639,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isEmpty",
     "module": "Object",
     "description": "Checks if a value is empty (empty object, array, string, map, set, or null/undefined).",
-    "signature": "isEmpty(val: any): boolean",
+    "signature": "isEmpty(...): boolean",
     "example": "isEmpty(...)",
     "output": "..."
   },
@@ -2699,7 +4648,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "defaults",
     "module": "Object",
     "description": "Assigns own and inherited enumerable string keyed properties of source objects to the destination object for all destination properties that resolve to undefined.",
-    "signature": "defaults<T extends Record<string, any>>( target: T, ...sources: Record<string, any>[] ): T",
+    "signature": "defaults(...): any",
     "example": "defaults(...)",
     "output": "..."
   },
@@ -2708,7 +4657,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "filterKeys",
     "module": "Object",
     "description": "Filters an object's properties based on key predicate.",
-    "signature": "filterKeys<T extends Record<string, any>>( obj: T, predicate: (key: keyof T)",
+    "signature": "filterKeys(...): any",
     "example": "filterKeys(...)",
     "output": "..."
   },
@@ -2717,7 +4666,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "filterValues",
     "module": "Object",
     "description": "Filters an object's properties based on value predicate.",
-    "signature": "filterValues<T extends Record<string, any>>( obj: T, predicate: (val: T[keyof T])",
+    "signature": "filterValues(...): any",
     "example": "filterValues(...)",
     "output": "..."
   },
@@ -2726,8 +4675,125 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "compactObject",
     "module": "Object",
     "description": "Removes null, undefined, and empty string values from an object.",
-    "signature": "compactObject<T extends Record<string, any>>(obj: T): Partial<T>",
+    "signature": "compactObject(...): Partial<T>",
     "example": "compactObject(...)",
+    "output": "..."
+  },
+  {
+    "id": "sep",
+    "name": "sep",
+    "module": "Path",
+    "description": "Utilities for cross-platform path manipulation.",
+    "signature": "sep(...)",
+    "example": "sep(...)",
+    "output": "..."
+  },
+  {
+    "id": "normalize",
+    "name": "normalize",
+    "module": "Path",
+    "description": "Normalizes a path string, resolving '..' and '.'.",
+    "signature": "normalize(...): string",
+    "example": "normalize(...)",
+    "output": "..."
+  },
+  {
+    "id": "join",
+    "name": "join",
+    "module": "Path",
+    "description": "Joins all given path segments together.",
+    "signature": "join(...): string",
+    "example": "join(...)",
+    "output": "..."
+  },
+  {
+    "id": "dirname",
+    "name": "dirname",
+    "module": "Path",
+    "description": "Gets the directory name of a path.",
+    "signature": "dirname(...): string",
+    "example": "dirname(...)",
+    "output": "..."
+  },
+  {
+    "id": "basename",
+    "name": "basename",
+    "module": "Path",
+    "description": "Gets the base name of a path.",
+    "signature": "basename(...): string",
+    "example": "basename(...)",
+    "output": "..."
+  },
+  {
+    "id": "extname",
+    "name": "extname",
+    "module": "Path",
+    "description": "Gets the extension of a path.",
+    "signature": "extname(...): string",
+    "example": "extname(...)",
+    "output": "..."
+  },
+  {
+    "id": "isabsolute",
+    "name": "isAbsolute",
+    "module": "Path",
+    "description": "Checks if a path is absolute.",
+    "signature": "isAbsolute(...): boolean",
+    "example": "isAbsolute(...)",
+    "output": "..."
+  },
+  {
+    "id": "measuretime",
+    "name": "measureTime",
+    "module": "Perf",
+    "description": "Measures the execution time of a synchronous function.",
+    "signature": "measureTime(...): [T, number]",
+    "example": "measureTime(...)",
+    "output": "..."
+  },
+  {
+    "id": "measuretimeasync",
+    "name": "measureTimeAsync",
+    "module": "Perf",
+    "description": "Measures the execution time of an asynchronous function.",
+    "signature": "measureTimeAsync(...): Promise<[T, number]>",
+    "example": "measureTimeAsync(...)",
+    "output": "..."
+  },
+  {
+    "id": "benchmark",
+    "name": "benchmark",
+    "module": "Perf",
+    "description": "Benchmarks a function by running it multiple times and returning the average execution time.",
+    "signature": "benchmark(...): number",
+    "example": "benchmark(...)",
+    "output": "..."
+  },
+  {
+    "id": "benchmarkasync",
+    "name": "benchmarkAsync",
+    "module": "Perf",
+    "description": "Benchmarks an asynchronous function.",
+    "signature": "benchmarkAsync(...): Promise<number>",
+    "example": "benchmarkAsync(...)",
+    "output": "..."
+  },
+  {
+    "id": "createfpscounter",
+    "name": "createFPSCounter",
+    "module": "Perf",
+    "description": "Creates a FPS (Frames Per Second) counter.",
+    "signature": "createFPSCounter(...): ",
+    "example": "createFPSCounter(...)",
+    "output": "..."
+  },
+  {
+    "id": "mindelay",
+    "name": "minDelay",
+    "module": "Perf",
+    "description": "Ensures a function takes at least a specified amount of time to execute.",
+    "signature": "minDelay(...): Promise<T>",
+    "example": "minDelay(...)",
     "output": "..."
   },
   {
@@ -2735,7 +4801,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "randomUUID",
     "module": "Random",
     "description": "Generates a random UUID (v4) using the native crypto API.",
-    "signature": "randomUUID(): string",
+    "signature": "randomUUID(...): string",
     "example": "randomUUID(...)",
     "output": "..."
   },
@@ -2744,7 +4810,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "randomColor",
     "module": "Random",
     "description": "Generates a random hex color string.",
-    "signature": "randomColor(): string",
+    "signature": "randomColor(...): string",
     "example": "randomColor(...)",
     "output": "..."
   },
@@ -2753,7 +4819,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "randomBoolean",
     "module": "Random",
     "description": "Returns a random boolean value.",
-    "signature": "randomBoolean(): boolean",
+    "signature": "randomBoolean(...): boolean",
     "example": "randomBoolean(...)",
     "output": "..."
   },
@@ -2762,7 +4828,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "randomFloat",
     "module": "Random",
     "description": "Generates a random floating-point number between min and max (inclusive of min, exclusive of max).",
-    "signature": "randomFloat(min: number, max: number): number",
+    "signature": "randomFloat(...): number",
     "example": "randomFloat(...)",
     "output": "..."
   },
@@ -2771,7 +4837,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "randomItem",
     "module": "Random",
     "description": "Returns a random item from an array.",
-    "signature": "randomItem<T>(arr: T[]): T | undefined",
+    "signature": "randomItem(...): T | undefined",
     "example": "randomItem(...)",
     "output": "..."
   },
@@ -2780,7 +4846,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "randomIntFast",
     "module": "Random",
     "description": "Generates a random integer between min and max (inclusive) using Math.random (non-cryptographically secure).",
-    "signature": "randomIntFast(min: number, max: number): number",
+    "signature": "randomIntFast(...): number",
     "example": "randomIntFast(...)",
     "output": "..."
   },
@@ -2789,7 +4855,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "randomString",
     "module": "Random",
     "description": "Generates a random alphanumeric string of a given length.",
-    "signature": "randomString(length: number, charset?: string): string",
+    "signature": "randomString(...): string",
     "example": "randomString(...)",
     "output": "..."
   },
@@ -2798,7 +4864,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "randomSample",
     "module": "Random",
     "description": "Returns N unique random items from an array (no repeats).",
-    "signature": "randomSample<T>(arr: T[], n: number): T[]",
+    "signature": "randomSample(...): T[]",
     "example": "randomSample(...)",
     "output": "..."
   },
@@ -2807,7 +4873,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "weightedRandom",
     "module": "Random",
     "description": "Selects a random item from a weighted list.",
-    "signature": "weightedRandom<T>(items",
+    "signature": "weightedRandom(...): T | undefined",
     "example": "weightedRandom(...)",
     "output": "..."
   },
@@ -2816,8 +4882,53 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "regex",
     "module": "Regex",
     "description": "A collection of common, standard regular expressions for validation.",
-    "signature": "regex",
+    "signature": "regex(...)",
     "example": "regex(...)",
+    "output": "..."
+  },
+  {
+    "id": "retrywithexponentialbackoff",
+    "name": "retryWithExponentialBackoff",
+    "module": "Retry",
+    "description": "Retry Utilities",
+    "signature": "retryWithExponentialBackoff(...): any",
+    "example": "retryWithExponentialBackoff(...)",
+    "output": "..."
+  },
+  {
+    "id": "retrywithjitter",
+    "name": "retryWithJitter",
+    "module": "Retry",
+    "description": "Utility function",
+    "signature": "retryWithJitter(...): any",
+    "example": "retryWithJitter(...)",
+    "output": "..."
+  },
+  {
+    "id": "exponentialbackoffdelay",
+    "name": "exponentialBackoffDelay",
+    "module": "Retry",
+    "description": "Utility function",
+    "signature": "exponentialBackoffDelay(...): number",
+    "example": "exponentialBackoffDelay(...)",
+    "output": "..."
+  },
+  {
+    "id": "linearbackoffdelay",
+    "name": "linearBackoffDelay",
+    "module": "Retry",
+    "description": "Utility function",
+    "signature": "linearBackoffDelay(...): number",
+    "example": "linearBackoffDelay(...)",
+    "output": "..."
+  },
+  {
+    "id": "isretryableerror",
+    "name": "isRetryableError",
+    "module": "Retry",
+    "description": "Utility function",
+    "signature": "isRetryableError(...): boolean",
+    "example": "isRetryableError(...)",
     "output": "..."
   },
   {
@@ -2825,7 +4936,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "validate",
     "module": "Schema",
     "description": "Validates a single value against an array of rules.",
-    "signature": "validate(val: any, rules: Rule[]): ValidationResult",
+    "signature": "validate(...): ValidationResult",
     "example": "validate(...)",
     "output": "..."
   },
@@ -2834,7 +4945,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isValid",
     "module": "Schema",
     "description": "Checks if a value is valid against a list of rules (returns boolean).",
-    "signature": "isValid(val: any, rules: Rule[]): boolean",
+    "signature": "isValid(...): boolean",
     "example": "isValid(...)",
     "output": "..."
   },
@@ -2843,7 +4954,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "validateObject",
     "module": "Schema",
     "description": "Validates an object against a schema of fields and their rules.",
-    "signature": "validateObject( obj: Record<string, any>, schema: Record<string, Rule[]> ): ObjectValidationResult",
+    "signature": "validateObject(...): any",
     "example": "validateObject(...)",
     "output": "..."
   },
@@ -2852,7 +4963,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "required",
     "module": "Schema",
     "description": "Rule: Value must be present (not null, undefined, or empty string).",
-    "signature": "required(msg?: string): Rule",
+    "signature": "required(...): Rule",
     "example": "required(...)",
     "output": "..."
   },
@@ -2861,7 +4972,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "minLength",
     "module": "Schema",
     "description": "Rule: Value must have a minimum length (works for strings and arrays).",
-    "signature": "minLength(len: number, msg?: string): Rule",
+    "signature": "minLength(...): Rule",
     "example": "minLength(...)",
     "output": "..."
   },
@@ -2870,7 +4981,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "maxLength",
     "module": "Schema",
     "description": "Rule: Value must have a maximum length (works for strings and arrays).",
-    "signature": "maxLength(len: number, msg?: string): Rule",
+    "signature": "maxLength(...): Rule",
     "example": "maxLength(...)",
     "output": "..."
   },
@@ -2879,7 +4990,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "pattern",
     "module": "Schema",
     "description": "Rule: Value must match the regex pattern.",
-    "signature": "pattern(regex: RegExp, msg?: string): Rule",
+    "signature": "pattern(...): Rule",
     "example": "pattern(...)",
     "output": "..."
   },
@@ -2888,7 +4999,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "minValue",
     "module": "Schema",
     "description": "Rule: Value must be >= limit.",
-    "signature": "minValue(limit: number, msg?: string): Rule",
+    "signature": "minValue(...): Rule",
     "example": "minValue(...)",
     "output": "..."
   },
@@ -2897,7 +5008,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "maxValue",
     "module": "Schema",
     "description": "Rule: Value must be <= limit.",
-    "signature": "maxValue(limit: number, msg?: string): Rule",
+    "signature": "maxValue(...): Rule",
     "example": "maxValue(...)",
     "output": "..."
   },
@@ -2906,7 +5017,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isIn",
     "module": "Schema",
     "description": "Rule: Value must be one of the allowed values.",
-    "signature": "isIn(allowed: any[], msg?: string): Rule",
+    "signature": "isIn(...): Rule",
     "example": "isIn(...)",
     "output": "..."
   },
@@ -2915,7 +5026,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isType",
     "module": "Schema",
     "description": "Rule: Value must match the expected type.",
-    "signature": "isType( expected: \"string\" | \"number\" | \"boolean\" | \"object\" | \"array\" | \"function\", msg?: string ): Rule",
+    "signature": "isType(...): any",
     "example": "isType(...)",
     "output": "..."
   },
@@ -2924,8 +5035,53 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "custom",
     "module": "Schema",
     "description": "Rule: Value must satisfy a custom predicate.",
-    "signature": "custom(fn: (val: any)",
+    "signature": "custom(...): Rule",
     "example": "custom(...)",
+    "output": "..."
+  },
+  {
+    "id": "linearsearch",
+    "name": "linearSearch",
+    "module": "Search",
+    "description": "Linear search: finds the index of the first matching element.",
+    "signature": "linearSearch(...): number",
+    "example": "linearSearch(...)",
+    "output": "..."
+  },
+  {
+    "id": "binarysearch",
+    "name": "binarySearch",
+    "module": "Search",
+    "description": "Binary search: efficiently finds the index of the target in a SORTED array.",
+    "signature": "binarySearch(...): number",
+    "example": "binarySearch(...)",
+    "output": "..."
+  },
+  {
+    "id": "jumpsearch",
+    "name": "jumpSearch",
+    "module": "Search",
+    "description": "Jump search: finds the index of the target in a SORTED array using block jumps.",
+    "signature": "jumpSearch(...): number",
+    "example": "jumpSearch(...)",
+    "output": "..."
+  },
+  {
+    "id": "exponentialsearch",
+    "name": "exponentialSearch",
+    "module": "Search",
+    "description": "Exponential search: finds the index of the target in a SORTED array.",
+    "signature": "exponentialSearch(...): number",
+    "example": "exponentialSearch(...)",
+    "output": "..."
+  },
+  {
+    "id": "interpolationsearch",
+    "name": "interpolationSearch",
+    "module": "Search",
+    "description": "Interpolation search: finds the index of a number in a uniformly distributed SORTED array.",
+    "signature": "interpolationSearch(...): number",
+    "example": "interpolationSearch(...)",
     "output": "..."
   },
   {
@@ -2933,7 +5089,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "semverParse",
     "module": "Semver",
     "description": "Parses a semantic version string into a SemVer object.",
-    "signature": "semverParse(version: string): SemVer | null",
+    "signature": "semverParse(...): SemVer | null",
     "example": "semverParse(...)",
     "output": "..."
   },
@@ -2942,7 +5098,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "semverClean",
     "module": "Semver",
     "description": "Cleans the semantic version string, stripping leading \"v\" or whitespace.",
-    "signature": "semverClean(version: string): string | null",
+    "signature": "semverClean(...): string | null",
     "example": "semverClean(...)",
     "output": "..."
   },
@@ -2951,7 +5107,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "semverIsValid",
     "module": "Semver",
     "description": "Checks if a string is a valid SemVer format.",
-    "signature": "semverIsValid(version: string): boolean",
+    "signature": "semverIsValid(...): boolean",
     "example": "semverIsValid(...)",
     "output": "..."
   },
@@ -2960,7 +5116,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "semverCompare",
     "module": "Semver",
     "description": "Compares two semantic version strings.",
-    "signature": "semverCompare(v1: string, v2: string): number",
+    "signature": "semverCompare(...): number",
     "example": "semverCompare(...)",
     "output": "..."
   },
@@ -2969,8 +5125,161 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "semverSatisfies",
     "module": "Semver",
     "description": "Checks if a version satisfies a range expression (e.g. \"^1.2.3\", \">=1.0.0 <2.0.0\", \"~1.0.0 || ^2.0.0\").",
-    "signature": "semverSatisfies(version: string, range: string): boolean",
+    "signature": "semverSatisfies(...): boolean",
     "example": "semverSatisfies(...)",
+    "output": "..."
+  },
+  {
+    "id": "unionofsets",
+    "name": "unionOfSets",
+    "module": "Set",
+    "description": "Creates a new set containing elements present in either set A or set B.",
+    "signature": "unionOfSets(...): Set<T>",
+    "example": "unionOfSets(...)",
+    "output": "..."
+  },
+  {
+    "id": "intersectionofsets",
+    "name": "intersectionOfSets",
+    "module": "Set",
+    "description": "Creates a new set containing elements present in both set A and set B.",
+    "signature": "intersectionOfSets(...): Set<T>",
+    "example": "intersectionOfSets(...)",
+    "output": "..."
+  },
+  {
+    "id": "differenceofsets",
+    "name": "differenceOfSets",
+    "module": "Set",
+    "description": "Creates a new set containing elements present in set A but not in set B.",
+    "signature": "differenceOfSets(...): Set<T>",
+    "example": "differenceOfSets(...)",
+    "output": "..."
+  },
+  {
+    "id": "setsymmetricdifference",
+    "name": "setSymmetricDifference",
+    "module": "Set",
+    "description": "Creates a new set containing elements present in either set A or set B, but not both.",
+    "signature": "setSymmetricDifference(...): Set<T>",
+    "example": "setSymmetricDifference(...)",
+    "output": "..."
+  },
+  {
+    "id": "issetsubset",
+    "name": "isSetSubset",
+    "module": "Set",
+    "description": "Checks if set A is a subset of set B (all elements of A are in B).",
+    "signature": "isSetSubset(...): boolean",
+    "example": "isSetSubset(...)",
+    "output": "..."
+  },
+  {
+    "id": "issetsuperset",
+    "name": "isSetSuperset",
+    "module": "Set",
+    "description": "Checks if set A is a superset of set B (all elements of B are in A).",
+    "signature": "isSetSuperset(...): boolean",
+    "example": "isSetSuperset(...)",
+    "output": "..."
+  },
+  {
+    "id": "isdisjoint",
+    "name": "isDisjoint",
+    "module": "Set",
+    "description": "Checks if set A and set B have no elements in common.",
+    "signature": "isDisjoint(...): boolean",
+    "example": "isDisjoint(...)",
+    "output": "..."
+  },
+  {
+    "id": "mapset",
+    "name": "mapSet",
+    "module": "Set",
+    "description": "Maps over a set to produce a new set.",
+    "signature": "mapSet(...): Set<U>",
+    "example": "mapSet(...)",
+    "output": "..."
+  },
+  {
+    "id": "filterset",
+    "name": "filterSet",
+    "module": "Set",
+    "description": "Filters a set to produce a new set.",
+    "signature": "filterSet(...): Set<T>",
+    "example": "filterSet(...)",
+    "output": "..."
+  },
+  {
+    "id": "cartesianproduct",
+    "name": "cartesianProduct",
+    "module": "Set",
+    "description": "Creates the Cartesian product of two sets.",
+    "signature": "cartesianProduct(...): Set<[T, U]>",
+    "example": "cartesianProduct(...)",
+    "output": "..."
+  },
+  {
+    "id": "bubblesort",
+    "name": "bubbleSort",
+    "module": "Sort",
+    "description": "Bubble Sort algorithm.",
+    "signature": "bubbleSort(...): T[]",
+    "example": "bubbleSort(...)",
+    "output": "..."
+  },
+  {
+    "id": "selectionsort",
+    "name": "selectionSort",
+    "module": "Sort",
+    "description": "Selection Sort algorithm.",
+    "signature": "selectionSort(...): T[]",
+    "example": "selectionSort(...)",
+    "output": "..."
+  },
+  {
+    "id": "insertionsort",
+    "name": "insertionSort",
+    "module": "Sort",
+    "description": "Insertion Sort algorithm.",
+    "signature": "insertionSort(...): T[]",
+    "example": "insertionSort(...)",
+    "output": "..."
+  },
+  {
+    "id": "mergesort",
+    "name": "mergeSort",
+    "module": "Sort",
+    "description": "Merge Sort algorithm.",
+    "signature": "mergeSort(...): T[]",
+    "example": "mergeSort(...)",
+    "output": "..."
+  },
+  {
+    "id": "quicksort",
+    "name": "quickSort",
+    "module": "Sort",
+    "description": "Quick Sort algorithm.",
+    "signature": "quickSort(...): T[]",
+    "example": "quickSort(...)",
+    "output": "..."
+  },
+  {
+    "id": "heapsort",
+    "name": "heapSort",
+    "module": "Sort",
+    "description": "Heap Sort algorithm.",
+    "signature": "heapSort(...): T[]",
+    "example": "heapSort(...)",
+    "output": "..."
+  },
+  {
+    "id": "issorted",
+    "name": "isSorted",
+    "module": "Sort",
+    "description": "Check if array is sorted.",
+    "signature": "isSorted(...): boolean",
+    "example": "isSorted(...)",
     "output": "..."
   },
   {
@@ -2978,7 +5287,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "mode",
     "module": "Statistics",
     "description": "Returns the most frequently occurring value(s) in an array.",
-    "signature": "mode(nums: number[]): number[]",
+    "signature": "mode(...): number[]",
     "example": "mode(...)",
     "output": "..."
   },
@@ -2987,7 +5296,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "variance",
     "module": "Statistics",
     "description": "Calculates the variance of a dataset.",
-    "signature": "variance(nums: number[], population",
+    "signature": "variance(...): number",
     "example": "variance(...)",
     "output": "..."
   },
@@ -2996,7 +5305,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "percentile",
     "module": "Statistics",
     "description": "Calculates the p-th percentile of an array of numbers.",
-    "signature": "percentile(nums: number[], p: number): number",
+    "signature": "percentile(...): number",
     "example": "percentile(...)",
     "output": "..."
   },
@@ -3005,7 +5314,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "quartiles",
     "module": "Statistics",
     "description": "Returns the 1st (25%), 2nd (50%/median), and 3rd (75%) quartiles of an array.",
-    "signature": "quartiles(nums: number[])",
+    "signature": "quartiles(...): ",
     "example": "quartiles(...)",
     "output": "..."
   },
@@ -3014,7 +5323,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "zScore",
     "module": "Statistics",
     "description": "Calculates the z-score for a specific value given a dataset.",
-    "signature": "zScore(value: number, nums: number[], population",
+    "signature": "zScore(...): number",
     "example": "zScore(...)",
     "output": "..."
   },
@@ -3023,7 +5332,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "covariance",
     "module": "Statistics",
     "description": "Calculates the covariance between two equally-sized arrays of numbers.",
-    "signature": "covariance(nums1: number[], nums2: number[], population",
+    "signature": "covariance(...): number",
     "example": "covariance(...)",
     "output": "..."
   },
@@ -3032,7 +5341,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "correlation",
     "module": "Statistics",
     "description": "Calculates the Pearson correlation coefficient between two arrays.",
-    "signature": "correlation(nums1: number[], nums2: number[], population",
+    "signature": "correlation(...): number",
     "example": "correlation(...)",
     "output": "..."
   },
@@ -3041,7 +5350,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "skewness",
     "module": "Statistics",
     "description": "Calculates the skewness (asymmetry) of a dataset.",
-    "signature": "skewness(nums: number[]): number",
+    "signature": "skewness(...): number",
     "example": "skewness(...)",
     "output": "..."
   },
@@ -3050,7 +5359,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "kurtosis",
     "module": "Statistics",
     "description": "Calculates the excess kurtosis (tailedness) of a dataset.",
-    "signature": "kurtosis(nums: number[]): number",
+    "signature": "kurtosis(...): number",
     "example": "kurtosis(...)",
     "output": "..."
   },
@@ -3059,7 +5368,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "movingAverage",
     "module": "Statistics",
     "description": "Calculates the simple moving average of an array with a given window size.",
-    "signature": "movingAverage(nums: number[], windowSize: number): number[]",
+    "signature": "movingAverage(...): number[]",
     "example": "movingAverage(...)",
     "output": "..."
   },
@@ -3068,7 +5377,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "weightedAverage",
     "module": "Statistics",
     "description": "Calculates the weighted average of values with corresponding weights.",
-    "signature": "weightedAverage(values: number[], weights: number[]): number",
+    "signature": "weightedAverage(...): number",
     "example": "weightedAverage(...)",
     "output": "..."
   },
@@ -3077,7 +5386,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "geometricMean",
     "module": "Statistics",
     "description": "Calculates the geometric mean of an array of positive numbers.",
-    "signature": "geometricMean(nums: number[]): number",
+    "signature": "geometricMean(...): number",
     "example": "geometricMean(...)",
     "output": "..."
   },
@@ -3086,7 +5395,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "safeStorage",
     "module": "Storage",
     "description": "An isomorphic wrapper for LocalStorage and SessionStorage supporting JSON serialization,",
-    "signature": "safeStorage",
+    "signature": "safeStorage(...)",
     "example": "safeStorage(...)",
     "output": "..."
   },
@@ -3095,7 +5404,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "signal",
     "module": "Store",
     "description": "Creates a reactive signal primitive that tracks dependencies and propagates changes.",
-    "signature": "signal<T>(initialValue: T): Signal<T>",
+    "signature": "signal(...): Signal<T>",
     "example": "signal(...)",
     "output": "..."
   },
@@ -3104,7 +5413,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "computed",
     "module": "Store",
     "description": "Creates a derived reactive computation that caches values and updates automatically when dependencies change.",
-    "signature": "computed<T>(fn: ()",
+    "signature": "computed(...): Computed<T>",
     "example": "computed(...)",
     "output": "..."
   },
@@ -3113,7 +5422,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "effect",
     "module": "Store",
     "description": "Runs a side-effect function that automatically re-runs whenever any read signal changes.",
-    "signature": "effect(fn: ()",
+    "signature": "effect(...): () => void",
     "example": "effect(...)",
     "output": "..."
   },
@@ -3122,7 +5431,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "createStore",
     "module": "Store",
     "description": "Creates a lightweight state store using a publish-subscribe model (Zustand style).",
-    "signature": "createStore<T extends Record<string, any>>(initialState: T): Store<T>",
+    "signature": "createStore(...): Store<T>",
     "example": "createStore(...)",
     "output": "..."
   },
@@ -3130,22 +5439,17 @@ export const utilitiesData: UtilityMeta[] = [
     "id": "capitalize",
     "name": "capitalize",
     "module": "String",
-    "description": "Capitalizes the first character of a string and lowercases the rest.",
-    "signature": "capitalize(str: string): string",
-    "example": "capitalize('hElLo WORLD') // -> 'Hello world'",
-    "output": "'Hello world'",
-    "benchmark": {
-      "optikitOps": 5215000,
-      "lodashOps": 1334000,
-      "multiplier": 3.91
-    }
+    "description": "Capitalizes the first character of a string.",
+    "signature": "capitalize(...): string",
+    "example": "capitalize(...)",
+    "output": "..."
   },
   {
     "id": "slugify",
     "name": "slugify",
     "module": "String",
     "description": "Converts a string into a URL-friendly slug with customization options.",
-    "signature": "slugify( str: string, options?",
+    "signature": "slugify(...): any",
     "example": "slugify(...)",
     "output": "..."
   },
@@ -3154,7 +5458,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "truncate",
     "module": "String",
     "description": "Truncates a string to a specified length with customizable separator and suffix.",
-    "signature": "truncate( str: string, length: number, options?: string |",
+    "signature": "truncate(...): any",
     "example": "truncate(...)",
     "output": "..."
   },
@@ -3163,21 +5467,16 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "camelCase",
     "module": "String",
     "description": "Converts a string to camelCase.",
-    "signature": "camelCase(str: string): string",
-    "example": "camelCase('Hello world test') // -> 'helloWorldTest'",
-    "output": "'helloWorldTest'",
-    "benchmark": {
-      "optikitOps": 1398000,
-      "lodashOps": 609000,
-      "multiplier": 2.29
-    }
+    "signature": "camelCase(...): string",
+    "example": "camelCase(...)",
+    "output": "..."
   },
   {
     "id": "kebabcase",
     "name": "kebabCase",
     "module": "String",
     "description": "Converts a string to kebab-case.",
-    "signature": "kebabCase(str: string): string",
+    "signature": "kebabCase(...): string",
     "example": "kebabCase(...)",
     "output": "..."
   },
@@ -3186,7 +5485,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "snakeCase",
     "module": "String",
     "description": "Converts a string to snake_case.",
-    "signature": "snakeCase(str: string): string",
+    "signature": "snakeCase(...): string",
     "example": "snakeCase(...)",
     "output": "..."
   },
@@ -3195,7 +5494,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "escapeHtml",
     "module": "String",
     "description": "Escapes HTML characters: &, <, >, \", and ' in a string.",
-    "signature": "escapeHtml(str: string): string",
+    "signature": "escapeHtml(...): string",
     "example": "escapeHtml(...)",
     "output": "..."
   },
@@ -3204,7 +5503,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "unescapeHtml",
     "module": "String",
     "description": "Unescapes HTML entities back to characters.",
-    "signature": "unescapeHtml(str: string): string",
+    "signature": "unescapeHtml(...): string",
     "example": "unescapeHtml(...)",
     "output": "..."
   },
@@ -3213,7 +5512,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "stripHtml",
     "module": "String",
     "description": "Removes all HTML tags from a string.",
-    "signature": "stripHtml(str: string): string",
+    "signature": "stripHtml(...): string",
     "example": "stripHtml(...)",
     "output": "..."
   },
@@ -3222,7 +5521,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "wordCount",
     "module": "String",
     "description": "Counts the number of words in a string.",
-    "signature": "wordCount(str: string): number",
+    "signature": "wordCount(...): number",
     "example": "wordCount(...)",
     "output": "..."
   },
@@ -3231,7 +5530,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "pad",
     "module": "String",
     "description": "Pads a string to a target length with a fill character.",
-    "signature": "pad( str: string, length: number, options?",
+    "signature": "pad(...): any",
     "example": "pad(...)",
     "output": "..."
   },
@@ -3240,7 +5539,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "repeat",
     "module": "String",
     "description": "Repeats a string a given number of times with an optional separator.",
-    "signature": "repeat(str: string, count: number, separator",
+    "signature": "repeat(...): string",
     "example": "repeat(...)",
     "output": "..."
   },
@@ -3249,7 +5548,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "reverseWords",
     "module": "String",
     "description": "Reverses the order of words in a string.",
-    "signature": "reverseWords(str: string): string",
+    "signature": "reverseWords(...): string",
     "example": "reverseWords(...)",
     "output": "..."
   },
@@ -3258,7 +5557,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "titleCase",
     "module": "String",
     "description": "Converts a string to Title Case.",
-    "signature": "titleCase( str: string, options?",
+    "signature": "titleCase(...): any",
     "example": "titleCase(...)",
     "output": "..."
   },
@@ -3267,7 +5566,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "countOccurrences",
     "module": "String",
     "description": "Counts how many times a substring appears in a string.",
-    "signature": "countOccurrences( str: string, sub: string, options?",
+    "signature": "countOccurrences(...): any",
     "example": "countOccurrences(...)",
     "output": "..."
   },
@@ -3276,16 +5575,16 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "interpolate",
     "module": "String",
     "description": "Interpolates template variables in a string using a data object.",
-    "signature": "interpolate( template: string, data: Record<string, any>, options?",
-    "example": "interpolate(\"Hello {{name}}!\", { name: \"Mohit\" })",
-    "output": "\"Hello Mohit!\""
+    "signature": "interpolate(...): any",
+    "example": "interpolate(...)",
+    "output": "..."
   },
   {
     "id": "pascalcase",
     "name": "pascalCase",
     "module": "String",
     "description": "Converts a string to PascalCase.",
-    "signature": "pascalCase(str: string): string",
+    "signature": "pascalCase(...): string",
     "example": "pascalCase(...)",
     "output": "..."
   },
@@ -3294,7 +5593,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "swapCase",
     "module": "String",
     "description": "Swaps the casing of each character in a string.",
-    "signature": "swapCase(str: string): string",
+    "signature": "swapCase(...): string",
     "example": "swapCase(...)",
     "output": "..."
   },
@@ -3303,7 +5602,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "trimAll",
     "module": "String",
     "description": "Removes all whitespace characters from a string.",
-    "signature": "trimAll(str: string): string",
+    "signature": "trimAll(...): string",
     "example": "trimAll(...)",
     "output": "..."
   },
@@ -3312,7 +5611,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "chars",
     "module": "String",
     "description": "Splits a string into an array of its characters.",
-    "signature": "chars(str: string): string[]",
+    "signature": "chars(...): string[]",
     "example": "chars(...)",
     "output": "..."
   },
@@ -3321,7 +5620,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "chop",
     "module": "String",
     "description": "Chops a string into pieces of a specific length.",
-    "signature": "chop(str: string, step: number): string[]",
+    "signature": "chop(...): string[]",
     "example": "chop(...)",
     "output": "..."
   },
@@ -3330,7 +5629,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "endsWithAny",
     "module": "String",
     "description": "Checks if a string ends with any of the provided suffixes.",
-    "signature": "endsWithAny(str: string, suffixes: string[]): boolean",
+    "signature": "endsWithAny(...): boolean",
     "example": "endsWithAny(...)",
     "output": "..."
   },
@@ -3339,7 +5638,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "startsWithAny",
     "module": "String",
     "description": "Checks if a string starts with any of the provided prefixes.",
-    "signature": "startsWithAny(str: string, prefixes: string[]): boolean",
+    "signature": "startsWithAny(...): boolean",
     "example": "startsWithAny(...)",
     "output": "..."
   },
@@ -3348,7 +5647,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "insert",
     "module": "String",
     "description": "Inserts a substring at a specific index.",
-    "signature": "insert(str: string, index: number, sub: string): string",
+    "signature": "insert(...): string",
     "example": "insert(...)",
     "output": "..."
   },
@@ -3357,7 +5656,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "reverse",
     "module": "String",
     "description": "Reverses the characters in a string.",
-    "signature": "reverse(str: string): string",
+    "signature": "reverse(...): string",
     "example": "reverse(...)",
     "output": "..."
   },
@@ -3366,7 +5665,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "mask",
     "module": "String",
     "description": "Masks a string with a character, leaving some characters visible.",
-    "signature": "mask( str: string, maskChar",
+    "signature": "mask(...): any",
     "example": "mask(...)",
     "output": "..."
   },
@@ -3375,7 +5674,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "removeNonWords",
     "module": "String",
     "description": "Removes all non-word characters (everything except a-z, A-Z, 0-9, and _).",
-    "signature": "removeNonWords(str: string): string",
+    "signature": "removeNonWords(...): string",
     "example": "removeNonWords(...)",
     "output": "..."
   },
@@ -3384,7 +5683,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isBlank",
     "module": "String",
     "description": "Checks if a string is empty or contains only whitespace.",
-    "signature": "isBlank(str: string): boolean",
+    "signature": "isBlank(...): boolean",
     "example": "isBlank(...)",
     "output": "..."
   },
@@ -3393,7 +5692,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isLower",
     "module": "String",
     "description": "Checks if a string is entirely lowercase.",
-    "signature": "isLower(str: string): boolean",
+    "signature": "isLower(...): boolean",
     "example": "isLower(...)",
     "output": "..."
   },
@@ -3402,7 +5701,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isUpper",
     "module": "String",
     "description": "Checks if a string is entirely uppercase.",
-    "signature": "isUpper(str: string): boolean",
+    "signature": "isUpper(...): boolean",
     "example": "isUpper(...)",
     "output": "..."
   },
@@ -3411,7 +5710,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "surround",
     "module": "String",
     "description": "Surrounds a string with a prefix and suffix.",
-    "signature": "surround(str: string, wrapper: string): string",
+    "signature": "surround(...): string",
     "example": "surround(...)",
     "output": "..."
   },
@@ -3420,7 +5719,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isPalindrome",
     "module": "String",
     "description": "Checks if a string is a palindrome.",
-    "signature": "isPalindrome( str: string, options?",
+    "signature": "isPalindrome(...): any",
     "example": "isPalindrome(...)",
     "output": "..."
   },
@@ -3429,7 +5728,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "collapseWhitespace",
     "module": "String",
     "description": "Collapses multiple consecutive whitespace characters into a single space and trims the result.",
-    "signature": "collapseWhitespace(str: string): string",
+    "signature": "collapseWhitespace(...): string",
     "example": "collapseWhitespace(...)",
     "output": "..."
   },
@@ -3438,7 +5737,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "dotCase",
     "module": "String",
     "description": "Converts a string to dot.case.",
-    "signature": "dotCase(str: string): string",
+    "signature": "dotCase(...): string",
     "example": "dotCase(...)",
     "output": "..."
   },
@@ -3447,7 +5746,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "headerCase",
     "module": "String",
     "description": "Converts a string to Header-Case (Title-Kebab-Case).",
-    "signature": "headerCase(str: string): string",
+    "signature": "headerCase(...): string",
     "example": "headerCase(...)",
     "output": "..."
   },
@@ -3456,7 +5755,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "ensurePrefix",
     "module": "String",
     "description": "Ensures a string starts with the given prefix.",
-    "signature": "ensurePrefix(str: string, prefix: string): string",
+    "signature": "ensurePrefix(...): string",
     "example": "ensurePrefix(...)",
     "output": "..."
   },
@@ -3465,7 +5764,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "ensureSuffix",
     "module": "String",
     "description": "Ensures a string ends with the given suffix.",
-    "signature": "ensureSuffix(str: string, suffix: string): string",
+    "signature": "ensureSuffix(...): string",
     "example": "ensureSuffix(...)",
     "output": "..."
   },
@@ -3474,7 +5773,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "stripPrefix",
     "module": "String",
     "description": "Removes a prefix from the start of a string if present.",
-    "signature": "stripPrefix(str: string, prefix: string): string",
+    "signature": "stripPrefix(...): string",
     "example": "stripPrefix(...)",
     "output": "..."
   },
@@ -3483,7 +5782,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "stripSuffix",
     "module": "String",
     "description": "Removes a suffix from the end of a string if present.",
-    "signature": "stripSuffix(str: string, suffix: string): string",
+    "signature": "stripSuffix(...): string",
     "example": "stripSuffix(...)",
     "output": "..."
   },
@@ -3492,7 +5791,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "lines",
     "module": "String",
     "description": "Splits a multi-line string into an array of individual lines.",
-    "signature": "lines(str: string): string[]",
+    "signature": "lines(...): string[]",
     "example": "lines(...)",
     "output": "..."
   },
@@ -3501,7 +5800,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "unlines",
     "module": "String",
     "description": "Joins an array of line strings into a single multi-line string.",
-    "signature": "unlines(linesArr: string[]): string",
+    "signature": "unlines(...): string",
     "example": "unlines(...)",
     "output": "..."
   },
@@ -3510,7 +5809,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "levenshteinDistance",
     "module": "String",
     "description": "Computes the Levenshtein distance (edit distance) between two strings.",
-    "signature": "levenshteinDistance(a: string, b: string): number",
+    "signature": "levenshteinDistance(...): number",
     "example": "levenshteinDistance(...)",
     "output": "..."
   },
@@ -3519,7 +5818,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "stringSimilarity",
     "module": "String",
     "description": "Calculates string similarity score between 0 and 1 using Levenshtein distance.",
-    "signature": "stringSimilarity(a: string, b: string): number",
+    "signature": "stringSimilarity(...): number",
     "example": "stringSimilarity(...)",
     "output": "..."
   },
@@ -3528,7 +5827,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "getFileExtension",
     "module": "String",
     "description": "Extracts the file extension from a filename or path.",
-    "signature": "getFileExtension(filename: string): string",
+    "signature": "getFileExtension(...): string",
     "example": "getFileExtension(...)",
     "output": "..."
   },
@@ -3537,8 +5836,17 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "getFileName",
     "module": "String",
     "description": "Extracts the filename without its extension.",
-    "signature": "getFileName(filename: string): string",
+    "signature": "getFileName(...): string",
     "example": "getFileName(...)",
+    "output": "..."
+  },
+  {
+    "id": "escaperegexp",
+    "name": "escapeRegExp",
+    "module": "String",
+    "description": "Escapes special characters in a string for use in a regular expression.",
+    "signature": "escapeRegExp(...): string",
+    "example": "escapeRegExp(...)",
     "output": "..."
   },
   {
@@ -3546,7 +5854,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "render",
     "module": "Template",
     "description": "Renders a logic-less template string by interpolating data, loops, and conditionals.",
-    "signature": "render(template: string, data: Record<string, any>): string",
+    "signature": "render(...): string",
     "example": "render(...)",
     "output": "..."
   },
@@ -3555,7 +5863,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "compile",
     "module": "Template",
     "description": "Pre-compiles a template string into a reusable rendering function for faster execution.",
-    "signature": "compile( template: string ): (data: Record<string, any>)",
+    "signature": "compile(...): any",
     "example": "compile(...)",
     "output": "..."
   },
@@ -3564,7 +5872,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "arrayToTree",
     "module": "Tree",
     "description": "Converts a flat array of items with parent-child relationships into a nested tree structure.",
-    "signature": "arrayToTree( list: FlatNode[], options",
+    "signature": "arrayToTree(...): any",
     "example": "arrayToTree(...)",
     "output": "..."
   },
@@ -3573,143 +5881,8 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "treeToArray",
     "module": "Tree",
     "description": "Flattens a nested tree structure back into a flat array of nodes.",
-    "signature": "treeToArray( tree: TreeNode[], options",
+    "signature": "treeToArray(...): any",
     "example": "treeToArray(...)",
-    "output": "..."
-  },
-  {
-    "id": "isnil",
-    "name": "isNil",
-    "module": "Types",
-    "description": "Checks if a value is null or undefined.",
-    "signature": "isNil(val: any): val is null | undefined",
-    "example": "isNil(...)",
-    "output": "..."
-  },
-  {
-    "id": "isobject",
-    "name": "isObject",
-    "module": "Types",
-    "description": "Checks if a value is a plain object (excluding array, null, and other instances).",
-    "signature": "isObject(val: any): val is Record<any, any>",
-    "example": "isObject(...)",
-    "output": "..."
-  },
-  {
-    "id": "isfunction",
-    "name": "isFunction",
-    "module": "Types",
-    "description": "Checks if a value is a function.",
-    "signature": "isFunction(val: any): val is Function",
-    "example": "isFunction(...)",
-    "output": "..."
-  },
-  {
-    "id": "isdate",
-    "name": "isDate",
-    "module": "Types",
-    "description": "Checks if a value is a valid Date instance.",
-    "signature": "isDate(val: any): val is Date",
-    "example": "isDate(...)",
-    "output": "..."
-  },
-  {
-    "id": "isregexp",
-    "name": "isRegExp",
-    "module": "Types",
-    "description": "Checks if a value is a regular expression.",
-    "signature": "isRegExp(val: any): val is RegExp",
-    "example": "isRegExp(...)",
-    "output": "..."
-  },
-  {
-    "id": "isstring",
-    "name": "isString",
-    "module": "Types",
-    "description": "Checks if a value is a string.",
-    "signature": "isString(val: any): val is string",
-    "example": "isString(...)",
-    "output": "..."
-  },
-  {
-    "id": "isnumber",
-    "name": "isNumber",
-    "module": "Types",
-    "description": "Checks if a value is a finite number (excludes NaN and Infinity).",
-    "signature": "isNumber(val: any): val is number",
-    "example": "isNumber(...)",
-    "output": "..."
-  },
-  {
-    "id": "isboolean",
-    "name": "isBoolean",
-    "module": "Types",
-    "description": "Checks if a value is a boolean.",
-    "signature": "isBoolean(val: any): val is boolean",
-    "example": "isBoolean(...)",
-    "output": "..."
-  },
-  {
-    "id": "isarray",
-    "name": "isArray",
-    "module": "Types",
-    "description": "Checks if a value is an array.",
-    "signature": "isArray(val: any): val is any[]",
-    "example": "isArray(...)",
-    "output": "..."
-  },
-  {
-    "id": "ispromise",
-    "name": "isPromise",
-    "module": "Types",
-    "description": "Checks if a value is a Promise or thenable.",
-    "signature": "isPromise(val: any): val is Promise<any>",
-    "example": "isPromise(...)",
-    "output": "..."
-  },
-  {
-    "id": "ismap",
-    "name": "isMap",
-    "module": "Types",
-    "description": "Checks if a value is a Map instance.",
-    "signature": "isMap(val: any): val is Map<any, any>",
-    "example": "isMap(...)",
-    "output": "..."
-  },
-  {
-    "id": "isset",
-    "name": "isSet",
-    "module": "Types",
-    "description": "Checks if a value is a Set instance.",
-    "signature": "isSet(val: any): val is Set<any>",
-    "example": "isSet(...)",
-    "output": "..."
-  },
-  {
-    "id": "issymbol",
-    "name": "isSymbol",
-    "module": "Types",
-    "description": "Checks if a value is a Symbol.",
-    "signature": "isSymbol(val: any): val is symbol",
-    "example": "isSymbol(...)",
-    "output": "..."
-  },
-  {
-    "id": "iserror",
-    "name": "isError",
-    "module": "Types",
-    "description": "Checks if a value is an Error instance.",
-    "signature": "isError(val: any): val is Error",
-    "example": "isError(...)",
-    "output": "..."
-  },
-  {
-    "id": "isprimitive",
-    "name": "isPrimitive",
-    "module": "Types",
-    "description": "Checks if a value is a JavaScript primitive (string, number, bigint, boolean, undefined, symbol, or null).",
-    "signature": "isPrimitive(val: any): boolean",
-    "example": "isPrimitive(...)",
     "output": "..."
   },
   {
@@ -3717,7 +5890,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "celsiusToFahrenheit",
     "module": "Units",
     "description": "Converts Celsius to Fahrenheit.",
-    "signature": "celsiusToFahrenheit(c: number): number",
+    "signature": "celsiusToFahrenheit(...): number",
     "example": "celsiusToFahrenheit(...)",
     "output": "..."
   },
@@ -3726,7 +5899,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "fahrenheitToCelsius",
     "module": "Units",
     "description": "Converts Fahrenheit to Celsius.",
-    "signature": "fahrenheitToCelsius(f: number): number",
+    "signature": "fahrenheitToCelsius(...): number",
     "example": "fahrenheitToCelsius(...)",
     "output": "..."
   },
@@ -3735,7 +5908,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "milesToKilometers",
     "module": "Units",
     "description": "Converts miles to kilometers.",
-    "signature": "milesToKilometers(miles: number): number",
+    "signature": "milesToKilometers(...): number",
     "example": "milesToKilometers(...)",
     "output": "..."
   },
@@ -3744,7 +5917,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "kilometersToMiles",
     "module": "Units",
     "description": "Converts kilometers to miles.",
-    "signature": "kilometersToMiles(km: number): number",
+    "signature": "kilometersToMiles(...): number",
     "example": "kilometersToMiles(...)",
     "output": "..."
   },
@@ -3753,7 +5926,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "poundsToKilograms",
     "module": "Units",
     "description": "Converts pounds to kilograms.",
-    "signature": "poundsToKilograms(lbs: number): number",
+    "signature": "poundsToKilograms(...): number",
     "example": "poundsToKilograms(...)",
     "output": "..."
   },
@@ -3762,7 +5935,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "kilogramsToPounds",
     "module": "Units",
     "description": "Converts kilograms to pounds.",
-    "signature": "kilogramsToPounds(kg: number): number",
+    "signature": "kilogramsToPounds(...): number",
     "example": "kilogramsToPounds(...)",
     "output": "..."
   },
@@ -3771,7 +5944,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "degreesToRadians",
     "module": "Units",
     "description": "Converts degrees to radians.",
-    "signature": "degreesToRadians(degrees: number): number",
+    "signature": "degreesToRadians(...): number",
     "example": "degreesToRadians(...)",
     "output": "..."
   },
@@ -3780,7 +5953,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "radiansToDegrees",
     "module": "Units",
     "description": "Converts radians to degrees.",
-    "signature": "radiansToDegrees(radians: number): number",
+    "signature": "radiansToDegrees(...): number",
     "example": "radiansToDegrees(...)",
     "output": "..."
   },
@@ -3789,7 +5962,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "joinPaths",
     "module": "Url",
     "description": "Joins multiple path segments safely without creating duplicate forward slashes.",
-    "signature": "joinPaths(...parts: string[]): string",
+    "signature": "joinPaths(...): string",
     "example": "joinPaths(...)",
     "output": "..."
   },
@@ -3798,7 +5971,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "parseUrl",
     "module": "Url",
     "description": "Parses a URL string into structured parts. Falls back gracefully for malformed strings.",
-    "signature": "parseUrl(urlStr: string)",
+    "signature": "parseUrl(...): ",
     "example": "parseUrl(...)",
     "output": "..."
   },
@@ -3807,7 +5980,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "stringifyQuery",
     "module": "Url",
     "description": "Converts a key-value object into a URL query string (e.g. \"?a=1&b=2\").",
-    "signature": "stringifyQuery(query: Record<string, string | number | boolean>): string",
+    "signature": "stringifyQuery(...): string",
     "example": "stringifyQuery(...)",
     "output": "..."
   },
@@ -3816,7 +5989,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "buildUrl",
     "module": "Url",
     "description": "Constructs a full URL string given a base URL and an object of query parameters.",
-    "signature": "buildUrl(baseUrl: string, query?: Record<string, string | number | boolean>): string",
+    "signature": "buildUrl(...): string",
     "example": "buildUrl(...)",
     "output": "..."
   },
@@ -3825,7 +5998,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isAbsoluteUrl",
     "module": "Url",
     "description": "Checks whether a given string is an absolute URL (contains a protocol).",
-    "signature": "isAbsoluteUrl(urlStr: string): boolean",
+    "signature": "isAbsoluteUrl(...): boolean",
     "example": "isAbsoluteUrl(...)",
     "output": "..."
   },
@@ -3834,7 +6007,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "getBaseUrl",
     "module": "Url",
     "description": "Extracts the base URL (protocol + host) from a full URL string.",
-    "signature": "getBaseUrl(urlStr: string): string",
+    "signature": "getBaseUrl(...): string",
     "example": "getBaseUrl(...)",
     "output": "..."
   },
@@ -3843,7 +6016,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "removeQuery",
     "module": "Url",
     "description": "Removes all query parameters and hash fragments from a URL.",
-    "signature": "removeQuery(urlStr: string): string",
+    "signature": "removeQuery(...): string",
     "example": "removeQuery(...)",
     "output": "..."
   },
@@ -3852,7 +6025,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "addQueryParam",
     "module": "Url",
     "description": "Adds or updates query parameters in an existing URL string.",
-    "signature": "addQueryParam(urlStr: string, key: string | Record<string, string | number | boolean>, value?: string | number | boolean): string",
+    "signature": "addQueryParam(...): string",
     "example": "addQueryParam(...)",
     "output": "..."
   },
@@ -3861,7 +6034,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isEmail",
     "module": "Validate",
     "description": "Validates whether a string is a properly formatted email.",
-    "signature": "isEmail(val: string): boolean",
+    "signature": "isEmail(...): boolean",
     "example": "isEmail(...)",
     "output": "..."
   },
@@ -3870,7 +6043,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isUrl",
     "module": "Validate",
     "description": "Validates whether a string is a valid absolute URL.",
-    "signature": "isUrl(val: string): boolean",
+    "signature": "isUrl(...): boolean",
     "example": "isUrl(...)",
     "output": "..."
   },
@@ -3879,7 +6052,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isUuid",
     "module": "Validate",
     "description": "Validates whether a string is a standard UUID (v1-v5).",
-    "signature": "isUuid(val: string): boolean",
+    "signature": "isUuid(...): boolean",
     "example": "isUuid(...)",
     "output": "..."
   },
@@ -3888,7 +6061,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isPhone",
     "module": "Validate",
     "description": "Validates whether a string is a valid standard phone number pattern.",
-    "signature": "isPhone(val: string): boolean",
+    "signature": "isPhone(...): boolean",
     "example": "isPhone(...)",
     "output": "..."
   },
@@ -3897,7 +6070,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isStrongPassword",
     "module": "Validate",
     "description": "Validates password strength (minimum 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char).",
-    "signature": "isStrongPassword(val: string): boolean",
+    "signature": "isStrongPassword(...): boolean",
     "example": "isStrongPassword(...)",
     "output": "..."
   },
@@ -3906,7 +6079,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isIP",
     "module": "Validate",
     "description": "Validates whether a string is a valid IPv4 or IPv6 address.",
-    "signature": "isIP(val: string, version?: \"4\" | \"6\"): boolean",
+    "signature": "isIP(...): boolean",
     "example": "isIP(...)",
     "output": "..."
   },
@@ -3915,7 +6088,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isDateValid",
     "module": "Validate",
     "description": "Validates whether a string represents a valid, parseable calendar date.",
-    "signature": "isDateValid(val: string): boolean",
+    "signature": "isDateValid(...): boolean",
     "example": "isDateValid(...)",
     "output": "..."
   },
@@ -3924,7 +6097,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isAlpha",
     "module": "Validate",
     "description": "Validates whether a string contains only alphabetic characters.",
-    "signature": "isAlpha(val: string): boolean",
+    "signature": "isAlpha(...): boolean",
     "example": "isAlpha(...)",
     "output": "..."
   },
@@ -3933,7 +6106,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isAlphanumeric",
     "module": "Validate",
     "description": "Validates whether a string contains only alphanumeric characters.",
-    "signature": "isAlphanumeric(val: string): boolean",
+    "signature": "isAlphanumeric(...): boolean",
     "example": "isAlphanumeric(...)",
     "output": "..."
   },
@@ -3942,7 +6115,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isNumeric",
     "module": "Validate",
     "description": "Validates whether a string contains only numbers.",
-    "signature": "isNumeric(val: string): boolean",
+    "signature": "isNumeric(...): boolean",
     "example": "isNumeric(...)",
     "output": "..."
   },
@@ -3951,7 +6124,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isHexColor",
     "module": "Validate",
     "description": "Validates whether a string is a valid Hex Color code.",
-    "signature": "isHexColor(val: string): boolean",
+    "signature": "isHexColor(...): boolean",
     "example": "isHexColor(...)",
     "output": "..."
   },
@@ -3960,7 +6133,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isBase64",
     "module": "Validate",
     "description": "Validates whether a string is valid Base64 encoding.",
-    "signature": "isBase64(val: string): boolean",
+    "signature": "isBase64(...): boolean",
     "example": "isBase64(...)",
     "output": "..."
   },
@@ -3969,7 +6142,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isJSON",
     "module": "Validate",
     "description": "Validates whether a string is valid JSON.",
-    "signature": "isJSON(val: string): boolean",
+    "signature": "isJSON(...): boolean",
     "example": "isJSON(...)",
     "output": "..."
   },
@@ -3978,7 +6151,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isJWT",
     "module": "Validate",
     "description": "Validates whether a string is a valid JWT token.",
-    "signature": "isJWT(val: string): boolean",
+    "signature": "isJWT(...): boolean",
     "example": "isJWT(...)",
     "output": "..."
   },
@@ -3987,7 +6160,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isCreditCard",
     "module": "Validate",
     "description": "Validates whether a string represents a valid Credit Card number using the Luhn algorithm.",
-    "signature": "isCreditCard(val: string): boolean",
+    "signature": "isCreditCard(...): boolean",
     "example": "isCreditCard(...)",
     "output": "..."
   },
@@ -3996,7 +6169,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isMacAddress",
     "module": "Validate",
     "description": "Validates whether a string is a valid MAC address.",
-    "signature": "isMacAddress(val: string): boolean",
+    "signature": "isMacAddress(...): boolean",
     "example": "isMacAddress(...)",
     "output": "..."
   },
@@ -4005,7 +6178,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isAscii",
     "module": "Validate",
     "description": "Validates whether a string contains only ASCII characters.",
-    "signature": "isAscii(val: string): boolean",
+    "signature": "isAscii(...): boolean",
     "example": "isAscii(...)",
     "output": "..."
   },
@@ -4014,7 +6187,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isBooleanString",
     "module": "Validate",
     "description": "Validates whether a string represents a boolean (\"true\", \"false\", \"1\", \"0\").",
-    "signature": "isBooleanString(val: string): boolean",
+    "signature": "isBooleanString(...): boolean",
     "example": "isBooleanString(...)",
     "output": "..."
   },
@@ -4023,7 +6196,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isDataURI",
     "module": "Validate",
     "description": "Validates whether a string is a valid Data URI.",
-    "signature": "isDataURI(val: string): boolean",
+    "signature": "isDataURI(...): boolean",
     "example": "isDataURI(...)",
     "output": "..."
   },
@@ -4032,7 +6205,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isPort",
     "module": "Validate",
     "description": "Validates whether a value is a valid port number.",
-    "signature": "isPort(val: string | number): boolean",
+    "signature": "isPort(...): boolean",
     "example": "isPort(...)",
     "output": "..."
   },
@@ -4041,7 +6214,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isSemVer",
     "module": "Validate",
     "description": "Validates whether a string is a Semantic Versioning (SemVer) string.",
-    "signature": "isSemVer(val: string): boolean",
+    "signature": "isSemVer(...): boolean",
     "example": "isSemVer(...)",
     "output": "..."
   },
@@ -4050,7 +6223,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isSlug",
     "module": "Validate",
     "description": "Validates whether a string is a valid slug (kebab-case alphanumeric).",
-    "signature": "isSlug(val: string): boolean",
+    "signature": "isSlug(...): boolean",
     "example": "isSlug(...)",
     "output": "..."
   },
@@ -4059,7 +6232,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isHexadecimal",
     "module": "Validate",
     "description": "Validates whether a string is a hexadecimal value.",
-    "signature": "isHexadecimal(val: string): boolean",
+    "signature": "isHexadecimal(...): boolean",
     "example": "isHexadecimal(...)",
     "output": "..."
   },
@@ -4068,7 +6241,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isMD5",
     "module": "Validate",
     "description": "Validates whether a string is a valid MD5 hash.",
-    "signature": "isMD5(val: string): boolean",
+    "signature": "isMD5(...): boolean",
     "example": "isMD5(...)",
     "output": "..."
   },
@@ -4077,7 +6250,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isSHA256",
     "module": "Validate",
     "description": "Validates whether a string is a valid SHA256 hash.",
-    "signature": "isSHA256(val: string): boolean",
+    "signature": "isSHA256(...): boolean",
     "example": "isSHA256(...)",
     "output": "..."
   },
@@ -4086,7 +6259,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isLatitude",
     "module": "Validate",
     "description": "Validates whether a value is a valid latitude coordinate (-90 to 90).",
-    "signature": "isLatitude(val: number | string): boolean",
+    "signature": "isLatitude(...): boolean",
     "example": "isLatitude(...)",
     "output": "..."
   },
@@ -4095,7 +6268,7 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isLongitude",
     "module": "Validate",
     "description": "Validates whether a value is a valid longitude coordinate (-180 to 180).",
-    "signature": "isLongitude(val: number | string): boolean",
+    "signature": "isLongitude(...): boolean",
     "example": "isLongitude(...)",
     "output": "..."
   },
@@ -4104,8 +6277,143 @@ export const utilitiesData: UtilityMeta[] = [
     "name": "isLatLong",
     "module": "Validate",
     "description": "Validates whether a string is a valid \"lat,long\" or \"lat, long\" coordinate pair.",
-    "signature": "isLatLong(val: string): boolean",
+    "signature": "isLatLong(...): boolean",
     "example": "isLatLong(...)",
+    "output": "..."
+  },
+  {
+    "id": "vecadd",
+    "name": "vecAdd",
+    "module": "Vector",
+    "description": "Adds two vectors.",
+    "signature": "vecAdd(...): Vec",
+    "example": "vecAdd(...)",
+    "output": "..."
+  },
+  {
+    "id": "vecsub",
+    "name": "vecSub",
+    "module": "Vector",
+    "description": "Subtracts vector b from vector a.",
+    "signature": "vecSub(...): Vec",
+    "example": "vecSub(...)",
+    "output": "..."
+  },
+  {
+    "id": "vecmul",
+    "name": "vecMul",
+    "module": "Vector",
+    "description": "Multiplies a vector by a scalar or another vector.",
+    "signature": "vecMul(...): Vec",
+    "example": "vecMul(...)",
+    "output": "..."
+  },
+  {
+    "id": "vecdiv",
+    "name": "vecDiv",
+    "module": "Vector",
+    "description": "Divides a vector by a scalar or another vector.",
+    "signature": "vecDiv(...): Vec",
+    "example": "vecDiv(...)",
+    "output": "..."
+  },
+  {
+    "id": "vecdot",
+    "name": "vecDot",
+    "module": "Vector",
+    "description": "Calculates the dot product of two vectors.",
+    "signature": "vecDot(...): number",
+    "example": "vecDot(...)",
+    "output": "..."
+  },
+  {
+    "id": "veccross",
+    "name": "vecCross",
+    "module": "Vector",
+    "description": "Calculates the cross product of two 3D vectors.",
+    "signature": "vecCross(...): Vec3",
+    "example": "vecCross(...)",
+    "output": "..."
+  },
+  {
+    "id": "vecmagsq",
+    "name": "vecMagSq",
+    "module": "Vector",
+    "description": "Calculates the squared magnitude of a vector.",
+    "signature": "vecMagSq(...): number",
+    "example": "vecMagSq(...)",
+    "output": "..."
+  },
+  {
+    "id": "vecmag",
+    "name": "vecMag",
+    "module": "Vector",
+    "description": "Calculates the magnitude (length) of a vector.",
+    "signature": "vecMag(...): number",
+    "example": "vecMag(...)",
+    "output": "..."
+  },
+  {
+    "id": "vecnormalize",
+    "name": "vecNormalize",
+    "module": "Vector",
+    "description": "Normalizes a vector (makes its length 1).",
+    "signature": "vecNormalize(...): Vec",
+    "example": "vecNormalize(...)",
+    "output": "..."
+  },
+  {
+    "id": "vecdistsq",
+    "name": "vecDistSq",
+    "module": "Vector",
+    "description": "Calculates the squared distance between two vectors.",
+    "signature": "vecDistSq(...): number",
+    "example": "vecDistSq(...)",
+    "output": "..."
+  },
+  {
+    "id": "vecdist",
+    "name": "vecDist",
+    "module": "Vector",
+    "description": "Calculates the distance between two vectors.",
+    "signature": "vecDist(...): number",
+    "example": "vecDist(...)",
+    "output": "..."
+  },
+  {
+    "id": "veclerp",
+    "name": "vecLerp",
+    "module": "Vector",
+    "description": "Linearly interpolates between two vectors.",
+    "signature": "vecLerp(...): Vec",
+    "example": "vecLerp(...)",
+    "output": "..."
+  },
+  {
+    "id": "vecangle",
+    "name": "vecAngle",
+    "module": "Vector",
+    "description": "Calculates the angle between two vectors in radians.",
+    "signature": "vecAngle(...): number",
+    "example": "vecAngle(...)",
+    "output": "..."
+  },
+  {
+    "id": "vecproject",
+    "name": "vecProject",
+    "module": "Vector",
+    "description": "Projects vector a onto vector b.",
+    "signature": "vecProject(...): Vec",
+    "example": "vecProject(...)",
+    "output": "..."
+  },
+  {
+    "id": "vecreflect",
+    "name": "vecReflect",
+    "module": "Vector",
+    "description": "Reflects a vector around a normal.",
+    "signature": "vecReflect(...): Vec",
+    "example": "vecReflect(...)",
     "output": "..."
   }
 ];

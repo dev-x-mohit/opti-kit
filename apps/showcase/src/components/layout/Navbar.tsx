@@ -37,24 +37,8 @@ export function Navbar() {
     }
   };
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Focus search bar on '/' press
-      if (e.key === '/' && document.activeElement !== searchInputRef.current) {
-        e.preventDefault();
-        searchInputRef.current?.focus();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  const handleSearchEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      const value = e.currentTarget.value;
-      navigate(value ? `/modules?q=${encodeURIComponent(value)}` : '/modules');
-      searchInputRef.current?.blur();
-    }
+  const dispatchCmdK = () => {
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
   };
 
   return (
@@ -66,18 +50,18 @@ export function Navbar() {
 
         
         <div className="flex-1 max-w-md mx-8 hidden md:block">
-          <div className="relative group">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search size={16} className="text-muted group-focus-within:text-primary transition-colors" />
+          <button 
+            onClick={dispatchCmdK}
+            className="w-full bg-surface border border-border hover:border-primary/50 hover:bg-surface-hover transition-all rounded-md py-1.5 pl-3 pr-2 flex items-center justify-between text-sm text-muted group"
+          >
+            <div className="flex items-center gap-2">
+              <Search size={16} className="group-hover:text-primary transition-colors" />
+              <span>Search modules or utilities...</span>
             </div>
-            <input 
-              ref={searchInputRef}
-              type="text" 
-              onKeyDown={handleSearchEnter}
-              placeholder="Search utilities... (Press '/' to focus)" 
-              className="w-full bg-surface border border-border rounded-md py-1.5 pl-10 pr-4 text-sm text-text-main placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-            />
-          </div>
+            <div className="flex items-center gap-1 font-mono text-[10px] opacity-70 bg-background px-1.5 py-0.5 rounded border border-border">
+              <span>⌘</span><span>K</span>
+            </div>
+          </button>
         </div>
 
         <div className="flex items-center gap-4">

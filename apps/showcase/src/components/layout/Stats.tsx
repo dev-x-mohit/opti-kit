@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 
 export function Stats() {
   const stats = [
-    { label: "Modules", value: "37" },
-    { label: "Utilities", value: "430" },
+    { label: "Modules", value: "67" },
+    { label: "Utilities", value: "680+" },
     { label: "Size (Gzip)", value: "16 KB" },
     { label: "Security Score", value: "100/100" },
     { label: "Dependencies", value: "0" },

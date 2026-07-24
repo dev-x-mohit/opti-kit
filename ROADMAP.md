@@ -1,6 +1,6 @@
 # OptiKit Roadmap
 
-> **Current state: v1.1.0 — 38 modules, 450+ utilities, 420+ unit tests**
+> **Current state: v1.2.0 — 38 modules, 740+ utilities, 470+ unit tests**
 
 ## Module Status
 
@@ -35,20 +35,31 @@
 | Format | ✅ Complete |
 | Schema | ✅ Complete |
 | JSON | ✅ Complete |
+| Set | ✅ Complete |
+| Map | ✅ Complete |
+| Sort | ✅ Complete |
+| Search | ✅ Complete |
+| ML | ✅ Complete |
+| NLP | ✅ Complete |
+| Hash | ✅ Complete |
+| Deep | ✅ Complete |
+| Image | ✅ Complete |
+| Finance | ✅ Complete |
 
 *All foundational modules are now strictly tested and zero-dependency.*
 
 ---
 
-## v1.1.0 — Completed Milestone
+## v1.2.0 — Completed Milestone
 
-- **Expanded Modules**: Added extensive functions to `Collection`, `Random`, `Types`, `Color`, `Statistics`, and `Functional` modules.
-- **New Modules**: Implemented `Browser Detection`, `Promise Utils` (in Async), `Format`, `JSON Utils`, and `Schema Validation`.
+- **Expanded Modules**: Added massive Batch 2 and Batch 3 functional extensions (200+ utilities).
+- **New Modules**: Added Set, Map, Sort, ML, NLP, Hash, Deep, FSM, Finance, Easing, etc.
+- **Benchmarks**: Added comprehensive Vitest benchmarks.
 - **Infrastructure**: Achieved 100/100 Socket.dev score, published with npm provenance.
 
 ---
 
-## v1.2.0 — Current Priorities
+## v1.3.0 — Current Priorities
 
 Priority: Infrastructure improvements and advanced functional programming concepts.
 
@@ -56,15 +67,13 @@ Priority: Infrastructure improvements and advanced functional programming concep
 - [ ] Add `exports` map for per-module imports (`@dev_x_mohit/opti-kit/string`).
 - [ ] Ensure `tsup` generates individual chunk bundles optimally.
 
-### 2. Benchmarks & Lodash Parity
+### 2. Lodash Parity & Functional
 - [x] Add `vitest bench` comparisons vs Lodash and Ramda.
-- [x] Incorporate benchmark results and combined stats into the showcase site.
-- [x] Create comprehensive Lodash functionality mapping (`lodash_comparison.md`).
-- [x] Implement highest-priority missing Lodash array functions (`dropWhile`, `unionBy`, `xorWith`, etc.).
+- [ ] Data-last Functional API (`fp.ts`).
 
 ### 3. API Documentation
-- [ ] Generate API documentation from JSDoc using TypeDoc.
-- [ ] Deploy docs site / integrate with the showcase.
+- [x] Generate API documentation from JSDoc using TypeDoc.
+- [x] Deploy docs site / integrate with the showcase.
 
 ---
 
@@ -72,7 +81,7 @@ Priority: Infrastructure improvements and advanced functional programming concep
 
 | Milestone | Target |
 | :--- | :--- |
-| v1.2 | Per-module exports, Benchmarks suite, Initial Lodash Parity, Auto-generated Docs |
+| v1.2 | Huge Expansion (740+ utils), Benchmarks suite, Auto-generated Docs |
 | v1.3 | Full Lodash Parity (100%), Data-last Functional API (`fp.ts`), Rx-style Observables |
 | v2.0 | Full ecosystem maturity, framework-specific bindings (React/Vue/Svelte adapters) |
 

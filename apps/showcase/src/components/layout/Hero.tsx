@@ -4,7 +4,7 @@ import { Button } from '../ui/Button';
 import { useNavigate } from 'react-router-dom';
 import { 
   Terminal, Copy, Check, Sparkles, ArrowRight, Zap, 
-  ShieldCheck, Layers, Cpu, Scale
+  ShieldCheck, Layers, Cpu, Scale, Code2
 } from 'lucide-react';
 
 export function Hero() {
@@ -49,8 +49,7 @@ export function Hero() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#4F8DFD] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#4F8DFD]"></span>
           </span>
-          <span>OptiKit v1.0.9 • 16 KB Gzip • 100/100 Security Score • 430 Utilities</span>
-
+          <span>OptiKit v1.0.9 • 16 KB Gzip • 100/100 Security Score • 680+ Utilities</span>
         </motion.div>
 
         {/* Centered Headline */}
@@ -73,8 +72,28 @@ export function Hero() {
           transition={{ delay: 0.1 }}
           className="text-base sm:text-xl text-black dark:text-muted max-w-3xl mx-auto leading-relaxed font-medium"
         >
-          Say goodbye to monolithic legacy utilities like Lodash and Moment. OptiKit delivers 430 pure, zero-dependency utility functions natively built in TypeScript with perfect tree shaking.
+          Say goodbye to monolithic legacy utilities like Lodash and Moment. OptiKit delivers 680+ pure, zero-dependency utility functions natively built in TypeScript with perfect tree shaking.
         </motion.p>
+
+        {/* Action Buttons */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8"
+        >
+          <Button size="lg" className="w-full sm:w-auto shadow-lg shadow-primary/25" onClick={() => navigate('/docs')}>
+            <Code2 size={20} /> Get Started
+          </Button>
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="w-full sm:w-auto bg-surface"
+            onClick={() => navigate('/modules')}
+          >
+            Explore 680+ Utilities
+          </Button>
+        </motion.div>
 
         {/* Terminal Command Bar */}
         <motion.div

@@ -10,6 +10,8 @@ import {
   Cpu, Code2, CheckCircle2, XCircle, ArrowUpRight
 } from 'lucide-react';
 
+import { utilitiesData } from '../data/utilitiesData';
+
 export function HomePage() {
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
@@ -22,15 +24,24 @@ export function HomePage() {
     } catch {}
   };
 
+  const getCount = (moduleTitle: string, extraModules: string[] = []) => {
+    const modulesToMatch = [moduleTitle, ...extraModules].map(m => m.toLowerCase());
+    return utilitiesData.filter(u => modulesToMatch.includes(u.module.toLowerCase())).length;
+  };
+
   const moduleCategories = [
-    { title: "String", count: "45 utils", desc: "Slugify, truncate, pad, interpolate, titleCase, HTML escaping & similarity" },
-    { title: "Array", count: "40 utils", desc: "Chunk, unique, groupBy, partition, shuffle, sample, zip & diffing" },
-    { title: "Math", count: "32 utils", desc: "Clamp, lerp, mean, median, stdDev, factorial, distance & vector ops" },
-    { title: "Object", count: "31 utils", desc: "DeepClone, deepMerge, flatten, pick, omit, mapKeys & path getters" },
-    { title: "Validation", count: "28 utils", desc: "isEmail, isUrl, isUuid, isPhone, isIP, isSemVer, isCreditCard & JWT" },
-    { title: "Date", count: "20 utils", desc: "Relative time, formatters, add/sub days, leap year & quarter queries" },
-    { title: "Async", count: "19 utils", desc: "Debounce, throttle, retry, delay, asyncPool, pMap & retryWithBackoff" },
-    { title: "Number", count: "18 utils", desc: "Currency, compact format (1K/1M), ordinal, byte formatting & isPrime" },
+    { title: "String", count: `${getCount("String")} utils`, desc: "Slugify, truncate, pad, interpolate, titleCase, HTML escaping & similarity" },
+    { title: "Array", count: `${getCount("Array")} utils`, desc: "Chunk, unique, groupBy, partition, shuffle, sample, zip & diffing" },
+    { title: "Math", count: `${getCount("Math", ["Number", "Statistics", "Geometry"])} utils`, desc: "Clamp, lerp, mean, median, stdDev, factorial, distance & vector ops" },
+    { title: "Object", count: `${getCount("Object")} utils`, desc: "DeepClone, deepMerge, flatten, pick, omit, mapKeys & path getters" },
+    { title: "Validation", count: `${getCount("Validate")} utils`, desc: "isEmail, isUrl, isUuid, isPhone, isIP, isSemVer, isCreditCard & JWT" },
+    { title: "ML & AI", count: `${getCount("ML")} utils`, desc: "Sigmoid, ReLU, minMaxScaler, zScore, cosineSimilarity" },
+    { title: "NLP", count: `${getCount("NLP")} utils`, desc: "Tokenization, stop words, n-grams, soundex, levenshtein distance" },
+    { title: "Deep", count: `${getCount("Deep")} utils`, desc: "Deep freeze, map keys, flatten, diff, safe omits" },
+    { title: "Hash", count: `${getCount("Hash", ["Crypto", "Encoding"])} utils`, desc: "Base64, Hex encoding, CRC32, DJB2 hashing, UUID v4, NanoId" },
+    { title: "Date", count: `${getCount("Date")} utils`, desc: "Relative time, formatters, add/sub days, leap year & quarter queries" },
+    { title: "Async", count: `${getCount("Async", ["Concurrency", "Functional"])} utils`, desc: "Debounce, throttle, retry, delay, asyncPool, pMap & retryWithBackoff" },
+    { title: "Finance", count: `${getCount("Finance")} utils`, desc: "Compound interest, PMT, ROI, NPV, amortizations" },
   ];
 
   const comparison = [
@@ -50,7 +61,7 @@ export function HomePage() {
       <section className="container mx-auto px-4 py-16 max-w-7xl">
         <div className="text-center mb-12 space-y-3">
           <span className="px-3 py-1 bg-[#E7EDFF] dark:bg-primary/10 text-[#2563EB] dark:text-[#4F8DFD] rounded-full text-xs font-semibold border border-[#C9D4FF]/60 dark:border-primary/20 shadow-sm inline-flex items-center gap-1.5">
-            <Layers size={13} /> 37 Hand-Crafted Modules
+            <Layers size={13} /> 67 Hand-Crafted Modules
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] dark:text-white tracking-tight">Explore the Utility Ecosystem</h2>
           <p className="text-[#334155] dark:text-muted max-w-2xl mx-auto text-base font-medium">
@@ -83,7 +94,7 @@ export function HomePage() {
             onClick={() => navigate('/modules')}
             className="text-xs sm:text-sm font-semibold text-[#2563EB] dark:text-[#4F8DFD] hover:text-[#6B6CF7] transition-colors inline-flex items-center gap-1.5 underline-offset-4 hover:underline"
           >
-            View all 37 modules & 430 utilities <ArrowRight size={16} />
+            View all 67 modules & 680+ utilities <ArrowRight size={16} />
           </button>
         </div>
       </section>
