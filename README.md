@@ -90,3 +90,5 @@ npm run test:package
 
 MIT © [Mohit Lakhara](https://mohitlakhara.vercel.app)
 
+
+<!-- OptiKit v2 Major Update -->
