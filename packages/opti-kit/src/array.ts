@@ -724,3 +724,5 @@ export function pullAt<T>(arr: T[], indexes: number[]): T[] {
   const indexSet = new Set(indexes);
   return arr.filter((_, i) => !indexSet.has(i));
 }
+
+// Array utils optimized for v2
