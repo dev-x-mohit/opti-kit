@@ -524,3 +524,5 @@ export function compactObject<T extends Record<string, any>>(obj: T): Partial<T>
   );
 }
 
+
+// Object utils optimized for v2
