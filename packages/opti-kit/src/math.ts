@@ -335,3 +335,5 @@ export { mode } from "./statistics";
 
 
 
+
+// Math utils optimized for v2
