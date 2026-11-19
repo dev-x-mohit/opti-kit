@@ -1,66 +1,179 @@
 import React, { useState } from 'react';
 import { Check, Copy } from 'lucide-react';
+import { copyToClipboard } from '../../lib/copyToClipboard';
 
-interface CodeBlockProps {
+export interface CodeBlockProps {
   code: string;
   language?: string;
+  filename?: string;
+  showLineNumbers?: boolean;
+  className?: string;
 }
 
-export function CodeBlock({ code, language = 'bash' }: CodeBlockProps) {
+export function CodeBlock({
+  code,
+  language = 'typescript',
+  filename,
+  showLineNumbers = false,
+  className = '',
+}: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(code);
+    const success = await copyToClipboard(code.trim());
+    if (success) {
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
+      setTimeout(() => setCopied(false), 1500);
     }
   };
 
-  const highlightLine = (line: string) => {
-    if (line.startsWith('//')) {
-      return <span className="text-black dark:text-muted italic font-medium">{line}</span>;
-    }
+  const highlightSyntax = (text: string) => {
+    const lines = text.split('\n');
 
-    // Basic token highlighter for JS/TS/Bash
-    const parts = line.split(/(\b(?:import|export|from|const|let|var|function|return|async|await|default|type|interface|npm|pnpm|yarn|bun)\b|".*?"|'.*?'|\/\/.*)/g);
-    
-    return parts.map((part, index) => {
-      if (!part) return null;
-      if (part.startsWith('//')) {
-        return <span key={index} className="text-black dark:text-muted italic font-medium">{part}</span>;
+    return lines.map((line, lineIdx) => {
+      // Check comment line
+      if (line.trim().startsWith('//')) {
+        return (
+          <div key={lineIdx} className="table-row leading-relaxed">
+            {showLineNumbers && (
+              <span className="table-cell select-none pr-4 text-right text-xs text-[var(--text-faint)] opacity-60">
+                {lineIdx + 1}
+              </span>
+            )}
+            <span className="table-cell whitespace-pre font-mono text-xs text-[var(--syntax-comment)] italic">
+              {line}
+            </span>
+          </div>
+        );
       }
-      if (/^(?:import|export|from|const|let|var|function|return|async|await|default|type|interface)$/.test(part)) {
-        return <span key={index} className="text-[#4F46E5] dark:text-accent font-bold">{part}</span>;
+
+      // Tokenize
+      const regex = /(\/\/.*$|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|\b(?:import|export|from|const|let|var|function|return|async|await|default|type|interface|class|new|if|else|switch|case|break|try|catch|throw|typeof|instanceof|extends|implements|as|npm|pnpm|yarn|bun|npx)\b|\b\d+(?:\.\d+)?\b|\b[A-Za-z_$][A-Za-z0-9_$]*(?=\s*\()|[{}\[\](),;.:])/g;
+
+      const segments: React.ReactNode[] = [];
+      let lastIndex = 0;
+      let match;
+
+      while ((match = regex.exec(line)) !== null) {
+        if (match.index > lastIndex) {
+          segments.push(
+            <span key={`text-${lastIndex}`} className="text-[var(--text)]">
+              {line.substring(lastIndex, match.index)}
+            </span>
+          );
+        }
+
+        const token = match[0];
+        if (token.startsWith('//')) {
+          segments.push(
+            <span key={`tok-${match.index}`} className="text-[var(--syntax-comment)] italic">
+              {token}
+            </span>
+          );
+        } else if (
+          token.startsWith('"') ||
+          token.startsWith("'") ||
+          token.startsWith('`')
+        ) {
+          segments.push(
+            <span key={`tok-${match.index}`} className="text-[var(--syntax-string)]">
+              {token}
+            </span>
+          );
+        } else if (/^\d+(?:\.\d+)?$/.test(token)) {
+          segments.push(
+            <span key={`tok-${match.index}`} className="text-[var(--syntax-number)]">
+              {token}
+            </span>
+          );
+        } else if (
+          /^(import|export|from|const|let|var|function|return|async|await|default|type|interface|class|new|if|else|switch|case|break|try|catch|throw|typeof|instanceof|extends|implements|as|npm|pnpm|yarn|bun|npx)$/.test(
+            token
+          )
+        ) {
+          segments.push(
+            <span key={`tok-${match.index}`} className="text-[var(--syntax-keyword)] font-medium">
+              {token}
+            </span>
+          );
+        } else if (
+          /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(token) &&
+          line[match.index + token.length] === '('
+        ) {
+          segments.push(
+            <span key={`tok-${match.index}`} className="text-[var(--syntax-function)]">
+              {token}
+            </span>
+          );
+        } else if (/^[{}\[\](),;.:]$/.test(token)) {
+          segments.push(
+            <span key={`tok-${match.index}`} className="text-[var(--syntax-punct)]">
+              {token}
+            </span>
+          );
+        } else {
+          segments.push(
+            <span key={`tok-${match.index}`} className="text-[var(--text)]">
+              {token}
+            </span>
+          );
+        }
+
+        lastIndex = match.index + token.length;
       }
-      if (/^(?:npm|pnpm|yarn|bun)$/.test(part)) {
-        return <span key={index} className="text-[#2563EB] dark:text-primary font-bold">{part}</span>;
+
+      if (lastIndex < line.length) {
+        segments.push(
+          <span key={`text-end`} className="text-[var(--text)]">
+            {line.substring(lastIndex)}
+          </span>
+        );
       }
-      if ((part.startsWith('"') && part.endsWith('"')) || (part.startsWith("'") && part.endsWith("'"))) {
-        return <span key={index} className="text-[#047857] dark:text-emerald-400 font-semibold">{part}</span>;
-      }
-      return <span key={index} className="text-black dark:text-text-main font-medium">{part}</span>;
+
+      return (
+        <div key={lineIdx} className="table-row leading-relaxed">
+          {showLineNumbers && (
+            <span className="table-cell select-none pr-4 text-right text-xs text-[var(--text-faint)] opacity-60">
+              {lineIdx + 1}
+            </span>
+          )}
+          <span className="table-cell whitespace-pre font-mono text-xs">
+            {segments.length > 0 ? segments : ' '}
+          </span>
+        </div>
+      );
     });
   };
 
   return (
-    <div className="relative group rounded-[16px] overflow-hidden bg-[#EEF2F8] dark:bg-code-bg border border-[#DCE3F0] dark:border-border my-6 shadow-sm">
-      <div className="flex items-center justify-between px-4 py-2 bg-surface/80 dark:bg-surface/50 border-b border-[#DCE3F0] dark:border-border">
-        <span className="text-xs font-mono text-black dark:text-muted uppercase tracking-wider font-semibold">{language}</span>
+    <div
+      className={`rounded-xl border border-[var(--border)] bg-[var(--surface)] overflow-hidden shadow-xs ${className}`}
+    >
+      <div className="flex items-center justify-between border-b border-[var(--border)] px-3.5 py-2 bg-[var(--surface-2)]">
+        <span className="font-mono text-xs text-[var(--text-muted)] select-none">
+          {filename || language}
+        </span>
         <button
           onClick={handleCopy}
-          className="text-black hover:text-primary dark:text-muted dark:hover:text-text-main transition-colors p-1.5 rounded-md hover:bg-surface"
-          aria-label="Copy to clipboard"
+          aria-label={copied ? 'Code copied' : 'Copy code to clipboard'}
+          className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface)] transition-colors cursor-pointer"
         >
-          {copied ? <Check size={14} className="text-success" /> : <Copy size={14} />}
+          {copied ? (
+            <>
+              <Check size={13} className="text-[var(--success)]" />
+              <span className="text-[var(--success)] font-medium">Copied</span>
+            </>
+          ) : (
+            <>
+              <Copy size={13} />
+              <span>Copy</span>
+            </>
+          )}
         </button>
       </div>
-      <div className="p-4 overflow-x-auto text-sm font-mono leading-relaxed text-black dark:text-text-main">
-        {code.split('\n').map((line, i) => (
-          <div key={i} className="whitespace-pre">{highlightLine(line) || ' '}</div>
-        ))}
+
+      <div className="p-4 overflow-x-auto text-[var(--text)] font-mono text-xs">
+        <div className="table w-full">{highlightSyntax(code)}</div>
       </div>
     </div>
   );

@@ -1,94 +1,130 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Code2, Package, Search, Sun, Moon } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react';
+import { Sun, Moon, Search, ExternalLink } from 'lucide-react';
 import { OptiKitLogo } from '../ui/OptiKitLogo';
+import { GithubIcon } from '../ui/GithubIcon';
+import { Button } from '../ui/Button';
+import { useScrollSpy } from '../../hooks/useScrollSpy';
 
-export function Navbar() {
-  const [isDark, setIsDark] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') === 'dark';
-    }
-    return false;
-  });
+interface NavbarProps {
+  isDark: boolean;
+  toggleTheme: () => void;
+  onOpenSearch: () => void;
+}
 
-  const searchInputRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
+const navLinks = [
+  { id: 'features', label: 'Features', href: '#features' },
+  { id: 'playground', label: 'Playground', href: '#playground' },
+  { id: 'compare', label: 'Compare', href: '#compare' },
+  { id: 'mcp', label: 'MCP', href: '#mcp' },
+  { id: 'tree-shaking', label: 'Tree-Shaking', href: '#tree-shaking' },
+  { id: 'docs', label: 'Docs', href: '#quick-start' },
+];
+
+export function Navbar({ isDark, toggleTheme, onOpenSearch }: NavbarProps) {
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const activeId = useScrollSpy(['features', 'playground', 'compare', 'mcp', 'tree-shaking', 'quick-start'], 120);
 
   useEffect(() => {
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleTheme = () => {
-    const nextDark = !isDark;
-    setIsDark(nextDark);
-    if (nextDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  };
-
-  const dispatchCmdK = () => {
-    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
-  };
-
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/80 backdrop-blur-xl transition-colors">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between max-w-7xl">
-        <Link to="/" className="flex items-center">
-          <OptiKitLogo showVersion size={34} />
-        </Link>
+    <header
+      className={`sticky top-0 z-40 w-full transition-all duration-200 ${
+        hasScrolled
+          ? 'bg-[var(--bg)]/85 backdrop-blur-md border-b border-[var(--border)] shadow-xs'
+          : 'bg-[var(--bg)]/85 backdrop-blur-md border-b border-transparent'
+      }`}
+    >
+      <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-4 sm:px-6">
+        {/* Wordmark logo */}
+        <a href="#" className="flex items-center gap-2" aria-label="OptiKit Home">
+          <OptiKitLogo size={30} showVersion />
+        </a>
 
-        
-        <div className="flex-1 max-w-md mx-8 hidden md:block">
-          <button 
-            onClick={dispatchCmdK}
-            className="w-full bg-surface border border-border hover:border-primary/50 hover:bg-surface-hover transition-all rounded-md py-1.5 pl-3 pr-2 flex items-center justify-between text-sm text-muted group"
-          >
-            <div className="flex items-center gap-2">
-              <Search size={16} className="group-hover:text-primary transition-colors" />
-              <span>Search modules or utilities...</span>
-            </div>
-            <div className="flex items-center gap-1 font-mono text-[10px] opacity-70 bg-background px-1.5 py-0.5 rounded border border-border">
-              <span>⌘</span><span>K</span>
-            </div>
-          </button>
-        </div>
+        {/* Center navigation with scroll-spy active indicator */}
+        <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+          {navLinks.map((link) => {
+            const isActive = activeId === link.id;
+            return (
+              <a
+                key={link.id}
+                href={link.href}
+                className={`relative px-3 py-1.5 text-sm font-medium transition-colors ${
+                  isActive
+                    ? 'text-[var(--text)]'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text)]'
+                }`}
+              >
+                {link.label}
+                {isActive && (
+                  <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-[var(--primary)] rounded-full transition-all" />
+                )}
+              </a>
+            );
+          })}
+        </nav>
 
-        <div className="flex items-center gap-4">
-          <Link to="/docs" className="text-sm font-semibold text-black dark:text-muted hover:text-primary transition-colors">Docs</Link>
-          <a href="/api/index.html" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-black dark:text-muted hover:text-primary transition-colors">API</a>
-          <Link to="/modules" className="text-sm font-semibold text-black dark:text-muted hover:text-primary transition-colors">Modules</Link>
-          <Link to="/playground" className="text-sm font-semibold text-black dark:text-muted hover:text-primary transition-colors">Playground</Link>
-          <Link to="/benchmarks" className="text-sm font-semibold text-black dark:text-muted hover:text-primary transition-colors">Benchmarks</Link>
-          
-          <div className="w-px h-4 bg-border mx-2"></div>
-          
-          <button 
-            onClick={toggleTheme} 
-            className="text-black dark:text-muted hover:text-primary transition-colors p-1"
-            aria-label="Toggle theme"
+        {/* Right side actions */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Quick search button */}
+          <button
+            onClick={onOpenSearch}
+            className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] hover:text-[var(--text)] hover:border-[var(--border-strong)] transition-colors text-xs cursor-pointer"
+            aria-label="Search utilities (Press Cmd+K)"
           >
-            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            <Search size={14} />
+            <span className="hidden sm:inline">Search</span>
+            <kbd className="font-mono text-[10px] px-1 py-0.5 rounded bg-[var(--surface-2)] border border-[var(--border)]">
+              ⌘K
+            </kbd>
           </button>
-          
-          <a href="https://github.com/dev-x-mohit/opti-kit" className="text-black dark:text-muted hover:text-primary transition-colors">
-            <Code2 size={20} />
+
+          {/* GitHub link with star count badge */}
+          <a
+            href="https://github.com/dev-x-mohit/opti-kit"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View OptiKit on GitHub"
+            className="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] transition-colors inline-flex items-center"
+          >
+            <GithubIcon size={18} />
           </a>
-          <a href="https://npmjs.com/package/@dev_x_mohit/opti-kit" className="text-black dark:text-muted hover:text-primary transition-colors">
-            <Package size={20} />
+
+          {/* NPM link */}
+          <a
+            href="https://www.npmjs.com/package/@dev_x_mohit/opti-kit"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View OptiKit on npm"
+            className="hidden sm:inline-flex p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] transition-colors"
+          >
+            <span className="font-mono text-xs font-semibold px-1 rounded bg-[var(--surface-2)] border border-[var(--border)]">
+              npm
+            </span>
+          </a>
+
+          {/* Theme toggle */}
+          <button
+            onClick={toggleTheme}
+            aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+            className="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] transition-colors cursor-pointer"
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
+          {/* Primary CTA */}
+          <a href="#quick-start">
+            <Button size="sm" variant="primary">
+              Get Started
+            </Button>
           </a>
         </div>
       </div>
-    </nav>
+    </header>
   );
 }

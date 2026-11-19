@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://opti-kit-showcase.vercel.app/sitemap.xml

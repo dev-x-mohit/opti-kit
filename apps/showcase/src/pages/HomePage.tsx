@@ -1,254 +1,86 @@
-import React, { useState } from 'react';
-import { Hero } from '../components/layout/Hero';
-import { Stats } from '../components/layout/Stats';
-import { Features } from '../components/layout/Features';
+import React, { Suspense, lazy, useState } from 'react';
+import { HeroSection } from '../sections/HeroSection';
+import { StatsSection } from '../sections/StatsSection';
+import { BundleComparisonSection } from '../sections/BundleComparisonSection';
+import { FeatureDomainsSection } from '../sections/FeatureDomainsSection';
+import { MigrationSection } from '../sections/MigrationSection';
+import { AgenticMcpSection } from '../sections/AgenticMcpSection';
+import { RunsEverywhereSection } from '../sections/RunsEverywhereSection';
+import { TreeShakingSection } from '../sections/TreeShakingSection';
+import { MonorepoArchitectureSection } from '../sections/MonorepoArchitectureSection';
+import { QuickStartSection } from '../sections/QuickStartSection';
+import { SecurityTrustSection } from '../sections/SecurityTrustSection';
+import { FinalCtaSection } from '../sections/FinalCtaSection';
 import { Footer } from '../components/layout/Footer';
-import { Card } from '../components/ui/Card';
-import { useNavigate } from 'react-router-dom';
-import { 
-  ArrowRight, Check, Copy, Sparkles, Layers, ShieldCheck, 
-  Cpu, Code2, CheckCircle2, XCircle, ArrowUpRight
-} from 'lucide-react';
+import { PlaygroundSkeleton } from '../components/ui/Skeleton';
+import { CommandPalette } from '../components/ui/CommandPalette';
 
-import { utilitiesData } from '../data/utilitiesData';
+// Lazy load centerpiece interactive playground for optimal initial page load performance
+const PlaygroundSection = lazy(() =>
+  import('../sections/PlaygroundSection').then((mod) => ({ default: mod.PlaygroundSection }))
+);
 
 export function HomePage() {
-  const navigate = useNavigate();
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText('npm install @dev_x_mohit/opti-kit');
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {}
-  };
-
-  const getCount = (moduleTitle: string, extraModules: string[] = []) => {
-    const modulesToMatch = [moduleTitle, ...extraModules].map(m => m.toLowerCase());
-    return utilitiesData.filter(u => modulesToMatch.includes(u.module.toLowerCase())).length;
-  };
-
-  const moduleCategories = [
-    { title: "String", count: `${getCount("String")} utils`, desc: "Slugify, truncate, pad, interpolate, titleCase, HTML escaping & similarity" },
-    { title: "Array", count: `${getCount("Array")} utils`, desc: "Chunk, unique, groupBy, partition, shuffle, sample, zip & diffing" },
-    { title: "Math", count: `${getCount("Math", ["Number", "Statistics", "Geometry"])} utils`, desc: "Clamp, lerp, mean, median, stdDev, factorial, distance & vector ops" },
-    { title: "Object", count: `${getCount("Object")} utils`, desc: "DeepClone, deepMerge, flatten, pick, omit, mapKeys & path getters" },
-    { title: "Validation", count: `${getCount("Validate")} utils`, desc: "isEmail, isUrl, isUuid, isPhone, isIP, isSemVer, isCreditCard & JWT" },
-    { title: "ML & AI", count: `${getCount("ML")} utils`, desc: "Sigmoid, ReLU, minMaxScaler, zScore, cosineSimilarity" },
-    { title: "NLP", count: `${getCount("NLP")} utils`, desc: "Tokenization, stop words, n-grams, soundex, levenshtein distance" },
-    { title: "Deep", count: `${getCount("Deep")} utils`, desc: "Deep freeze, map keys, flatten, diff, safe omits" },
-    { title: "Hash", count: `${getCount("Hash", ["Crypto", "Encoding"])} utils`, desc: "Base64, Hex encoding, CRC32, DJB2 hashing, UUID v4, NanoId" },
-    { title: "Date", count: `${getCount("Date")} utils`, desc: "Relative time, formatters, add/sub days, leap year & quarter queries" },
-    { title: "Async", count: `${getCount("Async", ["Concurrency", "Functional"])} utils`, desc: "Debounce, throttle, retry, delay, asyncPool, pMap & retryWithBackoff" },
-    { title: "Finance", count: `${getCount("Finance")} utils`, desc: "Compound interest, PMT, ROI, NPV, amortizations" },
-  ];
-
-  const comparison = [
-    { feature: "Bundle Impact", opti: "~30 KB (Tree-shakeable)", legacy: "500 KB+ (Lodash/Moment)" },
-    { feature: "Dependencies", opti: "0 Dependencies", legacy: "Dozens of transitive packages" },
-    { feature: "TypeScript", opti: "100% Native TypeScript", legacy: "Requires @types patches" },
-    { feature: "Module Formats", opti: "Native ESM & CommonJS", legacy: "Inconsistent CJS/ESM" },
-    { feature: "Hydration & SSR", opti: "Zero Window Errors", legacy: "Requires SSR workarounds" },
-  ];
-
   return (
-    <div className="space-y-8">
-      <Hero />
-      <Stats />
+    <div className="flex flex-col min-h-screen">
+      {/* Skip to main content accessibility link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-[var(--primary)] text-white rounded-lg font-medium shadow-md"
+      >
+        Skip to main content
+      </a>
 
-      {/* Categories Showcase Section */}
-      <section className="container mx-auto px-4 py-16 max-w-7xl">
-        <div className="text-center mb-12 space-y-3">
-          <span className="px-3 py-1 bg-[#E7EDFF] dark:bg-primary/10 text-[#2563EB] dark:text-[#4F8DFD] rounded-full text-xs font-semibold border border-[#C9D4FF]/60 dark:border-primary/20 shadow-sm inline-flex items-center gap-1.5">
-            <Layers size={13} /> 67 Hand-Crafted Modules
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] dark:text-white tracking-tight">Explore the Utility Ecosystem</h2>
-          <p className="text-[#334155] dark:text-muted max-w-2xl mx-auto text-base font-medium">
-            Every module is isolated, side-effect free, and fully type-checked.
-          </p>
-        </div>
+      {/* Global Cmd+K Search Command Palette */}
+      <CommandPalette />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {moduleCategories.map((cat, i) => (
-            <Card 
-              key={i} 
-              onClick={() => navigate(`/modules?q=${cat.title.toLowerCase()}`)}
-              className="p-5 cursor-pointer border-border hover:border-primary/50 transition-all hover:-translate-y-1 shadow-sm group"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-lg font-bold text-[#0F172A] dark:text-white group-hover:text-primary transition-colors flex items-center gap-1">
-                  {cat.title} <ArrowUpRight size={16} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                </h3>
-                <span className="text-[11px] font-mono font-semibold px-2 py-0.5 bg-[#E7EDFF] dark:bg-primary/10 text-[#2563EB] dark:text-[#4F8DFD] rounded-full border border-[#C9D4FF]/60 dark:border-primary/20">
-                  {cat.count}
-                </span>
-              </div>
-              <p className="text-xs text-[#334155] dark:text-muted leading-relaxed font-medium">{cat.desc}</p>
-            </Card>
-          ))}
-        </div>
+      <main id="main-content" className="flex-1">
+        {/* 2. Hero Section */}
+        <HeroSection />
 
-        <div className="text-center mt-8">
-          <button 
-            onClick={() => navigate('/modules')}
-            className="text-xs sm:text-sm font-semibold text-[#2563EB] dark:text-[#4F8DFD] hover:text-[#6B6CF7] transition-colors inline-flex items-center gap-1.5 underline-offset-4 hover:underline"
-          >
-            View all 67 modules & 680+ utilities <ArrowRight size={16} />
-          </button>
-        </div>
-      </section>
+        {/* 3. Stats Strip */}
+        <StatsSection />
 
-      {/* Comparison Section: OptiKit vs Legacy Monoliths */}
-      <section className="container mx-auto px-4 py-16 max-w-6xl">
-        <div className="text-center mb-14 space-y-3">
-          <span className="px-3.5 py-1.5 bg-[#E7EDFF] dark:bg-primary/10 text-[#2563EB] dark:text-[#4F8DFD] rounded-full text-xs font-semibold border border-[#C9D4FF]/60 dark:border-primary/20 shadow-sm inline-flex items-center gap-1.5">
-            <Cpu size={14} /> Performance & Security Audit
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] dark:text-white tracking-tight">OptiKit vs Legacy Monoliths</h2>
-          <p className="text-[#334155] dark:text-muted max-w-2xl mx-auto text-base font-medium">
-            See how OptiKit outperforms traditional utility libraries like Lodash, Moment, and Ramda across bundle impact, security, and developer experience.
-          </p>
-        </div>
+        {/* 4. Interactive Playground (Lazy Loaded with Suspense) */}
+        <Suspense fallback={<PlaygroundSkeleton />}>
+          <PlaygroundSection />
+        </Suspense>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          
-          {/* Card 1: Bundle Impact */}
-          <Card className="p-6 border-border hover:border-primary/40 transition-all shadow-md space-y-5 flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#334155] dark:text-muted uppercase tracking-wider">Bundle Footprint</span>
-                <span className="px-2 py-0.5 rounded-full bg-success/10 text-success text-xs font-mono font-semibold">99.8% Smaller</span>
-              </div>
-              
-              <div className="space-y-2">
-                <div className="bg-surface p-3 rounded-xl border border-border flex items-center justify-between shadow-sm">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 size={16} className="text-success shrink-0" />
-                    <span className="text-sm font-semibold text-[#0F172A] dark:text-white">OptiKit</span>
-                  </div>
-                  <span className="font-mono text-sm font-bold text-success">16 KB Gzip</span>
-                </div>
-                <div className="bg-code-bg/50 p-3 rounded-xl border border-border flex items-center justify-between opacity-80">
-                  <div className="flex items-center gap-2">
-                    <XCircle size={16} className="text-red-400 shrink-0" />
-                    <span className="text-sm font-medium text-[#334155] dark:text-muted">Lodash / Moment</span>
-                  </div>
-                  <span className="font-mono text-sm font-bold text-red-400">520+ KB</span>
-                </div>
-              </div>
-            </div>
-            <p className="text-xs text-[#334155] dark:text-muted leading-relaxed font-medium">
-              OptiKit imports only the code you use, keeping your production bundle lightning fast.
-            </p>
-          </Card>
+        {/* 5. Bundle-size Comparison */}
+        <BundleComparisonSection />
 
-          {/* Card 2: Supply Chain Security */}
-          <Card className="p-6 border-border hover:border-primary/40 transition-all shadow-md space-y-5 flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#334155] dark:text-muted uppercase tracking-wider">Security Rating</span>
-                <span className="px-2 py-0.5 rounded-full bg-[#E7EDFF] dark:bg-primary/10 text-[#2563EB] dark:text-[#4F8DFD] text-xs font-mono font-semibold">Socket Verified</span>
-              </div>
-              
-              <div className="space-y-2">
-                <div className="bg-surface p-3 rounded-xl border border-border flex items-center justify-between shadow-sm">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 size={16} className="text-success shrink-0" />
-                    <span className="text-sm font-semibold text-[#0F172A] dark:text-white">OptiKit</span>
-                  </div>
-                  <span className="font-mono text-sm font-bold text-success">100 / 100 Score</span>
-                </div>
-                <div className="bg-code-bg/50 p-3 rounded-xl border border-border flex items-center justify-between opacity-80">
-                  <div className="flex items-center gap-2">
-                    <XCircle size={16} className="text-red-400 shrink-0" />
-                    <span className="text-sm font-medium text-[#334155] dark:text-muted">Legacy Utilities</span>
-                  </div>
-                  <span className="font-mono text-sm font-bold text-[#334155] dark:text-muted">Transitive Risk</span>
-                </div>
-              </div>
-            </div>
-            <p className="text-xs text-[#334155] dark:text-muted leading-relaxed font-medium">
-              0 external dependencies means zero supply-chain vulnerabilities and total security peace of mind.
-            </p>
-          </Card>
+        {/* 6. Feature Domains (Bento Grid + Side Drawer) */}
+        <FeatureDomainsSection onOpenSearch={() => {
+          window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
+        }} />
 
-          {/* Card 3: Native TypeScript */}
-          <Card className="p-6 border-border hover:border-primary/40 transition-all shadow-md space-y-5 flex flex-col justify-between md:col-span-2 lg:col-span-1">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#334155] dark:text-muted uppercase tracking-wider">Type System</span>
-                <span className="px-2 py-0.5 rounded-full bg-accent/10 text-accent text-xs font-mono font-semibold">Native TS</span>
-              </div>
-              
-              <div className="space-y-2">
-                <div className="bg-surface p-3 rounded-xl border border-border flex items-center justify-between shadow-sm">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 size={16} className="text-success shrink-0" />
-                    <span className="text-sm font-semibold text-[#0F172A] dark:text-white">OptiKit</span>
-                  </div>
-                  <span className="font-mono text-sm font-bold text-success">Strict Types & Generics</span>
-                </div>
-                <div className="bg-code-bg/50 p-3 rounded-xl border border-border flex items-center justify-between opacity-80">
-                  <div className="flex items-center gap-2">
-                    <XCircle size={16} className="text-red-400 shrink-0" />
-                    <span className="text-sm font-medium text-[#334155] dark:text-muted">Legacy Packages</span>
-                  </div>
-                  <span className="font-mono text-sm font-bold text-[#334155] dark:text-muted">Requires @types</span>
-                </div>
-              </div>
-            </div>
-            <p className="text-xs text-[#334155] dark:text-muted leading-relaxed font-medium">
-              Built natively in TypeScript with complete `.d.ts` declaration maps for flawless editor auto-complete.
-            </p>
-          </Card>
+        {/* 7. Migration (Before/After with highlights) */}
+        <MigrationSection />
 
-        </div>
-      </section>
+        {/* 8. Agentic Compute (MCP) */}
+        <AgenticMcpSection />
 
+        {/* 9. Runs Everywhere (Node, Browser, Edge, Marquee) */}
+        <RunsEverywhereSection />
 
-      <Features />
+        {/* 10. Tree-shaking Visualizer */}
+        <TreeShakingSection />
 
-      {/* CTA Installation Banner */}
-      <section className="container mx-auto px-4 py-16 max-w-7xl">
-        <div className="relative rounded-[24px] bg-surface border border-border p-8 sm:p-12 overflow-hidden shadow-[0_10px_40px_rgba(15,23,42,0.05)] flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#E7EDFF] dark:bg-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
-          
-          <div className="space-y-3 text-center lg:text-left relative z-10">
-            <div className="inline-flex items-center gap-1.5 text-[#2563EB] dark:text-[#4F8DFD] text-xs font-semibold uppercase tracking-wider">
-              <Sparkles size={14} /> Ready to Upgrade?
-            </div>
-            <h3 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] dark:text-white">Build Faster with OptiKit</h3>
-            <p className="text-[#334155] dark:text-muted text-sm sm:text-base max-w-xl font-medium">
-              Install the zero-dependency utility suite today and start shipping smaller, faster bundles.
-            </p>
-          </div>
+        {/* 11. Monorepo Architecture */}
+        <MonorepoArchitectureSection />
 
-          <div className="relative z-10 w-full lg:w-auto flex flex-col sm:flex-row items-center gap-3">
-            <div className="bg-code-bg border border-border rounded-xl px-5 py-3.5 flex items-center justify-between gap-4 font-mono text-xs sm:text-sm text-[#0F172A] dark:text-white shadow-inner w-full sm:w-auto">
-              <span>npm install @dev_x_mohit/opti-kit</span>
-              <button 
-                onClick={handleCopy}
-                className="text-[#334155] dark:text-muted hover:text-[#2563EB] transition-colors"
-                title="Copy command"
-              >
-                {copied ? <Check size={16} className="text-success" /> : <Copy size={16} />}
-              </button>
-            </div>
-            
-            <button
-              onClick={() => navigate('/docs')}
-              className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#4F8DFD] via-[#6B6CF7] to-[#8B5CF6] text-white font-semibold text-xs sm:text-sm hover:opacity-95 transition-opacity shadow-lg shadow-primary/25 whitespace-nowrap w-full sm:w-auto flex items-center justify-center gap-2"
-            >
-              Get Started <ArrowRight size={16} />
-            </button>
-          </div>
+        {/* 12. Quick Start */}
+        <QuickStartSection />
 
-        </div>
-      </section>
+        {/* 13. Security & Trust */}
+        <SecurityTrustSection />
 
+        {/* 14. Final CTA */}
+        <FinalCtaSection />
+      </main>
+
+      {/* Footer */}
       <Footer />
     </div>
   );
 }
-

@@ -1,0 +1,81 @@
+/* OptiKit Design Tokens & Color System */
+
+:root {
+  /* Light theme */
+  --bg: #FFFFFF;
+  --bg-subtle: #F7F8FA;
+  --surface: #FFFFFF;
+  --surface-2: #F1F3F7;
+  --border: #E4E7EC;
+  --border-strong: #CBD0DA;
+  --text: #0F1420;
+  --text-muted: #566074;
+  --text-faint: #7A8397;
+  --primary: #3B5BDB;
+  --primary-hover: #2F4AC0;
+  --primary-soft: rgba(59, 91, 219, 0.08);
+  --success: #0E9F6E;
+  --success-soft: rgba(14, 159, 110, 0.10);
+  --warning: #F5B94A;
+  --danger: #DC2626;
+
+  /* Competitor gray */
+  --competitor-bar: #AEB5C3;
+
+  /* Syntax Highlighting (Light) */
+  --syntax-keyword: #7C3AED;
+  --syntax-string: #047857;
+  --syntax-number: #B45309;
+  --syntax-function: #2F4AC0;
+  --syntax-comment: #7A8397;
+  --syntax-punct: #566074;
+}
+
+.dark,
+:root:not(.light) {
+  /* Dark theme (default) */
+  --bg: #0B0D12;
+  --bg-subtle: #0F1218;
+  --surface: #141821;
+  --surface-2: #1A1F2B;
+  --border: #252B38;
+  --border-strong: #343C4D;
+  --text: #E8EAF0;
+  --text-muted: #9AA3B5;
+  --text-faint: #6B7385;
+  --primary: #5B7CFA;
+  --primary-hover: #7490FF;
+  --primary-soft: rgba(91, 124, 250, 0.12);
+  --success: #34D399;
+  --success-soft: rgba(52, 211, 153, 0.12);
+  --warning: #F5B94A;
+  --danger: #F87171;
+
+  /* Competitor gray */
+  --competitor-bar: #4B5263;
+
+  /* Syntax Highlighting (Dark) */
+  --syntax-keyword: #C4A7FF;
+  --syntax-string: #7EE0A3;
+  --syntax-number: #F5B94A;
+  --syntax-function: #7AA2FF;
+  --syntax-comment: #6B7385;
+  --syntax-punct: #9AA3B5;
+}
+
+/* Base Utility Classes mapped to CSS Variables */
+.bg-theme { background-color: var(--bg); }
+.bg-theme-subtle { background-color: var(--bg-subtle); }
+.bg-surface { background-color: var(--surface); }
+.bg-surface-2 { background-color: var(--surface-2); }
+.bg-primary-soft { background-color: var(--primary-soft); }
+.bg-success-soft { background-color: var(--success-soft); }
+
+.text-theme { color: var(--text); }
+.text-theme-muted { color: var(--text-muted); }
+.text-theme-faint { color: var(--text-faint); }
+.text-primary-color { color: var(--primary); }
+.text-success-color { color: var(--success); }
+
+.border-theme { border-color: var(--border); }
+.border-theme-strong { border-color: var(--border-strong); }

@@ -1062,6 +1062,159 @@ export const utilitiesData: UtilityMeta[] = [
     "output": "..."
   },
   {
+    "id": "fastcrc32",
+    "name": "fastCrc32",
+    "module": "Checksum",
+    "description": "Computes standard IEEE 802.3 CRC-32 checksum (returns unsigned 32-bit number).",
+    "signature": "fastCrc32(...): number",
+    "example": "fastCrc32(...)",
+    "output": "..."
+  },
+  {
+    "id": "crc32hex",
+    "name": "crc32Hex",
+    "module": "Checksum",
+    "description": "Computes CRC-32 and returns a formatted 8-character lowercase hexadecimal string.",
+    "signature": "crc32Hex(...): string",
+    "example": "crc32Hex(...)",
+    "output": "..."
+  },
+  {
+    "id": "adler32",
+    "name": "adler32",
+    "module": "Checksum",
+    "description": "Computes Adler-32 checksum (used in zlib RFC 1950).",
+    "signature": "adler32(...): number",
+    "example": "adler32(...)",
+    "output": "..."
+  },
+  {
+    "id": "adler32hex",
+    "name": "adler32Hex",
+    "module": "Checksum",
+    "description": "Computes Adler-32 and returns an 8-character hex string.",
+    "signature": "adler32Hex(...): string",
+    "example": "adler32Hex(...)",
+    "output": "..."
+  },
+  {
+    "id": "fnv1a32",
+    "name": "fnv1a32",
+    "module": "Checksum",
+    "description": "Fowler–Noll–Vo 32-bit (FNV-1a) hash function.",
+    "signature": "fnv1a32(...): number",
+    "example": "fnv1a32(...)",
+    "output": "..."
+  },
+  {
+    "id": "fnv1a32hex",
+    "name": "fnv1a32Hex",
+    "module": "Checksum",
+    "description": "Computes FNV-1a 32-bit and returns a hex string.",
+    "signature": "fnv1a32Hex(...): string",
+    "example": "fnv1a32Hex(...)",
+    "output": "..."
+  },
+  {
+    "id": "fnv1a64",
+    "name": "fnv1a64",
+    "module": "Checksum",
+    "description": "Fowler–Noll–Vo 64-bit (FNV-1a) hash using native BigInt.",
+    "signature": "fnv1a64(...): string",
+    "example": "fnv1a64(...)",
+    "output": "..."
+  },
+  {
+    "id": "murmur3",
+    "name": "murmur3",
+    "module": "Checksum",
+    "description": "MurmurHash3 32-bit implementation.",
+    "signature": "murmur3(...): number",
+    "example": "murmur3(...)",
+    "output": "..."
+  },
+  {
+    "id": "encodebase58",
+    "name": "encodeBase58",
+    "module": "Codec",
+    "description": "Encodes an input string or Uint8Array to a Base58 string (Bitcoin alphabet).",
+    "signature": "encodeBase58(...): string",
+    "example": "encodeBase58(...)",
+    "output": "..."
+  },
+  {
+    "id": "decodebase58",
+    "name": "decodeBase58",
+    "module": "Codec",
+    "description": "Decodes a Base58 string back to bytes or string.",
+    "signature": "decodeBase58(...): string | Uint8Array",
+    "example": "decodeBase58(...)",
+    "output": "..."
+  },
+  {
+    "id": "encodebase62",
+    "name": "encodeBase62",
+    "module": "Codec",
+    "description": "Encodes an integer or BigInt to a Base62 string (alphanumeric [0-9a-zA-Z]).",
+    "signature": "encodeBase62(...): string",
+    "example": "encodeBase62(...)",
+    "output": "..."
+  },
+  {
+    "id": "decodebase62",
+    "name": "decodeBase62",
+    "module": "Codec",
+    "description": "Decodes a Base62 string into a BigInt integer.",
+    "signature": "decodeBase62(...): bigint",
+    "example": "decodeBase62(...)",
+    "output": "..."
+  },
+  {
+    "id": "encodebase32",
+    "name": "encodeBase32",
+    "module": "Codec",
+    "description": "Encodes input to RFC 4648 Base32 (used in 2FA/TOTP secret keys).",
+    "signature": "encodeBase32(...): string",
+    "example": "encodeBase32(...)",
+    "output": "..."
+  },
+  {
+    "id": "decodebase32",
+    "name": "decodeBase32",
+    "module": "Codec",
+    "description": "Decodes an RFC 4648 Base32 string.",
+    "signature": "decodeBase32(...): string | Uint8Array",
+    "example": "decodeBase32(...)",
+    "output": "..."
+  },
+  {
+    "id": "generateshortid",
+    "name": "generateShortId",
+    "module": "Codec",
+    "description": "Generates a cryptographically random, URL-friendly short identifier.",
+    "signature": "generateShortId(...): string",
+    "example": "generateShortId(...)",
+    "output": "..."
+  },
+  {
+    "id": "urlsafebase64encode",
+    "name": "urlSafeBase64Encode",
+    "module": "Codec",
+    "description": "Encodes a string into URL-Safe Base64 (RFC 4648 §5).",
+    "signature": "urlSafeBase64Encode(...): string",
+    "example": "urlSafeBase64Encode(...)",
+    "output": "..."
+  },
+  {
+    "id": "urlsafebase64decode",
+    "name": "urlSafeBase64Decode",
+    "module": "Codec",
+    "description": "Decodes a URL-Safe Base64 string.",
+    "signature": "urlSafeBase64Decode(...): string",
+    "example": "urlSafeBase64Decode(...)",
+    "output": "..."
+  },
+  {
     "id": "invertmap",
     "name": "invertMap",
     "module": "Collection",
@@ -1341,6 +1494,51 @@ export const utilitiesData: UtilityMeta[] = [
     "output": "..."
   },
   {
+    "id": "compresslzw",
+    "name": "compressLZW",
+    "module": "Compression",
+    "description": "Compresses a text string using the Lempel-Ziv-Welch (LZW) algorithm.",
+    "signature": "compressLZW(...): number[]",
+    "example": "compressLZW(...)",
+    "output": "..."
+  },
+  {
+    "id": "decompresslzw",
+    "name": "decompressLZW",
+    "module": "Compression",
+    "description": "Decompresses an LZW integer code array back into the original string.",
+    "signature": "decompressLZW(...): string",
+    "example": "decompressLZW(...)",
+    "output": "..."
+  },
+  {
+    "id": "compressrle",
+    "name": "compressRLE",
+    "module": "Compression",
+    "description": "Run-Length Encoding (RLE) string compression.",
+    "signature": "compressRLE(...): string",
+    "example": "compressRLE(...)",
+    "output": "..."
+  },
+  {
+    "id": "deltaencode",
+    "name": "deltaEncode",
+    "module": "Compression",
+    "description": "Delta encoding for numeric series. Converts absolute values to relative differences.",
+    "signature": "deltaEncode(...): number[]",
+    "example": "deltaEncode(...)",
+    "output": "..."
+  },
+  {
+    "id": "deltadecode",
+    "name": "deltaDecode",
+    "module": "Compression",
+    "description": "Restores original numeric series from delta-encoded differences.",
+    "signature": "deltaDecode(...): number[]",
+    "example": "deltaDecode(...)",
+    "output": "..."
+  },
+  {
     "id": "pmapseries",
     "name": "pMapSeries",
     "module": "Concurrency",
@@ -1401,6 +1599,51 @@ export const utilitiesData: UtilityMeta[] = [
     "description": "Resolves an object of promises.",
     "signature": "pResolveProps(...): any",
     "example": "pResolveProps(...)",
+    "output": "..."
+  },
+  {
+    "id": "isvalidcron",
+    "name": "isValidCron",
+    "module": "Cron",
+    "description": "Validates whether a cron expression is syntactically valid (5 standard fields).",
+    "signature": "isValidCron(...): boolean",
+    "example": "isValidCron(...)",
+    "output": "..."
+  },
+  {
+    "id": "parsecron",
+    "name": "parseCron",
+    "module": "Cron",
+    "description": "Parses a standard 5-part cron expression into integer arrays.",
+    "signature": "parseCron(...): ParsedCron",
+    "example": "parseCron(...)",
+    "output": "..."
+  },
+  {
+    "id": "getnextcrondate",
+    "name": "getNextCronDate",
+    "module": "Cron",
+    "description": "Calculates the next occurrence Date matching the cron expression after a reference date.",
+    "signature": "getNextCronDate(...): Date",
+    "example": "getNextCronDate(...)",
+    "output": "..."
+  },
+  {
+    "id": "getnextcrondates",
+    "name": "getNextCronDates",
+    "module": "Cron",
+    "description": "Returns the next N occurrence dates matching the cron expression.",
+    "signature": "getNextCronDates(...): Date[]",
+    "example": "getNextCronDates(...)",
+    "output": "..."
+  },
+  {
+    "id": "describecron",
+    "name": "describeCron",
+    "module": "Cron",
+    "description": "Generates a human-friendly English description of a standard 5-part cron expression.",
+    "signature": "describeCron(...): string",
+    "example": "describeCron(...)",
     "output": "..."
   },
   {
@@ -1761,6 +2004,60 @@ export const utilitiesData: UtilityMeta[] = [
     "description": "Utility function",
     "signature": "deepOmit(...): any",
     "example": "deepOmit(...)",
+    "output": "..."
+  },
+  {
+    "id": "diffobjects",
+    "name": "diffObjects",
+    "module": "Diff",
+    "description": "Recursively diffs two objects and returns added, removed, and updated fields.",
+    "signature": "diffObjects(...): ObjectDiff",
+    "example": "diffObjects(...)",
+    "output": "..."
+  },
+  {
+    "id": "patchobject",
+    "name": "patchObject",
+    "module": "Diff",
+    "description": "Applies an ObjectDiff to a target object and returns the resulting object.",
+    "signature": "patchObject(...): T",
+    "example": "patchObject(...)",
+    "output": "..."
+  },
+  {
+    "id": "diffarrays",
+    "name": "diffArrays",
+    "module": "Diff",
+    "description": "Compares two arrays and produces added, removed, and unchanged elements.",
+    "signature": "diffArrays(...): ArrayDiff<T>",
+    "example": "diffArrays(...)",
+    "output": "..."
+  },
+  {
+    "id": "createjsonpatch",
+    "name": "createJsonPatch",
+    "module": "Diff",
+    "description": "Generates an RFC 6902 JSON Patch representing the changes from original to target.",
+    "signature": "createJsonPatch(...): JsonPatchOperation[]",
+    "example": "createJsonPatch(...)",
+    "output": "..."
+  },
+  {
+    "id": "applyjsonpatch",
+    "name": "applyJsonPatch",
+    "module": "Diff",
+    "description": "Applies an RFC 6902 JSON Patch to a document and returns a new document.",
+    "signature": "applyJsonPatch(...): T",
+    "example": "applyJsonPatch(...)",
+    "output": "..."
+  },
+  {
+    "id": "diffwords",
+    "name": "diffWords",
+    "module": "Diff",
+    "description": "Computes a word-by-word diff between two text strings.",
+    "signature": "diffWords(...): TextDiffPart[]",
+    "example": "diffWords(...)",
     "output": "..."
   },
   {
@@ -4680,6 +4977,96 @@ export const utilitiesData: UtilityMeta[] = [
     "output": "..."
   },
   {
+    "id": "observable",
+    "name": "Observable",
+    "module": "Observable",
+    "description": "Cold reactive data stream that pushes values to observers.",
+    "signature": "class Observable",
+    "example": "new Observable()",
+    "output": "..."
+  },
+  {
+    "id": "subject",
+    "name": "Subject",
+    "module": "Observable",
+    "description": "Multicast reactive Subject that acts as both an Observer and an Observable.",
+    "signature": "class Subject",
+    "example": "new Subject()",
+    "output": "..."
+  },
+  {
+    "id": "behaviorsubject",
+    "name": "BehaviorSubject",
+    "module": "Observable",
+    "description": "Subject variant that stores its current value and immediately emits it to new subscribers.",
+    "signature": "class BehaviorSubject",
+    "example": "new BehaviorSubject()",
+    "output": "..."
+  },
+  {
+    "id": "of",
+    "name": "of",
+    "module": "Observable",
+    "description": "Creates an Observable that emits synchronous arguments sequentially and completes.",
+    "signature": "of(...): Observable<T>",
+    "example": "of(...)",
+    "output": "..."
+  },
+  {
+    "id": "from",
+    "name": "from",
+    "module": "Observable",
+    "description": "Converts an Array, Iterable, or Promise into an Observable.",
+    "signature": "from(...): Observable<T>",
+    "example": "from(...)",
+    "output": "..."
+  },
+  {
+    "id": "interval",
+    "name": "interval",
+    "module": "Observable",
+    "description": "Emits sequential integers at a specified millisecond interval.",
+    "signature": "interval(...): Observable<number>",
+    "example": "interval(...)",
+    "output": "..."
+  },
+  {
+    "id": "mapobservable",
+    "name": "mapObservable",
+    "module": "Observable",
+    "description": "Transforms each emitted value using a projection function.",
+    "signature": "mapObservable(...): OperatorFunction<T, R>",
+    "example": "mapObservable(...)",
+    "output": "..."
+  },
+  {
+    "id": "filterobservable",
+    "name": "filterObservable",
+    "module": "Observable",
+    "description": "Emits only values that satisfy the predicate.",
+    "signature": "filterObservable(...): OperatorFunction<T, T>",
+    "example": "filterObservable(...)",
+    "output": "..."
+  },
+  {
+    "id": "takeobservable",
+    "name": "takeObservable",
+    "module": "Observable",
+    "description": "Emits only the first `count` values.",
+    "signature": "takeObservable(...): OperatorFunction<T, T>",
+    "example": "takeObservable(...)",
+    "output": "..."
+  },
+  {
+    "id": "debouncetimeobservable",
+    "name": "debounceTimeObservable",
+    "module": "Observable",
+    "description": "Discards values that take place within `ms` milliseconds of another emission.",
+    "signature": "debounceTimeObservable(...): OperatorFunction<T, T>",
+    "example": "debounceTimeObservable(...)",
+    "output": "..."
+  },
+  {
     "id": "sep",
     "name": "sep",
     "module": "Path",
@@ -4797,6 +5184,24 @@ export const utilitiesData: UtilityMeta[] = [
     "output": "..."
   },
   {
+    "id": "pipeline",
+    "name": "Pipeline",
+    "module": "Pipeline",
+    "description": "OptiKit Pipeline — Resilient multi-step asynchronous workflow orchestrator",
+    "signature": "class Pipeline",
+    "example": "new Pipeline()",
+    "output": "..."
+  },
+  {
+    "id": "createpipeline",
+    "name": "createPipeline",
+    "module": "Pipeline",
+    "description": "Creates a new resilient workflow pipeline.",
+    "signature": "createPipeline(...): Pipeline<TContext>",
+    "example": "createPipeline(...)",
+    "output": "..."
+  },
+  {
     "id": "randomuuid",
     "name": "randomUUID",
     "module": "Random",
@@ -4878,6 +5283,51 @@ export const utilitiesData: UtilityMeta[] = [
     "output": "..."
   },
   {
+    "id": "tokenbucket",
+    "name": "TokenBucket",
+    "module": "Rate Limit",
+    "description": "Token Bucket algorithm implementation for rate limiting bursts while enforcing average throughput.",
+    "signature": "class TokenBucket",
+    "example": "new TokenBucket()",
+    "output": "..."
+  },
+  {
+    "id": "leakybucket",
+    "name": "LeakyBucket",
+    "module": "Rate Limit",
+    "description": "Leaky Bucket algorithm for smoothing out traffic bursts into a steady output rate.",
+    "signature": "class LeakyBucket",
+    "example": "new LeakyBucket()",
+    "output": "..."
+  },
+  {
+    "id": "slidingwindowratelimiter",
+    "name": "SlidingWindowRateLimiter",
+    "module": "Rate Limit",
+    "description": "In-memory Sliding Window Log rate limiter for tracking key-based request limits (e.g., per IP or user ID).",
+    "signature": "class SlidingWindowRateLimiter",
+    "example": "new SlidingWindowRateLimiter()",
+    "output": "..."
+  },
+  {
+    "id": "ratelimit",
+    "name": "rateLimit",
+    "module": "Rate Limit",
+    "description": "Wraps an async function with rate limiting. Calls exceeding the limit are queued",
+    "signature": "rateLimit(...): any",
+    "example": "rateLimit(...)",
+    "output": "..."
+  },
+  {
+    "id": "exponentialbackoff",
+    "name": "ExponentialBackoff",
+    "module": "Rate Limit",
+    "description": "Calculates exponential backoff delay with optional random jitter.",
+    "signature": "class ExponentialBackoff",
+    "example": "new ExponentialBackoff()",
+    "output": "..."
+  },
+  {
     "id": "regex",
     "name": "regex",
     "module": "Regex",
@@ -4929,6 +5379,69 @@ export const utilitiesData: UtilityMeta[] = [
     "description": "Utility function",
     "signature": "isRetryableError(...): boolean",
     "example": "isRetryableError(...)",
+    "output": "..."
+  },
+  {
+    "id": "stringschema",
+    "name": "StringSchema",
+    "module": "Schema Infer",
+    "description": "OptiKit Schema Infer — Zero-dependency runtime schema validator with static TypeScript type inference.",
+    "signature": "class StringSchema",
+    "example": "new StringSchema()",
+    "output": "..."
+  },
+  {
+    "id": "numberschema",
+    "name": "NumberSchema",
+    "module": "Schema Infer",
+    "description": "Utility function",
+    "signature": "class NumberSchema",
+    "example": "new NumberSchema()",
+    "output": "..."
+  },
+  {
+    "id": "booleanschema",
+    "name": "BooleanSchema",
+    "module": "Schema Infer",
+    "description": "Utility function",
+    "signature": "class BooleanSchema",
+    "example": "new BooleanSchema()",
+    "output": "..."
+  },
+  {
+    "id": "arrayschema",
+    "name": "ArraySchema",
+    "module": "Schema Infer",
+    "description": "Utility function",
+    "signature": "class ArraySchema",
+    "example": "new ArraySchema()",
+    "output": "..."
+  },
+  {
+    "id": "objectschema",
+    "name": "ObjectSchema",
+    "module": "Schema Infer",
+    "description": "Utility function",
+    "signature": "class ObjectSchema",
+    "example": "new ObjectSchema()",
+    "output": "..."
+  },
+  {
+    "id": "enumschema",
+    "name": "EnumSchema",
+    "module": "Schema Infer",
+    "description": "Utility function",
+    "signature": "class EnumSchema",
+    "example": "new EnumSchema()",
+    "output": "..."
+  },
+  {
+    "id": "s",
+    "name": "s",
+    "module": "Schema Infer",
+    "description": "OptiKit Schema Builder namespace.",
+    "signature": "s(...)",
+    "example": "s(...)",
     "output": "..."
   },
   {
@@ -5220,6 +5733,60 @@ export const utilitiesData: UtilityMeta[] = [
     "output": "..."
   },
   {
+    "id": "batch",
+    "name": "batch",
+    "module": "Signals",
+    "description": "Executes a callback within a batch transaction.",
+    "signature": "batch(...): T",
+    "example": "batch(...)",
+    "output": "..."
+  },
+  {
+    "id": "untrack",
+    "name": "untrack",
+    "module": "Signals",
+    "description": "Runs a function without tracking any signal access as dependencies.",
+    "signature": "untrack(...): T",
+    "example": "untrack(...)",
+    "output": "..."
+  },
+  {
+    "id": "issignal",
+    "name": "isSignal",
+    "module": "Signals",
+    "description": "Checks whether a given value is an OptiKit Signal.",
+    "signature": "isSignal(...): val is Signal<any> | ReadonlySignal<any>",
+    "example": "isSignal(...)",
+    "output": "..."
+  },
+  {
+    "id": "signal",
+    "name": "signal",
+    "module": "Signals",
+    "description": "Creates a reactive signal holding a mutable state value.",
+    "signature": "signal(...): Signal<T>",
+    "example": "signal(...)",
+    "output": "..."
+  },
+  {
+    "id": "computed",
+    "name": "computed",
+    "module": "Signals",
+    "description": "Creates a memoized computed signal derived from other signals.",
+    "signature": "computed(...): ReadonlySignal<T>",
+    "example": "computed(...)",
+    "output": "..."
+  },
+  {
+    "id": "effect",
+    "name": "effect",
+    "module": "Signals",
+    "description": "Creates a reactive effect that runs immediately and re-executes whenever",
+    "signature": "effect(...): () => void",
+    "example": "effect(...)",
+    "output": "..."
+  },
+  {
     "id": "bubblesort",
     "name": "bubbleSort",
     "module": "Sort",
@@ -5397,33 +5964,6 @@ export const utilitiesData: UtilityMeta[] = [
     "description": "An isomorphic wrapper for LocalStorage and SessionStorage supporting JSON serialization,",
     "signature": "safeStorage(...)",
     "example": "safeStorage(...)",
-    "output": "..."
-  },
-  {
-    "id": "signal",
-    "name": "signal",
-    "module": "Store",
-    "description": "Creates a reactive signal primitive that tracks dependencies and propagates changes.",
-    "signature": "signal(...): Signal<T>",
-    "example": "signal(...)",
-    "output": "..."
-  },
-  {
-    "id": "computed",
-    "name": "computed",
-    "module": "Store",
-    "description": "Creates a derived reactive computation that caches values and updates automatically when dependencies change.",
-    "signature": "computed(...): Computed<T>",
-    "example": "computed(...)",
-    "output": "..."
-  },
-  {
-    "id": "effect",
-    "name": "effect",
-    "module": "Store",
-    "description": "Runs a side-effect function that automatically re-runs whenever any read signal changes.",
-    "signature": "effect(...): () => void",
-    "example": "effect(...)",
     "output": "..."
   },
   {

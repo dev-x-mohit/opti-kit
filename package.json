@@ -13,7 +13,9 @@
   ],
   "scripts": {
     "build:package": "npm run build -w packages/opti-kit",
+    "build:mcp": "npm run build -w packages/mcp-server",
     "build:showcase": "npm run build -w apps/showcase",
+    "build:all": "npm run build:package && npm run build:mcp && npm run build:showcase",
     "test:package": "npm run test -w packages/opti-kit",
     "release": "node scripts/release.js"
   },

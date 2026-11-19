@@ -1,21 +1,24 @@
 import React from 'react';
 
-interface OptiKitLogoProps {
+export interface OptiKitLogoProps {
   size?: number;
   showVersion?: boolean;
   version?: string;
   className?: string;
 }
 
-export function OptiKitLogo({ 
-  size = 36, 
-  showVersion = false, 
-  version = "v1.2.1",
-  className = "" 
+export function OptiKitLogo({
+  size = 32,
+  showVersion = false,
+  version = 'v1.2.1',
+  className = '',
 }: OptiKitLogoProps) {
   return (
-    <div className={`flex items-center gap-3 select-none ${className}`}>
-      <div className="relative flex items-center justify-center transition-transform hover:scale-105" style={{ width: size, height: size }}>
+    <div className={`flex items-center gap-2.5 select-none ${className}`}>
+      <div
+        className="relative flex items-center justify-center shrink-0"
+        style={{ width: size, height: size }}
+      >
         <svg
           width={size}
           height={size}
@@ -23,14 +26,7 @@ export function OptiKitLogo({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <defs>
-            <linearGradient id="optikit-hex-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#4F8DFD" />
-              <stop offset="50%" stopColor="#6B6CF7" />
-              <stop offset="100%" stopColor="#8B5CF6" />
-            </linearGradient>
-          </defs>
-          {/* Perfectly Centered Rounded Hexagon Icon */}
+          {/* Rounded Hexagon Icon in primary */}
           <path
             d="M 20 2.5 
                C 20.7 2.5 21.4 2.9 21.8 3.6 
@@ -47,30 +43,32 @@ export function OptiKitLogo({
                C 4.5 12 5 11.2 5.7 10.8 
                L 18.2 3.6 
                C 18.6 2.9 19.3 2.5 20 2.5 Z"
-            stroke="url(#optikit-hex-gradient)"
+            stroke="var(--primary)"
             strokeWidth="2.5"
             strokeLinejoin="round"
             fill="var(--surface)"
           />
 
-          {/* Perfectly Centered Code Symbol </> Vector Paths */}
-          <g stroke="var(--text-main)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="stroke-black dark:stroke-white">
-            {/* Left Bracket < */}
+          {/* Centered Code Symbol </> */}
+          <g
+            stroke="var(--text)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <path d="M 14.5 15 L 10.5 20 L 14.5 25" />
-            {/* Forward Slash / */}
-            <path d="M 21.5 14 L 18.5 26" />
-            {/* Right Bracket > */}
+            <path d="M 18.5 26 L 21.5 14" stroke="var(--primary)" />
             <path d="M 25.5 15 L 29.5 20 L 25.5 25" />
           </g>
         </svg>
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="font-bold text-xl tracking-tight text-black dark:text-white font-sans">
-          Opti<span className="text-gradient">Kit</span>
+        <span className="font-semibold tracking-tight text-[var(--text)] text-lg">
+          Opti<span className="text-[var(--primary)]">Kit</span>
         </span>
         {showVersion && (
-          <span className="px-2 py-0.5 rounded-full bg-[#E7EDFF] dark:bg-primary/10 text-[#4F8DFD] text-xs font-semibold border border-[#C9D4FF]/40 dark:border-primary/20">
+          <span className="font-mono text-[11px] font-medium px-2 py-0.5 rounded-full bg-[var(--surface-2)] text-[var(--text-muted)] border border-[var(--border)]">
             {version}
           </span>
         )}

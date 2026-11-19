@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Search, Command, X, Code2 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { Search, X, Code2, ArrowRight, CornerDownLeft, Copy, Check } from 'lucide-react';
 import { utilitiesData } from '../../data/utilitiesData';
+import { copyToClipboard } from '../../lib/copyToClipboard';
 
-export function CommandPalette() {
+export interface CommandPaletteProps {
+  onSelectFunction?: (fnName: string) => void;
+}
+
+export function CommandPalette({ onSelectFunction }: CommandPaletteProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const navigate = useNavigate();
+  const [copiedName, setCopiedName] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -27,146 +30,182 @@ export function CommandPalette() {
 
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 100);
+      setTimeout(() => inputRef.current?.focus(), 50);
       setQuery('');
       setSelectedIndex(0);
     }
   }, [isOpen]);
 
-  const filteredResults = React.useMemo(() => {
-    if (!query) return [];
-    const lowerQ = query.toLowerCase();
-    
-    // Exact match for module name gets priority, otherwise match utility name/desc
-    const matches = utilitiesData.filter(u => 
-      u.name.toLowerCase().includes(lowerQ) || 
-      u.module.toLowerCase().includes(lowerQ) ||
-      u.description.toLowerCase().includes(lowerQ)
-    );
-    
-    // Sort logic: module exact match > name exact match > name includes > desc includes
-    return matches.sort((a, b) => {
-      const aMod = a.module.toLowerCase() === lowerQ ? 1 : 0;
-      const bMod = b.module.toLowerCase() === lowerQ ? 1 : 0;
-      if (aMod !== bMod) return bMod - aMod;
-      
-      const aName = a.name.toLowerCase() === lowerQ ? 1 : 0;
-      const bName = b.name.toLowerCase() === lowerQ ? 1 : 0;
-      if (aName !== bName) return bName - aName;
-      
-      return 0;
-    }).slice(0, 15); // Show max 15 results
+  const filteredResults = useMemo(() => {
+    if (!query.trim()) {
+      return utilitiesData.slice(0, 10);
+    }
+    const lower = query.toLowerCase().trim();
+    return utilitiesData
+      .filter(
+        (u) =>
+          u.name.toLowerCase().includes(lower) ||
+          u.module.toLowerCase().includes(lower) ||
+          u.description.toLowerCase().includes(lower)
+      )
+      .slice(0, 15);
   }, [query]);
 
-  useEffect(() => {
-    setSelectedIndex(0);
-  }, [query]);
-
-  const handleSelect = (result: typeof utilitiesData[0]) => {
+  const handleSelect = (item: (typeof utilitiesData)[0]) => {
+    if (onSelectFunction) {
+      onSelectFunction(item.name);
+    }
     setIsOpen(false);
-    navigate(`/modules/${result.module.toLowerCase()}?u=${result.id}`);
   };
 
-  const onKeyDown = (e: React.KeyboardEvent) => {
+  const handleCopy = async (e: React.MouseEvent, text: string, name: string) => {
+    e.stopPropagation();
+    const success = await copyToClipboard(text);
+    if (success) {
+      setCopiedName(name);
+      setTimeout(() => setCopiedName(null), 1500);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (filteredResults.length === 0) return;
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setSelectedIndex(prev => Math.min(prev + 1, filteredResults.length - 1));
+      setSelectedIndex((prev) => (prev + 1) % filteredResults.length);
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      setSelectedIndex(prev => Math.max(prev - 1, 0));
-    } else if (e.key === 'Enter' && filteredResults.length > 0) {
+      setSelectedIndex((prev) => (prev - 1 + filteredResults.length) % filteredResults.length);
+    } else if (e.key === 'Enter') {
       e.preventDefault();
       handleSelect(filteredResults[selectedIndex]);
     }
   };
 
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsOpen(false)}
-            className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm"
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            transition={{ duration: 0.15 }}
-            className="fixed inset-x-0 top-[10%] max-w-2xl mx-auto z-[101] p-4 sm:p-0"
-          >
-            <div className="bg-surface border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[70vh]">
-              <div className="flex items-center px-4 py-3 border-b border-border gap-3">
-                <Search size={18} className="text-muted shrink-0" />
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onKeyDown={onKeyDown}
-                  placeholder="Search modules or utilities (e.g. 'chunk', 'array', 'isEmail')..."
-                  className="flex-1 bg-transparent border-none focus:outline-none text-text-main text-base sm:text-lg placeholder:text-muted"
-                />
-                <button 
-                  onClick={() => setIsOpen(false)}
-                  className="p-1.5 hover:bg-black/5 dark:hover:bg-white/10 rounded-md text-muted transition-colors shrink-0"
-                >
-                  <X size={18} />
-                </button>
-              </div>
+  if (!isOpen) return null;
 
-              {query && filteredResults.length > 0 && (
-                <div className="overflow-y-auto p-2 custom-scrollbar">
-                  {filteredResults.map((result, idx) => (
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Command search palette"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/60 backdrop-blur-xs transition-opacity duration-150"
+      onClick={() => setIsOpen(false)}
+    >
+      <div
+        className="w-full max-w-2xl overflow-hidden rounded-xl border border-[var(--border-strong)] bg-[var(--surface)] shadow-2xl transition-all"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Search Input Bar */}
+        <div className="relative flex items-center border-b border-[var(--border)] px-4 py-3">
+          <Search size={18} className="text-[var(--text-muted)] shrink-0 mr-3" />
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setSelectedIndex(0);
+            }}
+            onKeyDown={handleKeyDown}
+            placeholder="Search 740+ functions, modules, algorithms... (e.g. debounce, sha256, tree)"
+            className="w-full bg-transparent text-sm text-[var(--text)] placeholder-[var(--text-faint)] outline-none"
+          />
+          {query && (
+            <button
+              onClick={() => setQuery('')}
+              className="text-[var(--text-muted)] hover:text-[var(--text)] p-1 mr-2"
+              aria-label="Clear query"
+            >
+              <X size={16} />
+            </button>
+          )}
+          <span className="font-mono text-[10px] text-[var(--text-faint)] border border-[var(--border)] px-1.5 py-0.5 rounded">
+            ESC
+          </span>
+        </div>
+
+        {/* Results List */}
+        <div className="max-h-96 overflow-y-auto p-2 divide-y divide-[var(--border)]/30">
+          {filteredResults.length === 0 ? (
+            <div className="py-8 text-center text-sm text-[var(--text-muted)]">
+              No matching utility found for "{query}".
+            </div>
+          ) : (
+            filteredResults.map((item, index) => {
+              const isSelected = index === selectedIndex;
+              return (
+                <div
+                  key={`${item.module}-${item.name}`}
+                  onClick={() => handleSelect(item)}
+                  onMouseEnter={() => setSelectedIndex(index)}
+                  className={`flex items-center justify-between p-3 rounded-lg cursor-pointer transition-colors ${
+                    isSelected ? 'bg-[var(--surface-2)] text-[var(--text)]' : 'text-[var(--text-muted)]'
+                  }`}
+                >
+                  <div className="flex items-start gap-3 min-w-0 pr-2">
                     <div
-                      key={result.id}
-                      onClick={() => handleSelect(result)}
-                      onMouseEnter={() => setSelectedIndex(idx)}
-                      className={`flex items-start justify-between p-3 rounded-xl cursor-pointer transition-colors ${
-                        idx === selectedIndex 
-                          ? 'bg-primary/10 border border-primary/20' 
-                          : 'hover:bg-black/5 dark:hover:bg-white/5 border border-transparent'
+                      className={`mt-0.5 p-1.5 rounded-md shrink-0 ${
+                        isSelected ? 'bg-[var(--primary-soft)] text-[var(--primary)]' : 'bg-[var(--surface-2)] text-[var(--text-muted)]'
                       }`}
                     >
-                      <div className="flex flex-col gap-1 overflow-hidden">
-                        <div className="flex items-center gap-2">
-                          <Code2 size={16} className={idx === selectedIndex ? 'text-primary' : 'text-muted'} />
-                          <span className={`font-semibold font-mono ${idx === selectedIndex ? 'text-primary' : 'text-text-main'}`}>
-                            {result.name}
-                          </span>
-                          <span className="px-2 py-0.5 rounded-full bg-surface border border-border text-[10px] font-bold text-muted uppercase tracking-wider">
-                            {result.module}
-                          </span>
-                        </div>
-                        <p className="text-xs text-muted truncate pr-4">{result.description}</p>
-                      </div>
-                      <div className="hidden sm:block shrink-0">
-                        <span className="text-xs text-muted opacity-50 font-mono">Jump</span>
-                      </div>
+                      <Code2 size={16} />
                     </div>
-                  ))}
-                </div>
-              )}
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-sm font-semibold text-[var(--text)] truncate">
+                          {item.name}
+                        </span>
+                        <span className="font-mono text-[11px] px-1.5 py-0.5 rounded bg-[var(--surface-2)] border border-[var(--border)] text-[var(--text-faint)]">
+                          {item.module}
+                        </span>
+                      </div>
+                      <p className="text-xs text-[var(--text-muted)] truncate max-w-md mt-0.5">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
 
-              {query && filteredResults.length === 0 && (
-                <div className="p-12 text-center text-muted">
-                  <p>No results found for "{query}".</p>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      onClick={(e) =>
+                        handleCopy(
+                          e,
+                          `import { ${item.name} } from '@dev_x_mohit/opti-kit';`,
+                          item.name
+                        )
+                      }
+                      title="Copy import statement"
+                      className="p-1 rounded text-[var(--text-faint)] hover:text-[var(--text)] hover:bg-[var(--surface)] transition-colors"
+                    >
+                      {copiedName === item.name ? (
+                        <Check size={14} className="text-[var(--success)]" />
+                      ) : (
+                        <Copy size={14} />
+                      )}
+                    </button>
+                    {isSelected && (
+                      <CornerDownLeft size={14} className="text-[var(--primary)]" />
+                    )}
+                  </div>
                 </div>
-              )}
+              );
+            })
+          )}
+        </div>
 
-              {!query && (
-                <div className="p-8 text-center text-muted border-t border-border bg-black/5 dark:bg-white/5 flex flex-col items-center gap-2">
-                  <Command size={24} className="opacity-50" />
-                  <p className="text-sm">Start typing to search all 740+ utilities</p>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+        {/* Footer shortcuts */}
+        <div className="flex items-center justify-between border-t border-[var(--border)] px-4 py-2 text-[11px] text-[var(--text-faint)] bg-[var(--surface-2)]/50">
+          <div className="flex items-center gap-3">
+            <span>
+              <kbd className="font-mono bg-[var(--surface)] px-1.5 py-0.5 rounded border border-[var(--border)]">↑↓</kbd> Navigate
+            </span>
+            <span>
+              <kbd className="font-mono bg-[var(--surface)] px-1.5 py-0.5 rounded border border-[var(--border)]">↵</kbd> Select
+            </span>
+          </div>
+          <span>740+ verified utilities indexed</span>
+        </div>
+      </div>
+    </div>
   );
 }
