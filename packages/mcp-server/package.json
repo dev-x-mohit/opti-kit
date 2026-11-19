@@ -1,0 +1,56 @@
+{
+  "name": "@dev_x_mohit/opti-kit-mcp",
+  "version": "1.2.1",
+  "description": "Model Context Protocol (MCP) server for OptiKit: deterministic utilities, math, crypto, and algorithms for AI agents.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "opti-kit-mcp": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./tools": {
+      "types": "./dist/tools/index.d.ts",
+      "import": "./dist/tools/index.mjs",
+      "require": "./dist/tools/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "start": "node dist/cli.js",
+    "dev": "tsup --watch"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "opti-kit",
+    "ai-agent",
+    "claude-desktop",
+    "cursor",
+    "deterministic-math",
+    "tools"
+  ],
+  "author": "Mohit Lakhara (@dev_x_mohit)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-x-mohit/opti-kit.git",
+    "directory": "packages/mcp-server"
+  },
+  "dependencies": {
+    "@dev_x_mohit/opti-kit": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
+  }
+}
