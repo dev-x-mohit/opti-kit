@@ -62,4 +62,15 @@ export * from "./template";
 export * from "./keyboard";
 export * from "./semver";
 
-// v2 release export updates
+// High-value functional, reactive, streaming, and codec engines
+export * from "./signals";
+export * from "./diff";
+export * as fp from "./fp";
+export * from "./rate-limit";
+export * from "./checksum";
+export * from "./pipeline";
+export * from "./observable";
+export * from "./cron";
+export * from "./codec";
+export * from "./compression";
+export * from "./schema-infer";
