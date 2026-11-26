@@ -1,92 +1,23 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search, Layers, ChevronRight } from 'lucide-react';
-import { utilitiesData, UtilityMeta } from '../data/utilitiesData';
-
-const moduleCategories: Record<string, string> = {
-  String: 'Data',
-  Array: 'Data',
-  Crypto: 'Security & Encoders',
-  Encoding: 'Security & Encoders',
-  Validate: 'Security & Encoders',
-  Hash: 'Security & Encoders',
-  Binary: 'Security & Encoders',
-  
-  Math: 'Math & Science',
-  Number: 'Math & Science',
-  Statistics: 'Math & Science',
-  Geometry: 'Math & Science',
-  Units: 'Math & Science',
-  ML: 'Math & Science',
-  NLP: 'Math & Science',
-  Finance: 'Math & Science',
-  Matrix: 'Math & Science',
-  Vector: 'Math & Science',
-  Graph: 'Math & Science',
-  
-  Browser: 'Web',
-  DOM: 'Web',
-  URL: 'Web',
-  Storage: 'Web',
-  Keyboard: 'Web',
-  Events: 'Web',
-  'Html Entities': 'Web',
-  Http: 'Web',
-  
-  Async: 'Async & Logic',
-  Functional: 'Async & Logic',
-  Store: 'Async & Logic',
-  FSM: 'Async & Logic',
-  Concurrency: 'Async & Logic',
-  Memoize: 'Async & Logic',
-  Retry: 'Async & Logic',
-  
-  Object: 'Data',
-  Collection: 'Data',
-  JSON: 'Data',
-  CSV: 'Data',
-  DS: 'Data',
-  Tree: 'Data',
-  Deep: 'Data',
-  Map: 'Data',
-  Set: 'Data',
-  Iter: 'Data',
-  Sort: 'Data',
-  Search: 'Data',
-  
-  Random: 'Utilities',
-  Color: 'Utilities',
-  'Color Space': 'Utilities',
-  Regex: 'Utilities',
-  Types: 'Utilities',
-  Cache: 'Utilities',
-  Guard: 'Utilities',
-  Format: 'Utilities',
-  Schema: 'Utilities',
-  Date: 'Utilities',
-  Log: 'Utilities',
-  Semver: 'Utilities',
-  Bit: 'Utilities',
-  Image: 'Utilities',
-  Duration: 'Utilities',
-  File: 'Utilities',
-  Intl: 'Utilities',
-  Path: 'Utilities',
-  Perf: 'Utilities',
-  Template: 'Utilities',
-  'Byte Size': 'Utilities',
-  Error: 'Utilities',
-  Easing: 'Utilities',
-};
-
-const categories = ['All', 'Data', 'Math & Science', 'Web', 'Async & Logic', 'Security & Encoders', 'Utilities'];
+import { Search, Layers, ChevronRight, Star, ArrowUpDown, Code2 } from 'lucide-react';
+import { utilitiesData } from '../data/utilitiesData';
+import {
+  CATEGORIES,
+  TOTAL_MODULES_COUNT,
+  TOTAL_UTILITIES_COUNT,
+  getModuleCategory,
+} from '../lib/moduleMeta';
+import { useFavorites } from '../hooks/useFavorites';
 
 export function ModulesIndexPage() {
-  const [activeTab, setActiveTab] = useState<'modules' | 'utils' | 'categories'>('modules');
+  const [activeTab, setActiveTab] = useState<'modules' | 'utils' | 'categories' | 'favorites'>('modules');
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [utilSearchQuery, setUtilSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState<'name' | 'count'>('name');
+  const { favorites, isFavorite, toggleFavorite } = useFavorites();
 
   const moduleStats = useMemo(() => {
     const stats: Record<string, { count: number; name: string; category: string; description: string }> = {};
@@ -95,98 +26,124 @@ export function ModulesIndexPage() {
         stats[u.module] = {
           name: u.module,
           count: 0,
-          category: moduleCategories[u.module] || 'Utilities',
-          description: u.description
+          category: getModuleCategory(u.module),
+          description: u.description,
         };
       }
       stats[u.module].count++;
     });
-    return Object.values(stats).sort((a, b) => a.name.localeCompare(b.name));
+    return Object.values(stats);
   }, []);
 
   const filteredModules = useMemo(() => {
-    return moduleStats.filter((mod) => {
+    const list = moduleStats.filter((mod) => {
       const matchCategory = activeCategory === 'All' || mod.category === activeCategory;
       const matchSearch = mod.name.toLowerCase().includes(searchQuery.toLowerCase());
       return matchCategory && matchSearch;
     });
-  }, [activeCategory, searchQuery, moduleStats]);
+    return list.sort((a, b) =>
+      sortBy === 'count' ? b.count - a.count : a.name.localeCompare(b.name)
+    );
+  }, [activeCategory, searchQuery, moduleStats, sortBy]);
 
   const filteredUtils = useMemo(() => {
-    if (!utilSearchQuery) return utilitiesData.slice(0, 100); // Limit initial render for performance
-    const lowerQ = utilSearchQuery.toLowerCase();
-    return utilitiesData.filter(u => 
-      u.name.toLowerCase().includes(lowerQ) || 
-      u.description.toLowerCase().includes(lowerQ) ||
-      u.module.toLowerCase().includes(lowerQ)
-    ).slice(0, 100);
+    if (!utilSearchQuery.trim()) return utilitiesData.slice(0, 120);
+    const lowerQ = utilSearchQuery.toLowerCase().trim();
+    return utilitiesData
+      .filter(
+        (u) =>
+          u.name.toLowerCase().includes(lowerQ) ||
+          u.description.toLowerCase().includes(lowerQ) ||
+          u.module.toLowerCase().includes(lowerQ)
+      )
+      .slice(0, 120);
   }, [utilSearchQuery]);
 
+  const favoriteUtils = useMemo(() => {
+    return utilitiesData.filter((u) => favorites.includes(u.id));
+  }, [favorites]);
+
   const categoryStats = useMemo(() => {
-    const stats: Record<string, { modules: Set<string>, utils: number }> = {};
-    categories.forEach(c => {
+    const stats: Record<string, { modules: Set<string>; utils: number }> = {};
+    CATEGORIES.forEach((c) => {
       if (c !== 'All') stats[c] = { modules: new Set(), utils: 0 };
     });
-    
-    utilitiesData.forEach(u => {
-      const cat = moduleCategories[u.module] || 'Utilities';
+
+    utilitiesData.forEach((u) => {
+      const cat = getModuleCategory(u.module);
       if (!stats[cat]) stats[cat] = { modules: new Set(), utils: 0 };
       stats[cat].modules.add(u.module);
       stats[cat].utils++;
     });
 
-    return Object.entries(stats).map(([name, data]) => ({
-      name,
-      moduleCount: data.modules.size,
-      utilCount: data.utils
-    })).filter(c => c.moduleCount > 0);
+    return Object.entries(stats)
+      .map(([name, data]) => ({
+        name,
+        moduleCount: data.modules.size,
+        utilCount: data.utils,
+      }))
+      .filter((c) => c.moduleCount > 0);
   }, []);
 
   return (
-    <div className="p-6 sm:p-10 max-w-7xl mx-auto min-h-screen">
-      <div className="flex flex-col gap-8">
-        <div>
-          <h1 className="text-3xl font-black tracking-tight text-text-main mb-2">Directory</h1>
-          <p className="text-muted text-lg max-w-2xl">
-            Explore 67 hand-optimized modules and over 680 utilities. 
-          </p>
+    <div className="p-6 sm:p-10 max-w-6xl mx-auto">
+      <div className="flex flex-col gap-7">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[var(--primary-soft)] text-[var(--primary)] text-xs font-mono font-medium mb-3">
+              <span>{TOTAL_MODULES_COUNT} Modules</span>
+              <span className="opacity-50">•</span>
+              <span>{TOTAL_UTILITIES_COUNT} Utilities</span>
+            </div>
+            <h1 className="text-3xl font-bold tracking-tight text-[var(--text)]">
+              API Directory
+            </h1>
+            <p className="text-[var(--text-muted)] text-sm sm:text-base mt-1.5 max-w-2xl">
+              Explore tree-shakeable modules, inspect TypeScript signatures, and test functions live in the browser.
+            </p>
+          </div>
         </div>
 
         {/* Top Tabs */}
-        <div className="flex border-b border-border gap-6">
-          <button 
-            onClick={() => setActiveTab('modules')} 
-            className={`pb-2 border-b-2 font-medium text-sm transition-colors ${activeTab === 'modules' ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-text-main hover:border-border'}`}
-          >
-            Modules
-          </button>
-          <button 
-            onClick={() => setActiveTab('utils')} 
-            className={`pb-2 border-b-2 font-medium text-sm transition-colors ${activeTab === 'utils' ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-text-main hover:border-border'}`}
-          >
-            Utilities
-          </button>
-          <button 
-            onClick={() => setActiveTab('categories')} 
-            className={`pb-2 border-b-2 font-medium text-sm transition-colors ${activeTab === 'categories' ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-text-main hover:border-border'}`}
-          >
-            Categories
-          </button>
+        <div className="flex border-b border-[var(--border)] gap-6 overflow-x-auto">
+          {(
+            [
+              { id: 'modules', label: `Modules (${TOTAL_MODULES_COUNT})` },
+              { id: 'utils', label: `Utilities (${TOTAL_UTILITIES_COUNT})` },
+              { id: 'categories', label: 'Categories' },
+              { id: 'favorites', label: `Saved (${favoriteUtils.length})` },
+            ] as const
+          ).map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id)}
+              className={`pb-2.5 border-b-2 font-medium text-sm whitespace-nowrap transition-colors cursor-pointer ${
+                activeTab === tab.id
+                  ? 'border-[var(--primary)] text-[var(--primary)]'
+                  : 'border-transparent text-[var(--text-muted)] hover:text-[var(--text)]'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
 
         {activeTab === 'modules' && (
           <div className="flex flex-col gap-6">
             {/* Filters */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <div className="flex flex-wrap gap-2">
-                {categories.map(cat => (
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+              <div className="flex flex-wrap gap-1.5">
+                {CATEGORIES.map((cat) => (
                   <button
                     key={cat}
+                    type="button"
                     onClick={() => setActiveCategory(cat)}
-                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
-                      activeCategory === cat 
-                        ? 'bg-primary text-white shadow-md shadow-primary/20' 
-                        : 'bg-surface border border-border text-muted hover:text-text-main hover:border-primary/30'
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+                      activeCategory === cat
+                        ? 'bg-[var(--primary)] text-white shadow-xs'
+                        : 'bg-[var(--surface)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] hover:border-[var(--border-strong)]'
                     }`}
                   >
                     {cat}
@@ -194,15 +151,27 @@ export function ModulesIndexPage() {
                 ))}
               </div>
 
-              <div className="relative w-full sm:w-64">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" size={16} />
-                <input 
-                  type="text"
-                  placeholder="Filter modules..."
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                  className="w-full bg-surface border border-border rounded-lg pl-9 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-                />
+              <div className="flex items-center gap-2 w-full lg:w-auto">
+                <div className="relative flex-1 lg:w-60">
+                  <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-faint)]" />
+                  <input
+                    type="text"
+                    placeholder="Filter modules..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    aria-label="Filter modules"
+                    className="w-full bg-[var(--surface)] border border-[var(--border)] rounded-lg pl-9 pr-3 py-1.5 text-sm text-[var(--text)] placeholder-[var(--text-faint)] focus:outline-none focus:border-[var(--primary)]"
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSortBy((s) => (s === 'name' ? 'count' : 'name'))}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text)] hover:border-[var(--border-strong)] transition-colors cursor-pointer shrink-0"
+                  title="Toggle sort order"
+                >
+                  <ArrowUpDown size={13} />
+                  <span>{sortBy === 'name' ? 'A–Z' : 'Most Utils'}</span>
+                </button>
               </div>
             </div>
 
@@ -210,30 +179,39 @@ export function ModulesIndexPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredModules.map((mod, i) => (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.03, duration: 0.3 }}
+                  transition={{ delay: Math.min(i * 0.015, 0.25), duration: 0.2 }}
                   key={mod.name}
                 >
-                  <Link 
+                  <Link
                     to={`/modules/${mod.name.toLowerCase()}`}
-                    className="group flex flex-col h-full bg-surface border border-border hover:border-primary/40 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all cursor-pointer relative overflow-hidden"
+                    className="group flex flex-col h-full bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--border-strong)] hover:bg-[var(--surface-2)]/60 rounded-xl p-5 transition-all cursor-pointer"
                   >
                     <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <div className="p-2 bg-primary/10 rounded-lg text-primary">
-                          <Layers size={18} />
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div className="p-2 bg-[var(--primary-soft)] rounded-lg text-[var(--primary)] shrink-0">
+                          <Layers size={16} />
                         </div>
-                        <h3 className="font-bold text-text-main text-lg">{mod.name}</h3>
+                        <h3 className="font-semibold text-[var(--text)] text-base truncate">
+                          {mod.name}
+                        </h3>
                       </div>
-                      <ChevronRight size={18} className="text-muted group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                      <ChevronRight
+                        size={16}
+                        className="text-[var(--text-faint)] group-hover:text-[var(--primary)] group-hover:translate-x-0.5 transition-all shrink-0"
+                      />
                     </div>
-                    
-                    <div className="mt-auto flex items-center justify-between pt-4 border-t border-border/50">
-                      <span className="text-xs font-semibold text-muted bg-black/5 dark:bg-white/5 px-2 py-1 rounded-md">
+
+                    <p className="text-xs text-[var(--text-muted)] line-clamp-2 mb-4">
+                      {mod.description}
+                    </p>
+
+                    <div className="mt-auto flex items-center justify-between pt-3 border-t border-[var(--border)]/60">
+                      <span className="text-[11px] font-medium text-[var(--text-muted)] bg-[var(--surface-2)] px-2 py-0.5 rounded-md border border-[var(--border)]">
                         {mod.category}
                       </span>
-                      <span className="text-xs font-mono font-bold text-primary bg-primary/10 px-2 py-1 rounded-md">
+                      <span className="text-[11px] font-mono font-semibold text-[var(--primary)] bg-[var(--primary-soft)] px-2 py-0.5 rounded-md">
                         {mod.count} utils
                       </span>
                     </div>
@@ -241,10 +219,20 @@ export function ModulesIndexPage() {
                 </motion.div>
               ))}
             </div>
-            
+
             {filteredModules.length === 0 && (
-              <div className="py-20 text-center">
-                <p className="text-muted">No modules found matching your criteria.</p>
+              <div className="py-16 text-center rounded-xl border border-dashed border-[var(--border)] bg-[var(--surface)]/40">
+                <p className="text-sm text-[var(--text-muted)]">No modules found matching your criteria.</p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveCategory('All');
+                    setSearchQuery('');
+                  }}
+                  className="mt-3 text-xs font-medium text-[var(--primary)] hover:underline cursor-pointer"
+                >
+                  Reset filters
+                </button>
               </div>
             )}
           </div>
@@ -252,85 +240,145 @@ export function ModulesIndexPage() {
 
         {activeTab === 'utils' && (
           <div className="flex flex-col gap-6">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
               <div className="relative w-full sm:w-96">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" size={16} />
-                <input 
+                <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-faint)]" />
+                <input
                   type="text"
-                  placeholder="Search utilities by name or description..."
+                  placeholder="Search utilities by name, module, or description..."
                   value={utilSearchQuery}
-                  onChange={e => setUtilSearchQuery(e.target.value)}
-                  className="w-full bg-surface border border-border rounded-lg pl-9 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  onChange={(e) => setUtilSearchQuery(e.target.value)}
+                  aria-label="Search utilities"
+                  className="w-full bg-[var(--surface)] border border-[var(--border)] rounded-lg pl-9 pr-4 py-2 text-sm text-[var(--text)] placeholder-[var(--text-faint)] focus:outline-none focus:border-[var(--primary)]"
                 />
               </div>
-              <span className="text-sm text-muted hidden sm:block">
-                Showing {filteredUtils.length} {filteredUtils.length === 100 && !utilSearchQuery ? '(Top 100) ' : ''}utilities
+              <span className="text-xs font-mono text-[var(--text-faint)]">
+                Showing {filteredUtils.length}
+                {!utilSearchQuery.trim() && TOTAL_UTILITIES_COUNT > 120 ? ` of ${TOTAL_UTILITIES_COUNT}` : ''} utilities
               </span>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {filteredUtils.map((u, i) => (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: (i % 10) * 0.02, duration: 0.2 }}
-                  key={u.id}
-                >
-                  <Link 
-                    to={`/modules/${u.module.toLowerCase()}?u=${u.id}`}
-                    className="flex flex-col h-full bg-surface border border-border hover:border-primary/40 rounded-xl p-4 shadow-sm hover:shadow-md transition-all cursor-pointer group"
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3.5">
+              {filteredUtils.map((u) => {
+                const fav = isFavorite(u.id);
+                return (
+                  <div
+                    key={u.id}
+                    className="flex items-start justify-between gap-3 bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--border-strong)] rounded-xl p-4 transition-colors group"
                   >
-                    <div className="flex items-center justify-between mb-1">
-                      <h3 className="font-bold text-text-main font-mono text-sm group-hover:text-primary transition-colors">{u.name}</h3>
-                      <span className="text-[10px] font-semibold text-primary bg-primary/10 px-1.5 py-0.5 rounded border border-primary/20">
-                        {u.module}
-                      </span>
-                    </div>
-                    <p className="text-xs text-muted line-clamp-2 mt-1">{u.description}</p>
-                  </Link>
-                </motion.div>
-              ))}
+                    <Link
+                      to={`/modules/${u.module.toLowerCase()}?u=${u.id}`}
+                      className="flex-1 min-w-0"
+                    >
+                      <div className="flex items-center gap-2 mb-1">
+                        <Code2 size={14} className="text-[var(--primary)] shrink-0" />
+                        <h3 className="font-semibold text-[var(--text)] font-mono text-sm group-hover:text-[var(--primary)] transition-colors truncate">
+                          {u.name}
+                        </h3>
+                        <span className="text-[10px] font-mono font-medium text-[var(--text-muted)] bg-[var(--surface-2)] px-1.5 py-0.5 rounded border border-[var(--border)] shrink-0">
+                          {u.module}
+                        </span>
+                      </div>
+                      <p className="text-xs text-[var(--text-muted)] line-clamp-2">{u.description}</p>
+                    </Link>
+
+                    <button
+                      type="button"
+                      onClick={() => toggleFavorite(u.id)}
+                      aria-label={fav ? `Remove ${u.name} from saved` : `Save ${u.name}`}
+                      className={`p-1.5 rounded-lg transition-colors cursor-pointer shrink-0 ${
+                        fav
+                          ? 'text-[var(--warning)] bg-[var(--surface-2)]'
+                          : 'text-[var(--text-faint)] hover:text-[var(--text)] hover:bg-[var(--surface-2)]'
+                      }`}
+                    >
+                      <Star size={15} fill={fav ? 'currentColor' : 'none'} />
+                    </button>
+                  </div>
+                );
+              })}
             </div>
 
             {filteredUtils.length === 0 && (
-              <div className="py-20 text-center">
-                <p className="text-muted">No utilities found matching "{utilSearchQuery}".</p>
+              <div className="py-16 text-center rounded-xl border border-dashed border-[var(--border)] bg-[var(--surface)]/40">
+                <p className="text-sm text-[var(--text-muted)]">No utilities found matching "{utilSearchQuery}".</p>
               </div>
             )}
           </div>
         )}
 
         {activeTab === 'categories' && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categoryStats.map((cat, i) => (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.05, duration: 0.3 }}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {categoryStats.map((cat) => (
+              <button
                 key={cat.name}
+                type="button"
+                onClick={() => {
+                  setActiveCategory(cat.name);
+                  setActiveTab('modules');
+                }}
+                className="flex flex-col text-left h-full bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--border-strong)] hover:bg-[var(--surface-2)]/60 rounded-xl p-6 transition-all cursor-pointer group"
               >
-                <div 
-                  onClick={() => {
-                    setActiveCategory(cat.name);
-                    setActiveTab('modules');
-                  }}
-                  className="flex flex-col h-full bg-surface border border-border hover:border-primary/40 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all cursor-pointer group"
-                >
-                  <h3 className="text-xl font-bold text-text-main group-hover:text-primary transition-colors mb-4">{cat.name}</h3>
-                  <div className="mt-auto flex items-center gap-4">
-                    <div className="flex flex-col">
-                      <span className="text-2xl font-black text-primary">{cat.moduleCount}</span>
-                      <span className="text-xs text-muted font-medium uppercase tracking-wider">Modules</span>
-                    </div>
-                    <div className="w-px h-8 bg-border"></div>
-                    <div className="flex flex-col">
-                      <span className="text-2xl font-black text-text-main">{cat.utilCount}</span>
-                      <span className="text-xs text-muted font-medium uppercase tracking-wider">Utilities</span>
-                    </div>
+                <h3 className="text-lg font-semibold text-[var(--text)] group-hover:text-[var(--primary)] transition-colors mb-4">
+                  {cat.name}
+                </h3>
+                <div className="mt-auto flex items-center gap-5">
+                  <div className="flex flex-col">
+                    <span className="text-2xl font-bold font-mono text-[var(--primary)]">{cat.moduleCount}</span>
+                    <span className="text-[11px] text-[var(--text-faint)] font-medium uppercase tracking-wider">Modules</span>
+                  </div>
+                  <div className="w-px h-8 bg-[var(--border)]" />
+                  <div className="flex flex-col">
+                    <span className="text-2xl font-bold font-mono text-[var(--text)]">{cat.utilCount}</span>
+                    <span className="text-[11px] text-[var(--text-faint)] font-medium uppercase tracking-wider">Utilities</span>
                   </div>
                 </div>
-              </motion.div>
+              </button>
             ))}
+          </div>
+        )}
+
+        {activeTab === 'favorites' && (
+          <div>
+            {favoriteUtils.length === 0 ? (
+              <div className="py-16 text-center rounded-xl border border-dashed border-[var(--border)] bg-[var(--surface)]/40 space-y-2">
+                <Star size={24} className="mx-auto text-[var(--text-faint)]" />
+                <p className="text-sm font-medium text-[var(--text)]">No saved utilities yet</p>
+                <p className="text-xs text-[var(--text-muted)] max-w-md mx-auto">
+                  Star any utility from the Utilities tab or a module detail page to keep your most-used functions one click away.
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3.5">
+                {favoriteUtils.map((u) => (
+                  <div
+                    key={u.id}
+                    className="flex items-start justify-between gap-3 bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--border-strong)] rounded-xl p-4 transition-colors group"
+                  >
+                    <Link to={`/modules/${u.module.toLowerCase()}?u=${u.id}`} className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Code2 size={14} className="text-[var(--primary)] shrink-0" />
+                        <h3 className="font-semibold text-[var(--text)] font-mono text-sm group-hover:text-[var(--primary)] truncate">
+                          {u.name}
+                        </h3>
+                        <span className="text-[10px] font-mono text-[var(--text-muted)] bg-[var(--surface-2)] px-1.5 py-0.5 rounded border border-[var(--border)]">
+                          {u.module}
+                        </span>
+                      </div>
+                      <p className="text-xs text-[var(--text-muted)] line-clamp-2">{u.description}</p>
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => toggleFavorite(u.id)}
+                      aria-label={`Remove ${u.name} from saved`}
+                      className="p-1.5 rounded-lg text-[var(--warning)] bg-[var(--surface-2)] cursor-pointer shrink-0"
+                    >
+                      <Star size={15} fill="currentColor" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>

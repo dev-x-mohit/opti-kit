@@ -4,6 +4,20 @@ All notable changes across the **OptiKit Monorepo** (`@dev_x_mohit/opti-kit`, `@
 
 ---
 
+## [1.4.0] - 2026-11-26
+
+### Core Library (`@dev_x_mohit/opti-kit`)
+- **22 New Pro Modules Added (535 new runtime exports)**: `result`, `state-machine`, `di`, `query`, `lens`, `parser`, `interval`, `trie`, `spatial`, `crypto-pro`, `scheduler`, `telemetry`, `validation-pro`, `text-pro`, `reactive-store`, `graph-pro`, `statistics-pro`, `finance-pro`, `encoding-pro`, `color-pro`, `datetime-pro`, `workflow-pro`.
+- **Unit Test Suite**: **108 test files, 641 tests** with 100% pass rate.
+- **Zero Runtime Dependencies**: Full CJS, ESM, and `.d.ts`/`.d.mts` TypeScript declarations built with `tsup`.
+
+### Showcase Application (`apps/showcase`)
+- Regenerated `utilitiesData.ts` indexing **1,280 utilities across 108 modules**.
+- Added dedicated `/changelog` page with category filtering and release timeline.
+- Updated homepage stats, hero, and security copy (humanized and verified via `li-human`).
+
+---
+
 ## [1.3.0] - 2026-11-20
 
 ### 📦 Core Library (`@dev_x_mohit/opti-kit`)

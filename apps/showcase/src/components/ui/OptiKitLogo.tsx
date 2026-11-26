@@ -10,7 +10,7 @@ export interface OptiKitLogoProps {
 export function OptiKitLogo({
   size = 32,
   showVersion = false,
-  version = 'v1.2.1',
+  version = 'v1.4.0',
   className = '',
 }: OptiKitLogoProps) {
   return (

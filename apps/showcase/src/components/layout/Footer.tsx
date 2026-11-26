@@ -1,13 +1,14 @@
 import React from 'react';
-import { ExternalLink, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ExternalLink } from 'lucide-react';
 import { OptiKitLogo } from '../ui/OptiKitLogo';
 import { GithubIcon } from '../ui/GithubIcon';
 
 export function Footer() {
   return (
     <footer className="border-t border-[var(--border)] bg-[var(--surface)] text-xs text-[var(--text-muted)]">
-      <div className="mx-auto max-w-[1200px] px-4 sm:px-6 py-14">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-10">
           {/* Brand Col */}
           <div className="col-span-2 space-y-4">
             <OptiKitLogo size={28} showVersion />
@@ -43,35 +44,36 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Links Col 1 */}
+          {/* Product */}
           <div className="space-y-3">
             <h4 className="font-semibold text-xs text-[var(--text)] uppercase tracking-wider font-mono">
               Product
             </h4>
             <ul className="space-y-2">
-              <li><a href="#features" className="hover:text-[var(--text)] transition-colors">Features</a></li>
-              <li><a href="#playground" className="hover:text-[var(--text)] transition-colors">Playground</a></li>
-              <li><a href="#compare" className="hover:text-[var(--text)] transition-colors">Bundle Benchmarks</a></li>
-              <li><a href="#mcp" className="hover:text-[var(--text)] transition-colors">Agentic MCP</a></li>
-              <li><a href="#tree-shaking" className="hover:text-[var(--text)] transition-colors">Tree-Shaking</a></li>
+              <li><Link to="/" className="hover:text-[var(--text)] transition-colors">Overview</Link></li>
+              <li><Link to="/modules" className="hover:text-[var(--text)] transition-colors">Modules Directory</Link></li>
+              <li><Link to="/playground" className="hover:text-[var(--text)] transition-colors">Scripting IDE</Link></li>
+              <li><Link to="/docs" className="hover:text-[var(--text)] transition-colors">Documentation</Link></li>
+              <li><Link to="/benchmarks" className="hover:text-[var(--text)] transition-colors">Benchmarks</Link></li>
+              <li><Link to="/changelog" className="hover:text-[var(--text)] transition-colors">Changelog</Link></li>
             </ul>
           </div>
 
-          {/* Links Col 2 */}
+          {/* Domains */}
           <div className="space-y-3">
             <h4 className="font-semibold text-xs text-[var(--text)] uppercase tracking-wider font-mono">
-              Domains
+              Popular Modules
             </h4>
             <ul className="space-y-2">
-              <li><a href="#features" className="hover:text-[var(--text)] transition-colors">Data & Collections</a></li>
-              <li><a href="#features" className="hover:text-[var(--text)] transition-colors">Control Flow & Async</a></li>
-              <li><a href="#features" className="hover:text-[var(--text)] transition-colors">Security & Validation</a></li>
-              <li><a href="#features" className="hover:text-[var(--text)] transition-colors">Math, ML & Science</a></li>
-              <li><a href="#features" className="hover:text-[var(--text)] transition-colors">Web & DOM</a></li>
+              <li><Link to="/modules/array" className="hover:text-[var(--text)] transition-colors">Array & Collections</Link></li>
+              <li><Link to="/modules/async" className="hover:text-[var(--text)] transition-colors">Async & Control Flow</Link></li>
+              <li><Link to="/modules/crypto" className="hover:text-[var(--text)] transition-colors">Crypto & Security</Link></li>
+              <li><Link to="/modules/signals" className="hover:text-[var(--text)] transition-colors">Reactive Signals</Link></li>
+              <li><Link to="/modules/diff" className="hover:text-[var(--text)] transition-colors">Deep Diff & Patch</Link></li>
             </ul>
           </div>
 
-          {/* Links Col 3 */}
+          {/* Ecosystem */}
           <div className="space-y-3">
             <h4 className="font-semibold text-xs text-[var(--text)] uppercase tracking-wider font-mono">
               Ecosystem
@@ -150,7 +152,7 @@ export function Footer() {
           </p>
 
           <p className="font-mono text-[11px]">
-            © {new Date().getFullYear()} OptiKit Ecosystem. All claims verified.
+            © {new Date().getFullYear()} OptiKit Ecosystem.
           </p>
         </div>
       </div>
