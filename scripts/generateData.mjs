@@ -73,6 +73,12 @@ const fileOutput = `export interface UtilityMeta {
   signature: string;
   example: string;
   output: string;
+  benchmark?: {
+    opti: string;
+    lodash: string;
+    multiplier: string;
+    winner: string;
+  };
 }
 
 export const utilitiesData: UtilityMeta[] = ${JSON.stringify(data, null, 2)};

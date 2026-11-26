@@ -76,7 +76,7 @@ export function PlaygroundSection() {
   useEffect(() => {
     let isCurrent = true;
     const start = performance.now();
-    opti.sha256(cryptoInput).then((h) => {
+    opti.sha256(cryptoInput).then((h: string) => {
       if (isCurrent) {
         setSha256Hash(h);
         setHashTimeMs(Number((performance.now() - start).toFixed(2)));
@@ -129,7 +129,7 @@ export function PlaygroundSection() {
     { id: '4', parentId: '2', name: 'mcp-server (agent stdio)' },
     { id: '5', parentId: '1', name: 'apps' },
     { id: '6', parentId: '5', name: 'showcase (docs site)' },
-    { id: '7', parentId: '3', name: '67 pure modules' },
+    { id: '7', parentId: '3', name: '108 pure modules' },
   ]);
   const [treeSearch, setTreeSearch] = useState('');
   const [expandedNodes, setExpandedNodes] = useState<Record<string, boolean>>({
@@ -210,7 +210,7 @@ export function PlaygroundSection() {
   // -------------------------------------------------------------
   // 7. CUSTOM CODE IDE
   // -------------------------------------------------------------
-  const defaultCode = `// Call any of the 740+ utilities from @dev_x_mohit/opti-kit
+  const defaultCode = `// Call any of the 1,280+ utilities from @dev_x_mohit/opti-kit
 const rawData = [45, 12, 89, 23, 67, 12, 90, 34];
 
 const clean = opti.unique(rawData);

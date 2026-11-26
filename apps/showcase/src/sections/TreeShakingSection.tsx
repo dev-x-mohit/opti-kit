@@ -177,12 +177,12 @@ export function TreeShakingSection() {
             </div>
           </div>
 
-          {/* 67 Module Grid Visualization */}
+          {/* Module Grid Visualization */}
           <div className="lg:col-span-7 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between pb-3 border-b border-[var(--border)] mb-4">
                 <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text)]">
-                  67 Modules Grid (Click any tile to toggle):
+                  Modules Grid (Click any tile to toggle):
                 </span>
                 <span className="font-mono text-xs text-[var(--primary)] font-semibold">
                   {activeModules.size} active

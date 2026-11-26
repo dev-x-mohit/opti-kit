@@ -13,7 +13,7 @@ export interface LibraryComparison {
 export const bundleComparisonData: LibraryComparison[] = [
   {
     name: 'OptiKit',
-    version: '1.2.1',
+    version: '1.4.0',
     fullGzipKb: 14.8,
     singleImportGzipKb: 0.32,
     dependencyCount: 0,

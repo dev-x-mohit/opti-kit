@@ -14,6 +14,9 @@
     "verbatimModuleSyntax": false,
     "moduleDetection": "force",
     "noEmit": true,
+    "paths": {
+      "@dev_x_mohit/opti-kit": ["../../packages/opti-kit/dist/index.d.ts"]
+    },
 
     /* Linting */
     "noUnusedLocals": false,

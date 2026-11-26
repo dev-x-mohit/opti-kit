@@ -38,7 +38,7 @@ export function FeatureDomainsSection({ onOpenSearch }: FeatureDomainsProps) {
               5 Core Utility Domains
             </h2>
             <p className="mt-2 text-sm sm:text-base text-[var(--text-muted)] max-w-xl">
-              Every utility is modular, written from first principles in TypeScript, with zero external dependencies.
+              Every helper is modular and written from scratch in TypeScript, with zero external dependencies.
             </p>
           </div>
 
@@ -47,7 +47,7 @@ export function FeatureDomainsSection({ onOpenSearch }: FeatureDomainsProps) {
             className="self-start md:self-auto flex items-center gap-2 px-3.5 py-2 rounded-lg border border-[var(--border)] bg-[var(--surface)] text-xs text-[var(--text-muted)] hover:text-[var(--text)] hover:border-[var(--primary)] transition-all cursor-pointer shadow-xs"
           >
             <Search size={14} />
-            <span>Search all 740+ functions</span>
+            <span>Search all 1,280+ functions</span>
             <kbd className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-[var(--surface-2)] border border-[var(--border)]">
               ⌘K
             </kbd>

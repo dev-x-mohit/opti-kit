@@ -33,11 +33,11 @@ export function FinalCtaSection() {
         </div>
 
         <h2 className="mx-auto max-w-2xl text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.02em] text-[var(--text)]">
-          Ship less code. Do more.
+          Ship less code. Get more done.
         </h2>
 
         <p className="mx-auto mt-4 max-w-[56ch] text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
-          Zero dependencies, 14 KB footprint, and 740+ deterministic utilities ready for your modern TypeScript applications.
+          You get 1,280+ pure TypeScript utilities, a 14 KB core footprint, and zero dependencies ready for production.
         </p>
 
         {/* Copyable install command box */}
