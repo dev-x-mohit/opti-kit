@@ -1,7 +1,7 @@
 {
   "name": "@dev_x_mohit/opti-kit",
-  "version": "1.3.0",
-  "description": "OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility monorepo library. It ships 37 hand-optimized isomorphic modules. Every function is side-effect free, individually importable, and ships with full TypeScript declarations, CJS/ESM dual output, 430 utilities, and 419 unit tests.",
+  "version": "1.4.0",
+  "description": "OptiKit is a zero-dependency, ultra-lightweight, and fully tree-shakeable JavaScript/TypeScript utility monorepo library. It ships 108 hand-optimized isomorphic modules. Every function is side-effect free, individually importable, and ships with full TypeScript declarations, CJS/ESM dual output, 1,280+ utilities, and 641 unit tests.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
